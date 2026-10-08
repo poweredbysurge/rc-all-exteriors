@@ -1,0 +1,246 @@
+{
+  "meta": {
+    "business_name": "RC All Exteriors LLC",
+    "url": "https://rcallexteriors.com",
+    "platform": "WordPress 7.1.2 + Elementor 4.3.4, hosted on GoDaddy, built by 4PRINT (2025)",
+    "industry": "Roofing and exteriors (roof replacement, roof and siding repair, gutters, siding, windows, doors, storm and insurance work)",
+    "market": "Woodbridge, VA (Prince William County), serving Northern Virginia and the DMV",
+    "address": "12325 Woodlawn Ct, Woodbridge, VA 22192",
+    "phone": "703-677-1976",
+    "email": "Info@rcallexteriors.com",
+    "extracted_at": "2026-10-05",
+    "title": "Your trusted partner in exteriors",
+    "description": "",
+    "primary_contact": "Ricardo",
+    "founded": "2025 (confirmed; copy never leads with years)",
+    "owner": "Ricardo Castro",
+    "hours": "Monday to Saturday, 7am to 5pm",
+    "address_policy": "Service-area business. Schema and contact page show Woodbridge, VA and the service area, not the street address (copy decision batch-2).",
+    "service_area": [
+      "Woodbridge",
+      "Lake Ridge",
+      "Lorton",
+      "Fairfax Station",
+      "Fairfax",
+      "Springfield",
+      "Alexandria",
+      "Arlington",
+      "McLean",
+      "Great Falls"
+    ],
+    "confirmed_trust": [
+      "Virginia Class A contractor (number CONFIRM)",
+      "BBB accredited",
+      "49 five-star Google reviews (Sept 2026)",
+      "CertainTeed installer, 3-Star level (program name CONFIRM)",
+      "10-year workmanship warranty (terms CONFIRM)",
+      "Financing available (partner CONFIRM)"
+    ]
+  },
+  "colors": {
+    "logo": {
+      "blue": {
+        "hex": "#0F2ACE",
+        "role": "logo mark",
+        "status": "fixed",
+        "contrast_on_white": 9.36,
+        "white_on_it": 9.36,
+        "note": "Royal blue. Passes AA and AAA both ways. This is the brand color."
+      },
+      "charcoal": {
+        "hex": "#303030",
+        "role": "logo wordmark",
+        "status": "fixed",
+        "contrast_on_white": 13.2
+      }
+    },
+    "legacy_web": {
+      "primary": {
+        "hex": "#00A2FD",
+        "role": "Elementor primary, buttons and links",
+        "status": "legacy-web, replace",
+        "contrast_on_white": 2.77,
+        "note": "Fails AA as text and as a button fill under white text. Not the logo blue. Drop it."
+      },
+      "navy": {
+        "hex": "#0D1427",
+        "role": "dark sections and headings",
+        "status": "legacy-web, open",
+        "note": "Usable as a dark surface candidate but derive from the logo blue instead."
+      },
+      "text": {
+        "hex": "#949494",
+        "role": "Elementor text color",
+        "status": "legacy-web, replace",
+        "contrast_on_white": 3.03,
+        "note": "Fails AA for body text."
+      },
+      "text_alt": {
+        "hex": "#878991",
+        "role": "body text seen in page CSS",
+        "status": "legacy-web, replace",
+        "contrast_on_white": 3.49
+      },
+      "accent": {
+        "hex": "#5A3700",
+        "role": "Elementor accent (brown), unused in practice",
+        "status": "legacy-web, drop"
+      },
+      "extended": [
+        "#141414",
+        "#060400",
+        "#929292",
+        "#DBDBDB",
+        "#F7F7F7",
+        "#F6F7FA",
+        "#EAECF1",
+        "#D6D8E0",
+        "#046BD2",
+        "#045CB4",
+        "#FF6900"
+      ]
+    }
+  },
+  "fonts": {
+    "legacy_web": {
+      "display": {
+        "family": "Inter",
+        "weight": "800",
+        "size": "6.5rem",
+        "line_height": "0.9",
+        "hosted": "google",
+        "status": "legacy-web, replace"
+      },
+      "heading": {
+        "family": "Inter",
+        "weight": "700",
+        "size": "3.6rem",
+        "line_height": "0.9",
+        "hosted": "google",
+        "status": "legacy-web, replace"
+      },
+      "body": {
+        "family": "Inter",
+        "weight": "400",
+        "size": "1rem",
+        "line_height": "1.4",
+        "hosted": "google",
+        "status": "legacy-web, replace",
+        "note": "16px body, below the Surge 18px floor"
+      },
+      "also_loaded": [
+        "IBM Plex Sans (15 declarations)",
+        "Roboto (2 declarations)"
+      ],
+      "note": "Three Google font families loaded at every weight 100 to 900 italic. Font sprawl. Inter is on the Surge kill list unless the brand kit specifies it; it does not."
+    },
+    "logo_wordmark": {
+      "family": "Unidentified wide bold geometric grotesque, uppercase, slightly extended. Outlines live in the PDF logo files.",
+      "note": "Direction boards should either harmonize with this (wide grotesque heading face) or deliberately contrast it (condensed or slab). Do not pick a face that is almost-but-not-quite the wordmark."
+    }
+  },
+  "logos": {
+    "source": "Google Drive folder 1FIrc9oxiO-GbFl5-3zjiQFW9wSNT7pkO (client supplied, 2026-10-05)",
+    "files": [
+      {
+        "name": "rc-all-exteriors-logo-digital-rgb.pdf",
+        "drive_id": "1hushQiBDDjQYqnYP440_b_HLCtMdgaBd",
+        "format": "pdf (vector)",
+        "use": "Source for SVG export"
+      },
+      {
+        "name": "rc-all-exteriors-logo-print-cmyk.pdf",
+        "drive_id": "14d-Tshxmx21DgGwYSC4NHwTrqrWYADGu",
+        "format": "pdf (vector, CMYK)",
+        "use": "Print only"
+      },
+      {
+        "name": "rc-all-exteriors-logo-full-color-transparent.png",
+        "drive_id": "17zEDMrTZHHakuhJraWsYfhCj6JyO67v2",
+        "format": "png 2250x2250",
+        "use": "Light backgrounds"
+      },
+      {
+        "name": "rc-all-exteriors-logo-white-transparent.png",
+        "drive_id": "1ZyR4_PAbFqoxN0h4V62fesmSj2qMGBGZ",
+        "format": "png",
+        "use": "Dark backgrounds"
+      },
+      {
+        "name": "rc-all-exteriors-logo-black-transparent.png",
+        "drive_id": "1O7mDM8NL0KhCFc7tWutWNnqDuteNzcJv",
+        "format": "png",
+        "use": "Mono"
+      },
+      {
+        "name": "rc-all-exteriors-logo-blue-icon-light-text-transparent.png",
+        "drive_id": "1KADaCtoECyc8D-9UymelaSx9ylIopMaW",
+        "format": "png",
+        "use": "Dark backgrounds, blue mark kept"
+      },
+      {
+        "name": "rc-all-exteriors-icon-blue-transparent.png",
+        "drive_id": "1V2mSO91HD3kbgeNlDQVgTP_aE5hrl7oL",
+        "format": "png",
+        "use": "Favicon, app icon, mark-only uses"
+      },
+      {
+        "name": "rc-all-exteriors-logo-gbp-profile-720.png",
+        "drive_id": "1Nfh6abXabbPeuG-GOudT_5ykGyrj7Agl",
+        "format": "png 720",
+        "use": "Google Business Profile"
+      }
+    ],
+    "legacy_site_logo": "https://rcallexteriors.com/wp-content/uploads/2025/10/Recurso-2@4x.png (776x315, same mark, white wordmark on transparent)",
+    "svg_exports": "Branding/logos/*.svg exported from rc-all-exteriors-logo-digital-rgb.pdf on 2026-10-05: full-color, white, black, blue-mark-white-text, icon-blue. Fills normalized to #0F2ACE and #303030."
+  },
+  "direction": {
+    "name": "Direction C, Crew",
+    "decided": "2026-10-05",
+    "adr": "Branding/ADR-002-design-direction.md",
+    "heading": {
+      "family": "Archivo",
+      "axis": "wdth 125 (Expanded)",
+      "weight": 700,
+      "case": "sentence",
+      "css": "font-family: Archivo; font-stretch: 125%; font-weight: 700; line-height: 1.02; letter-spacing: -0.015em",
+      "google_fonts": "family=Archivo:wdth,wght@125,700",
+      "licence": "SIL OFL",
+      "hosted": "self (subset woff2)"
+    },
+    "body": {
+      "family": "Manrope",
+      "weights": {
+        "400": "body",
+        "500": "secondary",
+        "600": "labels and chips",
+        "700": "button labels"
+      },
+      "size": "18px / 1.6, 16px floor",
+      "licence": "SIL OFL",
+      "hosted": "self (subset woff2)"
+    },
+    "accent": "#0F2ACE",
+    "radius": "per tokens page",
+    "dark_surface": "per tokens page, near-black blue"
+  },
+  "flags": [
+    "contrast_issue: legacy primary #00A2FD is 2.77:1 on white. Legacy body text #949494 is 3.03:1. Both fail AA.",
+    "font_sprawl: Inter, IBM Plex Sans and Roboto all loaded, every weight. Inter is the de facto brand font by default, not by decision.",
+    "body_below_floor: legacy body is 16px / 1.4. Surge floor is 18px / 1.6.",
+    "missing_meta: no meta description on the homepage.",
+    "no_schema: zero JSON-LD on the site. No LocalBusiness, no RoofingContractor.",
+    "no_nap_on_homepage: address appears only in the roof-replacement page footer region. Footer says 'Serving the metropolitan area (DC, MD, VA)' with no street address.",
+    "invented_stats: About page shows '97% Reputation', '87% Value of Money', '92% Comprehensive Solutions', '95% Customer Services' and broken counters reading '0 YEAR OF EXPERIENCES' and '0 Completed Project'. None of this carries over.",
+    "stock_photography: at least one stock image (white-gutter-guard-system... and qtq80-...). Real photos exist (IMG_*.jpg) and should be collected from Ricardo at full resolution.",
+    "class_a_claim: 'CLASS A CONTRACTOR' appears as a heading. Need the Virginia DPOR licence number before it goes in the footer or schema.",
+    "tenure_resolved: founded 2025 per Mario (Sept 22). Old-site 2015 claim dropped. Copy leads with reviews, licence, warranty, never years."
+  ],
+  "recommendations": [
+    "Brand color is the logo blue #0F2ACE, not the site's #00A2FD. Build the palette from #0F2ACE and #303030.",
+    "Derive accent-hover (#0B21A6 range) and accent-tint (#EEF0FC range) from #0F2ACE. White on #0F2ACE already passes, so no accent-btn derivation is needed.",
+    "Dark surface candidate: a near-black blue in the #0A1030 to #0D1427 range so dark sections feel like the brand rather than generic black.",
+    "Typography is fully open. Run the three-direction exercise. The wordmark is wide and geometric, so Direction C (wide grotesque) will harmonize and Direction A (condensed) will contrast. Both are valid. Avoid anything that looks like a near-miss of the wordmark face.",
+    "Collect 10 to 15 real job photos from Ricardo (roof tear-off, finished roofs, crew, truck) before the direction boards. The IMG_* files on the current site are a start but are compressed."
+  ]
+}

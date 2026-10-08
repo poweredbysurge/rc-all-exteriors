@@ -1,0 +1,108 @@
+/* RC All Exteriors · Mode A design tokens · 2026-10-08 · generated from pages/tokens/index.html. One accent. Neutrals derive from #0A1030. Contrast comments: WCAG 2.1, body needs 4.5:1, 24px+ headings 3:1. */
+:root {
+  /* ADR-002 slots, resolved */
+  --color-accent-hover: #0B21A6; /* ADR-002 final · primary button hover · white on it 11.8:1 */
+  --color-accent-tint: #EEF0FC; /* ADR-002 final · tinted panels, selected chips · fg on it 16.4:1 · fg-muted on it 7.0:1 · accent on it 8.3:1 */
+  --color-surface-contrast: #0A1030; /* ADR-002 final "dark surface" · footer, CTA band, scrim base · fg-inverse on it 18.6:1 · fg-inverse-muted on it 12.6:1 */
+  --radius-sm: 6px; /* ADR-002 final · checkbox, tags */
+  --radius-md: 10px; /* ADR-002 final · buttons, chips, fields, step photos */
+  --radius-lg: 14px; /* ADR-002 final · cards, photos, panels */
+
+  /* color: accent */
+  --color-accent: #0F2ACE; /* the one accent · white on it 9.4:1 · on surface 9.4:1 · on surface-muted 8.6:1 · on surface-subtle 8.2:1 · on accent-tint 8.3:1 */
+  --color-accent-press: #081A85; /* primary button active · white on it 14.0:1 */
+  /* color: surfaces */
+  --color-surface: #FFFFFF; /* page, cards */
+  --color-surface-muted: #F4F5FA; /* alternating sections, table header */
+  --color-surface-subtle: #EEF0F5; /* alternating sections, photo gap block */
+  /* color: text */
+  --color-fg: #0A1030; /* on surface 18.6:1 · on surface-muted 17.1:1 · on surface-subtle 16.3:1 · on accent-tint 16.4:1 */
+  --color-fg-muted: #4B506B; /* on surface 7.9:1 · on surface-muted 7.3:1 · on surface-subtle 6.9:1 · on accent-tint 7.0:1 */
+  --color-fg-subtle: #5F6480; /* captions only · on surface 5.8:1 · on surface-muted 5.3:1 · on surface-subtle 5.1:1 · on accent-tint 5.1:1 */
+  --color-fg-inverse: #FFFFFF; /* on surface-contrast 18.6:1 · on accent 9.4:1 · on hero scrim 45% over mid-tone photo (H1 only) 6.2:1 */
+  --color-fg-inverse-muted: #D3D4DA; /* on surface-contrast 12.6:1 · on accent (rating chip) 6.3:1 · on hero scrim 60% over mid-tone photo (lede) 7.3:1 */
+  /* color: borders and status */
+  --color-border-subtle: #E0E2EC; /* card and header hairlines */
+  --color-border: #CFD2DE; /* chips, table and FAQ rules */
+  --color-border-strong: #8A8FA6; /* field borders at rest */
+  --color-error: #B3261E; /* on surface 6.5:1 · on error-tint 5.7:1 */
+  --color-error-tint: #FBEDEC; /* alert background */
+  --icon-on-dark: rgba(255,255,255,0.9);
+  --watermark-opacity: 0.08;
+  --hero-scrim-mobile: linear-gradient(180deg,rgba(10,16,48,0.45) 0%,rgba(10,16,48,0.60) 40%,rgba(10,16,48,0.92) 100%);
+  --hero-scrim-desktop: linear-gradient(90deg,rgba(10,16,48,0.90) 0%,rgba(10,16,48,0.72) 50%,rgba(10,16,48,0.40) 100%);
+
+  /* type: families and weights */
+  --font-heading: "Archivo", sans-serif; /* Archivo Expanded 700: font-stretch 125%, letter-spacing -0.015em, sentence case */
+  --font-heading-stretch: 125%;
+  --font-heading-weight: 700;
+  --font-body: "Manrope", sans-serif; /* 400 body · 500 secondary labels · 600 labels, chips, nav · 700 buttons, strong */
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace; /* annotations only, not on the live site */
+  /* type: scale (390 → 1440; clamp between) */
+  --text-display-mobile: 40px;
+  --text-display-desktop: 72px;
+  --leading-display: 1.02;
+  --text-h1-mobile: 36px;
+  --text-h1-desktop: 56px;
+  --leading-h1: 1.05;
+  --text-h2-mobile: 28px;
+  --text-h2-desktop: 40px;
+  --leading-h2: 1.1;
+  --text-h3-mobile: 22px;
+  --text-h3-desktop: 28px;
+  --leading-h3: 1.2;
+  --text-h4-mobile: 20px;
+  --text-h4-desktop: 22px;
+  --leading-h4: 1.3;
+  --text-body-lg-mobile: 20px;
+  --text-body-lg-desktop: 20px;
+  --text-body-mobile: 18px;
+  --text-body-desktop: 18px;
+  --text-body-sm-mobile: 16px;
+  --text-body-sm-desktop: 16px;
+  --text-eyebrow: 16px; /* uppercase, tracking 0.08em, Manrope 600, with the 24px roofline rule */
+  --leading-body: 1.6;
+  --tracking-heading: -0.015em;
+  --tracking-eyebrow: 0.08em;
+  --text-floor: 16px; /* nothing on the site renders smaller */
+
+  /* spacing (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --gutter-360: 16px;
+  --gutter-390: 20px;
+  --gutter-1440: 48px;
+  --gutter-1920: 64px;
+  --container: 1280px;
+  --section-py-mobile: 100px; /* raised from 48px at Gate A, 2026-10-07: 48px read as dense on phones */
+  --section-py-desktop: 128px; /* raised from 96px with the mobile change so desktop is never tighter than mobile */
+  --section-py-quiet: 64px;
+
+  /* elevation */
+  --shadow-sm: 0 1px 2px rgba(10,16,48,0.06), 0 1px 1px rgba(10,16,48,0.04);
+  --shadow-md: 0 4px 12px rgba(10,16,48,0.08), 0 1px 3px rgba(10,16,48,0.05); /* lead card, sticky bar */
+
+  /* icons: Lucide, stroke 1.75, round caps and joins, see icons.md */
+  --icon-stroke: 1.75px;
+  --icon-sm: 20px; /* trust bar, buttons, sticky bar */
+  --icon-md: 24px; /* default */
+  --icon-lg: 32px; /* cards, callouts, photo gap */
+
+  /* controls */
+  --control-height: 52px; /* buttons, fields */
+  --chip-height: 44px; /* minimum tap target */
+  --header-height-mobile: 64px;
+  --header-height-mobile-shrunk: 56px;
+  --header-height-desktop: 80px;
+  --focus-ring: 2px solid #0F2ACE;
+  --focus-ring-offset: 2px;
+}
