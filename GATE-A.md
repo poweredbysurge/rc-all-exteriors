@@ -12,11 +12,10 @@
 | "We confirm a time" timeline row | Keep. |
 | Six section eyebrows | Keep. |
 
-Change any of the four above before signing if you disagree with the recommendation.
-
 ## Approval
 
-- Approved by: ____________________
-- Date: ____________
+- Approved by: Sam Delgado
+- Date: 2026-10-07
+- Decisions 1 to 4 approved as written.
 
 After signing: `design/pages/` is read-only. Deviations in code go in `DESIGN-DEBT.md` in this repo with the artboard named.
