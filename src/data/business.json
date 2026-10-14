@@ -1,0 +1,61 @@
+{
+  "$comment": "Single source of truth for business facts (master prompt section 1.7). Schema, header, footer, sitemap and robots all read this file. Service-area business: there is no streetAddress here and there must never be one. A null value is an open CONFIRM with Ricardo; the site renders it as a visible placeholder and check-integrity fails a production build while it is null.",
+  "name": "RC All Exteriors",
+  "legalName": "RC All Exteriors LLC",
+  "schemaType": "RoofingContractor",
+  "owner": "Ricardo Castro",
+  "phone": {
+    "display": "(703) 677-1976",
+    "e164": "+17036771976"
+  },
+  "email": "Info@rcallexteriors.com",
+  "address": {
+    "addressLocality": "Woodbridge",
+    "addressRegion": "VA"
+  },
+  "serviceAreaLine": "Serving Woodbridge and Northern Virginia",
+  "hours": {
+    "display": "Mon to Sat, 7am to 5pm",
+    "displayLong": "Monday to Saturday, 7am to 5pm",
+    "spec": [
+      {
+        "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "07:00",
+        "closes": "17:00"
+      }
+    ]
+  },
+  "areaServed": [
+    "Woodbridge",
+    "Lake Ridge",
+    "Lorton",
+    "Fairfax Station",
+    "Fairfax",
+    "Springfield",
+    "Alexandria",
+    "Arlington",
+    "McLean",
+    "Great Falls"
+  ],
+  "licence": {
+    "label": "Virginia Class A Contractor",
+    "number": null
+  },
+  "accreditations": ["BBB Accredited"],
+  "reviews": {
+    "source": "Google",
+    "fallbackRating": 5,
+    "fallbackCount": 49,
+    "fallbackAsOf": "2026-09"
+  },
+  "profiles": {
+    "instagram": "https://www.instagram.com/rcallexteriors",
+    "facebook": null,
+    "google": null,
+    "bbb": null
+  },
+  "builtBy": {
+    "label": "Website by The Surge Agency",
+    "url": "https://thesurgeagency.com"
+  }
+}

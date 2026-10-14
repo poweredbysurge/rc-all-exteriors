@@ -1,0 +1,47 @@
+---
+// Sticky bottom bar (sticky-cta-390). Phones and tablets only. site.ts shows it
+// once the hero has scrolled out and hides it while a lead form is in view,
+// so it never competes with the form (master prompt section 3).
+import Icon from './Icon.astro';
+import { TEL } from '@/lib/site';
+
+interface Props {
+  /** True on pages that carry a lead card: the right button scrolls to it instead of navigating. */
+  hasLeadCard?: boolean;
+}
+const { hasLeadCard = false } = Astro.props;
+---
+
+<div
+  data-sticky-cta
+  class="sticky-cta fixed inset-x-0 bottom-0 z-30 grid grid-cols-[auto_minmax(0,1fr)] gap-2 border-t border-border-subtle bg-surface px-4 pt-2.5 shadow-md xs:px-5 nav:hidden"
+  aria-hidden="true"
+  inert
+>
+  <a href={TEL} class="btn btn-secondary px-3">
+    <Icon name="phone" size={20} />
+    Call or text
+  </a>
+  {
+    hasLeadCard ? (
+      <button type="button" class="btn btn-primary px-2" data-action="lead-card">
+        Free Roof Inspection
+      </button>
+    ) : (
+      <a href="/free-roof-inspection/" class="btn btn-primary px-2">
+        Free Roof Inspection
+      </a>
+    )
+  }
+</div>
+
+<style is:global>
+  .sticky-cta {
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    transform: translateY(110%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .sticky-cta.is-visible {
+    transform: none;
+  }
+</style>

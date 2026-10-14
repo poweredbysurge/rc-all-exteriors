@@ -1,0 +1,31 @@
+---
+// Linked service card: 32px line icon, title, one line, one link.
+import Icon from './Icon.astro';
+import Rich from './Rich.astro';
+import type { Inline } from '@/lib/copy';
+import { serviceByHref } from '@/data/nav';
+import { sentenceCase } from '@/lib/text';
+
+interface Props {
+  title: string;
+  text: Inline[];
+  href: string;
+  icon?: string;
+  tag?: 'h2' | 'h3';
+  class?: string;
+}
+const { title, text, href, tag: Tag = 'h3', class: className } = Astro.props;
+const icon = Astro.props.icon ?? serviceByHref.get(href)?.icon ?? 'layout-panel-left';
+---
+
+<a href={href} class:list={['card h-full', className]}>
+  <Icon name={icon} size={32} class="text-accent" />
+  <div class="flex flex-1 flex-col gap-2">
+    <Tag class="heading text-h3 text-fg">{sentenceCase(title)}</Tag>
+    <p class="text-body-sm text-fg-muted" data-sm><Rich inline={text} linkPhone={false} /></p>
+  </div>
+  <span class="inline-flex items-center gap-1.5 text-body-sm font-semibold text-accent">
+    {title}
+    <Icon name="arrow-right" size={18} />
+  </span>
+</a>

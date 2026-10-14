@@ -1,0 +1,84 @@
+---
+// Projects gallery. Copy: batch-5 section 4.
+// Every photo is real RC work. Captions name the job type from the Drive
+// folder; a photo without a confirmed town files under "Other" and is never
+// guessed (batch-5 build note). Case studies are built from the template in
+// projects/[slug].astro once Ricardo supplies real jobs; none are invented.
+import TrustPage from '@/components/TrustPage.astro';
+import Figure from '@/components/Figure.astro';
+import Rich from '@/components/Rich.astro';
+import Section from '@/components/Section.astro';
+import { services } from '@/data/nav';
+import { photos, type PhotoKey } from '@/data/photos';
+import { caseStudies } from '@/data/projects';
+import { first, getPage, section } from '@/lib/copy';
+import { confirmHtml } from '@/lib/render';
+import { slugify } from '@/lib/text';
+
+const path = '/projects/';
+const page = getPage(path);
+const filters = section(page, 'Filters');
+const featured = section(page, 'Case studies');
+const keys = Object.keys(photos) as PhotoKey[];
+const jobs = [...new Set(keys.map((k) => photos[k].job))];
+---
+
+<TrustPage path={path} pageType="CollectionPage" skip={['Filters', 'Gallery', 'Case studies']}>
+  <Section bg="surface" name="Gallery">
+    <div class="flex flex-col gap-6 lg:gap-8" data-gallery>
+      <h2 class="heading text-h2 text-fg"><Rich inline={first(filters, 'h2')!.inline} /></h2>
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Filter by job type">
+        <button type="button" class="chip cursor-pointer" aria-pressed="true" data-filter="all">All work</button>
+        {jobs.map((job) => <button type="button" class="chip cursor-pointer" aria-pressed="false" data-filter={slugify(job)}>{job}</button>)}
+      </div>
+      <p class="text-body-sm text-fg-muted" data-sm>
+        Town for each photo: <Fragment set:html={confirmHtml('Ricardo tags each photo with town and job type')} />. Until then every photo files under Other.
+      </p>
+      <ul class="m-0 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-2 lg:grid-cols-3">
+        {
+          keys.map((key) => (
+            <li data-job={slugify(photos[key].job)}>
+              <Figure photo={key} ratio={4 / 3} sizes="(min-width: 1024px) 410px, (min-width: 768px) 46vw, 92vw" showTown class="reveal" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <Section bg="muted" name="Featured projects">
+    <div class="flex flex-col gap-6">
+      <h2 class="heading text-h2 text-fg"><Rich inline={first(featured, 'h2')!.inline} /></h2>
+      {
+        caseStudies.length > 0 ? (
+          <ul class="m-0 grid list-none grid-cols-1 gap-5 p-0 md:grid-cols-2">
+            {caseStudies.map((c) => (
+              <li><a href={`/projects/${c.slug}/`} class="card h-full"><h3 class="heading text-h3 text-fg">{c.jobType} in {c.town}, VA</h3><p class="text-body-sm text-fg-muted" data-sm>{c.summary}</p></a></li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-fg-muted"><Fragment set:html={confirmHtml('details for the 4 launch case studies, from real jobs')} /></p>
+        )
+      }
+      <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+        {services.slice(0, 4).map((s) => <li><a href={s.href} class="chip">{s.label}</a></li>)}
+        <li><a href="/reviews/" class="chip">Reviews</a></li>
+      </ul>
+    </div>
+  </Section>
+</TrustPage>
+
+<script>
+  // Gallery filter: chips show one job type at a time.
+  const gallery = document.querySelector('[data-gallery]');
+  const buttons = [...(gallery?.querySelectorAll<HTMLButtonElement>('[data-filter]') ?? [])];
+  for (const button of buttons) {
+    button.addEventListener('click', () => {
+      const filter = button.dataset.filter;
+      for (const b of buttons) b.setAttribute('aria-pressed', String(b === button));
+      for (const item of gallery!.querySelectorAll<HTMLElement>('[data-job]')) {
+        item.hidden = filter !== 'all' && item.dataset.job !== filter;
+      }
+    });
+  }
+</script>

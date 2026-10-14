@@ -1,0 +1,42 @@
+---
+import LegalPage from '@/components/LegalPage.astro';
+import business from '@/data/business.json';
+import { MAILTO, PHONE, TEL } from '@/lib/site';
+---
+
+<LegalPage
+  path="/terms/"
+  title="Terms of Use | RC All Exteriors, Woodbridge, VA Roofing"
+  h1="Terms of Use"
+  description="Terms for using the RC All Exteriors LLC website: what the site is for, how estimates and written proposals work, and how to reach us with questions."
+  updated="October 7, 2026"
+>
+  <p>These terms cover your use of this website, run by {business.legalName}. By using the site you agree to them.</p>
+
+  <h2>What this site is for</h2>
+  <p>The site describes our roofing and exterior services and lets you ask for an inspection. Nothing on it is a contract to do work. Any job we do for you is covered by the written estimate and agreement you sign with us.</p>
+
+  <h2>Estimates and pricing</h2>
+  <p>Information on this site is general. The price for your job is the one in your written estimate, which we prepare after an inspection.</p>
+
+  <h2>Warranty</h2>
+  <p>Warranty coverage for completed work is set out in the warranty paperwork you receive with your job, not on this website.</p>
+
+  <h2>Reviews and photos</h2>
+  <p>Reviews shown on the site come from Google and are shown as written. Project photos show our own work.</p>
+
+  <h2>Your use of the site</h2>
+  <p>Please do not misuse the site: no automated form submissions, no attempts to break or probe it, and no copying of its content for commercial use without our permission.</p>
+
+  <h2>Links</h2>
+  <p>We link to other sites, such as our Google and Instagram profiles. We are not responsible for what is on them.</p>
+
+  <h2>Liability</h2>
+  <p>We work to keep the site accurate and available, but we provide it as is. To the extent the law allows, we are not liable for losses that come from using the site itself.</p>
+
+  <h2>Governing law</h2>
+  <p>These terms are governed by the laws of the Commonwealth of Virginia.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about these terms: call or text <a href={TEL}>{PHONE}</a> or email <a href={MAILTO}>{business.email}</a>.</p>
+</LegalPage>

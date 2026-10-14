@@ -1,0 +1,35 @@
+---
+import { breadcrumbsFor } from '@/data/nav';
+
+interface Props {
+  path: string;
+  /** On a dark hero the trail is off-white. */
+  onDark?: boolean;
+  class?: string;
+}
+const { path, onDark = false, class: className } = Astro.props;
+const trail = breadcrumbsFor(path);
+---
+
+{
+  trail.length > 1 && (
+    <nav aria-label="Breadcrumb" class={className}>
+      <ol class:list={['flex flex-wrap items-center gap-x-2 text-body-sm font-medium', onDark ? 'text-fg-inverse-muted' : 'text-fg-muted']}>
+        {trail.map((item, i) => (
+          <li class="flex items-center gap-2">
+            {i > 0 && <span aria-hidden="true">/</span>}
+            {i === trail.length - 1 ? (
+              <span aria-current="page" class={onDark ? 'text-fg-inverse' : 'text-fg'}>
+                {item.label}
+              </span>
+            ) : (
+              <a href={item.href} class="inline-flex min-h-11 items-center underline underline-offset-4 hover:decoration-2">
+                {item.label}
+              </a>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}

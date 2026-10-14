@@ -1,0 +1,96 @@
+---
+// Mobile nav panel (nav-open-390). Slides from the right below 900px: full
+// nav with the Services group expanded, phone, primary CTA, hours, Instagram.
+// site.ts opens and closes it, traps focus and restores it on close.
+import Icon from './Icon.astro';
+import business from '@/data/business.json';
+import { mobileNavServices, primaryNav } from '@/data/nav';
+import { PHONE, TEL } from '@/lib/site';
+
+const rest = primaryNav.filter((item) => !item.hasMenu);
+---
+
+<div
+  id="mobile-nav"
+  class="mobile-nav fixed inset-0 z-50 flex flex-col bg-surface nav:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menu"
+  hidden
+>
+  <div class="flex h-16 shrink-0 items-center justify-between border-b border-border-subtle px-5">
+    <img src="/logos/logo-full-color.svg" alt="RC All Exteriors" width="85" height="40" class="block h-10 w-auto" />
+    <button
+      type="button"
+      class="flex size-11 cursor-pointer items-center justify-center rounded-md border border-border text-fg"
+      aria-label="Close menu"
+      data-action="close"
+    >
+      <Icon name="x" size={22} />
+    </button>
+  </div>
+
+  <div class="flex min-h-0 flex-1 flex-col justify-between gap-6 overflow-y-auto px-5 pt-2 pb-5">
+    <nav aria-label="Mobile">
+      <button
+        type="button"
+        class="heading flex min-h-12 w-full cursor-pointer items-center justify-between border-b border-border-subtle px-1 text-left text-h4 text-fg"
+        aria-expanded="true"
+        aria-controls="mobile-nav-services"
+        data-action="services"
+      >
+        Services
+        <Icon name="chevron-down" size={24} class="text-accent" />
+      </button>
+      <div id="mobile-nav-services" class="flex flex-col border-b border-border-subtle py-1">
+        {
+          mobileNavServices.map((s) => (
+            <a href={s.href} class="flex min-h-11 items-center px-4 text-body-sm font-semibold text-fg">
+              {s.label}
+            </a>
+          ))
+        }
+        <a href="/services/" class="flex min-h-11 items-center px-4 text-body-sm font-semibold text-accent">
+          All services
+        </a>
+      </div>
+      {
+        [...rest, { href: '/contact/', label: 'Contact' }].map((item) => (
+          <a
+            href={item.href}
+            class="heading flex min-h-12 items-center border-b border-border-subtle px-1 text-h4 text-fg"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex flex-col gap-3">
+      <a href={TEL} class="btn btn-secondary btn-block">Call or text {PHONE}</a>
+      <a href="/free-roof-inspection/" class="btn btn-primary btn-block">Book a Free Roof Inspection</a>
+      <div class="flex flex-wrap items-center justify-center gap-x-1.5 text-body-sm font-medium text-fg-muted">
+        <span>{business.hours.display} ·</span>
+        <a href={business.profiles.instagram} class="flex min-h-11 items-center text-accent" rel="noopener">
+          Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .mobile-nav {
+    transform: translateX(100%);
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .mobile-nav.is-open {
+    transform: none;
+  }
+  .mobile-nav [data-action="services"] svg {
+    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .mobile-nav [data-action="services"][aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+</style>

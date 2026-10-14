@@ -15,7 +15,18 @@ Production site for RC All Exteriors LLC (Woodbridge, VA roofing and exteriors).
 
 ## Stack
 
-Astro + Tailwind on Vercel, trailing slashes always. Lead intake via same-origin `/api/lead` to Resend and Surge Command Center. Reviews via `/api/reviews` proxy. See ADR-001 once written.
+Astro 7 + Tailwind 4 on Vercel, trailing slashes always. Lead intake via same-origin `/api/lead/` to Resend and Surge Command Center. Reviews via the `/api/reviews/` proxy. See `adr/ADR-001-stack.md`.
+
+## Where things live
+
+- `src/lib/copy.ts`: parses `copy/batch-*.md` into the blocks every page renders.
+- `src/data/business.json`: phone, hours, service area, licence. One edit changes the site.
+- `src/lib/site.ts`: LAUNCH / LIVE hosts and the consent text version.
+- `src/data/photos.ts`: photo registry and the LCP map.
+- `src/data/nav.ts`: services, cities, routes, breadcrumbs.
+- `scripts/check-integrity.mjs` and `scripts/check-layout.mjs`: the verification gate.
+- `WORKING-ORDER.md`: what is done, blocked, and the commands to resume.
+- `CONFIRM-LIST.md`: every open question for Ricardo, by page.
 
 ## Working rules
 

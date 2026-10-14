@@ -1,0 +1,46 @@
+---
+// Lucide (ISC), 1.75px stroke, round caps and joins. Names are the ones in
+// design/icons.md. Rendered to inline SVG at build; no icon JS ships.
+// Never place an icon inside a circle or a filled square (design/icons.md).
+import * as lucide from 'lucide';
+
+interface Props {
+  name: string;
+  size?: number;
+  filled?: boolean;
+  class?: string;
+}
+const { name, size = 24, filled = false, class: className } = Astro.props;
+
+const ALIASES: Record<string, string> = { home: 'house' };
+const key = (ALIASES[name] ?? name)
+  .split('-')
+  .map((part) => part[0].toUpperCase() + part.slice(1))
+  .join('');
+const node = (lucide as unknown as Record<string, [string, Record<string, string | number>][]>)[key];
+if (!Array.isArray(node)) throw new Error(`Icon "${name}" is not a Lucide icon`);
+
+const inner = node
+  .map(
+    ([tag, attrs]) =>
+      `<${tag} ${Object.entries(attrs)
+        .map(([k, v]) => `${k}="${v}"`)
+        .join(' ')}/>`,
+  )
+  .join('');
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill={filled ? 'currentColor' : 'none'}
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  class:list={['block shrink-0', className]}
+  set:html={inner}
+/>

@@ -1,0 +1,39 @@
+---
+import LegalPage from '@/components/LegalPage.astro';
+import business from '@/data/business.json';
+import { MAILTO, PHONE, TEL } from '@/lib/site';
+---
+
+<LegalPage
+  path="/sms-terms/"
+  title="SMS Terms | RC All Exteriors, Woodbridge, VA Roofing"
+  h1="SMS Terms"
+  description="Terms for text messages from RC All Exteriors LLC: what we send, how often, message and data rates, and how to stop messages or get help at any time."
+  updated="October 7, 2026"
+>
+  <p>These terms cover text messages from {business.legalName}. You only receive them if you checked the box on one of our forms, or texted us first.</p>
+
+  <h2>What we send</h2>
+  <p>Messages about your inquiry: replies to your questions, appointment confirmations and reminders, and updates on your quote or job. We do not send marketing blasts.</p>
+
+  <h2>How often</h2>
+  <p>Message frequency varies. It depends on your request and where your job stands.</p>
+
+  <h2>Cost</h2>
+  <p>We do not charge for text messages. Message and data rates may apply from your mobile carrier.</p>
+
+  <h2>How to stop</h2>
+  <p>Reply STOP to any message. You will get one confirmation and then no more texts from us unless you opt in again.</p>
+
+  <h2>How to get help</h2>
+  <p>Reply HELP to any message, call or text <a href={TEL}>{PHONE}</a>, or email <a href={MAILTO}>{business.email}</a>.</p>
+
+  <h2>Consent</h2>
+  <p>Agreeing to receive text messages is not a condition of buying any service from us.</p>
+
+  <h2>Carriers</h2>
+  <p>Mobile carriers are not liable for delayed or undelivered messages.</p>
+
+  <h2>Privacy</h2>
+  <p>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. See our <a href="/privacy-policy/">Privacy Policy</a>.</p>
+</LegalPage>

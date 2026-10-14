@@ -1,0 +1,8 @@
+---
+// Copy: batch-2 section 4. The yard-sign photo stands in until a portrait of
+// Ricardo exists (src/assets/photos/PHOTO-INVENTORY.md); the portrait slot stays open.
+import TrustPage from '@/components/TrustPage.astro';
+import { personSchema } from '@/lib/schema';
+---
+
+<TrustPage path="/about/" pageType="AboutPage" heroPhoto="mansard" schema={[personSchema()]} />

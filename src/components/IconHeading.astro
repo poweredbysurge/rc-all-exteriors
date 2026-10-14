@@ -1,0 +1,15 @@
+---
+// A 24px line icon inline with an h3. Never an icon in a circle.
+import Icon from './Icon.astro';
+interface Props {
+  icon: string;
+  tag?: 'h2' | 'h3';
+  class?: string;
+}
+const { icon, tag: Tag = 'h3', class: className } = Astro.props;
+---
+
+<div class:list={['flex items-start gap-2.5', className]}>
+  <Icon name={icon} size={24} class="mt-1 text-accent" />
+  <Tag class="heading text-h3 text-fg"><slot /></Tag>
+</div>

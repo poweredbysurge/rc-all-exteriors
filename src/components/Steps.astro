@@ -1,0 +1,47 @@
+---
+// Process steps. A real photo above each step where one exists, a labeled
+// photo gap where one is still owed, and nothing where the trade has no
+// photos yet. The numeral sits top-left at 6% opacity, above the title rather
+// than behind it, so the two never overlap (Gate A review finding 5). No numbered circles, no dashed
+// connector line (master prompt section 9).
+import Figure from './Figure.astro';
+import PhotoGap from './PhotoGap.astro';
+import Rich from './Rich.astro';
+import type { PhotoKey } from '@/data/photos';
+import type { Inline } from '@/lib/copy';
+
+type StepMedia = PhotoKey | { gap: string; icon?: string } | null;
+interface Props {
+  items: { title: string; inline: Inline[] }[];
+  media?: StepMedia[];
+  class?: string;
+}
+const { items, media = [], class: className } = Astro.props;
+const cols = items.length === 4 ? 'md:grid-cols-2 lg:grid-cols-4' : items.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-3';
+const sizes = '(min-width: 1024px) 300px, (min-width: 768px) 46vw, 92vw';
+---
+
+<ol class:list={['m-0 grid list-none grid-cols-1 gap-7 p-0 lg:gap-8', cols, className]}>
+  {
+    items.map((step, i) => {
+      const m = media[i];
+      return (
+        <li class="reveal flex flex-col gap-3" style={`--reveal-i:${i}`}>
+          {typeof m === 'string' && <Figure photo={m} ratio={4 / 3} sizes={sizes} radius="md" />}
+          {m && typeof m === 'object' && <PhotoGap desc={m.gap} ratio={4 / 3} icon={m.icon} />}
+          <div class="flex flex-col">
+            <span aria-hidden="true" class="heading pointer-events-none -ml-0.5 block text-[3.5rem] leading-none text-accent opacity-[0.06] select-none lg:text-[4.5rem]">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h3 class="heading mt-1 text-h3 text-fg">{step.title}</h3>
+          </div>
+          {step.inline.length > 0 && (
+            <p class="rich text-fg-muted">
+              <Rich inline={step.inline} />
+            </p>
+          )}
+        </li>
+      );
+    })
+  }
+</ol>

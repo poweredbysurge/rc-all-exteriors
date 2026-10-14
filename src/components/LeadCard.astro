@@ -1,0 +1,234 @@
+---
+// The lead card: the HomeSource two-step standard (master prompt section 10),
+// drawn on lead-card-step1 / step2 / success / error / loading.
+//
+// Step 1 captures the lead. Step 2 is optional qualification and can never
+// lose it. src/scripts/lead.ts drives validation, submit, retry and analytics.
+// Field names are the Command Center contract. Do not rename them.
+import Icon from './Icon.astro';
+import business from '@/data/business.json';
+import { BEST_TIMES, CONTACT_REASONS, REASONS, ROOF_AGES, URGENCIES } from '@/data/lead-form';
+import { confirmHtml, esc } from '@/lib/render';
+import { CONSENT_TEXT, CONSENT_TEXT_VERSION, PHONE, TEL } from '@/lib/site';
+
+interface Props {
+  /** Unique per page and sent as form_id: "hero", "inspection", "contact". */
+  formId: string;
+  variant?: 'card' | 'contact';
+  heading?: string;
+  sub?: string;
+  submitLabel?: string;
+  class?: string;
+}
+const {
+  formId,
+  variant = 'card',
+  heading = 'Book your free inspection',
+  sub = "Schedule online in under a minute. We'll do the rest.",
+  submitLabel = 'Book a Free Roof Inspection',
+  class: className,
+} = Astro.props;
+
+const isContact = variant === 'contact';
+const id = (name: string) => `${formId}-${name}`;
+const reasons = isContact ? CONTACT_REASONS : REASONS;
+const reasonLabel = isContact ? 'What do you need?' : "What's going on?";
+// The label is rendered from the one consent string whose version is stored
+// with every submission, so the text and its version cannot drift apart.
+const consentHtml = esc(CONSENT_TEXT)
+  .replace('Privacy Policy', '<a href="/privacy-policy/">Privacy Policy</a>')
+  .replace('SMS Terms', '<a href="/sms-terms/">SMS Terms</a>');
+---
+
+<div
+  id="lead-card"
+  data-lead-card
+  data-form-id={formId}
+  data-variant={variant}
+  data-consent-version={CONSENT_TEXT_VERSION}
+  data-phone={PHONE}
+  data-tel={TEL}
+  class:list={['flex w-full flex-col gap-5 rounded-lg bg-surface px-5 py-6 text-fg shadow-md lg:p-8', className]}
+>
+  <!-- Step 1 -->
+  <form data-step="1" novalidate class="flex flex-col gap-5" aria-labelledby={id('heading')}>
+    <div class="flex flex-col gap-2">
+      <h2 id={id('heading')} class="heading text-h3 text-fg">{heading}</h2>
+      {sub && <p class="text-body-sm text-fg-muted" data-sm>{sub}</p>}
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <div>
+        <label class="field-label" for={id('full_name')}>Full name <span class="field-hint">(required)</span></label>
+        <input class="field" id={id('full_name')} name="full_name" type="text" autocomplete="name" required />
+      </div>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label class="field-label" for={id('phone')}>Phone <span class="field-hint">(required)</span></label>
+          <input class="field" id={id('phone')} name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
+        </div>
+        <div>
+          <label class="field-label" for={id('email')}>Email <span class="field-hint">(required)</span></label>
+          <input class="field" id={id('email')} name="email" type="email" inputmode="email" autocomplete="email" required />
+        </div>
+      </div>
+      {
+        isContact && (
+          <div>
+            <label class="field-label" for={id('address_street')}>Street address <span class="field-hint">(optional)</span></label>
+            <input class="field" id={id('address_street')} name="address_street" type="text" autocomplete="street-address" />
+          </div>
+        )
+      }
+      <div>
+        <label class="field-label" for={id('zip')}>Zip code <span class="field-hint">(required)</span></label>
+        <input class="field" id={id('zip')} name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" required />
+      </div>
+      <div>
+        <label class="field-label" for={id('reason')}>{reasonLabel} <span class="field-hint">(required)</span></label>
+        <div class="relative">
+          <select class="field" id={id('reason')} name="reason" required>
+            <option value="">Choose one</option>
+            {reasons.map((r) => <option value={r.key} data-label={r.label}>{r.label}</option>)}
+          </select>
+          <Icon name="chevron-down" size={20} class="pointer-events-none absolute top-1/2 right-3.5 -translate-y-1/2 text-fg-muted" />
+        </div>
+      </div>
+      {
+        isContact && (
+          <div>
+            <label class="field-label" for={id('notes')}>Message <span class="field-hint">(optional)</span></label>
+            <textarea class="field" id={id('notes')} name="notes" rows="4" />
+          </div>
+        )
+      }
+      <label class="flex cursor-pointer items-start gap-3" for={id('consent_sms')}>
+        <input
+          class="consent-box mt-0.5 size-6 shrink-0 cursor-pointer rounded-sm border border-border-strong accent-accent"
+          id={id('consent_sms')}
+          name="consent_sms"
+          type="checkbox"
+        />
+        <span class="rich text-body-sm leading-normal text-fg-muted" data-sm data-consent-text set:html={consentHtml} />
+      </label>
+      <!-- Honeypot. Hidden from people and assistive tech; a filled value means a bot. -->
+      <div class="absolute -left-[9999px] size-px overflow-hidden" aria-hidden="true">
+        <label for={id('company_website')}>Leave this field empty</label>
+        <input id={id('company_website')} name="company_website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+    </div>
+
+    <div data-form-alert role="alert" aria-live="polite" class="rich rounded-md border border-error bg-error-tint px-3.5 py-3 text-body-sm text-error" data-sm hidden></div>
+
+    <button type="submit" class="btn btn-primary btn-block" data-action="submit">
+      <span data-label>{submitLabel}</span>
+    </button>
+    <p class="text-center text-body-sm text-fg-muted" data-sm>
+      Or call or text <a href={TEL} class="font-bold whitespace-nowrap text-accent hover:underline">{PHONE}</a>
+    </p>
+  </form>
+
+  {
+    !isContact && (
+      <form data-step="2" novalidate class="flex flex-col gap-5" aria-labelledby={id('heading2')} hidden>
+        <h2 id={id('heading2')} class="heading text-h3 text-fg" tabindex="-1">
+          A few more details help us prep for your visit. All optional.
+        </h2>
+        <div class="flex flex-col gap-4">
+          <div>
+            <label class="field-label" for={id('address_street')}>Street address <span class="field-hint">(optional)</span></label>
+            <input class="field" id={id('address_street')} name="address_street" type="text" autocomplete="street-address" />
+          </div>
+          <fieldset>
+            <legend class="field-label">Roof age <span class="field-hint">(optional)</span></legend>
+            <div class="flex flex-wrap gap-2">
+              {ROOF_AGES.map((o) => (
+                <label class="chip chip-radio cursor-pointer">
+                  <input class="sr-only" type="radio" name="roof_age" value={o.key} />
+                  {o.label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="field-label">How soon <span class="field-hint">(optional)</span></legend>
+            <div class="flex flex-wrap gap-2">
+              {URGENCIES.map((o) => (
+                <label class="chip chip-radio cursor-pointer">
+                  <input class="sr-only" type="radio" name="urgency" value={o.key} />
+                  {o.label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <div>
+            <label class="field-label" for={id('best_time')}>Best time to reach you <span class="field-hint">(optional)</span></label>
+            <div class="relative">
+              <select class="field" id={id('best_time')} name="best_time">
+                <option value="">Choose one</option>
+                {BEST_TIMES.map((t) => <option value={t}>{t}</option>)}
+              </select>
+              <Icon name="chevron-down" size={20} class="pointer-events-none absolute top-1/2 right-3.5 -translate-y-1/2 text-fg-muted" />
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3">
+          <button type="submit" class="btn btn-primary btn-block" data-action="finish"><span data-label>Finish</span></button>
+          <button type="button" class="min-h-11 cursor-pointer text-center text-body-sm text-fg-muted underline underline-offset-4 hover:text-fg" data-action="skip">
+            Skip
+          </button>
+        </div>
+      </form>
+    )
+  }
+
+  <!-- Success. Copy is the approved confirmation sentence; "what happens next" is DRAFT. -->
+  <div data-step="success" class="flex flex-col gap-5" hidden>
+    <h2 class="heading text-h3 text-fg" tabindex="-1" data-success-heading>
+      {
+        isContact ? (
+          <Fragment>
+            Thanks. We'll call you within <Fragment set:html={confirmHtml('response time')} />.
+          </Fragment>
+        ) : (
+          <Fragment>
+            Got it. Ricardo will call you within <Fragment set:html={confirmHtml('hours')} /> to set a time.
+          </Fragment>
+        )
+      }
+    </h2>
+    <p class="text-fg">
+      What happens next: we confirm a time, inspect the roof, and give you a straight answer with a written estimate if work is needed.
+    </p>
+    <p class="text-fg">
+      Need us sooner? Call or text <a href={TEL} class="font-bold whitespace-nowrap text-accent hover:underline">{PHONE}</a>.
+    </p>
+    <div class="flex flex-col">
+      <a href="/roof-replacement/" class="link-arrow">Roof replacement <Icon name="arrow-right" size={18} /></a>
+      <a href="/roof-repair/" class="link-arrow">Roof repair <Icon name="arrow-right" size={18} /></a>
+      <a href="/reviews/" class="link-arrow">Read our reviews <Icon name="arrow-right" size={18} /></a>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .chip-radio:has(:checked) {
+    background: var(--color-accent-tint);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .chip-radio:has(:focus-visible) {
+    outline: var(--rc-focus-ring);
+    outline-offset: var(--rc-focus-ring-offset);
+  }
+  [data-lead-card] fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+  }
+</style>
+
+<script>
+  import '@/scripts/lead';
+</script>

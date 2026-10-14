@@ -1,0 +1,25 @@
+---
+// Plain list with the square accent marker. Always left-aligned.
+import Rich from './Rich.astro';
+import type { ListItem } from '@/lib/copy';
+
+interface Props {
+  items: ListItem[];
+  class?: string;
+}
+const { items, class: className } = Astro.props;
+---
+
+<ul class:list={['m-0 flex max-w-[720px] list-none flex-col gap-3 p-0 text-left', className]}>
+  {
+    items.map((item) => (
+      <li class="rich flex gap-3.5 text-fg">
+        <span aria-hidden="true" class="mt-[11px] size-2 shrink-0 rounded-[2px] bg-accent" />
+        <span>
+          {item.title && <strong class="font-bold text-fg">{item.title} </strong>}
+          <Rich inline={item.inline} />
+        </span>
+      </li>
+    ))
+  }
+</ul>

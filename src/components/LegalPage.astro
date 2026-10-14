@@ -1,0 +1,53 @@
+---
+// Legal page shell. The text is a Surge DRAFT written to the A2P 10DLC
+// requirements; it carries a CONFIRM slot so it cannot ship before the client
+// has reviewed it (copy/DRAFT-ADDITIONS.md).
+import Base from '@/layouts/Base.astro';
+import PageHero from './PageHero.astro';
+import Section from './Section.astro';
+import { confirmHtml } from '@/lib/render';
+
+interface Props {
+  path: string;
+  title: string;
+  h1: string;
+  description: string;
+  updated: string;
+}
+const { path, title, h1, description, updated } = Astro.props;
+---
+
+<Base title={title} description={description} path={path}>
+  <PageHero path={path} h1={h1} />
+  <Section bg="surface" name="Legal text">
+    <div class="legal rich mx-auto flex max-w-[720px] flex-col gap-5 text-fg">
+      <p class="text-body-sm text-fg-muted" data-sm>
+        Last updated {updated}. <Fragment set:html={confirmHtml('legal text reviewed and approved by RC All Exteriors')} />
+      </p>
+      <slot />
+    </div>
+  </Section>
+</Base>
+
+<style is:global>
+  .legal h2 {
+    font-family: var(--font-heading);
+    font-stretch: 125%;
+    font-weight: 700;
+    letter-spacing: var(--tracking-heading);
+    font-size: var(--text-h3);
+    line-height: var(--text-h3--line-height);
+    margin-top: 28px;
+    text-wrap: balance;
+  }
+  .legal ul {
+    list-style: disc;
+    padding-left: 1.25em;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .legal li::marker {
+    color: var(--color-accent);
+  }
+</style>

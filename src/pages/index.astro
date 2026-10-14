@@ -1,0 +1,186 @@
+---
+// Homepage (home-390, home-1440). Copy: batch-1 section 2.
+import Base from '@/layouts/Base.astro';
+import AreaMap from '@/components/AreaMap.astro';
+import BlockFlow from '@/components/BlockFlow.astro';
+import CityChips from '@/components/CityChips.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Faq from '@/components/Faq.astro';
+import Figure from '@/components/Figure.astro';
+import Hero from '@/components/Hero.astro';
+import Icon from '@/components/Icon.astro';
+import IconHeading from '@/components/IconHeading.astro';
+import ReviewCard from '@/components/ReviewCard.astro';
+import Rich from '@/components/Rich.astro';
+import Section from '@/components/Section.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import StatStrip from '@/components/StatStrip.astro';
+import Steps from '@/components/Steps.astro';
+import { groupByH3, iconFor } from '@/lib/blocks';
+import { blocksOf, faqs, first, getPage, plain, section } from '@/lib/copy';
+import { metaFor } from '@/lib/page';
+import { pickReviews } from '@/lib/pick-reviews';
+import { liveCount } from '@/lib/render';
+import { getReviews } from '@/lib/reviews';
+import { faqSchema } from '@/lib/schema';
+
+const path = '/';
+const page = getPage(path);
+const meta = metaFor(page);
+
+const hero = section(page, 'Hero');
+const opener = section(page, 'Problem opener');
+const why = section(page, 'Why us');
+const services = section(page, 'Services');
+const reviews = section(page, 'Reviews');
+const process = section(page, 'Process');
+const financing = section(page, 'Financing');
+const area = section(page, 'Service area');
+const faq = section(page, 'FAQ');
+const cta = section(page, 'Footer CTA');
+
+const whyGroups = groupByH3(why.blocks.filter((b) => b.type !== 'h2')).groups;
+const reviewSlots = blocksOf(reviews, 'review');
+const live = pickReviews((await getReviews()).reviews, reviewSlots.map((r) => r.hint));
+const areaParts = groupByH3(area.blocks.filter((b) => b.type !== 'h2' && b.type !== 'links' && b.type !== 'image'));
+const reviewsLink = first(reviews, 'links')!.links[0];
+---
+
+<Base title={meta.title} description={meta.description} path={path} og="home" hasLeadCard confirmMeta={meta.confirmMeta} schema={[faqSchema(faqs(page))]}>
+  <Hero
+    path={path}
+    display
+    h1={plain(first(hero, 'h1')!.inline)}
+    lede={first(hero, 'subhead')!.inline}
+    primary={blocksOf(hero, 'cta').find((c) => c.kind === 'primary') ?? null}
+    secondary={blocksOf(hero, 'cta').find((c) => c.kind === 'secondary') ?? null}
+    trust={first(hero, 'trust')!.items}
+  />
+
+  <Section bg="surface" name="Problem opener">
+    <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+      <h2 class="heading text-h2 text-fg"><Rich inline={first(opener, 'h2')!.inline} /></h2>
+      <BlockFlow blocks={blocksOf(opener, 'p')} class="[&>p]:text-fg" />
+    </div>
+  </Section>
+
+  <Section bg="muted" name="Why us">
+    <div class="grid grid-cols-1 items-start gap-7 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+      <Figure photo="mansard" ratio={4 / 5} sizes="(min-width: 1024px) 500px, 100vw" showTown bleed class="reveal" />
+      <div class="flex flex-col gap-7 lg:gap-10">
+        <div class="flex flex-col gap-4">
+          <Eyebrow>Why us</Eyebrow>
+          <h2 class="heading text-h2 text-fg"><Rich inline={first(why, 'h2')!.inline} /></h2>
+        </div>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+          {
+            whyGroups.map((group, i) => (
+              <div class="reveal flex flex-col gap-2.5" style={`--reveal-i:${i}`}>
+                <IconHeading icon={iconFor(plain(group.heading!.inline))}>
+                  <Rich inline={group.heading!.inline} />
+                </IconHeading>
+                <BlockFlow blocks={group.blocks} />
+              </div>
+            ))
+          }
+        </div>
+        <StatStrip />
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="surface" name="Services">
+    <div class="flex flex-col gap-6 lg:gap-10">
+      <div class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left">
+        <Eyebrow>Services</Eyebrow>
+        <h2 class="heading text-h2 text-fg"><Rich inline={first(services, 'h2')!.inline} /></h2>
+      </div>
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6">
+        {
+          blocksOf(services, 'card').map((card, i) => (
+            <div class="reveal" style={`--reveal-i:${i}`}>
+              <ServiceCard title={card.title} text={card.inline} href={card.href!} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="subtle" name="Reviews">
+    <div class="flex flex-col gap-6 lg:gap-10">
+      <div class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left">
+        <Eyebrow>Reviews</Eyebrow>
+        <h2 class="heading text-h2 text-fg"><Rich inline={first(reviews, 'h2')!.inline} /></h2>
+        <BlockFlow blocks={blocksOf(reviews, 'p')} class="text-left" />
+      </div>
+      <ReviewCard variant="pullquote" review={live[0]} hint={reviewSlots[0].hint} class="reveal" />
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6">
+        {reviewSlots.slice(1).map((slot, i) => <ReviewCard review={live[i + 1]} hint={slot.hint} class="reveal" />)}
+      </div>
+      <div class="text-center lg:text-left">
+        <a href={reviewsLink.href} class="link-arrow">
+          {liveCount(reviewsLink.text)}
+          <Icon name="arrow-right" size={18} />
+        </a>
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="surface" name="Process">
+    <div class="flex flex-col gap-6 lg:gap-10">
+      <h2 class="heading text-center text-h2 text-fg lg:text-left"><Rich inline={first(process, 'h2')!.inline} /></h2>
+      <Steps
+        items={first(process, 'steps')!.items}
+        media={['colonial', { gap: 'Ricardo walking a homeowner through a written estimate' }, 'underlayment', 'twoStory']}
+      />
+    </div>
+  </Section>
+
+  <Section bg="muted" quiet name="Financing">
+    <div class="flex flex-col items-center justify-between gap-4 text-center lg:flex-row lg:gap-16 lg:text-left">
+      <div class="flex max-w-[720px] items-start gap-4">
+        <Icon name="credit-card" size={32} class="mt-1 hidden text-accent lg:block" />
+        <div class="flex flex-col gap-3">
+          <h2 class="heading text-h2 text-fg"><Rich inline={first(financing, 'h2')!.inline} /></h2>
+          <p class="rich text-fg-muted"><Rich inline={first(financing, 'p')!.inline} /></p>
+        </div>
+      </div>
+      <BlockFlow blocks={blocksOf(financing, 'cta')} class="shrink-0" />
+    </div>
+  </Section>
+
+  <Section bg="surface" name="Service area">
+    <div class="grid grid-cols-1 items-start gap-7 lg:grid-cols-2 lg:gap-16">
+      <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-4">
+          <Eyebrow>Service area</Eyebrow>
+          <h2 class="heading text-h2 text-fg"><Rich inline={first(area, 'h2')!.inline} /></h2>
+        </div>
+        <BlockFlow blocks={areaParts.lead} class="[&>p]:text-fg" />
+        {
+          areaParts.groups.map((group) => (
+            <div class="flex flex-col gap-2.5">
+              <IconHeading icon="map-pin"><Rich inline={group.heading!.inline} /></IconHeading>
+              <BlockFlow blocks={group.blocks} />
+            </div>
+          ))
+        }
+      </div>
+      <div class="flex flex-col gap-6">
+        <AreaMap caption="Our service area across Northern Virginia, from our Woodbridge base. Solid dots have their own page. Schematic, not to scale." class="reveal mx-auto w-full max-w-[600px] lg:mx-0" />
+        <CityChips center />
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="subtle" name="FAQ">
+    <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
+      <h2 class="heading text-h2 text-fg"><Rich inline={first(faq, 'h2')!.inline} /></h2>
+      <Faq faqs={blocksOf(faq, 'faq')} />
+    </div>
+  </Section>
+
+  <CtaBand heading={first(cta, 'h2')!.inline} text={first(cta, 'p')?.inline} primary={blocksOf(cta, 'cta')[0]} />
+</Base>

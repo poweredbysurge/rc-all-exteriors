@@ -1,0 +1,29 @@
+---
+// Confirmation page (thank-you-390, thank-you-1440). noindex. It exists for
+// redirects from third-party forms and for Ads conversion URL rules; the
+// lead card also confirms in place. Copy is DRAFT and reuses the card's
+// approved confirmation sentence.
+import Base from '@/layouts/Base.astro';
+import Icon from '@/components/Icon.astro';
+import Section from '@/components/Section.astro';
+import { confirmHtml } from '@/lib/render';
+import { PHONE, TEL } from '@/lib/site';
+---
+
+<Base title="Thank You, We Got Your Request | RC All Exteriors" description="We received your request. Here is what happens next, and the number to call or text if you need RC All Exteriors sooner than that." path="/thank-you/" noindex>
+  <Section bg="surface" name="Thank you">
+    <div class="flex max-w-[720px] flex-col gap-8">
+      <div class="flex items-start gap-3">
+        <Icon name="check" size={32} class="mt-2 text-accent" />
+        <h1 class="heading text-h1 text-fg">Got it. Ricardo will call you within <Fragment set:html={confirmHtml('hours')} /> to set a time.</h1>
+      </div>
+      <p class="text-fg">What happens next: we confirm a time, inspect the roof, and give you a straight answer with a written estimate if work is needed.</p>
+      <p class="text-fg">Need us sooner? Call or text <a href={TEL} class="font-bold whitespace-nowrap text-accent hover:underline">{PHONE}</a>.</p>
+      <div class="flex flex-col">
+        <a href="/roof-replacement/" class="link-arrow self-start">Roof replacement <Icon name="arrow-right" size={18} /></a>
+        <a href="/roof-repair/" class="link-arrow self-start">Roof repair <Icon name="arrow-right" size={18} /></a>
+        <a href="/reviews/" class="link-arrow self-start">Read our reviews <Icon name="arrow-right" size={18} /></a>
+      </div>
+    </div>
+  </Section>
+</Base>

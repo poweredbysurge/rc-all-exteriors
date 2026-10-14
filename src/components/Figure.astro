@@ -1,0 +1,55 @@
+---
+// A real job photo with its caption. AVIF and WebP with srcset, explicit
+// dimensions, lazy below the fold. The caption names the job type; the town
+// is a CONFIRM slot until Ricardo supplies it, never a guess.
+import { photos, type PhotoKey } from '@/data/photos';
+import { sourceSet } from '@/lib/images';
+import { confirmHtml } from '@/lib/render';
+
+interface Props {
+  photo: PhotoKey;
+  /** width / height of the frame, for example 4 / 5. */
+  ratio: number;
+  /** The sizes attribute: how wide the frame renders. */
+  sizes: string;
+  caption?: string;
+  showTown?: boolean;
+  radius?: 'md' | 'lg';
+  /** Full-bleed to the gutter on phones (master prompt section 3). */
+  bleed?: boolean;
+  class?: string;
+}
+const { photo: key, ratio, sizes, caption, showTown = false, radius = 'lg', bleed = false, class: className } = Astro.props;
+const photo = photos[key];
+const set = await sourceSet(photo.src, [480, 768, 1024, 1440], { ratio });
+---
+
+<figure class:list={['m-0 flex min-w-0 flex-col gap-2', className]}>
+  <div
+    class:list={[
+      'overflow-hidden border border-border-subtle bg-surface-subtle',
+      radius === 'lg' ? 'rounded-lg' : 'rounded-md',
+      bleed && '-mx-4 rounded-none border-x-0 xs:-mx-5 md:mx-0 md:rounded-lg md:border-x',
+    ]}
+    style={`aspect-ratio:${ratio}`}
+  >
+    <picture>
+      <source type="image/avif" srcset={set.avif} sizes={sizes} />
+      <source type="image/webp" srcset={set.webp} sizes={sizes} />
+      <img src={set.src} alt={photo.alt} width={set.width} height={set.height} loading="lazy" decoding="async" class="size-full object-cover" />
+    </picture>
+  </div>
+  <figcaption class="text-body-sm leading-snug font-medium text-fg-subtle" data-sm>
+    {caption ?? photo.caption}
+    {
+      showTown &&
+        (photo.town ? (
+          <Fragment> · {photo.town}</Fragment>
+        ) : (
+          <Fragment>
+            · town <Fragment set:html={confirmHtml('from Ricardo')} />
+          </Fragment>
+        ))
+    }
+  </figcaption>
+</figure>

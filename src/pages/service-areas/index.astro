@@ -1,0 +1,54 @@
+---
+// Service areas hub. Copy: batch-4 section 4. Towns without a page yet are
+// plain "Coming soon" cards, never links (batch-4 build note).
+import TrustPage from '@/components/TrustPage.astro';
+import AreaMap from '@/components/AreaMap.astro';
+import Icon from '@/components/Icon.astro';
+import Rich from '@/components/Rich.astro';
+import Section from '@/components/Section.astro';
+import business from '@/data/business.json';
+import { routeByPath } from '@/data/nav';
+import { blocksOf, first, getPage, section } from '@/lib/copy';
+import { sentenceCase } from '@/lib/text';
+
+const path = '/service-areas/';
+const cities = section(getPage(path), 'Cities');
+const cards = blocksOf(cities, 'card');
+const isLive = (href: string | null) => !!href && (href === '/' || routeByPath.has(href));
+---
+
+<TrustPage path={path} pageType="CollectionPage" skip={['Cities']}>
+  <Section bg="surface" name="Cities">
+    <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+      <AreaMap caption={`Where we work: ${business.areaServed.join(', ')}. Schematic, not to scale.`} class="reveal w-full max-w-[600px]" />
+      <div class="flex flex-col gap-6">
+        <h2 class="heading text-h2 text-fg"><Rich inline={first(cities, 'h2')!.inline} /></h2>
+        <ul class="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2">
+          {
+            cards.map((card) =>
+              isLive(card.href) && !card.soon ? (
+                <li>
+                  <a href={card.href} class="card h-full gap-2">
+                    <h3 class="heading text-h3 text-fg">{sentenceCase(card.title)}</h3>
+                    <p class="text-body-sm text-fg-muted" data-sm><Rich inline={card.inline} /></p>
+                    <span class="inline-flex items-center gap-1.5 text-body-sm font-semibold text-accent">{card.title} <Icon name="arrow-right" size={18} /></span>
+                  </a>
+                </li>
+              ) : (
+                <li class="card h-full gap-2 border-dashed bg-transparent">
+                  <h3 class="heading text-h3 text-fg-muted">{card.title}</h3>
+                  <p class="text-body-sm text-fg-muted" data-sm>Coming soon</p>
+                </li>
+              ),
+            )
+          }
+        </ul>
+        {blocksOf(cities, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
+        <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+          <li><a href="/reviews/" class="chip">Reviews</a></li>
+          <li><a href="/contact/" class="chip">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+</TrustPage>

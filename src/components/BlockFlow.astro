@@ -1,0 +1,90 @@
+---
+// Renders a run of copy blocks in reading order: paragraphs, lists, single
+// sub-headings, inline links, image slots. Sections with their own layout
+// (steps, cards, reviews, FAQ) are composed in ContentSection.astro.
+import Bullets from './Bullets.astro';
+import Checklist from './Checklist.astro';
+import Figure from './Figure.astro';
+import Icon from './Icon.astro';
+import IconHeading from './IconHeading.astro';
+import PhotoGap from './PhotoGap.astro';
+import Rich from './Rich.astro';
+import type { PhotoKey } from '@/data/photos';
+import { asTitled, iconFor } from '@/lib/blocks';
+import { plain, type Block } from '@/lib/copy';
+
+interface Props {
+  blocks: Block[];
+  /** First paragraph in the full text color, the rest muted. */
+  leadFirst?: boolean;
+  /** A real photo for the [IMAGE] slots in this run, in order. Unmapped slots render as photo gaps. */
+  images?: (PhotoKey | null)[];
+  checklistColumns?: 1 | 2;
+  class?: string;
+}
+const { blocks, leadFirst = false, images = [], checklistColumns = 1, class: className } = Astro.props;
+let paragraph = 0;
+let image = 0;
+---
+
+<div class:list={['flex flex-col gap-5', className]}>
+  {
+    blocks.map((block) => {
+      switch (block.type) {
+        case 'p': {
+          const lead = leadFirst && paragraph === 0;
+          paragraph++;
+          return (
+            <p class:list={['rich max-w-[720px]', lead ? 'text-fg' : 'text-fg-muted']}>
+              <Rich inline={block.inline} />
+            </p>
+          );
+        }
+        case 'subhead':
+          return (
+            <p class="rich max-w-[720px] text-body-lg text-fg">
+              <Rich inline={block.inline} />
+            </p>
+          );
+        case 'h3':
+          return (
+            <IconHeading icon={iconFor(plain(block.inline))} class="mt-3">
+              <Rich inline={block.inline} linkPhone={false} />
+            </IconHeading>
+          );
+        case 'list': {
+          const titled = asTitled(block.items);
+          return titled ? <Checklist items={titled} columns={checklistColumns} /> : <Bullets items={block.items} />;
+        }
+        case 'links':
+          return (
+            <div class="flex flex-col">
+              {block.links.map((link) => (
+                <a href={link.href} class="link-arrow self-start">
+                  {link.text}
+                  <Icon name="arrow-right" size={18} />
+                </a>
+              ))}
+            </div>
+          );
+        case 'cta':
+          return block.href ? (
+            <a href={block.href} class="link-arrow self-start">
+              {block.label}
+              <Icon name="arrow-right" size={18} />
+            </a>
+          ) : null;
+        case 'image': {
+          const key = images[image++];
+          return key ? (
+            <Figure photo={key} ratio={3 / 2} sizes="(min-width: 1024px) 640px, 92vw" showTown class="reveal max-w-[720px]" />
+          ) : (
+            <PhotoGap desc={block.desc.replace(/\.$/, '')} ratio={3 / 2} icon="file-text" class="max-w-[720px]" />
+          );
+        }
+        default:
+          return null;
+      }
+    })
+  }
+</div>

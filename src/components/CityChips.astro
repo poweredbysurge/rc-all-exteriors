@@ -1,0 +1,33 @@
+---
+// City chip row: the three live city pages, the hub, and the towns that are
+// coming. A coming town is plain text in a dashed chip, never a link, until
+// its page exists (batch-4 build note).
+import { liveCities, soonCities } from '@/data/nav';
+
+interface Props {
+  /** Path of the page this row is on, to mark the current city. */
+  current?: string;
+  center?: boolean;
+  class?: string;
+}
+const { current, center = false, class: className } = Astro.props;
+---
+
+<div class:list={['flex flex-col gap-4', className]}>
+  <ul class:list={['m-0 flex list-none flex-wrap gap-2 p-0', center && 'justify-center lg:justify-start']}>
+    {
+      liveCities.map((city) => (
+        <li>
+          <a href={city.href} class="chip" aria-current={city.href === current ? 'page' : undefined}>
+            {city.name}
+          </a>
+        </li>
+      ))
+    }
+    <li><a href="/service-areas/" class="chip">All service areas</a></li>
+  </ul>
+  <ul class:list={['m-0 flex list-none flex-wrap items-center gap-2 p-0', center && 'justify-center lg:justify-start']}>
+    <li class="text-body-sm font-medium text-fg-muted">Coming soon:</li>
+    {soonCities.map((city) => <li class="chip chip-soon">{city.name}</li>)}
+  </ul>
+</div>

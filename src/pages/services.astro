@@ -1,0 +1,8 @@
+---
+// Services hub. Copy: batch-4 section 3.
+import TrustPage from '@/components/TrustPage.astro';
+import { services } from '@/data/nav';
+import { itemListSchema } from '@/lib/schema';
+---
+
+<TrustPage path="/services/" pageType="CollectionPage" schema={[itemListSchema(services.map((s) => ({ name: s.label, href: s.href })))]} />

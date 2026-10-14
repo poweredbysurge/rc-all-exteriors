@@ -1,0 +1,65 @@
+---
+// The dark CTA band: headline, one line of copy, phone, button. Never a
+// second form. One per page, carrying the one mark watermark.
+import Cta from './Cta.astro';
+import Icon from './Icon.astro';
+import Rich from './Rich.astro';
+import type { CtaBlock, Inline } from '@/lib/copy';
+import { PHONE, TEL } from '@/lib/site';
+
+interface Props {
+  heading: Inline[];
+  text?: Inline[] | null;
+  primary?: CtaBlock | null;
+  /** Where the form button goes: the offer page by default, or the form on this page. */
+  formTarget?: 'lead-card' | (string & {});
+  /** Emergency page: the phone is the primary action. */
+  phoneFirst?: boolean;
+}
+const { heading, text = null, primary = null, formTarget = '/free-roof-inspection/', phoneFirst = false } = Astro.props;
+const isPhone = (cta: CtaBlock | null) => !!cta && /\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label);
+const formLabel = primary && !isPhone(primary) ? primary.label : 'Book a Free Roof Inspection';
+const buttonTarget = primary?.href ?? formTarget;
+---
+
+<section data-section="cta-band" class="on-dark section-y gutter relative overflow-hidden bg-surface-contrast">
+  <img
+    src="/logos/icon-white.svg"
+    alt=""
+    aria-hidden="true"
+    width="369"
+    height="271"
+    loading="lazy"
+    decoding="async"
+    class="pointer-events-none absolute right-[-10%] bottom-[-30%] w-[56%] max-w-[720px] opacity-[0.08]"
+  />
+  <div class="container-site">
+    <div class="relative flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
+      <div class="flex max-w-[640px] flex-col items-center gap-3 lg:items-start">
+        <h2 class="heading text-h2 text-fg-inverse"><Rich inline={heading} linkPhone={false} /></h2>
+        {text && <p class="rich text-fg-inverse-muted"><Rich inline={text} linkPhone={false} /></p>}
+        {
+          !phoneFirst && (
+            <a href={TEL} class="inline-flex min-h-11 items-center gap-2.5 text-body-lg font-bold text-fg-inverse hover:underline underline-offset-4">
+              <Icon name="phone" size={20} class="text-fg-inverse/90" />
+              {PHONE}
+            </a>
+          )
+        }
+      </div>
+      <div class="flex w-full shrink-0 flex-col gap-3 btn:w-auto">
+        {phoneFirst && <Cta to="tel" variant="inverse" icon="phone">Call or text {PHONE}</Cta>}
+        {
+          primary?.confirm ? (
+            <span class="btn btn-block-mobile h-auto cursor-default flex-wrap border-dashed border-fg-inverse/50 py-2 text-center whitespace-normal text-fg-inverse" data-confirm={primary.confirm}>
+              {primary.label}
+              <span class="confirm-tag">CONFIRM</span>
+            </span>
+          ) : (
+            <Cta to={buttonTarget} variant={phoneFirst ? 'secondary-on-dark' : 'inverse'}>{phoneFirst ? 'Book a Free Roof Inspection' : formLabel}</Cta>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

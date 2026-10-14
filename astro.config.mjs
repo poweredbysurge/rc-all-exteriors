@@ -1,0 +1,26 @@
+import { defineConfig } from 'astro/config';
+import vercel from '@astrojs/vercel';
+import tailwindcss from '@tailwindcss/vite';
+
+// ADR-001: Astro + Tailwind on Vercel. Static pages, two on-demand routes
+// (/api/lead/, /api/reviews/), host-aware robots.txt, edge middleware for the
+// preview noindex header.
+export default defineConfig({
+  // The production domain. Canonicals, OG and JSON-LD use src/lib/site.ts
+  // (LAUNCH / LIVE), not this value; it only feeds Astro internals.
+  site: 'https://rcallexteriors.com',
+  trailingSlash: 'always',
+  output: 'static',
+  adapter: vercel({ middlewareMode: 'edge' }),
+  build: {
+    format: 'directory',
+    inlineStylesheets: 'always',
+  },
+  image: {
+    // Responsive widths are declared per image; no layout shift helpers needed.
+    responsiveStyles: false,
+  },
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});

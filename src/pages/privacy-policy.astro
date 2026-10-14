@@ -1,0 +1,62 @@
+---
+import LegalPage from '@/components/LegalPage.astro';
+import business from '@/data/business.json';
+import { MAILTO, PHONE, TEL } from '@/lib/site';
+const name = business.legalName;
+---
+
+<LegalPage
+  path="/privacy-policy/"
+  title="Privacy Policy | RC All Exteriors, Woodbridge, VA Roofing"
+  h1="Privacy Policy"
+  description="How RC All Exteriors LLC collects, uses and protects the information you send through this website, including text message consent and how to opt out."
+  updated="October 7, 2026"
+>
+  <p>{name} ("we", "us") runs this website to help homeowners in Northern Virginia book roof inspections and ask about our services. This policy explains what we collect when you use the site and what we do with it.</p>
+
+  <h2>What we collect</h2>
+  <ul>
+    <li>What you type into a form: your name, phone number, email address, zip code, street address if you give it, and what you tell us about your roof.</li>
+    <li>How you reached the site: the page you landed on, the page you came from, and campaign tags in the link you followed.</li>
+    <li>Basic usage data from Google Analytics, such as pages viewed and the type of device. We do not send your name, phone number or email to Google Analytics.</li>
+    <li>Your IP address and browser type, recorded by our server when you send a form.</li>
+  </ul>
+
+  <h2>How we use it</h2>
+  <ul>
+    <li>To call, text or email you about the inspection or service you asked for.</li>
+    <li>To prepare an estimate and schedule work.</li>
+    <li>To understand which pages and ads bring people to us, so we can improve the site.</li>
+  </ul>
+
+  <h2>Who we share it with</h2>
+  <p>We share your request with the people who need it to respond: our own team and The Surge Agency, which runs this website and our lead system for us. Email is delivered through Resend. These companies may only use your information to provide their service to us.</p>
+  <p>We do not sell your personal information.</p>
+
+  <h2>Text messages (SMS)</h2>
+  <p>If you check the box on a form agreeing to receive text messages, we will text you about your inquiry, including appointment confirmations and quote updates. Checking the box is optional and is not a condition of buying anything.</p>
+  <ul>
+    <li>Message frequency varies with your request. Message and data rates may apply.</li>
+    <li>Reply STOP to any message to opt out. Reply HELP for help.</li>
+    <li>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Text messaging opt-in data and consent are never shared with any third party, other than the providers that deliver the messages for us.</li>
+  </ul>
+  <p>The full program terms are in our <a href="/sms-terms/">SMS Terms</a>.</p>
+
+  <h2>Cookies</h2>
+  <p>We set one first-party cookie that remembers how you first reached the site, for 90 days, so a later form submission can be tied to the right source. Google Analytics sets its own cookies. You can block cookies in your browser and the site will still work.</p>
+
+  <h2>How long we keep it</h2>
+  <p>We keep your request for as long as we need it to serve you and to meet our record-keeping obligations, including warranty records for completed work.</p>
+
+  <h2>Your choices</h2>
+  <p>You can ask us what we hold about you, ask us to correct it, or ask us to delete it. Call or text <a href={TEL}>{PHONE}</a> or email <a href={MAILTO}>{business.email}</a>.</p>
+
+  <h2>Children</h2>
+  <p>This site is for homeowners and property managers. We do not knowingly collect information from children under 13.</p>
+
+  <h2>Changes</h2>
+  <p>If we change this policy we will post the new version here with a new date.</p>
+
+  <h2>Contact</h2>
+  <p>{name}, {business.address.addressLocality}, {business.address.addressRegion}. <a href={TEL}>{PHONE}</a>. <a href={MAILTO}>{business.email}</a>.</p>
+</LegalPage>

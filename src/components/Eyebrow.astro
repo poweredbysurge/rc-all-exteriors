@@ -1,0 +1,14 @@
+---
+// The one uppercase element on the site: a 16px label with the roofline rule.
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<div class:list={['flex items-center gap-2.5 text-accent', className]}>
+  <svg aria-hidden="true" width="24" height="10" viewBox="0 0 48 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" class="block shrink-0">
+    <path d="M1 19 L24 3 L47 19"></path>
+  </svg>
+  <span class="text-eyebrow font-semibold uppercase tracking-eyebrow"><slot /></span>
+</div>

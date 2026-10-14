@@ -1,0 +1,43 @@
+---
+// FAQ accordion. Questions and answers come from the copy batches, never from
+// the design export, which is missing the collapsed answers (Gate A review
+// finding 1). FAQPage schema is built from the same blocks in src/lib/schema.ts.
+// Every answer is in the HTML; CSS collapses the closed ones once JS is running.
+import Icon from './Icon.astro';
+import Rich from './Rich.astro';
+import type { FaqBlock } from '@/lib/copy';
+
+interface Props {
+  faqs: FaqBlock[];
+  /** Index of the row that starts open. */
+  open?: number;
+  idPrefix?: string;
+}
+const { faqs, open = 0, idPrefix = 'faq' } = Astro.props;
+---
+
+<div class="flex max-w-[800px] flex-col border-t border-border text-left" data-faq>
+  {
+    faqs.map((faq, i) => (
+      <div class="border-b border-border">
+        <h3 class="m-0">
+          <button
+            type="button"
+            class="heading flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left text-h4 text-fg"
+            aria-expanded={i === open ? 'true' : 'false'}
+            aria-controls={`${idPrefix}-${i}`}
+            data-faq-trigger
+          >
+            <span data-faq-question>{faq.q}</span>
+            <Icon name="chevron-down" size={24} class="text-accent" />
+          </button>
+        </h3>
+        <div id={`${idPrefix}-${i}`} class="rich max-w-[720px] pb-6 text-fg" data-faq-panel data-open={i === open ? '' : undefined}>
+          <p data-faq-answer>
+            <Rich inline={faq.a} />
+          </p>
+        </div>
+      </div>
+    ))
+  }
+</div>

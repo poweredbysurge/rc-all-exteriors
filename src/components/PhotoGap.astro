@@ -1,0 +1,21 @@
+---
+// A photo the site needs and does not have yet. Drawn as a labeled block,
+// never filled with stock (design/DESIGN-DEBT.md, "Photo gaps"). It carries
+// data-confirm, so a production build cannot ship with one.
+import Icon from './Icon.astro';
+
+interface Props {
+  desc: string;
+  ratio: number;
+  icon?: string;
+  class?: string;
+}
+const { desc, ratio, icon = 'file-text', class: className } = Astro.props;
+---
+
+<figure data-confirm={`photo: ${desc}`} class:list={['m-0 flex min-w-0 flex-col gap-2', className]}>
+  <div class="flex items-center justify-center rounded-lg bg-surface-subtle text-accent" style={`aspect-ratio:${ratio}`}>
+    <Icon name={icon} size={32} />
+  </div>
+  <figcaption class="text-body-sm leading-snug font-medium text-fg-subtle" data-sm>Photo: {desc}</figcaption>
+</figure>

@@ -1,0 +1,13 @@
+---
+// Renders a run of approved copy: text, bold, inline links, CONFIRM slots.
+import type { Inline } from '@/lib/copy';
+import { renderInline } from '@/lib/render';
+
+interface Props {
+  inline: Inline[];
+  linkPhone?: boolean;
+}
+const { inline, linkPhone } = Astro.props;
+---
+
+<Fragment set:html={renderInline(inline, { linkPhone })} />

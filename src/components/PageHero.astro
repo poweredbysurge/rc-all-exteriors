@@ -1,0 +1,59 @@
+---
+// Text hero for trust, hub and legal pages: no photo, so the H1 is the LCP
+// element and the preloaded heading font covers it.
+import Breadcrumbs from './Breadcrumbs.astro';
+import Cta from './Cta.astro';
+import Rich from './Rich.astro';
+import type { CtaBlock, Inline } from '@/lib/copy';
+import { decorate } from '@/lib/render';
+import { sentenceCase } from '@/lib/text';
+
+interface Props {
+  path: string;
+  h1: string;
+  lede?: Inline[] | null;
+  primary?: CtaBlock | null;
+  secondary?: CtaBlock | null;
+  /** Where a CTA with no href of its own goes. */
+  formTarget?: 'lead-card' | (string & {});
+}
+const { path, h1, lede = null, primary = null, secondary = null, formTarget = '/free-roof-inspection/' } = Astro.props;
+const isPhone = (cta: CtaBlock) => /\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label);
+const target = (cta: CtaBlock) => (isPhone(cta) ? 'tel' : (cta.href ?? formTarget));
+---
+
+<section data-hero class="on-dark section-y gutter relative bg-surface-contrast">
+  <div class="container-site">
+    <div class="flex max-w-[800px] flex-col items-center gap-4 text-center lg:items-start lg:gap-6 lg:text-left">
+      <Breadcrumbs path={path} onDark />
+      <h1 class="heading text-h1 text-fg-inverse" set:html={decorate(sentenceCase(h1), { linkPhone: false })} />
+      {
+        lede && (
+          <p class="rich max-w-[640px] text-body text-fg-inverse-muted lg:text-body-lg">
+            <Rich inline={lede} />
+          </p>
+        )
+      }
+      {
+        (primary || secondary) && (
+          <div class="mt-2 flex w-full flex-col gap-3 btn:w-auto btn:flex-row">
+            {[primary, secondary].map(
+              (cta, i) =>
+                cta &&
+                (cta.confirm ? (
+                  // The destination is still owed (for example the financing partner's
+                  // application link), so this is a labeled slot, not a dead button.
+                  <span class="btn btn-block-mobile h-auto cursor-default flex-wrap border-dashed border-fg-inverse/50 py-2 text-center whitespace-normal text-fg-inverse" data-confirm={cta.confirm}>
+                    {cta.label}
+                    <span class="confirm-tag">CONFIRM</span>
+                  </span>
+                ) : (
+                  <Cta to={target(cta)} variant={i === 0 ? 'primary' : 'secondary-on-dark'}>{cta.label}</Cta>
+                )),
+            )}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

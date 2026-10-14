@@ -1,0 +1,146 @@
+---
+// City page template (fairfax-390, fairfax-1440). Copy: batch-5.
+//
+// Anti-doorway: the three pages share this layout and nothing else. Each one
+// has its own opener, FAQ and local angle in the copy, and its local proof
+// (a real job, a local review, neighborhood names) is a CONFIRM slot per
+// city. A city page does not publish until those are filled (batch-5 rule),
+// which check-integrity enforces through the open data-confirm slots.
+import Base from '@/layouts/Base.astro';
+import AreaMap from '@/components/AreaMap.astro';
+import Bullets from '@/components/Bullets.astro';
+import CityChips from '@/components/CityChips.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Faq from '@/components/Faq.astro';
+import Figure from '@/components/Figure.astro';
+import Hero from '@/components/Hero.astro';
+import ReviewCard from '@/components/ReviewCard.astro';
+import Rich from '@/components/Rich.astro';
+import Section from '@/components/Section.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import StatStrip from '@/components/StatStrip.astro';
+import { liveCities } from '@/data/nav';
+import type { PhotoKey } from '@/data/photos';
+import { blocksOf, faqs, first, getPage, plain, section } from '@/lib/copy';
+import { metaFor } from '@/lib/page';
+import { confirmHtml } from '@/lib/render';
+import { faqSchema, serviceSchema } from '@/lib/schema';
+
+export function getStaticPaths() {
+  return liveCities.map((c) => ({ params: { city: c.slug }, props: { name: c.name } }));
+}
+const { name } = Astro.props as { name: string };
+const path = `/service-areas/${Astro.params.city}/`;
+const page = getPage(path);
+const meta = metaFor(page);
+
+const hero = section(page, 'Hero');
+const intro = section(page, 'Intro');
+const proof = section(page, 'Local proof');
+const services = section(page, 'Services');
+const why = section(page, 'Why us');
+const faq = section(page, 'FAQ');
+const cta = section(page, 'CTA');
+const [lead, ...rest] = blocksOf(intro, 'p');
+const proofPhotos: Record<string, [PhotoKey, PhotoKey]> = {
+  Fairfax: ['twoStory', 'colonial'],
+  Springfield: ['underlayment', 'twoStory'],
+  Lorton: ['colonial', 'mansard'],
+};
+const mapTowns = ['Woodbridge', 'Lake Ridge', 'Lorton', 'Fairfax Station', 'Fairfax', 'Springfield'];
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  path={path}
+  og="city"
+  hasLeadCard
+  confirmMeta={page.gate ? [`publish gate: ${page.gate}`] : []}
+  schema={[serviceSchema({ path, name: plain(first(hero, 'h1')!.inline), serviceType: 'Roofing', description: meta.description, areaServed: [name] }), faqSchema(faqs(page))]}
+>
+  <Hero
+    path={path}
+    h1={plain(first(hero, 'h1')!.inline)}
+    lede={first(hero, 'subhead')!.inline}
+    primary={blocksOf(hero, 'cta').find((c) => c.kind === 'primary') ?? null}
+    secondary={blocksOf(hero, 'cta').find((c) => c.kind === 'secondary') ?? null}
+    trust={first(hero, 'trust')!.items}
+  />
+
+  <Section bg="surface" name="Intro">
+    <div class="grid grid-cols-1 items-start gap-7 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+      <div class="flex max-w-[720px] flex-col gap-5">
+        <p class="rich text-body-lg text-fg"><Rich inline={lead.inline} /></p>
+        {rest.map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
+      </div>
+      <AreaMap only={mapTowns} ratio={420 / 320} caption={`${name} from our Woodbridge base. Schematic, not to scale.`} class="w-full max-w-[420px]" />
+    </div>
+  </Section>
+
+  <Section bg="muted" name="Local proof">
+    <div class="flex flex-col gap-6 lg:gap-10">
+      <div class="flex flex-col gap-4">
+        <Eyebrow>Recent work</Eyebrow>
+        <h2 class="heading text-h2 text-fg"><Rich inline={first(proof, 'h2')!.inline} /></h2>
+      </div>
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6" data-confirm={`photos: before and after from a real ${name} job`}>
+        {proofPhotos[name].map((key) => <Figure photo={key} ratio={3 / 2} sizes="(min-width: 768px) 620px, 92vw" showTown class="reveal" />)}
+      </div>
+      <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-12">
+        <div class="flex flex-col gap-4">
+          {blocksOf(proof, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
+          <p class="text-body-sm text-fg-muted" data-sm>Full project write-up: <Fragment set:html={confirmHtml(`case study for the ${name} job`)} /></p>
+        </div>
+        <ReviewCard hint={first(proof, 'review')!.hint} />
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="surface" name="Services">
+    <div class="flex flex-col gap-6 lg:gap-10">
+      <h2 class="heading text-center text-h2 text-fg lg:text-left"><Rich inline={first(services, 'h2')!.inline} /></h2>
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6 xl:grid-cols-4">
+        {blocksOf(services, 'card').map((card, i) => <div class="reveal" style={`--reveal-i:${i}`}><ServiceCard title={card.title} text={card.inline} href={card.href!} /></div>)}
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="subtle" name="Why us">
+    <div class="flex flex-col gap-10 lg:gap-12">
+      <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <h2 class="heading text-h2 text-fg"><Rich inline={first(why, 'h2')!.inline} /></h2>
+        <Bullets items={first(why, 'list')!.items} />
+      </div>
+      <StatStrip variant="boxed" />
+    </div>
+  </Section>
+
+  <Section bg="surface" quiet name="Neighborhoods">
+    <div class="flex flex-col gap-5">
+      <h2 class="heading text-h3 text-fg">{name} neighborhoods we serve</h2>
+      <p class="text-body-sm text-fg" data-sm><Fragment set:html={confirmHtml('neighborhood names from Ricardo')} /></p>
+    </div>
+  </Section>
+
+  <Section bg="muted" name="FAQ">
+    <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
+      <h2 class="heading text-h2 text-fg"><Rich inline={first(faq, 'h2')!.inline} /></h2>
+      <Faq faqs={blocksOf(faq, 'faq')} />
+    </div>
+  </Section>
+
+  <Section bg="surface" quiet name="Nearby service areas">
+    <div class="flex flex-col gap-4">
+      <h2 class="heading text-h3 text-fg">Nearby service areas</h2>
+      <CityChips current={path} />
+      <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+        <li><a href="/" class="chip">Woodbridge</a></li>
+        <li><a href="/projects/" class="chip">Our work</a></li>
+      </ul>
+    </div>
+  </Section>
+
+  <CtaBand heading={first(cta, 'h2')!.inline} primary={blocksOf(cta, 'cta')[0]} />
+</Base>

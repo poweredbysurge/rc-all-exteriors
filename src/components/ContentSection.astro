@@ -1,0 +1,148 @@
+---
+// Lays out one section of approved copy. The layout follows from what the
+// section contains, so the eleven service pages, the trust pages and the hubs
+// all come from the copy batches without a page of hand-placed markup each:
+//
+//   prose     paragraphs only: a centered reading column
+//   split     H2 left, copy and lists right (the default rhythm breaker)
+//   h3grid    H2, then icon-headed blocks in two columns
+//   steps     H2, then the process grid
+//   cards     H2, then linked service cards
+//   reviews   H2, then verbatim Google reviews or their labeled slots
+//
+// Headings center on phones where they sit above a grid; anything above a
+// list or a paragraph stays left with it (master prompt section 3).
+import BlockFlow from './BlockFlow.astro';
+import Eyebrow from './Eyebrow.astro';
+import IconHeading from './IconHeading.astro';
+import ReviewCard from './ReviewCard.astro';
+import Rich from './Rich.astro';
+import Section from './Section.astro';
+import ServiceCard from './ServiceCard.astro';
+import Steps from './Steps.astro';
+import type { PhotoKey } from '@/data/photos';
+import { groupByH3, iconFor, kindOf } from '@/lib/blocks';
+import { blocksOf, first, plain, type Block, type Section as CopySection } from '@/lib/copy';
+import { pickReviews } from '@/lib/pick-reviews';
+import { getReviews } from '@/lib/reviews';
+
+type StepMedia = PhotoKey | { gap: string; icon?: string } | null;
+interface Props {
+  section: CopySection;
+  bg?: 'surface' | 'muted' | 'subtle';
+  quiet?: boolean;
+  eyebrow?: string;
+  /** Photos or photo gaps for a steps section, one per step. */
+  media?: StepMedia[];
+  /** Real photos for [IMAGE] slots, in order. */
+  images?: (PhotoKey | null)[];
+  /** Heading level for card titles. */
+  cardTag?: 'h2' | 'h3';
+}
+const { section, bg = 'surface', quiet = false, eyebrow, media, images, cardTag = 'h3' } = Astro.props;
+
+const kind = kindOf(section);
+const h2 = first(section, 'h2');
+const rest = section.blocks.filter((b) => b !== h2);
+const not = (...types: Block['type'][]) => rest.filter((b) => !types.includes(b.type));
+
+const steps = first(section, 'steps');
+const cards = blocksOf(section, 'card').filter((c) => c.href && !c.template);
+const reviewSlots = blocksOf(section, 'review');
+const live = reviewSlots.length ? pickReviews((await getReviews()).reviews, reviewSlots.map((r) => r.hint)) : [];
+const { lead, groups } = groupByH3(rest);
+
+const cardCols = cards.length >= 4 && cards.length % 3 !== 0 ? 'md:grid-cols-2 xl:grid-cols-4' : cards.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
+---
+
+<Section bg={bg} quiet={quiet} name={section.name}>
+  {
+    kind === 'prose' && (
+      <BlockFlow blocks={rest} leadFirst images={images} class="mx-auto max-w-[720px] [&>p:first-child]:text-body-lg" />
+    )
+  }
+
+  {
+    kind === 'split' && (
+      <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <div class="flex flex-col gap-4">
+          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          <h2 class="heading text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
+        </div>
+        <BlockFlow blocks={rest} leadFirst images={images} />
+      </div>
+    )
+  }
+
+  {
+    kind === 'h3grid' && (
+      <div class="flex flex-col gap-8 lg:gap-10">
+        <div class="flex flex-col gap-4">
+          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          <h2 class="heading max-w-[800px] text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
+          {lead.length > 0 && <BlockFlow blocks={lead} leadFirst images={images} />}
+        </div>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-x-12 lg:gap-y-8">
+          {groups.map((group, i) => (
+            <div class="reveal flex flex-col gap-2.5" style={`--reveal-i:${i}`}>
+              <IconHeading icon={iconFor(plain(group.heading!.inline))}>
+                <Rich inline={group.heading!.inline} linkPhone={false} />
+              </IconHeading>
+              <BlockFlow blocks={group.blocks} />
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  {
+    kind === 'steps' && (
+      <div class="flex flex-col gap-6 lg:gap-10">
+        <div class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left">
+          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          <h2 class="heading text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
+        </div>
+        <Steps items={steps!.items} media={media} />
+        {not('steps').length > 0 && <BlockFlow blocks={not('steps')} images={images} />}
+      </div>
+    )
+  }
+
+  {
+    kind === 'cards' && (
+      <div class="flex flex-col gap-6 lg:gap-10">
+        <div class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left">
+          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          <h2 class="heading text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
+        </div>
+        <div class:list={['grid grid-cols-1 gap-5 lg:gap-6', cardCols]}>
+          {cards.map((card, i) => (
+            <div class="reveal" style={`--reveal-i:${Math.min(i, 5)}`}>
+              <ServiceCard title={card.title} text={card.inline} href={card.href!} tag={cardTag} />
+            </div>
+          ))}
+        </div>
+        {not('card').length > 0 && <BlockFlow blocks={not('card')} images={images} />}
+      </div>
+    )
+  }
+
+  {
+    kind === 'reviews' && (
+      <div class="flex flex-col gap-6 lg:gap-10">
+        <div class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left">
+          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          <h2 class="heading text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
+          {blocksOf(section, 'p').length > 0 && <BlockFlow blocks={blocksOf(section, 'p')} class="text-left" />}
+        </div>
+        <div class:list={['grid grid-cols-1 gap-5 lg:gap-6', reviewSlots.length > 1 && 'md:grid-cols-2']}>
+          {reviewSlots.map((slot, i) => (
+            <ReviewCard review={live[i]} hint={slot.hint} class="reveal" />
+          ))}
+        </div>
+        {blocksOf(section, 'links').length > 0 && <BlockFlow blocks={blocksOf(section, 'links')} />}
+      </div>
+    )
+  }
+</Section>

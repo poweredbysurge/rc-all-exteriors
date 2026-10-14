@@ -1,0 +1,42 @@
+---
+// Reviews. Copy: batch-4 section 5. Review text is verbatim from Google
+// through the reviews proxy, newest first. Never typed in, never edited.
+import TrustPage from '@/components/TrustPage.astro';
+import RatingChip from '@/components/RatingChip.astro';
+import ReviewCard from '@/components/ReviewCard.astro';
+import Rich from '@/components/Rich.astro';
+import Section from '@/components/Section.astro';
+import { first, getPage, section } from '@/lib/copy';
+import { getReviews } from '@/lib/reviews';
+
+const path = '/reviews/';
+const wall = section(getPage(path), 'Reviews');
+const { reviews } = await getReviews();
+const sorted = [...reviews].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
+const hint = first(wall, 'review')!.hint;
+---
+
+<TrustPage path={path} skip={['Reviews']}>
+  <Section bg="muted" name="Reviews">
+    <div class="flex flex-col gap-6 lg:gap-10">
+      <div class="flex flex-col items-center gap-4 text-center lg:flex-row lg:justify-between lg:text-left">
+        <h2 class="heading text-h2 text-fg"><Rich inline={first(wall, 'h2')!.inline} /></h2>
+        <RatingChip variant="light" />
+      </div>
+      {
+        sorted.length > 0 ? (
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {sorted.map((review) => <ReviewCard review={review} class="reveal" />)}
+          </div>
+        ) : (
+          <ReviewCard hint={hint} />
+        )
+      }
+      <ul class="m-0 flex list-none flex-wrap justify-center gap-2 p-0 lg:justify-start">
+        <li><a href="/about/" class="chip">About</a></li>
+        <li><a href="/roof-replacement/" class="chip">Roof Replacement</a></li>
+        <li><a href="/free-roof-inspection/" class="chip">Free Roof Inspection</a></li>
+      </ul>
+    </div>
+  </Section>
+</TrustPage>

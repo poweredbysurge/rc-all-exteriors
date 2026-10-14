@@ -1,0 +1,145 @@
+---
+// Base layout: head, chrome, structured data.
+//
+// LAUNCH / LIVE: canonical, og:url, og:image and every JSON-LD URL go through
+// rebase() in src/lib/site.ts, so cutover is one line there.
+// LCP: the hero image per route comes from LCP_MAP (src/data/photos.ts) and is
+// preloaded here; Hero.astro renders the same sources.
+import '@/styles/global.css';
+import Header from '@/components/Header.astro';
+import MobileNav from '@/components/MobileNav.astro';
+import Footer from '@/components/Footer.astro';
+import StickyCta from '@/components/StickyCta.astro';
+import business from '@/data/business.json';
+import { LCP_MAP } from '@/data/photos';
+import { breadcrumbsFor } from '@/data/nav';
+import { HERO_DESKTOP_MEDIA, HERO_MOBILE_MEDIA, heroSources } from '@/lib/images';
+import { getReviews } from '@/lib/reviews';
+import { breadcrumbSchema, businessSchema } from '@/lib/schema';
+import { rebase } from '@/lib/site';
+import { token } from '@/lib/tokens';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Site path with a trailing slash. */
+  path: string;
+  /** Share card: home, service, city or default. */
+  og?: 'home' | 'service' | 'city' | 'default';
+  noindex?: boolean;
+  /** Extra JSON-LD nodes for this page (Service, FAQPage, ...). */
+  schema?: (Record<string, unknown> | null)[];
+  hasLeadCard?: boolean;
+  /** CONFIRM slots that live in the title or meta description, surfaced for check-integrity. */
+  confirmMeta?: string[];
+}
+const {
+  title,
+  description,
+  path,
+  og = 'default',
+  noindex = false,
+  schema = [],
+  hasLeadCard = false,
+  confirmMeta = [],
+} = Astro.props;
+
+const canonical = rebase(path);
+const ogImage = rebase(`/og/${og}.jpg`);
+
+// Case studies are text-led pages added from data, so they need no map entry.
+const lcpKey = LCP_MAP[path] ?? (path.startsWith('/projects/') ? 'text' : undefined);
+if (lcpKey === undefined) throw new Error(`${path} has no entry in LCP_MAP (src/data/photos.ts)`);
+const lcp = lcpKey === 'text' ? null : await heroSources(lcpKey);
+
+const reviews = await getReviews();
+const trail = breadcrumbsFor(path);
+const graph = [
+  businessSchema(reviews, ogImage),
+  ...(trail.length > 1 ? [breadcrumbSchema(trail)] : []),
+  ...schema.filter((node): node is Record<string, unknown> => !!node),
+];
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+
+const gaId = import.meta.env.PUBLIC_GA_ID as string | undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {confirmMeta.map((label) => <meta name="rc-confirm" content={label} data-confirm={label} />)}
+    <meta name="theme-color" content={token('--color-surface-contrast')} />
+
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="preload" href="/fonts/archivo-expanded-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/manrope-variable-latin.woff2" as="font" type="font/woff2" crossorigin />
+    {
+      lcp && (
+        <Fragment>
+          <link rel="preload" as="image" type="image/avif" media={HERO_MOBILE_MEDIA} imagesrcset={lcp.mobile.avif} imagesizes="100vw" fetchpriority="high" />
+          <link rel="preload" as="image" type="image/avif" media={HERO_DESKTOP_MEDIA} imagesrcset={lcp.desktop.avif} imagesizes="100vw" fetchpriority="high" />
+        </Fragment>
+      )
+    }
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={jsonLd} />
+
+    {
+      gaId && (
+        <script is:inline define:vars={{ gaId }}>
+          // GA4 loads after the page does: nothing third-party in the critical path.
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function () { window.dataLayer.push(arguments); };
+          window.gtag('js', new Date());
+          window.gtag('config', gaId);
+          window.addEventListener('load', function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(gaId);
+            document.head.appendChild(s);
+          });
+        </script>
+      )
+    }
+  </head>
+  <body>
+    <a href="#main" class="btn btn-primary sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60]">Skip to content</a>
+    <Header />
+    <MobileNav />
+    <main id="main" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
+    <Footer />
+    <StickyCta hasLeadCard={hasLeadCard} />
+    <script>
+      import '@/scripts/site';
+    </script>
+  </body>
+</html>

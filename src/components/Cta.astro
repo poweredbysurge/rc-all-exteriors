@@ -1,0 +1,32 @@
+---
+// One CTA button. `to` decides the element:
+//   "lead-card"  a button that scrolls to and focuses the form on this page
+//   "tel"        click-to-call
+//   a path       a link
+import Icon from './Icon.astro';
+import { TEL } from '@/lib/site';
+
+interface Props {
+  to: 'lead-card' | 'tel' | (string & {});
+  variant?: 'primary' | 'secondary' | 'secondary-on-dark' | 'inverse';
+  block?: boolean;
+  icon?: string;
+  class?: string;
+}
+const { to, variant = 'primary', block = false, icon, class: className } = Astro.props;
+const classes = ['btn', `btn-${variant}`, block ? 'btn-block' : 'btn-block-mobile', className];
+---
+
+{
+  to === 'lead-card' ? (
+    <button type="button" class:list={classes} data-action="lead-card">
+      {icon && <Icon name={icon} size={20} />}
+      <slot />
+    </button>
+  ) : (
+    <a href={to === 'tel' ? TEL : to} class:list={classes}>
+      {icon && <Icon name={icon} size={20} />}
+      <slot />
+    </a>
+  )
+}

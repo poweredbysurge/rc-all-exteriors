@@ -1,0 +1,132 @@
+---
+// Photo hero with the lead card (home, service hubs, offer page, city pages).
+//
+// Desktop: copy left, lead card right (440px), vertically centered, 640px min.
+// Mobile: stacked. Never 100vh. The photo sits behind the headline as a 3:4
+// crop and fades into the dark surface, where the card takes over.
+//
+// The hero paints immediately: no reveal, and the image is the preloaded LCP
+// element from LCP_MAP (the same sources Base.astro preloads).
+import Breadcrumbs from './Breadcrumbs.astro';
+import Cta from './Cta.astro';
+import LeadCard from './LeadCard.astro';
+import Rich from './Rich.astro';
+import TrustRow from './TrustRow.astro';
+import { LCP_MAP } from '@/data/photos';
+import type { CtaBlock, Inline } from '@/lib/copy';
+import { HERO_DESKTOP_MEDIA, HERO_MOBILE_MEDIA, heroSources } from '@/lib/images';
+import { decorate } from '@/lib/render';
+import { sentenceCase } from '@/lib/text';
+
+interface Props {
+  path: string;
+  h1: string;
+  lede: Inline[];
+  primary: CtaBlock | null;
+  secondary: CtaBlock | null;
+  trust?: Inline[][];
+  /** Homepage only: the display size. */
+  display?: boolean;
+  formId?: string;
+  /** Offer page: on phones the card sits straight under the lede, CTAs and trust row below it. */
+  cardFirstOnMobile?: boolean;
+  /** Minimum desktop height in px (640 default, 720 on the offer page). */
+  minHeight?: number;
+}
+const {
+  path,
+  h1,
+  lede,
+  primary,
+  secondary,
+  trust = [],
+  display = false,
+  formId = 'hero',
+  cardFirstOnMobile = false,
+  minHeight = 640,
+} = Astro.props;
+
+const key = LCP_MAP[path];
+if (!key || key === 'text') throw new Error(`${path}: Hero needs a photo in LCP_MAP`);
+const { photo, mobile, desktop } = await heroSources(key);
+
+// A CTA whose label is the phone number is click-to-call; anything else on a
+// page with a lead card points at the form.
+const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? 'tel' : (cta.href ?? 'lead-card'));
+---
+
+<section data-hero class="hero on-dark section-y gutter relative isolate overflow-hidden bg-surface-contrast">
+  <div class="hero-media absolute inset-x-0 top-0 -z-10 lg:inset-0">
+    <picture>
+      <source media={HERO_MOBILE_MEDIA} type="image/avif" srcset={mobile.avif} sizes="100vw" width={mobile.width} height={mobile.height} />
+      <source media={HERO_MOBILE_MEDIA} type="image/webp" srcset={mobile.webp} sizes="100vw" width={mobile.width} height={mobile.height} />
+      <source media={HERO_DESKTOP_MEDIA} type="image/avif" srcset={desktop.avif} sizes="100vw" width={desktop.width} height={desktop.height} />
+      <source media={HERO_DESKTOP_MEDIA} type="image/webp" srcset={desktop.webp} sizes="100vw" width={desktop.width} height={desktop.height} />
+      <img
+        src={desktop.src}
+        alt={photo.alt}
+        width={desktop.width}
+        height={desktop.height}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        class="size-full object-cover"
+        style={`object-position:${photo.position}`}
+      />
+    </picture>
+    <div class="hero-scrim absolute inset-0"></div>
+  </div>
+
+  <div class="container-site">
+    <div class="hero-grid grid grid-cols-1 gap-y-6 lg:grid-cols-[minmax(0,1fr)_440px] lg:content-center lg:gap-x-16" style={`--hero-min:${minHeight}px`}>
+      <div class="flex max-w-[680px] flex-col items-center gap-4 justify-self-center text-center lg:col-start-1 lg:row-start-1 lg:items-start lg:gap-6 lg:justify-self-start lg:self-end lg:text-left">
+        <Breadcrumbs path={path} onDark />
+        <h1 class:list={['heading text-fg-inverse', display ? 'text-display' : 'text-h1']} set:html={decorate(sentenceCase(h1), { linkPhone: false })} />
+        <p class="rich max-w-[600px] text-body text-fg-inverse-muted lg:text-body-lg">
+          <Rich inline={lede} linkPhone={false} />
+        </p>
+      </div>
+
+      <div class:list={['flex max-w-[680px] flex-col items-center gap-6 lg:col-start-1 lg:row-start-2 lg:items-start lg:self-start', cardFirstOnMobile && 'order-3 lg:order-none']}>
+        <div class="flex w-full flex-col gap-3 btn:w-auto btn:flex-row">
+          {primary && <Cta to={target(primary)} variant="primary">{primary.label}</Cta>}
+          {secondary && <Cta to={target(secondary)} variant="secondary-on-dark">{secondary.label}</Cta>}
+        </div>
+        {trust.length > 0 && <TrustRow items={trust} />}
+      </div>
+
+      <div class:list={['mt-2 w-full max-w-[560px] justify-self-center lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:max-w-none lg:self-center', cardFirstOnMobile && 'order-2 lg:order-none']}>
+        <LeadCard formId={formId} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* Phones: a 3:4 photo behind the headline, 60% scrim to the 40% line (Gate A
+     review finding 3), then a fade to the solid dark surface. */
+  .hero-media {
+    aspect-ratio: 3 / 4;
+    max-height: 100%;
+  }
+  .hero-scrim {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-surface-contrast) 60%, transparent) 0%,
+      color-mix(in srgb, var(--color-surface-contrast) 60%, transparent) 40%,
+      var(--color-surface-contrast) 100%
+    );
+  }
+  @media (min-width: 64rem) {
+    .hero-media {
+      aspect-ratio: auto;
+      max-height: none;
+    }
+    .hero-scrim {
+      background: var(--rc-hero-scrim-desktop);
+    }
+    .hero-grid {
+      min-height: var(--hero-min);
+    }
+  }
+</style>

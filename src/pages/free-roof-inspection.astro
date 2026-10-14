@@ -1,0 +1,130 @@
+---
+// Offer page (free-roof-inspection-390, -1440). Copy: batch-1 section 6.
+// The conversion page: on phones the form sits straight under the lede.
+import Base from '@/layouts/Base.astro';
+import Checklist from '@/components/Checklist.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Faq from '@/components/Faq.astro';
+import Hero from '@/components/Hero.astro';
+import Icon from '@/components/Icon.astro';
+import PhotoGap from '@/components/PhotoGap.astro';
+import Rich from '@/components/Rich.astro';
+import Section from '@/components/Section.astro';
+import { blocksOf, faqs, first, getPage, plain, section, type Inline } from '@/lib/copy';
+import { metaFor } from '@/lib/page';
+import { confirmHtml } from '@/lib/render';
+import { faqSchema, serviceSchema } from '@/lib/schema';
+
+const path = '/free-roof-inspection/';
+const page = getPage(path);
+const meta = metaFor(page);
+const hero = section(page, 'Hero');
+const who = section(page, "Who it's for");
+const check = section(page, 'What we check');
+const get = section(page, 'What you get');
+const process = section(page, 'Process');
+const faq = section(page, 'FAQ');
+const cta = section(page, 'CTA');
+
+// The inspection page has no [TRUST BAR] of its own; the artboard uses these four locked facts.
+const t = (v: string): Inline[] => [{ t: 'text', v }];
+const trust = [t('Class A licensed'), t('BBB accredited'), t('10-year workmanship warranty')];
+const whoIcons = ['clock', 'cloud-lightning', 'droplet', 'house'];
+
+// Timeline rows are the copy's three [STEPS] plus "We confirm a time", built
+// from the copy's confirmation sentence (Gate A decision 3, DRAFT-ADDITIONS.md).
+const steps = first(process, 'steps')!.items;
+const timeline = [
+  { icon: 'phone', title: steps[0].title, body: steps[0].inline },
+  { icon: 'calendar', title: 'We confirm a time.', body: null },
+  { icon: 'search', title: steps[1].title, body: steps[1].inline },
+  { icon: 'file-text', title: steps[2].title, body: steps[2].inline },
+];
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  path={path}
+  og="service"
+  hasLeadCard
+  schema={[serviceSchema({ path, name: plain(first(hero, 'h1')!.inline), serviceType: 'Roof Inspection', description: meta.description, free: true }), faqSchema(faqs(page))]}
+>
+  <Hero
+    path={path}
+    h1={plain(first(hero, 'h1')!.inline)}
+    lede={first(hero, 'subhead')!.inline}
+    primary={blocksOf(hero, 'cta').find((c) => c.kind === 'primary') ?? null}
+    secondary={blocksOf(hero, 'cta').find((c) => c.kind === 'secondary') ?? null}
+    trust={trust}
+    formId="inspection"
+    cardFirstOnMobile
+    minHeight={720}
+  />
+
+  <Section bg="surface" name="Who it is for">
+    <div class="flex flex-col gap-6 lg:gap-10">
+      <h2 class="heading text-center text-h2 text-fg lg:text-left"><Rich inline={first(who, 'h2')!.inline} /></h2>
+      <ul class="m-0 grid list-none grid-cols-1 gap-5 p-0 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+        {
+          first(who, 'list')!.items.map((item, i) => (
+            <li class="card reveal" style={`--reveal-i:${i}`}>
+              <Icon name={whoIcons[i] ?? 'check'} size={32} class="text-accent" />
+              <p class="rich text-fg"><Rich inline={item.inline} /></p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <Section bg="muted" name="What we check">
+    <div class="grid grid-cols-1 items-start gap-7 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+      <div class="flex flex-col gap-6">
+        <h2 class="heading text-h2 text-fg"><Rich inline={first(check, 'h2')!.inline} /></h2>
+        <Checklist items={first(check, 'list')!.items} />
+      </div>
+      <PhotoGap desc="Ricardo on a roof during an inspection" ratio={4 / 5} icon="search" />
+    </div>
+  </Section>
+
+  <Section bg="surface" name="What you get and what happens next">
+    <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+      <div class="flex flex-col gap-5">
+        <h2 class="heading text-h2 text-fg"><Rich inline={first(get, 'h2')!.inline} /></h2>
+        <p class="rich text-fg"><Rich inline={first(get, 'p')!.inline} /></p>
+        <PhotoGap desc={first(get, 'image')!.desc} ratio={4 / 3} />
+      </div>
+      <div class="flex flex-col gap-6">
+        <h2 class="heading text-h2 text-fg"><Rich inline={first(process, 'h2')!.inline} /></h2>
+        <ol class="m-0 flex max-w-[720px] list-none flex-col p-0">
+          {
+            timeline.map((row, i) => (
+              <li class="grid grid-cols-[32px_minmax(0,1fr)] gap-5">
+                <div class="flex flex-col items-center">
+                  <Icon name={row.icon} size={24} class="text-accent" />
+                  {i < timeline.length - 1 && <div class="my-2 w-px flex-1 bg-border" />}
+                </div>
+                <div class:list={['flex flex-col gap-1.5', i < timeline.length - 1 && 'pb-7']}>
+                  <h3 class="text-body leading-snug font-semibold text-fg">{row.title}</h3>
+                  <p class="rich text-fg-muted">
+                    {row.body ? <Rich inline={row.body} /> : <Fragment>Ricardo will call you within <Fragment set:html={confirmHtml('hours')} /> to set a time.</Fragment>}
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="subtle" name="FAQ">
+    <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
+      <h2 class="heading text-h2 text-fg"><Rich inline={first(faq, 'h2')!.inline} /></h2>
+      <Faq faqs={blocksOf(faq, 'faq')} />
+    </div>
+  </Section>
+
+  <CtaBand heading={first(cta, 'h2')!.inline} primary={blocksOf(cta, 'cta')[0]} formTarget="lead-card" />
+</Base>

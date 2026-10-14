@@ -1,0 +1,48 @@
+---
+// Contact. Copy: batch-2 section 5. Same lead contract as the hero card
+// (ADR-003). Service area only: no street address, no embedded map script.
+import TrustPage from '@/components/TrustPage.astro';
+import AreaMap from '@/components/AreaMap.astro';
+import Bullets from '@/components/Bullets.astro';
+import LeadCard from '@/components/LeadCard.astro';
+import Rich from '@/components/Rich.astro';
+import Section from '@/components/Section.astro';
+import { blocksOf, first, getPage, plain, section } from '@/lib/copy';
+
+const path = '/contact/';
+const page = getPage(path);
+const details = section(page, 'Contact details');
+const form = section(page, 'Form');
+const area = section(page, 'Service area');
+const closing = section(page, 'Closing');
+---
+
+<TrustPage path={path} pageType="ContactPage" skip={['Contact details', 'Form', 'Service area', 'Closing']} hasLeadCard>
+  <Section bg="surface" name="Contact details and form">
+    <div class="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:gap-16">
+      <div class="flex flex-col gap-6">
+        <h2 class="heading text-h2 text-fg"><Rich inline={first(details, 'h2')!.inline} /></h2>
+        <Bullets items={first(details, 'list')!.items} />
+        {blocksOf(details, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
+      </div>
+      <div class="rounded-lg border border-border-subtle">
+        <LeadCard formId="contact" variant="contact" heading={plain(first(form, 'h2')!.inline)} sub="" submitLabel="Send My Request" class="shadow-none" />
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="muted" name="Service area">
+    <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-16">
+      <div class="flex flex-col gap-5">
+        <h2 class="heading text-h2 text-fg"><Rich inline={first(area, 'h2')!.inline} /></h2>
+        {blocksOf(area, 'p').map((p) => <p class="rich text-fg"><Rich inline={p.inline} /></p>)}
+        {blocksOf(closing, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
+        <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+          <li><a href="/service-areas/" class="chip">All service areas</a></li>
+          <li><a href="/free-roof-inspection/" class="chip">Free Roof Inspection</a></li>
+        </ul>
+      </div>
+      <AreaMap caption="Our service area across Northern Virginia. Schematic, not to scale." class="w-full max-w-[600px]" />
+    </div>
+  </Section>
+</TrustPage>

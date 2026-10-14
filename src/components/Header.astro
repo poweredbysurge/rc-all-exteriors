@@ -1,0 +1,212 @@
+---
+// Site header. Sticky. 64px under 900, 80px from 900, shrinking to 56 / 64 on
+// scroll. The outer element keeps its full height so shrinking the bar never
+// shifts the page (no layout animation, no CLS).
+// Desktop nav from 900px, hamburger below (master prompt section 3).
+import Icon from './Icon.astro';
+import { primaryNav, services } from '@/data/nav';
+import { PHONE, TEL } from '@/lib/site';
+
+const path = Astro.url.pathname;
+const roofing = services.filter((s) => s.group === 'roofing');
+const exteriors = services.filter((s) => s.group === 'exteriors');
+---
+
+<header data-site-header class="site-header pointer-events-none sticky top-0 z-40 h-16 nav:h-20">
+  <div data-header-bar class="header-bar gutter pointer-events-auto border-b border-border-subtle bg-surface nav:max-lg:px-5">
+    <div class="container-site flex h-full items-center justify-between gap-3 2xl:gap-8">
+      <a href="/" class="flex min-h-11 shrink-0 items-center">
+        <img
+          src="/logos/logo-full-color.svg"
+          alt="RC All Exteriors"
+          width="102"
+          height="48"
+          class="header-logo block w-auto"
+        />
+      </a>
+
+      <nav aria-label="Primary" class="hidden items-center gap-2 nav:flex lg:gap-3 xl:gap-5 2xl:gap-7">
+        {
+          primaryNav.map((item) =>
+            item.hasMenu ? (
+              <div class="dropdown relative flex items-center" data-dropdown>
+                <a href={item.href} class="nav-link" aria-current={path === item.href ? 'page' : undefined}>
+                  {item.label}
+                </a>
+                <button
+                  type="button"
+                  class="flex h-11 w-7 cursor-pointer items-center justify-center text-fg"
+                  aria-expanded="false"
+                  aria-controls="services-menu"
+                  aria-label="Show all services"
+                  data-dropdown-toggle
+                >
+                  <Icon name="chevron-down" size={18} />
+                </button>
+                <div
+                  id="services-menu"
+                  data-dropdown-panel
+                  class="dropdown-panel absolute left-0 top-full w-[34rem] rounded-lg border border-border-subtle bg-surface p-4 shadow-md"
+                >
+                  <div class="grid grid-cols-2 gap-x-4">
+                    <ul class="flex flex-col">
+                      {roofing.slice(0, 6).map((s) => (
+                        <li>
+                          <a href={s.href} class="menu-link">
+                            {s.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                    <ul class="flex flex-col">
+                      {[...roofing.slice(6), ...exteriors].map((s) => (
+                        <li>
+                          <a href={s.href} class="menu-link">
+                            {s.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <a href="/services/" class="menu-link mt-2 border-t border-border-subtle pt-2 text-accent">
+                    All services
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <a href={item.href} class="nav-link" aria-current={path === item.href ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ),
+          )
+        }
+      </nav>
+
+      <div class="flex shrink-0 items-center gap-2 xl:gap-4">
+        <a href={TEL} class="hidden min-h-11 items-center text-body font-bold whitespace-nowrap text-fg hover:text-accent xl:inline-flex">
+          {PHONE}
+        </a>
+        <a href="/free-roof-inspection/" class="btn btn-primary hidden nav:inline-flex nav:px-4 xl:px-7">
+          <span class="lg:hidden">Free Inspection</span>
+          <span class="hidden lg:inline xl:hidden">Free Roof Inspection</span>
+          <span class="hidden xl:inline">Book a Free Roof Inspection</span>
+        </a>
+        <a
+          href={TEL}
+          aria-label={`Call ${PHONE}`}
+          class="flex size-11 items-center justify-center rounded-md border border-border text-accent xl:hidden"
+        >
+          <Icon name="phone" size={20} />
+        </a>
+        <button
+          type="button"
+          class="flex size-11 cursor-pointer items-center justify-center rounded-md border border-border text-fg nav:hidden"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          data-action="menu"
+        >
+          <Icon name="menu" size={22} />
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style is:global>
+  .header-bar {
+    height: var(--rc-header-height-mobile);
+    transition:
+      height 200ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .header-logo {
+    height: 40px;
+    transition: height 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .site-header.is-scrolled .header-bar {
+    height: var(--rc-header-height-mobile-shrunk);
+    box-shadow: var(--shadow-sm);
+  }
+  .site-header.is-scrolled .header-logo {
+    height: 36px;
+  }
+  @media (min-width: 56.25rem) {
+    .header-bar {
+      height: var(--rc-header-height-desktop);
+    }
+    .header-logo {
+      height: 48px;
+    }
+    .site-header.is-scrolled .header-bar {
+      height: var(--rc-header-height-mobile);
+    }
+    .site-header.is-scrolled .header-logo {
+      height: 40px;
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+    font-size: var(--text-body-sm);
+    color: var(--color-fg);
+    white-space: nowrap;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8px;
+    height: 2px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .nav-link:hover::after,
+  .nav-link[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+  .menu-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 12px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: var(--text-body-sm);
+    color: var(--color-fg);
+  }
+  .menu-link:hover {
+    background: var(--color-accent-tint);
+    color: var(--color-accent);
+  }
+
+  /* Opens on hover, on keyboard focus and on click (data-open). */
+  .dropdown-panel {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 180ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 180ms cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0s linear 180ms;
+  }
+  .dropdown:hover .dropdown-panel,
+  .dropdown:focus-within .dropdown-panel,
+  .dropdown[data-open] .dropdown-panel {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+  .dropdown[data-closed] .dropdown-panel {
+    visibility: hidden;
+    opacity: 0;
+  }
+</style>

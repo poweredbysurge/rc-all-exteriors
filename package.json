@@ -1,0 +1,33 @@
+{
+  "name": "rc-all-exteriors",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/prune-originals.mjs",
+    "preview": "node scripts/serve-static.mjs",
+    "check": "node scripts/check-integrity.mjs",
+    "check:production": "node scripts/check-integrity.mjs --production",
+    "check:layout": "node scripts/check-layout.mjs",
+    "optimize-images": "node scripts/optimize-images.mjs",
+    "og": "node scripts/generate-og.mjs",
+    "fonts:measure": "node scripts/measure-fallbacks.mjs"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "^11.0.12",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.7",
+    "lucide": "^1.52.0",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "fontkit": "^2.0.4",
+    "node-html-parser": "^9.0.4",
+    "puppeteer-core": "^24.0.0"
+  }
+}

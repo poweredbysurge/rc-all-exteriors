@@ -1,0 +1,143 @@
+---
+// Site footer (footer-390, footer-1440). Four columns on desktop, stacked on
+// mobile with the 12 services in an accordion. Every link row is 44px tall
+// (Gate A review finding 6). The NAP block carries data-dni-skip so call
+// tracking can never rewrite the canonical number. No street address: this is
+// a service-area business.
+import Icon from './Icon.astro';
+import RatingChip from './RatingChip.astro';
+import business from '@/data/business.json';
+import { footerAreas, footerCompany, legalLinks, services, soonCities } from '@/data/nav';
+import { confirmHtml } from '@/lib/render';
+import { MAILTO, PHONE, TEL } from '@/lib/site';
+
+const year = new Date().getFullYear();
+const linkRow = 'flex min-h-11 items-center text-body-sm font-medium text-fg-inverse-muted hover:text-fg-inverse hover:underline underline-offset-4';
+const colTitle = 'mb-2 text-body-sm font-bold tracking-[0.02em] text-fg-inverse';
+---
+
+<footer class="on-dark section-y-quiet gutter relative bg-surface-contrast pb-[calc(100px+84px)] nav:pb-[100px] lg:pb-16">
+  <div class="absolute top-[-1px] left-1/2 -translate-x-1/2 text-accent">
+    <svg aria-hidden="true" width="48" height="20" viewBox="0 0 48 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" class="block">
+      <path d="M1 19 L24 3 L47 19"></path>
+    </svg>
+  </div>
+
+  <div class="container-site">
+    <div class="flex flex-col gap-10 lg:grid lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-12">
+      <div class="flex flex-col gap-5" data-dni-skip="true">
+        <img src="/logos/logo-white.svg" alt="RC All Exteriors" width="119" height="56" loading="lazy" decoding="async" class="block h-14 w-auto self-start" />
+        <p class="text-body-sm text-fg-inverse-muted" data-sm>
+          {business.legalName}<br />
+          {business.serviceAreaLine}<br />
+          {business.hours.display}
+        </p>
+        <div class="flex flex-col">
+          <a href={TEL} class="flex min-h-11 items-center self-start text-body font-bold text-fg-inverse hover:underline underline-offset-4" data-dni-skip="true">{PHONE}</a>
+          <a href={MAILTO} class="flex min-h-11 items-center self-start text-body-sm font-medium text-fg-inverse-muted hover:text-fg-inverse hover:underline underline-offset-4">{business.email}</a>
+        </div>
+        <p class="text-body-sm text-fg-inverse-muted" data-sm>
+          {business.licence.label}{' '}
+          {business.licence.number ? <span>#{business.licence.number}</span> : <Fragment set:html={confirmHtml('licence number')} />}
+          <br />
+          {business.accreditations.join(' · ')}
+        </p>
+        <RatingChip variant="dark" class="self-start" />
+      </div>
+
+      <div>
+        <h2 class={colTitle}>Services</h2>
+        <button
+          type="button"
+          class="flex min-h-12 w-full cursor-pointer items-center justify-between border-y border-fg-inverse/[0.14] text-body-sm font-semibold text-fg-inverse lg:hidden"
+          aria-expanded="false"
+          aria-controls="footer-services"
+          data-action="accordion"
+        >
+          <span>{services.length} services</span>
+          <Icon name="chevron-down" size={20} />
+        </button>
+        <ul id="footer-services" class="footer-services flex flex-col">
+          {
+            services.map((s) => (
+              <li>
+                <a href={s.href} class={linkRow}>
+                  {s.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h2 class={colTitle}>Service areas</h2>
+        <ul class="flex flex-col">
+          {
+            footerAreas.map((a) => (
+              <li>
+                <a href={a.href} class={linkRow}>
+                  {a.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-3 text-body-sm text-fg-inverse-muted" data-sm>
+          Coming soon: {soonCities.map((c) => c.name).join(', ')}
+        </p>
+      </div>
+
+      <div>
+        <h2 class={colTitle}>Company</h2>
+        <ul class="flex flex-col">
+          {
+            footerCompany.map((c) => (
+              <li>
+                <a href={c.href} class={linkRow}>
+                  {c.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-fg-inverse/[0.14] pt-6">
+      <ul class="flex flex-wrap gap-x-5">
+        {
+          legalLinks.map((l) => (
+            <li>
+              <a href={l.href} class={linkRow}>
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href={business.profiles.instagram} class={linkRow} rel="noopener">Instagram</a>
+        </li>
+      </ul>
+      <p class="text-body-sm font-medium text-fg-inverse-muted" data-sm>
+        &copy; {year} {business.legalName} ·
+        <a href={business.builtBy.url} class="inline-flex min-h-11 items-center underline underline-offset-4 hover:text-fg-inverse" rel="noopener">{business.builtBy.label}</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style is:global>
+  /* Collapsed on mobile only once JS is running, so the links are never unreachable. */
+  @media (max-width: 63.9375rem) {
+    .js .footer-services:not(.is-open) {
+      display: none;
+    }
+  }
+  footer [data-action="accordion"] svg {
+    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  footer [data-action="accordion"][aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+</style>

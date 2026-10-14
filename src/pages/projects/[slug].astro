@@ -1,0 +1,67 @@
+---
+// Case study template. Copy structure: batch-5 section 5. Pages are generated
+// from src/data/projects.ts, which holds real jobs only.
+import Base from '@/layouts/Base.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Figure from '@/components/Figure.astro';
+import PageHero from '@/components/PageHero.astro';
+import ReviewCard from '@/components/ReviewCard.astro';
+import Section from '@/components/Section.astro';
+import { routeByPath } from '@/data/nav';
+import { caseStudies, type CaseStudy } from '@/data/projects';
+import { rebase } from '@/lib/site';
+
+export function getStaticPaths() {
+  return caseStudies.map((study) => ({ params: { slug: study.slug }, props: { study } }));
+}
+const { study } = Astro.props as { study: CaseStudy };
+const path = `/projects/${study.slug}/`;
+const h1 = `${study.jobType} in ${study.town}, VA`;
+const title = `${h1}: Project Details | RC All Exteriors`;
+const facts = [
+  ['Location', study.town],
+  ['Home type', study.homeType],
+  ['Job', study.jobType],
+  ['Materials', study.materials],
+  ['Timeline', study.timeline],
+  ['Insurance claim', study.insuranceClaim ? 'Yes' : 'No'],
+];
+const t = (v: string) => [{ t: 'text' as const, v }];
+---
+
+<Base
+  title={title}
+  description={study.summary}
+  path={path}
+  schema={[{ '@type': 'Article', headline: h1, description: study.summary, url: rebase(path), author: { '@type': 'Organization', name: 'RC All Exteriors' } }]}
+>
+  <PageHero path={path} h1={h1} lede={t(study.summary)} />
+  <Section bg="surface" name="Before and after">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <Figure photo={study.before} ratio={3 / 2} sizes="(min-width: 768px) 620px, 92vw" caption="Before" />
+      <Figure photo={study.after} ratio={3 / 2} sizes="(min-width: 768px) 620px, 92vw" caption="After" />
+    </div>
+  </Section>
+  <Section bg="muted" name="Project details">
+    <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+      <h2 class="heading text-h2 text-fg">Project details</h2>
+      <dl class="m-0 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+        {facts.map(([label, value]) => <div><dt class="text-body-sm font-semibold text-fg-muted">{label}</dt><dd class="m-0 text-fg">{value}</dd></div>)}
+      </dl>
+    </div>
+  </Section>
+  <Section bg="surface" name="Story">
+    <div class="mx-auto flex max-w-[720px] flex-col gap-10">
+      <div class="flex flex-col gap-4"><h2 class="heading text-h2 text-fg">What we found</h2><p class="text-fg-muted">{study.found}</p></div>
+      <div class="flex flex-col gap-4"><h2 class="heading text-h2 text-fg">What we did</h2><p class="text-fg-muted">{study.did}</p></div>
+      <div class="flex flex-col gap-4"><h2 class="heading text-h2 text-fg">The result</h2><p class="text-fg-muted">{study.result}</p></div>
+      {study.review && <ReviewCard review={{ ...study.review, rating: 5 }} />}
+      <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+        <li><a href={study.serviceHref} class="chip">{routeByPath.get(study.serviceHref)?.label}</a></li>
+        {study.cityHref && <li><a href={study.cityHref} class="chip">{routeByPath.get(study.cityHref)?.label}</a></li>}
+        <li><a href="/projects/" class="chip">All projects</a></li>
+      </ul>
+    </div>
+  </Section>
+  <CtaBand heading={t('Have a similar problem?')} />
+</Base>

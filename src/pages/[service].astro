@@ -1,0 +1,225 @@
+---
+// Service hub template (roof-replacement-390, roof-replacement-1440), used by
+// all eleven service pages. Copy: batches 1 to 4. Sections render in the
+// copy's order; the one dark CTA band sits after the process section, as drawn.
+import Base from '@/layouts/Base.astro';
+import CityChips from '@/components/CityChips.astro';
+import ContentSection from '@/components/ContentSection.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Faq from '@/components/Faq.astro';
+import Figure from '@/components/Figure.astro';
+import Hero from '@/components/Hero.astro';
+import Icon from '@/components/Icon.astro';
+import PhotoGap from '@/components/PhotoGap.astro';
+import Rich from '@/components/Rich.astro';
+import Section from '@/components/Section.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import { routeByPath, serviceByHref, services } from '@/data/nav';
+import { materials, repairOrReplace } from '@/data/roof-replacement';
+import { blocksOf, faqs, first, getPage, plain, section, type ListBlock, type Section as CopySection } from '@/lib/copy';
+import { metaFor } from '@/lib/page';
+import { confirmHtml } from '@/lib/render';
+import { faqSchema, serviceSchema } from '@/lib/schema';
+import { sentenceCase } from '@/lib/text';
+
+export function getStaticPaths() {
+  return services
+    .filter((s) => s.href !== '/free-roof-inspection/')
+    .map((s) => ({ params: { service: s.href.replace(/\//g, '') } }));
+}
+
+const path = `/${Astro.params.service}/`;
+const service = serviceByHref.get(path)!;
+const page = getPage(path);
+const meta = metaFor(page);
+const isReplacement = path === '/roof-replacement/';
+const isEmergency = path === '/emergency-roof-repair/';
+
+const hero = section(page, 'Hero');
+const cta = section(page, 'CTA');
+const faqSection = page.sections.find((s) => blocksOf(s, 'faq').length > 0) ?? null;
+const body = page.sections.filter((s) => s !== hero && s !== cta && s !== faqSection);
+
+// The CTA band follows the process section when there is one with more page
+// after it; otherwise it sits just above the FAQ.
+const stepsIndex = body.findIndex((s) => blocksOf(s, 'steps').length > 0 && /process|how/i.test(s.name));
+const bandAfter = stepsIndex >= 0 && stepsIndex < body.length - 1 ? stepsIndex : body.length - 1;
+
+const cycle = ['surface', 'muted', 'surface', 'subtle'] as const;
+const bgOf = (i: number) => cycle[i % cycle.length];
+const faqBg = cycle[(body.length + 1) % cycle.length] === 'surface' ? 'muted' : cycle[(body.length + 1) % cycle.length];
+
+// Roof replacement: the warranty item is drawn as its own callout, so it comes out of the checklist.
+function included(s: CopySection): { section: CopySection; warranty: ListBlock['items'][number] | null } {
+  const list = first(s, 'list');
+  if (!isReplacement || !list || !/included/i.test(s.name)) return { section: s, warranty: null };
+  const warranty = list.items.find((i) => /warranty/i.test(i.title ?? '')) ?? null;
+  return {
+    section: { ...s, blocks: s.blocks.map((b) => (b === list ? { ...list, items: list.items.filter((i) => i !== warranty) } : b)) },
+    warranty,
+  };
+}
+
+// Related services: the copy's "Internal links on this page", with the hub's own card copy (batch-4 section 3).
+const hubCards = blocksOf(section(getPage('/services/'), 'Roofing'), 'card').concat(blocksOf(section(getPage('/services/'), 'Exteriors'), 'card'));
+const related = page.internalLinks
+  .filter((href) => href !== path && serviceByHref.has(href))
+  .slice(0, 3)
+  .map((href) => hubCards.find((c) => c.href === href)!)
+  .filter(Boolean);
+const inlineLinks = new Set(
+  page.sections.flatMap((s) =>
+    s.blocks.flatMap((b) =>
+      'inline' in b ? b.inline : b.type === 'list' || b.type === 'steps' ? b.items.flatMap((i) => i.inline) : b.type === 'faq' ? b.a : b.type === 'links' ? b.links.map((l) => ({ t: 'link' as const, text: l.text, href: l.href })) : [],
+    ),
+  ).filter((n) => n.t === 'link').map((n) => (n as { href: string }).href),
+);
+const more = page.internalLinks.filter((href) => href !== '/' && href !== path && !serviceByHref.has(href) && !inlineLinks.has(href) && routeByPath.has(href));
+
+const stepMedia = isReplacement ? (['colonial', { gap: 'written estimate on the kitchen table' }, 'underlayment', 'twoStory'] as const) : undefined;
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  path={path}
+  og="service"
+  hasLeadCard
+  confirmMeta={meta.confirmMeta}
+  schema={[
+    serviceSchema({ path, name: plain(first(hero, 'h1')!.inline), serviceType: service.serviceType, description: meta.description }),
+    faqSchema(faqs(page)),
+  ]}
+>
+  <Hero
+    path={path}
+    h1={plain(first(hero, 'h1')!.inline)}
+    lede={first(hero, 'subhead')!.inline}
+    primary={blocksOf(hero, 'cta').find((c) => c.kind === 'primary') ?? null}
+    secondary={blocksOf(hero, 'cta').find((c) => c.kind === 'secondary') ?? null}
+    trust={first(hero, 'trust')?.items ?? []}
+  />
+
+  {
+    body.map((s, i) => {
+      const inc = included(s);
+      return (
+        <Fragment>
+          <ContentSection
+            section={inc.section}
+            bg={bgOf(i)}
+            eyebrow={isReplacement && /included/i.test(s.name) ? 'What is included' : undefined}
+            media={blocksOf(s, 'steps').length && /process/i.test(s.name) ? (stepMedia as never) : undefined}
+          />
+
+          {isReplacement && s.name === 'Signs' && (
+            <Section bg="muted" quiet name="Repair or replace" class="!pt-0">
+              <div class="flex flex-col gap-4">
+                <h3 class="heading text-h3 text-fg">Repair or replace</h3>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <td class="!border-t-0 bg-surface-muted" />
+                        <th scope="col">Usually a repair</th>
+                        <th scope="col">Usually a replacement</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {repairOrReplace.map((row) => (
+                        <tr>
+                          <th scope="row">{row.label}</th>
+                          <td>{row.repair}</td>
+                          <td>{row.replace}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </Section>
+          )}
+
+          {inc.warranty && (
+            <Section bg={bgOf(i)} quiet name="Materials and warranty" class="!pt-0">
+              <div class="flex flex-col gap-10 lg:gap-12">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                  {materials.map((m, k) => (
+                    <a href={m.href} class="reveal group flex flex-col gap-3" style={`--reveal-i:${k}`}>
+                      {m.photo ? <Figure photo={m.photo} ratio={3 / 2} sizes="(min-width: 768px) 400px, 92vw" caption={m.caption} /> : <PhotoGap desc={m.caption} ratio={3 / 2} icon={m.icon} />}
+                      <span class="flex items-center gap-2.5">
+                        <Icon name={m.icon} size={24} class="text-accent" />
+                        <span class="heading text-h3 text-fg group-hover:text-accent">{m.title}</span>
+                      </span>
+                      <span class="text-body-sm text-fg-muted" data-sm>{m.text}</span>
+                    </a>
+                  ))}
+                </div>
+                <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+                  <div class="flex items-start gap-4 rounded-lg border border-accent bg-surface p-5 lg:p-6">
+                    <Icon name="shield-check" size={32} class="text-accent" />
+                    <div class="flex flex-col gap-2">
+                      <h3 class="heading text-h3 text-fg">{inc.warranty.title?.replace(/\.$/, '')}</h3>
+                      <p class="rich text-fg-muted"><Rich inline={inc.warranty.inline.filter((n) => n.t !== 'link')} /></p>
+                      {inc.warranty.inline.filter((n) => n.t === 'link').map((n) => n.t === 'link' && (
+                        <a href={n.href} class="link-arrow self-start">{sentenceCase(n.text)} <Icon name="arrow-right" size={18} /></a>
+                      ))}
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4 rounded-lg border border-border-subtle bg-surface-muted p-5 lg:p-6">
+                    <Icon name="file-text" size={32} class="text-accent" />
+                    <div class="flex flex-col gap-2">
+                      <h3 class="heading text-h3 text-fg">Pricing guidance</h3>
+                      <p class="text-body-sm text-fg" data-sm><Fragment set:html={confirmHtml('price range, deposit schedule')} /></p>
+                      <p class="text-body-sm text-fg-muted" data-sm>Your free inspection ends with a written estimate.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Section>
+          )}
+
+          {i === bandAfter && (
+            <CtaBand heading={first(cta, 'h2')!.inline} text={first(cta, 'p')?.inline} primary={blocksOf(cta, 'cta').find((c) => c.kind === 'primary')} phoneFirst={isEmergency} />
+          )}
+        </Fragment>
+      );
+    })
+  }
+
+  {
+    faqSection && (
+      <Section bg={faqBg} name="FAQ">
+        <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
+          <h2 class="heading text-h2 text-fg"><Rich inline={first(faqSection, 'h2')!.inline} /></h2>
+          <Faq faqs={blocksOf(faqSection, 'faq')} />
+        </div>
+      </Section>
+    )
+  }
+
+  <Section bg="surface" name="Related services and service areas">
+    <div class="flex flex-col gap-12">
+      {
+        related.length > 0 && (
+          <div class="flex flex-col gap-6 lg:gap-8">
+            <h2 class="heading text-center text-h2 text-fg lg:text-left">Related services</h2>
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-3 lg:gap-6">
+              {related.map((card) => <ServiceCard title={card.title} text={card.inline} href={card.href!} />)}
+            </div>
+            {more.length > 0 && (
+              <ul class="m-0 flex list-none flex-wrap justify-center gap-2 p-0 lg:justify-start">
+                {more.map((href) => <li><a href={href} class="chip">{routeByPath.get(href)!.label}</a></li>)}
+              </ul>
+            )}
+          </div>
+        )
+      }
+      <div class="flex flex-col gap-4">
+        <h3 class="heading text-h3 text-fg">{sentenceCase(service.label)} across Northern Virginia</h3>
+        <p class="text-fg-muted">Based in Woodbridge. Serving Lake Ridge and the neighborhoods around our home base, plus:</p>
+        <CityChips />
+      </div>
+    </div>
+  </Section>
+</Base>

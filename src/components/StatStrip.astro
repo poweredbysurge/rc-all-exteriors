@@ -1,0 +1,41 @@
+---
+// Stat strip: four locked facts, read from business.json and the reviews
+// proxy. Values never wrap ("10-year", "Class A": Gate A review finding 4).
+import Icon from './Icon.astro';
+import business from '@/data/business.json';
+import { getReviews } from '@/lib/reviews';
+
+interface Props {
+  /** boxed: on a white card (city pages). plain: under a rule (homepage). */
+  variant?: 'plain' | 'boxed';
+  class?: string;
+}
+const { variant = 'plain', class: className } = Astro.props;
+const reviews = await getReviews();
+const [days, hours] = business.hours.display.split(', ');
+
+const stats = [
+  { icon: 'star', value: String(reviews.count), label: 'five-star Google reviews', live: true },
+  { icon: 'shield-check', value: '10-year', label: 'workmanship warranty' },
+  { icon: 'badge-check', value: 'Class A', label: 'Virginia licensed' },
+  { icon: 'clock', value: days, label: hours },
+];
+---
+
+<div class:list={[variant === 'boxed' ? 'rounded-lg border border-border-subtle bg-surface p-5 lg:p-8' : 'border-t border-border pt-6 lg:pt-8', className]}>
+  <ul class:list={['m-0 grid list-none grid-cols-2 gap-x-4 gap-y-5 p-0 lg:gap-6', variant === 'boxed' && 'lg:grid-cols-4']}>
+    {
+      stats.map((stat) => (
+        <li class="flex flex-col items-start gap-2 lg:flex-row lg:gap-3">
+          <Icon name={stat.icon} size={24} class="text-accent lg:mt-1.5" />
+          <span class="flex min-w-0 flex-col gap-1">
+            <strong class="heading text-[1.375rem] leading-none whitespace-nowrap text-fg lg:text-[1.875rem]">
+              {stat.live ? <span data-rating-count>{stat.value}</span> : stat.value}
+            </strong>
+            <span class="text-body-sm leading-tight font-semibold text-fg-muted">{stat.label}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</div>

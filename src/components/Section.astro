@@ -1,0 +1,24 @@
+---
+// A page band. 100px / 128px vertical rhythm, or the quiet 64px desktop band.
+// Backgrounds alternate with intent; never two identical bands touching.
+interface Props {
+  bg?: 'surface' | 'muted' | 'subtle' | 'contrast';
+  quiet?: boolean;
+  /** Section name, for check-integrity and for whoever debugs the page next. */
+  name?: string;
+  class?: string;
+}
+const { bg = 'surface', quiet = false, name, class: className } = Astro.props;
+const bgClass = {
+  surface: 'bg-surface',
+  muted: 'bg-surface-muted',
+  subtle: 'bg-surface-subtle',
+  contrast: 'bg-surface-contrast on-dark',
+}[bg];
+---
+
+<section data-section={name} class:list={[quiet ? 'section-y-quiet' : 'section-y', 'gutter relative', bgClass, className]}>
+  <div class="container-site">
+    <slot />
+  </div>
+</section>

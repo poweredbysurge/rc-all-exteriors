@@ -1,0 +1,99 @@
+---
+// Generic copy-driven page: text hero, the copy's sections in order, FAQ, CTA
+// band. Used by the trust pages and hubs that have no artboard of their own
+// (DESIGN-DEBT.md). Named slots let a page add its own block after a section.
+import Base from '@/layouts/Base.astro';
+import ContentSection from './ContentSection.astro';
+import CtaBand from './CtaBand.astro';
+import Faq from './Faq.astro';
+import Figure from './Figure.astro';
+import PageHero from './PageHero.astro';
+import PhotoGap from './PhotoGap.astro';
+import Rich from './Rich.astro';
+import Section from './Section.astro';
+import type { PhotoKey } from '@/data/photos';
+import { blocksOf, faqs, first, getPage, plain, type CtaBlock } from '@/lib/copy';
+import { metaFor } from '@/lib/page';
+import { faqSchema, pageSchema } from '@/lib/schema';
+
+interface Props {
+  path: string;
+  /** schema.org page type: WebPage, AboutPage, ContactPage, CollectionPage. */
+  pageType?: string;
+  schema?: (Record<string, unknown> | null)[];
+  /** Section names this page renders itself (through the default slot). */
+  skip?: string[];
+  /** A real photo for the hero [IMAGE] slot, shown under the hero. */
+  heroPhoto?: PhotoKey;
+  hasLeadCard?: boolean;
+}
+const { path, pageType = 'WebPage', schema = [], skip = [], heroPhoto, hasLeadCard = false } = Astro.props;
+const page = getPage(path);
+const meta = metaFor(page);
+
+const hero = page.sections[0];
+const cta = page.sections.find((s) => /^(cta|footer cta)$/i.test(s.name)) ?? null;
+const faqSection = page.sections.find((s) => blocksOf(s, 'faq').length > 0) ?? null;
+const body = page.sections.filter((s) => s !== hero && s !== cta && s !== faqSection && !skip.includes(s.name));
+const heroCtas = blocksOf(hero, 'cta');
+const heroImage = first(hero, 'image');
+
+// A CTA repeated in the closing band inherits an open CONFIRM from its first use.
+const withConfirm = (c: CtaBlock | undefined): CtaBlock | null =>
+  c ? { ...c, confirm: c.confirm ?? heroCtas.find((h) => h.label === c.label)?.confirm ?? null } : null;
+
+const cycle = ['surface', 'muted', 'surface', 'subtle'] as const;
+const offset = heroImage ? 1 : 0;
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  path={path}
+  hasLeadCard={hasLeadCard}
+  confirmMeta={meta.confirmMeta}
+  schema={[pageSchema(pageType, { path, name: plain(first(hero, 'h1')!.inline), description: meta.description }), faqSchema(faqs(page)), ...schema]}
+>
+  <PageHero
+    path={path}
+    h1={plain(first(hero, 'h1')!.inline)}
+    lede={first(hero, 'subhead')?.inline}
+    primary={heroCtas.find((c) => c.kind === 'primary') ?? null}
+    secondary={heroCtas.find((c) => c.kind === 'secondary') ?? null}
+    formTarget={hasLeadCard ? 'lead-card' : '/free-roof-inspection/'}
+  />
+
+  {
+    heroImage && (
+      <Section bg="surface" quiet name="Hero photo">
+        <div class="mx-auto max-w-[960px]">
+          {heroPhoto ? (
+            <Fragment>
+              <Figure photo={heroPhoto} ratio={3 / 2} sizes="(min-width: 1024px) 960px, 92vw" showTown />
+              <PhotoGap desc={heroImage.desc.replace(/\.\s*Real photo\.?$/i, '').replace(/\.$/, '')} ratio={8} icon="file-text" class="mt-4 [&>div]:hidden" />
+            </Fragment>
+          ) : (
+            <PhotoGap desc={heroImage.desc.replace(/\.$/, '')} ratio={3 / 2} />
+          )}
+        </div>
+      </Section>
+    )
+  }
+
+  {body.map((s, i) => <ContentSection section={s} bg={cycle[(i + offset) % cycle.length]} cardTag="h3" />)}
+
+  <slot />
+
+  {
+    faqSection && (
+      <Section bg="muted" name="FAQ">
+        <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
+          <h2 class="heading text-h2 text-fg"><Rich inline={first(faqSection, 'h2')!.inline} /></h2>
+          <Faq faqs={blocksOf(faqSection, 'faq')} />
+        </div>
+      </Section>
+    )
+  }
+
+  {cta && <CtaBand heading={first(cta, 'h2')!.inline} text={first(cta, 'p')?.inline} primary={withConfirm(blocksOf(cta, 'cta').find((c) => c.kind === 'primary'))} formTarget={hasLeadCard ? 'lead-card' : '/free-roof-inspection/'} />}
+</Base>

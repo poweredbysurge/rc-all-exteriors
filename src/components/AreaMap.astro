@@ -1,0 +1,89 @@
+---
+// Service-area map. Schematic by decision (DESIGN-DEBT.md): towns plotted by
+// latitude and longitude from src/data/nav.ts, the home base marked with the
+// RC mark, live city pages as solid dots. No street address, and no map
+// provider script or key.
+import { cities, homeBase, lakeRidge } from '@/data/nav';
+
+interface Props {
+  /** Limit the map to these towns (city pages show their own corner). */
+  only?: string[];
+  ratio?: number;
+  caption: string;
+  class?: string;
+}
+const { only, ratio = 600 / 540, caption, class: className } = Astro.props;
+
+type Place = { name: string; lat: number; lon: number; kind: 'base' | 'live' | 'area'; label: 'right' | 'left' | 'top'; hideLabelOnPhone?: boolean };
+const all: Place[] = [
+  { ...homeBase, kind: 'base', label: 'right' },
+  { ...lakeRidge, kind: 'area', label: 'left', hideLabelOnPhone: true },
+  ...cities.map(
+    (c): Place => ({
+      name: c.name,
+      lat: c.lat,
+      lon: c.lon,
+      kind: c.href ? 'live' : 'area',
+      label: c.name === 'Fairfax' || c.name === 'Fairfax Station' ? 'left' : c.name === 'Alexandria' ? 'top' : 'right',
+      hideLabelOnPhone: c.name === 'Fairfax Station',
+    }),
+  ),
+];
+const places = only ? all.filter((p) => only.includes(p.name)) : all;
+
+// Linear projection with room on the right for labels.
+const lons = places.map((p) => p.lon);
+const lats = places.map((p) => p.lat);
+const [lonMin, lonMax] = [Math.min(...lons), Math.max(...lons)];
+const [latMin, latMax] = [Math.min(...lats), Math.max(...lats)];
+const pad = { left: 0.24, right: 0.3, top: 0.13, bottom: 0.2 };
+const x = (lon: number) => (pad.left + ((lon - lonMin) / (lonMax - lonMin || 1)) * (1 - pad.left - pad.right)) * 100;
+const y = (lat: number) => (pad.top + ((latMax - lat) / (latMax - latMin || 1)) * (1 - pad.top - pad.bottom)) * 100;
+
+const base = places.find((p) => p.kind === 'base');
+// The Potomac, as a dashed hint east of the home base. Schematic.
+const river = base
+  ? `M ${x(base.lon)} ${y(base.lat) + 11} C ${x(base.lon) + 6} ${y(base.lat) - 9}, ${x(base.lon) + 34} ${y(base.lat) - 24}, ${x(base.lon) + 38} ${y(base.lat) - 44}`
+  : '';
+---
+
+<figure class:list={['m-0 flex flex-col gap-2', className]}>
+  <div class="relative w-full overflow-hidden rounded-lg border border-border-subtle bg-surface-muted" style={`aspect-ratio:${ratio}`} role="img" aria-label={caption}>
+    {
+      river && (
+        <svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute inset-0 size-full text-border" fill="none" stroke="currentColor">
+          <path d={river} vector-effect="non-scaling-stroke" stroke-width="1.5" stroke-dasharray="4 6" />
+        </svg>
+      )
+    }
+    {
+      places.map((p) => (
+        <span class="absolute" style={`left:${x(p.lon)}%;top:${y(p.lat)}%`} aria-hidden="true">
+          {p.kind === 'base' ? (
+            <img src="/logos/icon-blue.svg" alt="" width="36" height="26" loading="lazy" decoding="async" class="absolute top-0 left-0 block w-9 max-w-none -translate-x-1/2 -translate-y-1/2" />
+          ) : (
+            <span
+              class:list={[
+                'absolute top-0 left-0 block -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-accent',
+                p.kind === 'live' ? 'size-3.5 bg-accent' : 'size-2.5 bg-surface',
+              ]}
+            />
+          )}
+          <span
+            class:list={[
+              'absolute text-body-sm leading-snug whitespace-nowrap',
+              p.kind === 'area' ? 'font-medium text-fg-muted' : 'font-bold text-fg',
+              p.label === 'right' && (p.kind === 'base' ? 'top-0 left-6 -translate-y-1/2' : 'top-0 left-3.5 -translate-y-1/2'),
+              p.label === 'left' && 'top-0 right-3.5 -translate-y-1/2',
+              p.label === 'top' && 'bottom-2.5 left-0 -translate-x-1/2',
+              p.hideLabelOnPhone && 'hidden sm:block',
+            ]}
+          >
+            {p.name}
+          </span>
+        </span>
+      ))
+    }
+  </div>
+  <figcaption class="text-body-sm leading-snug font-medium text-fg-subtle" data-sm>{caption}</figcaption>
+</figure>
