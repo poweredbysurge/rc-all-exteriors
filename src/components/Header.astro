@@ -55,6 +55,7 @@ const exteriors = services.filter((s) => s.group === 'exteriors');
                       {roofing.slice(0, 6).map((s) => (
                         <li>
                           <a href={s.href} class="menu-link">
+                            <Icon name={s.icon} size={20} class="menu-icon" />
                             {s.label}
                           </a>
                         </li>
@@ -64,6 +65,7 @@ const exteriors = services.filter((s) => s.group === 'exteriors');
                       {[...roofing.slice(6), ...exteriors].map((s) => (
                         <li>
                           <a href={s.href} class="menu-link">
+                            <Icon name={s.icon} size={20} class="menu-icon" />
                             {s.label}
                           </a>
                         </li>
@@ -71,6 +73,7 @@ const exteriors = services.filter((s) => s.group === 'exteriors');
                     </ul>
                   </div>
                   <a href="/services/" class="menu-link mt-2 border-t border-border-subtle pt-2 text-accent">
+                    <Icon name="layout-grid" size={20} class="menu-icon" />
                     All services
                   </a>
                 </div>
@@ -183,6 +186,7 @@ const exteriors = services.filter((s) => s.group === 'exteriors');
   .menu-link {
     display: flex;
     align-items: center;
+    gap: 10px;
     min-height: 44px;
     padding: 0 12px;
     border-radius: var(--radius-sm);
@@ -192,6 +196,12 @@ const exteriors = services.filter((s) => s.group === 'exteriors');
   }
   .menu-link:hover {
     background: var(--color-accent-tint);
+    color: var(--color-accent);
+  }
+  /* The service's own icon (src/data/nav.ts), the one its card uses. Accent
+     at rest, so the column reads as a list of services, not a list of links. */
+  .menu-icon {
+    flex-shrink: 0;
     color: var(--color-accent);
   }
 

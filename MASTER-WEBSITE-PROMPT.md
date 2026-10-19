@@ -198,7 +198,7 @@ Chips are where AI-generated UI shows itself first. These rules exist to stop th
 - Focus state is a 2px ring in `accent` with 2px offset. Visible on every interactive element.
 
 **Navigation**
-- Desktop: logo left, 5 to 7 items, phone number and primary CTA right. Dropdowns open on hover and on click, close on escape and outside click.
+- Desktop: logo left, 5 to 7 items, phone number and primary CTA right. Dropdowns open on hover and on click, close on escape and outside click. Each dropdown item carries its service's own 20px line icon in accent, read from the service registry (the same icon its card uses), so the menu scans as a list of services; the mobile services list carries the same icons.
 - The header is on the brand's dark surface by default, so the header, the hero and the footer bracket the page in one surface and the white or reversed lockup reads. A light header is the exception and needs a reason in the ADR (a brand whose lockup has no reversed version, for example). The CTA on a dark header is the inverse button (white fill, dark text); the accent button disappears on a dark surface.
 - Top bar above the nav (optional): trust line (Veteran Owned · Family Owned · Serving X, Y, Z) and phone. Collapses to a ticker or hides on mobile.
 - Header height 88px on desktop and 72px on phones, shrinking on scroll to 72 / 60. Logo height 56px desktop, 44px mobile, never below 44px at any state: a wide lockup at 40px is unreadable. Mark-only at the shrunk state is allowed if the wordmark would fall under 44px. Tokens: `--header-height-desktop`, `--header-height-mobile`, `--header-logo-desktop`, `--header-logo-mobile`, `--header-logo-shrunk`.
@@ -671,6 +671,8 @@ CLIENT DECISIONS ALREADY MADE: [Anything that overrides a default in this prompt
 ---
 
 ## Changelog
+
+- **1.3 (2026-10-19), third pass:** Service icons in the services dropdown and the mobile services list, from the one registry (section 7).
 
 - **1.3 (2026-10-19), second pass:** Inner pages get the homepage rhythm by plan (section 5 and 18): opening photo beside the first body section, one dark band in the first half with two light bands before the CTA band, which moves below the FAQ when needed; one `.on-dark` inversion rule instead of per-component dark variants. RC ADR-006.
 

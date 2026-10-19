@@ -24,6 +24,8 @@
 - `src/lib/rhythm.ts` plans every copy-driven page: opening photo beside the first section (by job type, rotated by route), one dark band in the first half, CTA band below the FAQ when it would crowd the dark band. Wired into `[service].astro`, `TrustPage.astro`; city pages and the offer page set by hand (city services grid is the dark band with photo cards). `ContentSection` takes `photo` and `bg="contrast"`; one unlayered `.on-dark` rule inverts the fg utilities. `npm run audit:rhythm` prints the result per page. Both gates pass.
 - Opening photos repeat across pages (five photos for 28 pages) and the commercial page falls back to a house photo. Photo originals remain the blocker.
 
+**Round 3, same day:** service icons in the services dropdown and the mobile services list, from the nav registry. Master prompt section 7.
+
 **Next**
 - Sam's next round of callouts on the live site, section by section.
 - Push this commit from the Mac (the cloud session cannot push: the Claude GitHub App is not installed on `poweredbysurge`).
