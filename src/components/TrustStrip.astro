@@ -1,0 +1,59 @@
+---
+// Trust strip under the hero (ADR-005): the live Google rating chip and the
+// copy's own [TRUST BAR] items in one thin light band, so the hero holds only
+// the headline, lede, CTAs and card and fits the first viewport.
+//
+// The strip is one line: the chip plus three items on desktop (the fourth
+// item, the warranty, is in the H1 and the stat strip already) and the chip
+// plus `mobileCount` items on phones.
+import Icon from './Icon.astro';
+import RatingChip from './RatingChip.astro';
+import Rich from './Rich.astro';
+import { plain, type Inline } from '@/lib/copy';
+
+interface Props {
+  items: Inline[][];
+  mobileCount?: number;
+  class?: string;
+}
+const { items, mobileCount = 2, class: className } = Astro.props;
+
+// The rating chip already states the review count, so a "49 five-star reviews"
+// item in the copy's trust bar is represented by the chip, not repeated.
+const rest = items.filter((item) => !/five-star/i.test(plain(item))).slice(0, 3);
+
+function iconFor(text: string): string {
+  const t = text.toLowerCase();
+  if (/warranty/.test(t)) return 'shield-check';
+  if (/class a|licen[cs]ed/.test(t)) return 'badge-check';
+  if (/bbb|certainteed/.test(t)) return 'award';
+  if (/financing/.test(t)) return 'credit-card';
+  if (/residential and commercial/.test(t)) return 'building-2';
+  if (/insurance|storm/.test(t)) return 'cloud-lightning';
+  if (/quick/.test(t)) return 'clock';
+  if (/inspection/.test(t)) return 'clipboard-check';
+  if (/insured/.test(t)) return 'shield-check';
+  return 'map-pin';
+}
+---
+
+<div data-section="Trust strip" class:list={['gutter border-b border-border-subtle bg-surface', className]}>
+  <div class="container-site">
+    <ul class="m-0 flex list-none flex-wrap items-center justify-center gap-x-2 gap-y-3 p-0 py-4 lg:gap-x-3 lg:py-5">
+      <li class="flex items-center">
+        <RatingChip variant="light" />
+      </li>
+      {
+        rest.map((item, i) => (
+          <li class:list={['items-center', i < mobileCount ? 'flex' : 'hidden lg:flex']}>
+            <span aria-hidden="true" class="mr-4 hidden h-5 w-px bg-border lg:inline-block" />
+            <span class="inline-flex items-center gap-2 text-body-sm leading-snug font-semibold text-fg lg:whitespace-nowrap">
+              <Icon name={iconFor(plain(item))} size={20} class="text-accent" />
+              <span><Rich inline={item} linkPhone={false} /></span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

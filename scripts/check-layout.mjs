@@ -14,6 +14,8 @@ import puppeteer from 'puppeteer-core';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const out = join(root, '.vercel/output/static');
 const base = process.env.BASE_URL || 'http://localhost:4321';
+// CHROME_PATH points at the browser; CHROME_ARGS (for example --no-sandbox in a
+// container running as root) is split on spaces and passed through.
 const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const WIDTHS = [320, 360, 375, 390, 414, 430, 768, 820, 834, 900, 1024, 1280, 1440, 1744, 1920];
 
@@ -29,7 +31,7 @@ const only = process.argv[2];
 const targets = (only ? [only] : routes.sort()).map((r) => r.replace(/^\/\//, '/'));
 
 const failures = [];
-const browser = await puppeteer.launch({ executablePath: CHROME, headless: true });
+const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, args: process.env.CHROME_ARGS ? process.env.CHROME_ARGS.split(' ') : [] });
 const page = await browser.newPage();
 
 for (const route of targets) {
@@ -80,6 +82,28 @@ for (const route of targets) {
       return [...new Set(problems)].slice(0, 6);
     }, width);
     for (const problem of result) failures.push(`${route} @${width}: ${problem}`);
+  }
+
+  // Hero fit (master prompt section 10, ADR-005): on a photo hero the hero's
+  // bottom edge is at or above the viewport's and the lead card is inside it,
+  // at 1440 by 900 and 1920 by 1080.
+  for (const [w, h] of [[1440, 900], [1920, 1080]]) {
+    await page.setViewport({ width: w, height: h });
+    await page.goto(base + route, { waitUntil: 'load' });
+    const fit = await page.evaluate((vh) => {
+      const hero = document.querySelector('[data-hero]');
+      if (!hero) return [];
+      const problems = [];
+      const hr = hero.getBoundingClientRect();
+      if (hr.bottom > vh + 1) problems.push(`hero bottom at ${Math.round(hr.bottom)}px overruns the ${vh}px viewport`);
+      const card = hero.querySelector('[data-lead-card]');
+      if (card) {
+        const cr = card.getBoundingClientRect();
+        if (cr.bottom > vh + 1) problems.push(`lead card bottom at ${Math.round(cr.bottom)}px is below the ${vh}px viewport`);
+      }
+      return problems;
+    }, h);
+    for (const problem of fit) failures.push(`${route} @${w}x${h}: ${problem}`);
   }
 
   // Sticky CTA at 390: hidden over the hero, visible after it, hidden over a form.

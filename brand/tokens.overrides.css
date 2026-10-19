@@ -1,0 +1,26 @@
+/* Token overrides applied after design/tokens.css (which is read-only after Gate A).
+   scripts/sync-tokens.mjs reads this file second, so a value here wins. Every
+   entry is a post-Gate-A decision logged in DESIGN-DEBT.md with its ADR.
+   Same format as design/tokens.css: one :root block, one token per line. */
+:root {
+  /* ADR-005: dark header, 88px desktop with a 56px logo (the RC lockup is wide
+     and low; at 40px the wordmark was unreadable). Shrinks on scroll. */
+  --header-height-mobile: 72px;
+  --header-height-mobile-shrunk: 60px;
+  --header-height-desktop: 88px;
+  --header-height-desktop-shrunk: 72px;
+  --header-logo-mobile: 44px;
+  --header-logo-desktop: 56px;
+  --header-logo-shrunk: 44px;
+
+  /* ADR-005: the hero is contained to the first viewport on desktop. Its
+     height is the viewport minus the header, clamped so a short window never
+     crushes the card and a tall monitor never leaves a dark void. */
+  --hero-min: 640px;
+  --hero-max: 820px;
+  --hero-py-desktop: 40px;
+  --hero-py-mobile: 56px;
+
+  /* ADR-005: lead card quiz panes. */
+  --quiz-bar-height: 3px;
+}

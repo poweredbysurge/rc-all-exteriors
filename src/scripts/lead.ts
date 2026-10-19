@@ -1,11 +1,15 @@
-// Lead card behavior (master prompt section 10).
+// Lead card behavior (master prompt section 10, ADR-005).
 //
+//  - step 1 is two panes: reason (one tap advances) then contact; the contact
+//    pane's submit is the step 1 POST that captures the lead
+//  - step 2 is one question per pane, Next until the last, then Finish; Skip
+//    is always visible and the lead captured in step 1 can never be lost
 //  - validation on blur and on submit, inline errors, first invalid field focused
-//  - honeypot filled, or a submit inside 3 seconds: fake success, nothing sent
+//  - honeypot filled, or a submit inside 3 seconds of first render: fake
+//    success, nothing sent
 //  - POST /api/lead/; on 2xx the card moves to step 2 and GA4 generate_lead fires
 //  - on failure the payload is queued in localStorage and replayed on the next
 //    page view, and the visitor sees retry copy with the phone number
-//  - step 2 is optional and can never lose the lead captured in step 1
 import { dequeue, enqueue, getAttribution, leadKey, postLead, track } from './attribution';
 
 const MIN_MS = 3000;
@@ -76,6 +80,70 @@ function setBusy(button: HTMLButtonElement, busy: boolean): void {
   }
 }
 
+// Pages a form's [data-pane] groups one at a time: back link, "n of N"
+// counter, progress bar, focus into the pane. Returns null for a form with
+// fewer than two panes, which then renders as one card.
+interface Pager {
+  index: () => number;
+  isLast: () => boolean;
+  next: () => void;
+  back: () => void;
+  reset: () => void;
+}
+function initPanes(form: HTMLFormElement, onChange?: (index: number) => void): Pager | null {
+  const panes = [...form.querySelectorAll<HTMLElement>('[data-pane]')];
+  if (panes.length < 2) return null;
+  const backBtn = form.querySelector<HTMLButtonElement>('[data-action="back"]');
+  const count = form.querySelector<HTMLElement>('[data-quiz-count]');
+  const sub = form.querySelector<HTMLElement>('[data-quiz-sub]');
+  const bar = form.querySelector<HTMLElement>('[data-quiz-bar] i');
+  let idx = 0;
+
+  const render = (moveFocus: boolean) => {
+    panes.forEach((pane, i) => (pane.hidden = i !== idx));
+    if (count) count.textContent = `${idx + 1} of ${panes.length}`;
+    if (sub) sub.hidden = idx > 0;
+    if (bar) bar.style.width = `${Math.round(((idx + 1) / panes.length) * 100)}%`;
+    if (backBtn) backBtn.hidden = idx === 0;
+    onChange?.(idx);
+    if (moveFocus) {
+      const target =
+        panes[idx].querySelector<HTMLElement>('[data-pane-title]') ??
+        panes[idx].querySelector<HTMLElement>('input:not([type="hidden"]), select, textarea');
+      target?.focus({ preventScroll: true });
+    }
+  };
+
+  backBtn?.addEventListener('click', () => {
+    if (idx > 0) {
+      idx -= 1;
+      render(true);
+    }
+  });
+  render(false);
+
+  return {
+    index: () => idx,
+    isLast: () => idx === panes.length - 1,
+    next: () => {
+      if (idx < panes.length - 1) {
+        idx += 1;
+        render(true);
+      }
+    },
+    back: () => {
+      if (idx > 0) {
+        idx -= 1;
+        render(true);
+      }
+    },
+    reset: () => {
+      idx = 0;
+      render(false);
+    },
+  };
+}
+
 function initCard(card: HTMLElement): void {
   const step1 = card.querySelector<HTMLFormElement>('form[data-step="1"]');
   const step2 = card.querySelector<HTMLFormElement>('form[data-step="2"]');
@@ -90,13 +158,16 @@ function initCard(card: HTMLElement): void {
   const startedAt = Date.now();
   let captured: Values = {};
 
+  const keepInView = () => {
+    const top = card.getBoundingClientRect().top;
+    if (top < 80) card.scrollIntoView({ block: 'start', behavior: 'auto' });
+  };
+
   const show = (el: HTMLElement) => {
     for (const pane of card.querySelectorAll<HTMLElement>('[data-step]')) pane.hidden = pane !== el;
     const heading = el.querySelector<HTMLElement>('h2[tabindex="-1"]');
     heading?.focus({ preventScroll: true });
-    // Keep the card in view when it changes height on a phone.
-    const top = card.getBoundingClientRect().top;
-    if (top < 80) card.scrollIntoView({ block: 'start', behavior: 'auto' });
+    keepInView();
   };
 
   const showAlert = (html: string | null) => {
@@ -113,8 +184,19 @@ function initCard(card: HTMLElement): void {
     attribution: getAttribution(),
   });
 
+  // Step 1 panes: reason, then contact. A tap on a reason advances.
+  const pager1 = initPanes(step1, keepInView);
+  const reasonRadios = [...step1.querySelectorAll<HTMLInputElement>('input[name="reason"]')];
+  for (const radio of reasonRadios) {
+    radio.addEventListener('change', () => {
+      if (!pager1 || pager1.index() !== 0) return;
+      // Let the selected state paint before the pane slides.
+      window.setTimeout(() => pager1.next(), 120);
+    });
+  }
+
   const fields = [...step1.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[name]')].filter(
-    (f) => f.name in validators,
+    (f) => f.name in validators && f.name !== 'reason',
   );
   for (const field of fields) {
     field.addEventListener('blur', () => validateField(field));
@@ -127,6 +209,22 @@ function initCard(card: HTMLElement): void {
     event.preventDefault();
     showAlert(null);
 
+    const data = new FormData(step1);
+    const get = (name: string) => String(data.get(name) ?? '').trim();
+
+    // Enter on pane 1 with nothing chosen: stay. With a choice: go to contact.
+    if (pager1 && pager1.index() === 0) {
+      if (get('reason')) pager1.next();
+      return;
+    }
+
+    const reasonError = validators.reason(get('reason'));
+    if (reasonError) {
+      pager1?.reset();
+      showAlert(`Choose what's going on first. Or call or text us at <a href="${TEL}" class="font-bold whitespace-nowrap">${PHONE}</a>.`);
+      return;
+    }
+
     const invalid = fields.filter((field) => !validateField(field));
     if (invalid.length) {
       invalid[0].focus();
@@ -135,10 +233,8 @@ function initCard(card: HTMLElement): void {
       return;
     }
 
-    const data = new FormData(step1);
-    const get = (name: string) => String(data.get(name) ?? '').trim();
-    const reasonSelect = step1.querySelector<HTMLSelectElement>('select[name="reason"]');
-    const reasonLabel = reasonSelect?.selectedOptions[0]?.dataset.label ?? '';
+    const reasonRadio = step1.querySelector<HTMLInputElement>('input[name="reason"]:checked');
+    const reasonLabel = reasonRadio?.dataset.label ?? '';
     const notes = [card.dataset.variant === 'contact' ? `Needs: ${reasonLabel}` : '', get('notes')].filter(Boolean).join('\n');
 
     captured = {
@@ -189,6 +285,13 @@ function initCard(card: HTMLElement): void {
   });
 
   if (step2) {
+    const submit = step2.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const label = submit.querySelector<HTMLElement>('[data-label]')!;
+    const pager2 = initPanes(step2, (i) => {
+      const panes = step2.querySelectorAll('[data-pane]').length;
+      label.textContent = i === panes - 1 ? (submit.dataset.finishLabel ?? 'Finish') : (submit.dataset.nextLabel ?? 'Next');
+    });
+
     const finish = async (send: boolean) => {
       if (send) {
         const data = new FormData(step2);
@@ -202,15 +305,14 @@ function initCard(card: HTMLElement): void {
         };
         if (Object.keys(extra).length) {
           const payload = { ...captured, ...extra, ...base(), step: 2 };
-          const button = step2.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-          setBusy(button, true);
+          setBusy(submit, true);
           try {
             await postLead(payload);
             track('lead_qualified', { urgency: get('urgency') });
           } catch {
             enqueue(payload);
           } finally {
-            setBusy(button, false);
+            setBusy(submit, false);
           }
         }
       }
@@ -218,8 +320,14 @@ function initCard(card: HTMLElement): void {
     };
     step2.addEventListener('submit', (event) => {
       event.preventDefault();
+      // Next until the last pane; nothing is sent until Finish.
+      if (pager2 && !pager2.isLast()) {
+        pager2.next();
+        return;
+      }
       void finish(true);
     });
+    // Skip sends nothing, as on HomeSource: step 2 posts only from Finish.
     step2.querySelector('[data-action="skip"]')?.addEventListener('click', () => void finish(false));
   }
 }

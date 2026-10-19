@@ -1,9 +1,13 @@
 ---
 // Photo hero with the lead card (home, service hubs, offer page, city pages).
 //
-// Desktop: copy left, lead card right (440px), vertically centered, 640px min.
-// Mobile: stacked. Never 100vh. The photo sits behind the headline as a 3:4
-// crop and fades into the dark surface, where the card takes over.
+// Desktop: copy left, lead card right (440px), vertically centered, and the
+// whole hero is contained to the first viewport: height is the viewport minus
+// the header, clamped between --hero-min and --hero-max (ADR-005). Never a
+// bare 100vh. The trust row renders as its own light strip under the hero
+// (TrustStrip), so the hero carries only headline, lede, CTAs and the card.
+// Mobile: stacked. The photo sits behind the headline as a 3:4 crop and fades
+// into the dark surface, where the card takes over.
 //
 // The hero paints immediately: no reveal, and the image is the preloaded LCP
 // element from LCP_MAP (the same sources Base.astro preloads).
@@ -11,7 +15,7 @@ import Breadcrumbs from './Breadcrumbs.astro';
 import Cta from './Cta.astro';
 import LeadCard from './LeadCard.astro';
 import Rich from './Rich.astro';
-import TrustRow from './TrustRow.astro';
+import TrustStrip from './TrustStrip.astro';
 import { LCP_MAP } from '@/data/photos';
 import type { CtaBlock, Inline } from '@/lib/copy';
 import { HERO_DESKTOP_MEDIA, HERO_MOBILE_MEDIA, heroSources } from '@/lib/images';
@@ -30,7 +34,7 @@ interface Props {
   formId?: string;
   /** Offer page: on phones the card sits straight under the lede, CTAs and trust row below it. */
   cardFirstOnMobile?: boolean;
-  /** Minimum desktop height in px (640 default, 720 on the offer page). */
+  /** Minimum desktop height in px (the --hero-min token by default, 720 on the offer page). */
   minHeight?: number;
 }
 const {
@@ -43,7 +47,7 @@ const {
   display = false,
   formId = 'hero',
   cardFirstOnMobile = false,
-  minHeight = 640,
+  minHeight,
 } = Astro.props;
 
 const key = LCP_MAP[path];
@@ -55,7 +59,7 @@ const { photo, mobile, desktop } = await heroSources(key);
 const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? 'tel' : (cta.href ?? 'lead-card'));
 ---
 
-<section data-hero class="hero on-dark section-y gutter relative isolate overflow-hidden bg-surface-contrast">
+<section data-hero class="hero on-dark gutter relative isolate overflow-hidden bg-surface-contrast" style={minHeight ? `--hero-min:${minHeight}px` : undefined}>
   <div class="hero-media absolute inset-x-0 top-0 -z-10 lg:inset-0">
     <picture>
       <source media={HERO_MOBILE_MEDIA} type="image/avif" srcset={mobile.avif} sizes="100vw" width={mobile.width} height={mobile.height} />
@@ -78,10 +82,10 @@ const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? '
   </div>
 
   <div class="container-site">
-    <div class="hero-grid grid grid-cols-1 gap-y-6 lg:grid-cols-[minmax(0,1fr)_440px] lg:content-center lg:gap-x-16" style={`--hero-min:${minHeight}px`}>
+    <div class="hero-grid grid grid-cols-1 gap-y-6 lg:grid-cols-[minmax(0,1fr)_440px] lg:content-center lg:gap-x-16">
       <div class="flex max-w-[680px] flex-col items-center gap-4 justify-self-center text-center lg:col-start-1 lg:row-start-1 lg:items-start lg:gap-6 lg:justify-self-start lg:self-end lg:text-left">
         <Breadcrumbs path={path} onDark />
-        <h1 class:list={['heading text-fg-inverse', display ? 'text-display' : 'text-h1']} set:html={decorate(sentenceCase(h1), { linkPhone: false })} />
+        <h1 class:list={['heading text-fg-inverse', display ? 'text-hero-display' : 'text-h1']} set:html={decorate(sentenceCase(h1), { linkPhone: false })} />
         <p class="rich max-w-[600px] text-body text-fg-inverse-muted lg:text-body-lg">
           <Rich inline={lede} linkPhone={false} />
         </p>
@@ -92,7 +96,6 @@ const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? '
           {primary && <Cta to={target(primary)} variant="primary">{primary.label}</Cta>}
           {secondary && <Cta to={target(secondary)} variant="secondary-on-dark">{secondary.label}</Cta>}
         </div>
-        {trust.length > 0 && <TrustRow items={trust} />}
       </div>
 
       <div class:list={['mt-2 w-full max-w-[560px] justify-self-center lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:max-w-none lg:self-center', cardFirstOnMobile && 'order-2 lg:order-none']}>
@@ -101,6 +104,7 @@ const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? '
     </div>
   </div>
 </section>
+{trust.length > 0 && <TrustStrip items={trust} />}
 
 <style is:global>
   /* Phones: a 3:4 photo behind the headline, 60% scrim to the 40% line (Gate A
@@ -117,6 +121,15 @@ const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? '
       var(--color-surface-contrast) 100%
     );
   }
+  .hero {
+    padding-block: var(--rc-hero-py-mobile) var(--rc-section-py-mobile);
+  }
+  /* The homepage display size, one step under the token so a 10-word H1 holds
+     three lines at 1440 and the hero still fits the viewport (ADR-005). */
+  .text-hero-display {
+    font-size: clamp(2.5rem, 1.7571rem + 2.2vw, 3.75rem);
+    line-height: 1.04;
+  }
   @media (min-width: 64rem) {
     .hero-media {
       aspect-ratio: auto;
@@ -125,8 +138,12 @@ const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? '
     .hero-scrim {
       background: var(--rc-hero-scrim-desktop);
     }
-    .hero-grid {
-      min-height: var(--hero-min);
+    .hero {
+      display: grid;
+      align-content: center;
+      box-sizing: border-box;
+      min-height: clamp(var(--hero-min, var(--rc-hero-min)), calc(100svh - var(--rc-header-height-desktop)), var(--rc-hero-max));
+      padding-block: var(--rc-hero-py-desktop);
     }
   }
 </style>

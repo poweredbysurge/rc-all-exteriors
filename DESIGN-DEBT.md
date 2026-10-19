@@ -17,6 +17,16 @@ Seeded from `design/DESIGN-DEBT.md` (Gate A export, 2026-10-07). `design/` is re
 | 9 | Hero photo has the RC mark baked in | **Not fixed.** The unwatermarked `colonial-home-roof-replacement-gray-shingle-01.jpg` is not in the repo. See Blocked. | home |
 | 10 | Section padding 100px / 128px | From `design/tokens.css` through the generated theme (`section-y`, `section-y-quiet`). | all |
 
+## Live review, 2026-10-19 (ADR-005). Fix upstream in the next Mode A export
+
+- **Hero is contained to the first viewport on desktop.** Height is the viewport minus the header, clamped 640 to 820px, 40px padding, content centered. The artboards draw the hero at 640px min inside 128px section padding, which overran 900px windows. Artboards: home-1440 and every *-1440 hero.
+- **Trust row is a light strip under the hero**, not a row inside it. Chip plus three items on desktop, chip plus two on phones. Artboards: every hero.
+- **Homepage display H1 is one step under the display token** (max 60px, was 72px). Artboard: home-1440.
+- **Lead card step 1 is two panes** (reason as option rows, then contact) with a counter, progress bar and Back; step 2 is one question per pane. The artboards draw step 1 as one tall form. Artboards: lead-card-step1, lead-card-step2, home-1440 card.
+- **Header is dark** (`surface-contrast`), 88px / 72px with the white lockup at 56px / 44px, inverse CTA; the mobile panel is dark. The artboards draw a white 80px header with the colour lockup at 40px. Artboards: header-1440, header-390, nav-open-390.
+- **Homepage section order**: services second, image-led cards on a dark band; problem opener third; financing on a dark band with a photo. Artboards: home-1440, home-390.
+- **New tokens** in `brand/tokens.overrides.css` (header heights, logo heights, hero min and max, quiz bar). `design/tokens.css` is unchanged; the generated theme reads both.
+
 ## Deviations from the artboards
 
 - **Mobile hero photo is a 3:4 crop behind the headline, not a cover image behind the whole hero.** ADR-004. Fix upstream by drawing the mobile hero that way. Artboards: every *-390 hero.

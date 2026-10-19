@@ -1,5 +1,5 @@
 # Surge Master Website Prompt
-**Version 1.2 - October 2026**
+**Version 1.3 - October 2026**
 **Owner:** Sam Delgado / Mario Goncalves
 **Built from:** HomeSource Roofing (static, 170 pages), Sunrise Landscape (Next.js, 60+ pages), Señor Tequilas (Astro, Claude Design port)
 
@@ -133,7 +133,8 @@ City pages and service pages run 900 to 2,000 words. They have to stay readable 
 **Density breakers (required on any page over 800 words):**
 - Every 300 to 400 words, insert one non-paragraph element: a photo with caption, a stat strip, a pullquote from a real review, a checklist card, a comparison table, a mid-page CTA band, or an FAQ cluster.
 - No more than three consecutive paragraphs without a sub-heading, list or visual.
-- Alternate section backgrounds with intent (white, tint, dark, white). Never two identical bands touching. Never more than one dark band in a row.
+- Alternate section backgrounds with intent (white, tint, dark, white). Never two identical bands touching. Never more than one dark band in a row. Never more than three consecutive light bands either: the header, hero and footer are dark, and at least one dark band sits in the top half of the homepage (the services grid or the stat strip) and one in the bottom half (financing or a mid-page CTA band). A page that runs light from the hero to the footer CTA reads as a wall of text whatever the word count.
+- Every homepage section except the FAQ carries a photo or a non-text visual (a real job photo, the map, review cards, process thumbnails). A two-column section that is text on both sides is allowed once per page. If a section has no honest visual, it merges into one that does.
 - Alternate section layout: full-width prose, then split (heading left / content right or image left / copy right), then full-width. Never five identical left-aligned blocks stacked.
 - Content column max-width 720 to 800px for prose. Full-width 1200 to 1280px container for grids, galleries and CTAs.
 - Tables: responsive wrapper with `overflow-x: auto` and a scroll hint, `min-width` on the table, sticky first column if more than 3 columns. Tables are styled globally, not per page.
@@ -197,9 +198,10 @@ Chips are where AI-generated UI shows itself first. These rules exist to stop th
 
 **Navigation**
 - Desktop: logo left, 5 to 7 items, phone number and primary CTA right. Dropdowns open on hover and on click, close on escape and outside click.
+- The header is on the brand's dark surface by default, so the header, the hero and the footer bracket the page in one surface and the white or reversed lockup reads. A light header is the exception and needs a reason in the ADR (a brand whose lockup has no reversed version, for example). The CTA on a dark header is the inverse button (white fill, dark text); the accent button disappears on a dark surface.
 - Top bar above the nav (optional): trust line (Veteran Owned · Family Owned · Serving X, Y, Z) and phone. Collapses to a ticker or hides on mobile.
-- Header is sticky, shrinks on scroll (reduce padding, not the logo below 32px height).
-- Mobile: logo, phone icon, hamburger. Panel slides from the right, full nav, phone, CTA, social.
+- Header height 88px on desktop and 72px on phones, shrinking on scroll to 72 / 60. Logo height 56px desktop, 44px mobile, never below 44px at any state: a wide lockup at 40px is unreadable. Mark-only at the shrunk state is allowed if the wordmark would fall under 44px. Tokens: `--header-height-desktop`, `--header-height-mobile`, `--header-logo-desktop`, `--header-logo-mobile`, `--header-logo-shrunk`.
+- Mobile: logo, phone icon, hamburger. Panel slides from the right on the same dark surface, full nav, phone, CTA, social.
 - Header never overflows its container at any width in the matrix. Measure, do not assume.
 
 **Footer**
@@ -289,8 +291,9 @@ Replace each with the specific, the real and the quiet: real photos, real review
 The hero is the page's job. It gets the most design time and the strictest rules.
 
 **Hero layout**
-- Desktop: two-column grid, copy left (1fr) and lead card right (fixed 420 to 460px), vertically centered, min-height 640 to 720px, never `100vh`.
-- Mobile: stacked. Eyebrow, H1, lede, primary CTA button, trust row, then the lead card. Below 480px the lead card may be replaced by a Google reviews card plus the sticky bottom CTA (Sunrise pattern) when the form has 5 or more fields in step 1; test both against conversion data when available.
+- Desktop: two-column grid, copy left (1fr) and lead card right (fixed 420 to 460px), vertically centered. The hero is contained to the first viewport: its height is the viewport minus the header, clamped between 640 and 820px (`--hero-min`, `--hero-max`), never a bare `100vh`. The verification gate checks that at 1440 by 900 and 1920 by 1080 the hero's bottom edge is at or above the viewport's and the lead card is fully inside it. The homepage display H1 is one step under the display token (max 60px) so a 10-word headline holds three lines at 1440.
+- The trust row is not inside the hero. It renders as its own thin light strip directly under it (rating chip plus three items on desktop, chip plus two on phones), so the hero carries only the H1, lede, two CTAs and the card.
+- Mobile: stacked. Eyebrow, H1, lede, primary CTA button, then the lead card, then the trust strip. Below 480px the lead card may be replaced by a Google reviews card plus the sticky bottom CTA (Sunrise pattern) when the form has 5 or more fields in step 1; test both against conversion data when available.
 - Background: a real photo of the client's crew or work, WebP, with a scrim (brand dark at 45 to 60 percent). Optional desktop-only video loop (`preload="none"`, `poster` set to the hero WebP, muted, playsinline, hidden on mobile). Never stock photography of a smiling model in a hard hat.
 - Eyebrow: trust line (Veteran Owned · Family Owned · Since 1986). Optional on mobile.
 - H1: service plus geography, 6 to 10 words, one highlighted word in accent if the brand allows. "Your Trusted Washington County Roofers". Not a question, not a slogan.
@@ -298,18 +301,20 @@ The hero is the page's job. It gets the most design time and the strictest rules
 - Primary CTA: scrolls to or focuses the lead form on mobile, or is the form itself on desktop. Secondary CTA is click-to-call.
 - Trust row under the lede: live Google rating (pulled via same-origin proxy, never hardcoded), licensed and insured, years in business, one more that is true. 3 to 4 items, divided by thin rules.
 
-**Lead card, step 1 (fast, 15 seconds)**
-- Heading at h3: "Book your free inspection" or the service equivalent. One line of copy under it: "Schedule online in under a minute. We'll do the rest."
-- Fields, in order: Full name (required) · Phone (tel, required) · Email (email, required) · Zip code (postal-code, required, 5-digit validation) · "What do you need?" select (required, closed enum, see below) · SMS consent checkbox (unchecked by default, label text per the A2P-compliant template below) · Honeypot field (visually hidden, `tabindex="-1"`, `autocomplete="off"`).
-- Submit button: full width, primary style, verb plus outcome ("Get My Free Inspection"). Button goes to a loading state on submit.
-- Phone and email side by side on desktop, stacked on mobile.
+**Lead card, step 1 (two panes, 30 seconds)**
+- Heading at h3: "Book your free inspection" or the service equivalent. One line of copy under it: "Two quick steps. We do the rest." Then the pane chrome: a "1 of 2" counter, a 3px progress bar in accent, and a Back link from pane 2.
+- Pane 1 is the one question that takes a tap: "What's going on?" as full-width option rows (radio inputs styled as rows, 52px tall, arrow on the right), one per reason in the closed enum below. A tap selects and advances; nothing is sent. Under the options: "About 30 seconds, no obligation" and the "Or call or text" line. This is the Sunrise first question on the HomeSource contract.
+- Pane 2 is contact: Full name and Zip code (postal-code, 5-digit validation) in one row · Phone (tel) and Email in one row, all required · SMS consent checkbox (unchecked by default, label text per the A2P-compliant template below) · Honeypot field (visually hidden, `tabindex="-1"`, `autocomplete="off"`). Submitting pane 2 is the step 1 POST.
+- Submit button: full width, primary style, verb plus outcome ("Book a Free Roof Inspection"). Button goes to a loading state on submit.
+- Step 1 is 560 to 600px tall on either pane at 440px wide, which is what lets the hero fit the viewport. A single-pane card with every field showing runs 900px and does not.
+- Panes slide 220ms (off under reduced motion), focus moves to the pane title or first field, Enter on pane 1 with a choice advances, and without JS every pane shows at once as one ordinary form.
 - The reason select is a closed enum that maps to the Command Center contract. Roofing reference: `leaking`, `storm_damage`, `old_roof`, `repair`, `buying_selling`, `other_trades`, `something_else`. Adapt labels and keys per trade, keep keys snake_case, keep `something_else` last.
 - On success, the card transitions in place to step 2. The lead is already captured. Nothing in step 2 can lose it.
 
-**Lead card, step 2 (optional qualification)**
-- One line: "A few more details help us prep for your visit. All optional."
-- Panes: Street address, city, state (select, limited to served states) · Property or asset age (radio row, e.g. roof age: under 10, 10 to 20, over 20, not sure) · Urgency (radio row: `right_away`, `within_month`, `1_3_months`, `planning`) · Budget band (optional, trade-dependent) · How did you hear about us (select).
-- "Skip" link always visible. Submit button "Finish".
+**Lead card, step 2 (optional qualification, one question per pane)**
+- One line: "A few more details help us prep for your visit. All optional." Same pane chrome: counter, progress bar, Back.
+- Panes, one question each: Street address · Property or asset age (radio chips, e.g. roof age: under 10, 10 to 20, over 20, not sure) · Urgency (radio chips: `right_away`, `within_month`, `1_3_months`, `planning`) · Budget band (optional, trade-dependent) · How did you hear about us, or best time to reach you (select).
+- The button reads "Next" until the last pane, then "Finish". Nothing is posted until Finish. "Skip" is always visible and posts nothing.
 - Then a success state in the card: confirmation copy, what happens next, the phone number, and a GA4 `generate_lead` event (step 1 fires the conversion; step 2 fires `lead_qualified`).
 
 **SMS consent label (TCPA / A2P 10DLC compliant, do not shorten):**
@@ -500,7 +505,7 @@ Measured on the Vercel production URL with Lighthouse mobile (Moto G Power profi
 
 ## 18. Page templates (build all that apply)
 
-1. **Homepage:** hero with lead card → trust strip → services grid (4 to 8) → why us / differentiators (split layout) → featured work or before-after → reviews wall → service area (map or city chips) → process (how it works, no numbered circles) → FAQ → final CTA band → footer.
+1. **Homepage:** hero with lead card → trust strip → services grid, image-led, on the first dark band (4 to 8 cards, each with a real job photo at 16:10 above the title; icon-only cards are for hubs, not the homepage) → problem opener, if the copy has one (the page's one text-only two-column section) → why us / differentiators (split layout with a photo and the stat strip) → reviews wall → process (how it works, no numbered circles) → financing or offer band on the second dark band, with a photo → service area (map or city chips) → FAQ → final CTA band → footer. The services grid is always second: a visitor should know what the company does inside one scroll. Why us never precedes it.
 2. **Service hub** (`/roof-replacement/`): hero with lead card → what is included → materials or options (table or cards) → pricing guidance if approved → process → gallery → reviews filtered to that service → FAQ → related services → city links → CTA.
 3. **City by service** (`/frederick-md-roofing/`): skeleton in section 15.
 4. **Service areas hub:** map, county and city grid with chips linking to city pages, coverage copy.
@@ -603,11 +608,13 @@ Automate as `scripts/check-integrity` and run it before every deploy. It exits n
 **Layout**
 - [ ] No horizontal overflow at 320 (graceful), 360, 375, 390, 768, 900, 1024, 1440, 1744, 1920
 - [ ] Header fits at every width above; hamburger below 900
+- [ ] Hero fits the first viewport at 1440 by 900 and 1920 by 1080: hero bottom at or above the viewport bottom, lead card fully inside it, on every page with a photo hero
 - [ ] Sticky CTA appears after hero and hides when the form is in view
 - [ ] Screenshot diff of homepage, one service, one city page at 390 and 1440 against Gate A
 
 **Lead form**
-- [ ] Step 1 submits to `/api/lead` and produces the internal email in a test inbox
+- [ ] Pane 1 tap advances without a request; pane 2 submits to `/api/lead` and produces the internal email in a test inbox
+- [ ] Step 2 button reads Next until the last pane, then Finish; Skip posts nothing
 - [ ] Honeypot filled produces fake success and no email
 - [ ] Submit under 3 seconds is rejected silently
 - [ ] Consent text matches the template and version string is stored
@@ -631,6 +638,7 @@ Every client repo carries:
 - `STANDARDS.md`: every change that the next client would also need, with a `candidate` / `promoted` status. Candidates graduate into the next version of this prompt.
 - `DESIGN-DEBT.md`: everything the port fixed in code that should be fixed upstream in Claude Design
 - `design/` with the Gate A export, `LINK-MAP.json`, `GATE-A.md`
+- `brand/tokens.overrides.css`: every token changed after Gate A, in the same format as `design/tokens.css`. `sync-tokens` reads it second so its values win and `design/` stays read-only. Each entry names its ADR.
 - `briefs/` per page for anything content-heavy
 - `scripts/check-integrity` and `scripts/optimize-images`
 - `deploy/redirects.json` for migrations
@@ -662,6 +670,8 @@ CLIENT DECISIONS ALREADY MADE: [Anything that overrides a default in this prompt
 ---
 
 ## Changelog
+
+- **1.3 (2026-10-19):** From the RC All Exteriors live review against the old rcallexteriors.com. Hero contained to the first viewport (section 10: viewport minus header, clamped 640 to 820px, gate check at 1440 by 900 and 1920 by 1080) with the trust row moved to its own strip under it. Lead card step 1 split into two panes, a one-tap reason question then contact (section 10), and step 2 shown one question per pane; the contract is unchanged. Dark header by default with header and logo size tokens (section 7: 88px / 56px logo, never below 44px; the old "not below 32px" allowed an unreadable lockup). Surface rhythm rules (section 5: no more than three consecutive light bands, a dark band in each half of the homepage, every homepage section except FAQ carries a visual, one text-only two-column section per page). Homepage order fixed with the services grid second and image-led (section 18). Post-Gate-A token changes live in `brand/tokens.overrides.css`, read by `sync-tokens` after `design/tokens.css`, so `design/` stays read-only (section 22).
 
 - **1.2 (2026-10-07):** Mobile section padding raised to 100px top and bottom (was 48 to 64px), desktop to 128px, quiet bands 64px. From the RC All Exteriors Gate A review: 48px looked dense on the 390 artboards. Tokens named in section 5.
 

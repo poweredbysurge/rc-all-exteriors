@@ -28,6 +28,7 @@ Everything here needs the humanizer pass and Sam's sign-off before launch. The a
 
 | Where | Text | Why it exists |
 |---|---|---|
+| Lead card pane chrome (ADR-005) | "Two quick steps. We do the rest." (replaces "Schedule online in under a minute. We'll do the rest.") / pane 2 title "How do we reach you?" / "About 30 seconds, no obligation" / "Back", "Next", "Finish", "Skip", "1 of 2" | Step 1 became two panes; the sub line names the count honestly. |
 | Lead card step 2 | Best time options: Morning, Afternoon, Evening, Any time | The copy names the field, not its choices. |
 | Form validation | "Enter your name so we know who to ask for." / "Enter a 10-digit phone number so we can call you back." / "Enter an email address, like name@example.com." / "Enter a 5-digit zip code." / "Choose the option that fits best." / "Check the [field] field above. Or call or text us at (703) 677-1976." | Inline errors. The phone one is from the lead-card-error artboard. |
 | Form retry | "We could not send that just now. Call or text us at (703) 677-1976, or press the button to try again." | Network failure state, not drawn. |

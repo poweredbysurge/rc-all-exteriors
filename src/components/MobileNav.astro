@@ -12,17 +12,17 @@ const rest = primaryNav.filter((item) => !item.hasMenu);
 
 <div
   id="mobile-nav"
-  class="mobile-nav fixed inset-0 z-50 flex flex-col bg-surface nav:hidden"
+  class="mobile-nav on-dark fixed inset-0 z-50 flex flex-col bg-surface-contrast text-fg-inverse nav:hidden"
   role="dialog"
   aria-modal="true"
   aria-label="Menu"
   hidden
 >
-  <div class="flex h-16 shrink-0 items-center justify-between border-b border-border-subtle px-5">
-    <img src="/logos/logo-full-color.svg" alt="RC All Exteriors" width="85" height="40" class="block h-10 w-auto" />
+  <div class="flex h-[var(--rc-header-height-mobile)] shrink-0 items-center justify-between border-b border-fg-inverse/10 px-5">
+    <img src="/logos/logo-white.svg" alt="RC All Exteriors" width="94" height="44" class="block h-11 w-auto" />
     <button
       type="button"
-      class="flex size-11 cursor-pointer items-center justify-center rounded-md border border-border text-fg"
+      class="flex size-11 cursor-pointer items-center justify-center rounded-md border border-fg-inverse/30 text-fg-inverse"
       aria-label="Close menu"
       data-action="close"
     >
@@ -34,23 +34,23 @@ const rest = primaryNav.filter((item) => !item.hasMenu);
     <nav aria-label="Mobile">
       <button
         type="button"
-        class="heading flex min-h-12 w-full cursor-pointer items-center justify-between border-b border-border-subtle px-1 text-left text-h4 text-fg"
+        class="heading flex min-h-12 w-full cursor-pointer items-center justify-between border-b border-fg-inverse/10 px-1 text-left text-h4 text-fg-inverse"
         aria-expanded="true"
         aria-controls="mobile-nav-services"
         data-action="services"
       >
         Services
-        <Icon name="chevron-down" size={24} class="text-accent" />
+        <Icon name="chevron-down" size={24} class="text-fg-inverse" />
       </button>
-      <div id="mobile-nav-services" class="flex flex-col border-b border-border-subtle py-1">
+      <div id="mobile-nav-services" class="flex flex-col border-b border-fg-inverse/10 py-1">
         {
           mobileNavServices.map((s) => (
-            <a href={s.href} class="flex min-h-11 items-center px-4 text-body-sm font-semibold text-fg">
+            <a href={s.href} class="flex min-h-11 items-center px-4 text-body-sm font-semibold text-fg-inverse-muted">
               {s.label}
             </a>
           ))
         }
-        <a href="/services/" class="flex min-h-11 items-center px-4 text-body-sm font-semibold text-accent">
+        <a href="/services/" class="flex min-h-11 items-center px-4 text-body-sm font-semibold text-fg-inverse">
           All services
         </a>
       </div>
@@ -58,7 +58,7 @@ const rest = primaryNav.filter((item) => !item.hasMenu);
         [...rest, { href: '/contact/', label: 'Contact' }].map((item) => (
           <a
             href={item.href}
-            class="heading flex min-h-12 items-center border-b border-border-subtle px-1 text-h4 text-fg"
+            class="heading flex min-h-12 items-center border-b border-fg-inverse/10 px-1 text-h4 text-fg-inverse"
           >
             {item.label}
           </a>
@@ -67,11 +67,11 @@ const rest = primaryNav.filter((item) => !item.hasMenu);
     </nav>
 
     <div class="flex flex-col gap-3">
-      <a href={TEL} class="btn btn-secondary btn-block">Call or text {PHONE}</a>
-      <a href="/free-roof-inspection/" class="btn btn-primary btn-block">Book a Free Roof Inspection</a>
-      <div class="flex flex-wrap items-center justify-center gap-x-1.5 text-body-sm font-medium text-fg-muted">
+      <a href={TEL} class="btn btn-secondary-on-dark btn-block">Call or text {PHONE}</a>
+      <a href="/free-roof-inspection/" class="btn btn-inverse btn-block">Book a Free Roof Inspection</a>
+      <div class="flex flex-wrap items-center justify-center gap-x-1.5 text-body-sm font-medium text-fg-inverse-muted">
         <span>{business.hours.display} ·</span>
-        <a href={business.profiles.instagram} class="flex min-h-11 items-center text-accent" rel="noopener">
+        <a href={business.profiles.instagram} class="flex min-h-11 items-center text-fg-inverse underline underline-offset-4" rel="noopener">
           Instagram
         </a>
       </div>

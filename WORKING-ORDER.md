@@ -1,5 +1,30 @@
 # Working order: RC All Exteriors
 
+## 2026-10-19, session 3: live review round 1 (ADR-005)
+
+**Done**
+- Sam's review of the published preview against the old rcallexteriors.com. Five fixes, all promoted to MASTER-WEBSITE-PROMPT v1.3 (changelog at the bottom of that file) because every future build would have hit them.
+- Hero contained to the first viewport on desktop (`Hero.astro`, `clamp(640px, 100svh - header, 820px)`), display H1 one step down, trust row moved to `TrustStrip.astro` under the hero.
+- Lead card as quiz panes on the unchanged contract (`LeadCard.astro`, `src/scripts/lead.ts` `initPanes()`): pane 1 reason rows, pane 2 contact and consent (the step 1 POST), step 2 one question per pane with Next then Finish. Walked in headless Chrome against a mocked `/api/lead/`: tap advances, submit posts once, step 2 pages, Finish lands on success.
+- Dark header and mobile panel, 88px / 72px, white lockup 56px / 44px, inverse CTA. Heights and logo sizes are tokens.
+- Homepage: services second on a dark band with photo cards (`ServiceCard photo=`), problem opener third, financing on a dark band with a photo, surfaces alternate. `Eyebrow onDark`.
+- `brand/tokens.overrides.css` for post-Gate-A tokens; `sync-tokens` reads it after `design/tokens.css`.
+- `check-layout`: new hero-fit assertion at 1440 by 900 and 1920 by 1080; `CHROME_ARGS` env for `--no-sandbox`.
+- Docs: ADR-005, DESIGN-DEBT (live review block), STANDARDS 25 to 32, DRAFT-ADDITIONS (pane copy), CLAUDE.md rule 5, master prompt v1.3 (also copied to `workspace/templates/website-build/` and the Project doc).
+- Ricardo's launch questions are a Google Doc in the RC client Drive folder (sent 2026-10-19).
+
+**Verified on this build**
+- `npm run check`: passes (same 8 copy-owner length notes as before).
+- `npm run check:layout`: passes, 28 pages at 15 widths plus the hero-fit check. Run in the cloud container as `CHROME_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome CHROME_ARGS=--no-sandbox npm run check:layout`; on the Mac the default Chrome path works.
+- Lighthouse not re-run this session.
+
+**Still blocked** (unchanged from session 2, below): Vercel env vars and the real `LAUNCH` host, photo originals (hero still carries the baked-in RC mark), Ricardo's CONFIRM answers, legal approval.
+
+**Next**
+- Sam's next round of glaring issues on the live site; the imagery-vs-text pass on the inner pages using the sections he likes from the old site.
+- Push this commit from the Mac (the cloud session cannot push: the Claude GitHub App is not installed on `poweredbysurge`).
+
+
 ## 2026-10-07, session 2: Mode B build to the verification gate
 
 **Done**

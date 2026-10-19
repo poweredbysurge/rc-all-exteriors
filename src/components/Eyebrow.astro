@@ -1,12 +1,14 @@
 ---
 // The one uppercase element on the site: a 16px label with the roofline rule.
 interface Props {
+  /** On a dark band the label is white; accent blue on navy does not pass. */
+  onDark?: boolean;
   class?: string;
 }
-const { class: className } = Astro.props;
+const { onDark = false, class: className } = Astro.props;
 ---
 
-<div class:list={['flex items-center gap-2.5 text-accent', className]}>
+<div class:list={['flex items-center gap-2.5', onDark ? 'text-fg-inverse' : 'text-accent', className]}>
   <svg aria-hidden="true" width="24" height="10" viewBox="0 0 48 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" class="block shrink-0">
     <path d="M1 19 L24 3 L47 19"></path>
   </svg>

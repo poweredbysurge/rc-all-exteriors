@@ -6,7 +6,7 @@ Read `README.md`, then `MASTER-WEBSITE-PROMPT.md` in full, then `GATE-A.md`, `de
 2. **Copy comes from `copy/batch-*.md`, never from the design export.** The export is missing collapsed FAQ answers. FAQPage schema is generated from the same copy source as the visible accordion, so they cannot drift.
 3. **Every `[CONFIRM]` in the copy is a placeholder.** Render it with `data-confirm` in preview. `scripts/check-integrity` fails a production build on any remaining one. Never resolve one by guessing.
 4. **No street address in markup or schema.** `business.json` has `addressLocality` Woodbridge and `addressRegion` VA only. Schema uses `areaServed`.
-5. **Tokens come from `design/tokens.css`.** Tailwind config maps them. No arbitrary hex in components. Section padding `--section-py-mobile: 100px`, `--section-py-desktop: 128px`.
+5. **Tokens come from `design/tokens.css`, then `brand/tokens.overrides.css`** (post-Gate-A changes, each with an ADR). `scripts/sync-tokens.mjs` reads both; never edit `theme.generated.css` by hand. No arbitrary hex in components. Section padding `--section-py-mobile: 100px`, `--section-py-desktop: 128px`.
 6. **Fonts self-hosted.** Archivo variable (wdth axis, 700) and Manrope 400/500/600/700 as subsetted woff2 in `public/fonts`, metric-matched fallbacks measured on the rendered case. No Google Fonts request in production.
 7. **Images through the pipeline.** Originals in `src/assets/photos/`, Astro `<Image>` emits WebP/AVIF with srcset. Any JPG or PNG in the output except favicons and OG images fails the gate.
 8. **Lead form contract** per master prompt section 11 and `copy/SITEMAP.md` reconciliation. Field names are a contract with Command Center; do not rename.

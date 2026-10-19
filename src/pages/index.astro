@@ -45,6 +45,10 @@ const reviewSlots = blocksOf(reviews, 'review');
 const live = pickReviews((await getReviews()).reviews, reviewSlots.map((r) => r.hint));
 const areaParts = groupByH3(area.blocks.filter((b) => b.type !== 'h2' && b.type !== 'links' && b.type !== 'image'));
 const reviewsLink = first(reviews, 'links')!.links[0];
+
+// Homepage service cards are image-led (ADR-005). One real job photo per card,
+// in the copy's card order: replacement, repair, storm, windows/gutters/siding.
+const SERVICE_PHOTOS = ['twoStory', 'underlayment', 'colonial', 'mansard'] as const;
 ---
 
 <Base title={meta.title} description={meta.description} path={path} og="home" hasLeadCard confirmMeta={meta.confirmMeta} schema={[faqSchema(faqs(page))]}>
@@ -58,7 +62,28 @@ const reviewsLink = first(reviews, 'links')!.links[0];
     trust={first(hero, 'trust')!.items}
   />
 
-  <Section bg="surface" name="Problem opener">
+  <!-- Services sit directly under the hero (ADR-005): a visitor knows what we do
+       inside one scroll, on the page's first dark band after the trust strip. -->
+  <Section bg="contrast" name="Services">
+    <div class="flex flex-col gap-6 lg:gap-10">
+      <div class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left">
+        <Eyebrow onDark>Services</Eyebrow>
+        <h2 class="heading text-h2 text-fg-inverse"><Rich inline={first(services, 'h2')!.inline} /></h2>
+      </div>
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+        {
+          blocksOf(services, 'card').map((card, i) => (
+            <div class="reveal" style={`--reveal-i:${i}`}>
+              <ServiceCard title={card.title} text={card.inline} href={card.href!} photo={SERVICE_PHOTOS[i]} sizes="(min-width: 1024px) 300px, (min-width: 768px) 50vw, 100vw" />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Section>
+
+  <!-- The one text-only two-column section on the page. -->
+  <Section bg="surface" quiet name="Problem opener">
     <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
       <h2 class="heading text-h2 text-fg"><Rich inline={first(opener, 'h2')!.inline} /></h2>
       <BlockFlow blocks={blocksOf(opener, 'p')} class="[&>p]:text-fg" />
@@ -67,7 +92,7 @@ const reviewsLink = first(reviews, 'links')!.links[0];
 
   <Section bg="muted" name="Why us">
     <div class="grid grid-cols-1 items-start gap-7 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
-      <Figure photo="mansard" ratio={4 / 5} sizes="(min-width: 1024px) 500px, 100vw" showTown bleed class="reveal" />
+      <Figure photo="mansard" ratio={4 / 5} sizes="(min-width: 1024px) 500px, 100vw" showTown bleed class="reveal lg:sticky lg:top-[calc(var(--rc-header-height-desktop)+24px)]" />
       <div class="flex flex-col gap-7 lg:gap-10">
         <div class="flex flex-col gap-4">
           <Eyebrow>Why us</Eyebrow>
@@ -90,25 +115,7 @@ const reviewsLink = first(reviews, 'links')!.links[0];
     </div>
   </Section>
 
-  <Section bg="surface" name="Services">
-    <div class="flex flex-col gap-6 lg:gap-10">
-      <div class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left">
-        <Eyebrow>Services</Eyebrow>
-        <h2 class="heading text-h2 text-fg"><Rich inline={first(services, 'h2')!.inline} /></h2>
-      </div>
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6">
-        {
-          blocksOf(services, 'card').map((card, i) => (
-            <div class="reveal" style={`--reveal-i:${i}`}>
-              <ServiceCard title={card.title} text={card.inline} href={card.href!} />
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </Section>
-
-  <Section bg="subtle" name="Reviews">
+  <Section bg="surface" name="Reviews">
     <div class="flex flex-col gap-6 lg:gap-10">
       <div class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left">
         <Eyebrow>Reviews</Eyebrow>
@@ -128,7 +135,7 @@ const reviewsLink = first(reviews, 'links')!.links[0];
     </div>
   </Section>
 
-  <Section bg="surface" name="Process">
+  <Section bg="subtle" name="Process">
     <div class="flex flex-col gap-6 lg:gap-10">
       <h2 class="heading text-center text-h2 text-fg lg:text-left"><Rich inline={first(process, 'h2')!.inline} /></h2>
       <Steps
@@ -138,16 +145,19 @@ const reviewsLink = first(reviews, 'links')!.links[0];
     </div>
   </Section>
 
-  <Section bg="muted" quiet name="Financing">
-    <div class="flex flex-col items-center justify-between gap-4 text-center lg:flex-row lg:gap-16 lg:text-left">
-      <div class="flex max-w-[720px] items-start gap-4">
-        <Icon name="credit-card" size={32} class="mt-1 hidden text-accent lg:block" />
+  <!-- Financing: the page's second dark band, with a job photo so it is not a
+       text-only strip (ADR-005). -->
+  <Section bg="contrast" quiet name="Financing">
+    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+      <div class="flex flex-col items-center gap-5 text-center lg:items-start lg:text-left">
+        <Icon name="credit-card" size={32} class="text-fg-inverse/90" />
         <div class="flex flex-col gap-3">
-          <h2 class="heading text-h2 text-fg"><Rich inline={first(financing, 'h2')!.inline} /></h2>
-          <p class="rich text-fg-muted"><Rich inline={first(financing, 'p')!.inline} /></p>
+          <h2 class="heading text-h2 text-fg-inverse"><Rich inline={first(financing, 'h2')!.inline} /></h2>
+          <p class="rich text-fg-inverse-muted"><Rich inline={first(financing, 'p')!.inline} /></p>
         </div>
+        <BlockFlow blocks={blocksOf(financing, 'cta')} class="shrink-0" />
       </div>
-      <BlockFlow blocks={blocksOf(financing, 'cta')} class="shrink-0" />
+      <Figure photo="twoStory" ratio={4 / 3} sizes="(min-width: 1024px) 480px, 100vw" class="reveal mx-auto w-full max-w-[560px] lg:mx-0 [&_figcaption]:text-fg-inverse-muted" />
     </div>
   </Section>
 

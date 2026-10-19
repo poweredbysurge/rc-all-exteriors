@@ -1,9 +1,13 @@
 ---
-// Linked service card: 32px line icon, title, one line, one link.
+// Linked service card: 32px line icon, title, one line, one link. With a
+// `photo` it becomes the image-led card (homepage services grid, ADR-005): a
+// 16:10 job photo on top, then title and the line (no icon: the photo carries it).
 import Icon from './Icon.astro';
 import Rich from './Rich.astro';
 import type { Inline } from '@/lib/copy';
 import { serviceByHref } from '@/data/nav';
+import { photos, type PhotoKey } from '@/data/photos';
+import { sourceSet } from '@/lib/images';
 import { sentenceCase } from '@/lib/text';
 
 interface Props {
@@ -11,15 +15,42 @@ interface Props {
   text: Inline[];
   href: string;
   icon?: string;
+  /** A real job photo from the registry. Makes the card image-led. */
+  photo?: PhotoKey;
+  /** The sizes attribute for the photo: how wide the card renders. */
+  sizes?: string;
   tag?: 'h2' | 'h3';
   class?: string;
 }
-const { title, text, href, tag: Tag = 'h3', class: className } = Astro.props;
+const { title, text, href, photo: key, sizes = '(min-width: 1024px) 600px, 100vw', tag: Tag = 'h3', class: className } = Astro.props;
 const icon = Astro.props.icon ?? serviceByHref.get(href)?.icon ?? 'layout-panel-left';
+const photo = key ? photos[key] : null;
+const set = photo ? await sourceSet(photo.src, [480, 768, 1024], { ratio: 16 / 10 }) : null;
 ---
 
-<a href={href} class:list={['card h-full', className]}>
-  <Icon name={icon} size={32} class="text-accent" />
+<a href={href} class:list={['card h-full', photo && 'card-photo', className]}>
+  {
+    photo && set && (
+      <div class="card-photo-frame overflow-hidden rounded-md bg-surface-subtle" style="aspect-ratio:16/10">
+        <picture>
+          <source type="image/avif" srcset={set.avif} sizes={sizes} />
+          <source type="image/webp" srcset={set.webp} sizes={sizes} />
+          <img
+            src={set.src}
+            alt={photo.alt}
+            width={set.width}
+            height={set.height}
+            loading="lazy"
+            decoding="async"
+            class="size-full object-cover"
+            style={`object-position:${photo.position}`}
+          />
+        </picture>
+      </div>
+    )
+  }
+  {/* The photo carries the card, so the icon stays off image-led cards. */}
+  {!photo && <Icon name={icon} size={32} class="text-accent" />}
   <div class="flex flex-1 flex-col gap-2">
     <Tag class="heading text-h3 text-fg">{sentenceCase(title)}</Tag>
     <p class="text-body-sm text-fg-muted" data-sm><Rich inline={text} linkPhone={false} /></p>
@@ -29,3 +60,17 @@ const icon = Astro.props.icon ?? serviceByHref.get(href)?.icon ?? 'layout-panel-
     <Icon name="arrow-right" size={18} />
   </span>
 </a>
+
+<style is:global>
+  .card-photo .card-photo-frame img {
+    transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .card-photo:hover .card-photo-frame img {
+    transform: scale(1.03);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card-photo:hover .card-photo-frame img {
+      transform: none;
+    }
+  }
+</style>
