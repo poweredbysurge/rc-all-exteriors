@@ -24,6 +24,12 @@
 - `src/lib/rhythm.ts` plans every copy-driven page: opening photo beside the first section (by job type, rotated by route), one dark band in the first half, CTA band below the FAQ when it would crowd the dark band. Wired into `[service].astro`, `TrustPage.astro`; city pages and the offer page set by hand (city services grid is the dark band with photo cards). `ContentSection` takes `photo` and `bg="contrast"`; one unlayered `.on-dark` rule inverts the fg utilities. `npm run audit:rhythm` prints the result per page. Both gates pass.
 - Opening photos repeat across pages (five photos for 28 pages) and the commercial page falls back to a house photo. Photo originals remain the blocker.
 
+**Round 4, same day: Ricardo's photos (92 files, sorted on Sam's Mac at `~/Desktop/RC All Exteriors`, MANIFEST.csv there)**
+- 25 originals into `src/assets/photos/` as `rc-*.jpg`, 2400px cap, registered in `src/data/photos.ts` with `pool: false` on people and process shots so they stay out of the opening-photo rotation. Hero is the unwatermarked colonial street view with a pre-cut 16:9 `heroSrc` (Gate A finding 9 closed). Slots filled: about hero, inspection page, roof replacement before-and-after, roof repair flashing, CertainTeed finished roof, process steps, homepage Why us and service cards, flat roof card. LCP photos rematched on commercial, storm, repair, gutters, siding, metal, inspection, Fairfax, Lorton.
+- CONFIRM list regenerated: 116 distinct (was 121). 10 photo slots remain and no file covers them (estimate walkthrough, estimate on the table, inspection report page, metal roof, hail marks, window or door before-and-after, three city before-and-afters, the map which stays schematic by ADR-004).
+- Build note: 30 photos at 3200px ran the 8GB container out of memory. Originals capped at 2400px; build with `SHARP_CONCURRENCY=1` (25 minutes cold, seconds warm). STANDARDS 37 and 38.
+- Drive: Sam is uploading the sorted job folders himself (the connector cannot carry 310MB).
+
 **Round 3, same day:** service icons in the services dropdown and the mobile services list, from the nav registry. Master prompt section 7.
 
 **Next**
@@ -59,7 +65,7 @@
 
 **Blocked**
 - **Vercel project.** Create and link it, then set env vars: `RESEND_API_KEY`, `LEAD_NOTIFY_TO` (Ricardo's address, CONFIRM), `LEAD_NOTIFY_CC`, `COMMAND_CENTER_TOKEN`, `GOOGLE_PLACES_KEY`, `GBP_PLACE_ID`, `PUBLIC_GA_ID`. Optional: `COMMAND_CENTER_URL`, `LEAD_REPLY_FROM`. After the first deploy, put the real preview host in `LAUNCH` in `src/lib/site.ts` (it is a guess today: `https://rc-all-exteriors.vercel.app`).
-- **Photo originals** from the RC Drive folder. Only the five selects are in the repo. The homepage hero still has the RC mark baked in (Gate A review finding 9), and five photos cover 16 heroes. Drop originals in `src/assets/photos/`, run `npm run optimize-images`, update imports in `src/data/photos.ts`.
+- **Photo originals.** Resolved 2026-10-19 for 25 photos (round 4 above). Ten photo slots still have no file; see CONFIRM-LIST.md.
 - **Ricardo's answers.** 121 distinct CONFIRM slots, 222 placements (`CONFIRM-LIST.md`). City pages must not publish without one real local job and one local review each.
 - **Legal text** on `/privacy-policy/`, `/terms/`, `/sms-terms/` is a Surge draft and carries a CONFIRM slot until RC approves it.
 - **Copy lengths for the copy owner** (8): titles on `/about/` (62), `/contact/` (67), `/warranty/` (61); descriptions on `/reviews/` (137), `/roof-repair/` (175), `/service-areas/fairfax-va/` (131), `/service-areas/` (185), `/skylights/` (137). Verbatim from the batches, so not changed here.

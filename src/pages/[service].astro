@@ -21,7 +21,7 @@ import { materials, repairOrReplace } from '@/data/roof-replacement';
 import { blocksOf, faqs, first, getPage, plain, section, type ListBlock, type Section as CopySection } from '@/lib/copy';
 import { metaFor } from '@/lib/page';
 import { confirmHtml } from '@/lib/render';
-import { LCP_MAP } from '@/data/photos';
+import { LCP_MAP, type PhotoKey } from '@/data/photos';
 import { planRhythm, faqSurface } from '@/lib/rhythm';
 import { faqSchema, serviceSchema } from '@/lib/schema';
 import { sentenceCase } from '@/lib/text';
@@ -85,7 +85,16 @@ const inlineLinks = new Set(
 );
 const more = page.internalLinks.filter((href) => href !== '/' && href !== path && !serviceByHref.has(href) && !inlineLinks.has(href) && routeByPath.has(href));
 
-const stepMedia = isReplacement ? (['colonial', { gap: 'written estimate on the kitchen table' }, 'underlayment', 'twoStory'] as const) : undefined;
+const stepMedia = isReplacement ? (['ricardoRoof', { gap: 'written estimate on the kitchen table' }, 'newDecking', 'mansardShakeYardSign'] as const) : undefined;
+
+// Real photos for the copy's [IMAGE] slots, in order, where the subject exists
+// (2026-10-19 photos). Slots with no matching photo stay as labeled gaps.
+const IMAGE_SLOTS: Record<string, PhotoKey[]> = {
+  '/roof-replacement/': ['newVsOld2'],
+  '/roof-repair/': ['chimneyFlashing'],
+  '/certainteed-roofing/': ['colonialFront'],
+};
+const slotImages = IMAGE_SLOTS[path] ?? [];
 ---
 
 <Base
@@ -118,6 +127,7 @@ const stepMedia = isReplacement ? (['colonial', { gap: 'written estimate on the 
             section={inc.section}
             bg={bgOf(i)}
             photo={plan[i].photo}
+            images={blocksOf(s, 'image').length ? slotImages : undefined}
             eyebrow={isReplacement && /included/i.test(s.name) ? 'What is included' : undefined}
             media={blocksOf(s, 'steps').length && /process/i.test(s.name) ? (stepMedia as never) : undefined}
           />

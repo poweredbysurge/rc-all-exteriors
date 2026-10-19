@@ -37,8 +37,8 @@ export function companionPhoto(route: string, exclude: PhotoKey | 'text' | null,
   // Only photos of the page's own job type: a flat membrane beside a shingle
   // replacement intro reads wrong. Residential pages all draw from the
   // replacement set, the only finished-house photos we have.
-  const typed = KEYS.filter((k) => photos[k].job === job && k !== exclude);
-  const pool = typed.length ? typed : KEYS.filter((k) => k !== exclude);
+  const typed = KEYS.filter((k) => photos[k].job === job && photos[k].pool !== false && k !== exclude);
+  const pool = typed.length ? typed : KEYS.filter((k) => photos[k].pool !== false && k !== exclude);
   return pool[hash(route) % pool.length];
 }
 

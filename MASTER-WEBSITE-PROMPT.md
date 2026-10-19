@@ -375,6 +375,7 @@ Store the consent text version string with every submission.
 
 ## 13. Images and media
 
+- **Hero sources:** the desktop hero is a 16:9 band and phones get a 3:4 crop. A landscape source serves both. A portrait source needs a pre-cut 16:9 file registered beside it for desktop, because image services crop with keyword positions only and will cut a portrait through its middle. Never rely on a percentage `object-position` to fix a generated crop.
 - **Format:** WebP for everything photographic, AVIF with WebP fallback when the pipeline supports it. SVG for logos and icons. PNG only for favicons and the OG image (1200 by 630, also provided as WebP where supported). No JPG ships.
 - **Responsive:** every content image has `srcset` at 480, 768, 1024, 1440 and 1920 widths (cap at 2x the rendered size), `sizes` that matches the layout, and explicit `width` and `height` attributes to reserve space.
 - **Hero / LCP image:** `fetchpriority="high"`, `loading="eager"`, a `<link rel="preload" as="image" imagesrcset imagesizes>` in the head, served at 640, 960 and 1200 widths for mobile and 1440 to 1920 for desktop. One LCP preload per route, declared in a route-to-image map in the base layout.
@@ -671,6 +672,8 @@ CLIENT DECISIONS ALREADY MADE: [Anything that overrides a default in this prompt
 ---
 
 ## Changelog
+
+- **1.3 (2026-10-19), fourth pass:** Portrait hero sources need a pre-cut 16:9 file (section 13). RC STANDARDS 37.
 
 - **1.3 (2026-10-19), third pass:** Service icons in the services dropdown and the mobile services list, from the one registry (section 7).
 

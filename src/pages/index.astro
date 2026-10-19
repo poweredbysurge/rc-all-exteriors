@@ -48,7 +48,7 @@ const reviewsLink = first(reviews, 'links')!.links[0];
 
 // Homepage service cards are image-led (ADR-005). One real job photo per card,
 // in the copy's card order: replacement, repair, storm, windows/gutters/siding.
-const SERVICE_PHOTOS = ['twoStory', 'underlayment', 'colonial', 'mansard'] as const;
+const SERVICE_PHOTOS = ['mansardShakeFront', 'chimneyFlashing', 'twoStoryWalk', 'colonialGarage'] as const;
 ---
 
 <Base title={meta.title} description={meta.description} path={path} og="home" hasLeadCard confirmMeta={meta.confirmMeta} schema={[faqSchema(faqs(page))]}>
@@ -92,7 +92,7 @@ const SERVICE_PHOTOS = ['twoStory', 'underlayment', 'colonial', 'mansard'] as co
 
   <Section bg="muted" name="Why us">
     <div class="grid grid-cols-1 items-start gap-7 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
-      <Figure photo="mansard" ratio={4 / 5} sizes="(min-width: 1024px) 500px, 100vw" showTown bleed class="reveal lg:sticky lg:top-[calc(var(--rc-header-height-desktop)+24px)]" />
+      <Figure photo="ricardoYardSign" ratio={4 / 5} sizes="(min-width: 1024px) 500px, 100vw" showTown bleed class="reveal lg:sticky lg:top-[calc(var(--rc-header-height-desktop)+24px)]" />
       <div class="flex flex-col gap-7 lg:gap-10">
         <div class="flex flex-col gap-4">
           <Eyebrow>Why us</Eyebrow>
@@ -140,7 +140,7 @@ const SERVICE_PHOTOS = ['twoStory', 'underlayment', 'colonial', 'mansard'] as co
       <h2 class="heading text-center text-h2 text-fg lg:text-left"><Rich inline={first(process, 'h2')!.inline} /></h2>
       <Steps
         items={first(process, 'steps')!.items}
-        media={['colonial', { gap: 'Ricardo walking a homeowner through a written estimate' }, 'underlayment', 'twoStory']}
+        media={['ricardoRoof', { gap: 'Ricardo walking a homeowner through a written estimate' }, 'newDecking', 'mansardShakeYardSign']}
       />
     </div>
   </Section>

@@ -5,7 +5,16 @@ Originals stay in Drive. Nothing is copied into this repo (files run 0.4 to 9.5 
 
 Inventoried 2026-10-05. 30 photos across 9 jobs, already named with job, shingle color and view. All real RC work, no stock.
 
-## Hero candidate
+
+## In the repo as of 2026-10-19
+
+Ricardo texted 92 photos and videos on 2026-10-19. Sam's Mac holds them sorted by job at `~/Desktop/RC All Exteriors` (MANIFEST.csv there lists every file with its Drive status). 25 went into this folder, capped at 2400px on the long edge, as `rc-*.jpg`, and `src/data/photos.ts` names each one. The watermarked GBP cover (`rc-select-01`) is gone: the hero is now the unwatermarked colonial street view (Gate A review finding 9 closed).
+
+Slots filled: about hero (Ricardo at the mansard job with the yard sign), inspection page (Ricardo on a roof), roof replacement [IMAGE] (new roof beside the old one), roof repair [IMAGE] (chimney flashing), CertainTeed [IMAGE] (colonial front), process step photos (Ricardo on the roof, new decking, finished mansard), homepage Why us and service cards, flat roof material card (white TPO).
+
+Still open, no photo exists yet: Ricardo walking a homeowner through an estimate, estimate on the kitchen table, inspection photo report page, metal roof, hail marks, window or door before and after, city before and after (towns unknown), and the town for every photo.
+
+## Hero candidate (2026-10-05 note, superseded above)
 
 **`Google Business Profile/rc-all-exteriors-gbp-cover-photo.jpg`** (1672 × 941, landscape, already has the RC mark in the corner)
 Gray architectural shingle on a tan colonial, porch, garage, blue sky, RC truck tail visible at right. This is the hero. It reads "finished roof on a real Prince William County house" in one second, and the composition leaves clean sky at top right for the H1 on desktop. For the site, use the unwatermarked source (likely `2026-06 Colonial Home - Gray Shingle/colonial-home-roof-replacement-gray-shingle-01.jpg`, confirm) so the mark is not baked in.

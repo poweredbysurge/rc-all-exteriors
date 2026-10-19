@@ -7,6 +7,7 @@ import CtaBand from '@/components/CtaBand.astro';
 import Faq from '@/components/Faq.astro';
 import Hero from '@/components/Hero.astro';
 import Icon from '@/components/Icon.astro';
+import Figure from '@/components/Figure.astro';
 import PhotoGap from '@/components/PhotoGap.astro';
 import Rich from '@/components/Rich.astro';
 import Section from '@/components/Section.astro';
@@ -85,7 +86,7 @@ const timeline = [
         <h2 class="heading text-h2 text-fg"><Rich inline={first(check, 'h2')!.inline} /></h2>
         <Checklist items={first(check, 'list')!.items} />
       </div>
-      <PhotoGap desc="Ricardo on a roof during an inspection" ratio={4 / 5} icon="search" />
+      <Figure photo="ricardoRoof" ratio={4 / 5} sizes="(min-width: 1024px) 480px, 100vw" caption="Ricardo on the roof. Every inspection is done in person." />
     </div>
   </Section>
 

@@ -64,7 +64,7 @@ export async function heroSources(key: PhotoKey) {
   const photo = photos[key];
   const [mobile, desktop] = await Promise.all([
     sourceSet(photo.src, HERO_MOBILE_WIDTHS, { ratio: 3 / 4 }),
-    sourceSet(photo.src, HERO_DESKTOP_WIDTHS, { ratio: 16 / 9 }),
+    sourceSet(photo.heroSrc ?? photo.src, HERO_DESKTOP_WIDTHS, { ratio: 16 / 9 }),
   ]);
   return { photo, mobile, desktop };
 }

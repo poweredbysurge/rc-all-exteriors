@@ -14,7 +14,7 @@ Seeded from `design/DESIGN-DEBT.md` (Gate A export, 2026-10-07). `design/` is re
 | 6 | Footer link rows about 34px | Every footer link row is 44px. | footer-390, footer-1440 |
 | 7 | Schematic map | Kept schematic, by decision. See ADR-004. | home, fairfax |
 | 8 | tear-off.jpg is an underlayment shot | Source renamed `rc-select-03-underlayment.jpg`; registry key `underlayment`. | home, roof-replacement |
-| 9 | Hero photo has the RC mark baked in | **Not fixed.** The unwatermarked `colonial-home-roof-replacement-gray-shingle-01.jpg` is not in the repo. See Blocked. | home |
+| 9 | Hero photo has the RC mark baked in | **Fixed 2026-10-19.** Hero source is the unwatermarked colonial street view from Ricardo's phone, with a pre-cut 16:9 band (`heroSrc`) for desktop because the image service crops portrait sources through the middle. | home |
 | 10 | Section padding 100px / 128px | From `design/tokens.css` through the generated theme (`section-y`, `section-y-quiet`). | all |
 
 ## Live review, 2026-10-19 (ADR-005). Fix upstream in the next Mode A export
