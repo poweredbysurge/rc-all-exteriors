@@ -509,3 +509,21 @@
     transform: none;
   }
 }
+
+/* Outside every layer so it beats the utility layer. */
+/* A content band on the dark surface (src/lib/rhythm.ts): the fg utilities
+   go inverse, except inside anything that paints its own light surface
+   (lead card, cards, dropdown panel, stat strip box, figures). Unlayered on
+   purpose so it beats the utility layer. */
+.on-dark :is(.text-fg, .text-accent):not(:is(.bg-surface, .card, .dropdown-panel, [data-lead-card]) *) {
+  color: var(--color-fg-inverse);
+}
+.on-dark :is(.text-fg-muted, .text-fg-subtle):not(:is(.bg-surface, .card, .dropdown-panel, [data-lead-card]) *) {
+  color: var(--color-fg-inverse-muted);
+}
+.on-dark .bg-accent:not(:is(.bg-surface, .card, [data-lead-card]) *) {
+  background: var(--color-fg-inverse);
+}
+.on-dark figure .border-border-subtle {
+  border-color: color-mix(in srgb, var(--color-fg-inverse) 15%, transparent);
+}

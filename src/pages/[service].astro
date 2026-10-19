@@ -1,7 +1,9 @@
 ---
 // Service hub template (roof-replacement-390, roof-replacement-1440), used by
 // all eleven service pages. Copy: batches 1 to 4. Sections render in the
-// copy's order; the one dark CTA band sits after the process section, as drawn.
+// copy's order. One body section is the page's dark band and the CTA band sits
+// after the process section, or below the FAQ when that would put two dark
+// bands within a section of each other (src/lib/rhythm.ts, ADR-006).
 import Base from '@/layouts/Base.astro';
 import CityChips from '@/components/CityChips.astro';
 import ContentSection from '@/components/ContentSection.astro';
@@ -19,6 +21,8 @@ import { materials, repairOrReplace } from '@/data/roof-replacement';
 import { blocksOf, faqs, first, getPage, plain, section, type ListBlock, type Section as CopySection } from '@/lib/copy';
 import { metaFor } from '@/lib/page';
 import { confirmHtml } from '@/lib/render';
+import { LCP_MAP } from '@/data/photos';
+import { planRhythm, faqSurface } from '@/lib/rhythm';
 import { faqSchema, serviceSchema } from '@/lib/schema';
 import { sentenceCase } from '@/lib/text';
 
@@ -45,9 +49,14 @@ const body = page.sections.filter((s) => s !== hero && s !== cta && s !== faqSec
 const stepsIndex = body.findIndex((s) => blocksOf(s, 'steps').length > 0 && /process|how/i.test(s.name));
 const bandAfter = stepsIndex >= 0 && stepsIndex < body.length - 1 ? stepsIndex : body.length - 1;
 
-const cycle = ['surface', 'muted', 'surface', 'subtle'] as const;
-const bgOf = (i: number) => cycle[i % cycle.length];
-const faqBg = cycle[(body.length + 1) % cycle.length] === 'surface' ? 'muted' : cycle[(body.length + 1) % cycle.length];
+// Surface rhythm and the opening photo (ADR-006). Sections that carry an
+// attached quiet sub-band on roof replacement stay light so the pair matches.
+const avoid = isReplacement ? body.map((s, i) => (s.name === 'Signs' || /included/i.test(s.name) ? i : -1)).filter((i) => i >= 0) : [];
+const { plans: plan, bandAfterFaq } = planRhythm(body, { route: path, heroPhoto: LCP_MAP[path] ?? null, bandAfter, tailLights: faqSection ? 1 : 0, offset: 1, job: path === '/commercial-roofing/' ? 'Commercial' : 'Roof replacement', avoid });
+const bgOf = (i: number) => plan[i].bg;
+const faqBg = faqSurface(plan);
+const relatedBg = faqSection ? (faqBg === 'surface' ? 'muted' : 'surface') : faqSurface(plan);
+const bandProps = { heading: first(cta, 'h2')!.inline, text: first(cta, 'p')?.inline, primary: blocksOf(cta, 'cta').find((c) => c.kind === 'primary'), phoneFirst: isEmergency };
 
 // Roof replacement: the warranty item is drawn as its own callout, so it comes out of the checklist.
 function included(s: CopySection): { section: CopySection; warranty: ListBlock['items'][number] | null } {
@@ -108,6 +117,7 @@ const stepMedia = isReplacement ? (['colonial', { gap: 'written estimate on the 
           <ContentSection
             section={inc.section}
             bg={bgOf(i)}
+            photo={plan[i].photo}
             eyebrow={isReplacement && /included/i.test(s.name) ? 'What is included' : undefined}
             media={blocksOf(s, 'steps').length && /process/i.test(s.name) ? (stepMedia as never) : undefined}
           />
@@ -179,9 +189,7 @@ const stepMedia = isReplacement ? (['colonial', { gap: 'written estimate on the 
             </Section>
           )}
 
-          {i === bandAfter && (
-            <CtaBand heading={first(cta, 'h2')!.inline} text={first(cta, 'p')?.inline} primary={blocksOf(cta, 'cta').find((c) => c.kind === 'primary')} phoneFirst={isEmergency} />
-          )}
+          {i === bandAfter && !bandAfterFaq && <CtaBand {...bandProps} />}
         </Fragment>
       );
     })
@@ -198,7 +206,9 @@ const stepMedia = isReplacement ? (['colonial', { gap: 'written estimate on the 
     )
   }
 
-  <Section bg="surface" name="Related services and service areas">
+  {bandAfterFaq && <CtaBand {...bandProps} />}
+
+  <Section bg={relatedBg} name="Related services and service areas">
     <div class="flex flex-col gap-12">
       {
         related.length > 0 && (

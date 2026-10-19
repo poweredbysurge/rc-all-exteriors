@@ -13,6 +13,7 @@
     "check": "node scripts/check-integrity.mjs",
     "check:production": "node scripts/check-integrity.mjs --production",
     "check:layout": "node scripts/check-layout.mjs",
+    "audit:rhythm": "node scripts/audit-rhythm.mjs",
     "optimize-images": "node scripts/optimize-images.mjs",
     "og": "node scripts/generate-og.mjs",
     "fonts:measure": "node scripts/measure-fallbacks.mjs"

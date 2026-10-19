@@ -49,6 +49,8 @@ const proofPhotos: Record<string, [PhotoKey, PhotoKey]> = {
   Lorton: ['colonial', 'mansard'],
 };
 const mapTowns = ['Woodbridge', 'Lake Ridge', 'Lorton', 'Fairfax Station', 'Fairfax', 'Springfield'];
+// Homepage card order: replacement, repair, storm, other (ADR-005).
+const SERVICE_PHOTOS: PhotoKey[] = ['twoStory', 'underlayment', 'colonial', 'mansard'];
 ---
 
 <Base
@@ -69,7 +71,7 @@ const mapTowns = ['Woodbridge', 'Lake Ridge', 'Lorton', 'Fairfax Station', 'Fair
     trust={first(hero, 'trust')!.items}
   />
 
-  <Section bg="surface" name="Intro">
+  <Section bg="muted" name="Intro">
     <div class="grid grid-cols-1 items-start gap-7 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
       <div class="flex max-w-[720px] flex-col gap-5">
         <p class="rich text-body-lg text-fg"><Rich inline={lead.inline} /></p>
@@ -79,7 +81,7 @@ const mapTowns = ['Woodbridge', 'Lake Ridge', 'Lorton', 'Fairfax Station', 'Fair
     </div>
   </Section>
 
-  <Section bg="muted" name="Local proof">
+  <Section bg="surface" name="Local proof">
     <div class="flex flex-col gap-6 lg:gap-10">
       <div class="flex flex-col gap-4">
         <Eyebrow>Recent work</Eyebrow>
@@ -98,16 +100,17 @@ const mapTowns = ['Woodbridge', 'Lake Ridge', 'Lorton', 'Fairfax Station', 'Fair
     </div>
   </Section>
 
-  <Section bg="surface" name="Services">
+  <!-- The page's dark band (ADR-006): image-led service cards, as on the homepage. -->
+  <Section bg="contrast" name="Services">
     <div class="flex flex-col gap-6 lg:gap-10">
       <h2 class="heading text-center text-h2 text-fg lg:text-left"><Rich inline={first(services, 'h2')!.inline} /></h2>
       <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6 xl:grid-cols-4">
-        {blocksOf(services, 'card').map((card, i) => <div class="reveal" style={`--reveal-i:${i}`}><ServiceCard title={card.title} text={card.inline} href={card.href!} /></div>)}
+        {blocksOf(services, 'card').map((card, i) => <div class="reveal" style={`--reveal-i:${i}`}><ServiceCard title={card.title} text={card.inline} href={card.href!} photo={SERVICE_PHOTOS[i % SERVICE_PHOTOS.length]} sizes="(min-width: 1280px) 300px, (min-width: 768px) 50vw, 100vw" /></div>)}
       </div>
     </div>
   </Section>
 
-  <Section bg="subtle" name="Why us">
+  <Section bg="surface" name="Why us">
     <div class="flex flex-col gap-10 lg:gap-12">
       <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
         <h2 class="heading text-h2 text-fg"><Rich inline={first(why, 'h2')!.inline} /></h2>
@@ -117,21 +120,21 @@ const mapTowns = ['Woodbridge', 'Lake Ridge', 'Lorton', 'Fairfax Station', 'Fair
     </div>
   </Section>
 
-  <Section bg="surface" quiet name="Neighborhoods">
+  <Section bg="muted" quiet name="Neighborhoods">
     <div class="flex flex-col gap-5">
       <h2 class="heading text-h3 text-fg">{name} neighborhoods we serve</h2>
       <p class="text-body-sm text-fg" data-sm><Fragment set:html={confirmHtml('neighborhood names from Ricardo')} /></p>
     </div>
   </Section>
 
-  <Section bg="muted" name="FAQ">
+  <Section bg="surface" name="FAQ">
     <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
       <h2 class="heading text-h2 text-fg"><Rich inline={first(faq, 'h2')!.inline} /></h2>
       <Faq faqs={blocksOf(faq, 'faq')} />
     </div>
   </Section>
 
-  <Section bg="surface" quiet name="Nearby service areas">
+  <Section bg="subtle" quiet name="Nearby service areas">
     <div class="flex flex-col gap-4">
       <h2 class="heading text-h3 text-fg">Nearby service areas</h2>
       <CityChips current={path} />

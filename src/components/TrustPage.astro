@@ -12,6 +12,7 @@ import PhotoGap from './PhotoGap.astro';
 import Rich from './Rich.astro';
 import Section from './Section.astro';
 import type { PhotoKey } from '@/data/photos';
+import { faqSurface, planRhythm } from '@/lib/rhythm';
 import { blocksOf, faqs, first, getPage, plain, type CtaBlock } from '@/lib/copy';
 import { metaFor } from '@/lib/page';
 import { faqSchema, pageSchema } from '@/lib/schema';
@@ -42,8 +43,16 @@ const heroImage = first(hero, 'image');
 const withConfirm = (c: CtaBlock | undefined): CtaBlock | null =>
   c ? { ...c, confirm: c.confirm ?? heroCtas.find((h) => h.label === c.label)?.confirm ?? null } : null;
 
-const cycle = ['surface', 'muted', 'surface', 'subtle'] as const;
-const offset = heroImage ? 1 : 0;
+// Surface rhythm (ADR-006): one dark band in the first half, a photo beside
+// the opening section unless the hero photo band already shows one.
+const { plans: plan } = planRhythm(body, {
+  route: path,
+  heroPhoto: heroPhoto ?? 'text',
+  bandAfter: -1,
+  tailLights: faqSection ? 1 : 0,
+  offset: heroImage ? 1 : 0,
+  firstPhoto: !heroImage,
+});
 ---
 
 <Base
@@ -80,13 +89,13 @@ const offset = heroImage ? 1 : 0;
     )
   }
 
-  {body.map((s, i) => <ContentSection section={s} bg={cycle[(i + offset) % cycle.length]} cardTag="h3" />)}
+  {body.map((s, i) => <ContentSection section={s} bg={plan[i].bg} photo={plan[i].photo} cardTag="h3" />)}
 
   <slot />
 
   {
     faqSection && (
-      <Section bg="muted" name="FAQ">
+      <Section bg={faqSurface(plan)} name="FAQ">
         <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
           <h2 class="heading text-h2 text-fg"><Rich inline={first(faqSection, 'h2')!.inline} /></h2>
           <Faq faqs={blocksOf(faqSection, 'faq')} />

@@ -14,6 +14,7 @@
 // list or a paragraph stays left with it (master prompt section 3).
 import BlockFlow from './BlockFlow.astro';
 import Eyebrow from './Eyebrow.astro';
+import Figure from './Figure.astro';
 import IconHeading from './IconHeading.astro';
 import ReviewCard from './ReviewCard.astro';
 import Rich from './Rich.astro';
@@ -29,9 +30,12 @@ import { getReviews } from '@/lib/reviews';
 type StepMedia = PhotoKey | { gap: string; icon?: string } | null;
 interface Props {
   section: CopySection;
-  bg?: 'surface' | 'muted' | 'subtle';
+  /** contrast is the page's one dark band (src/lib/rhythm.ts); text goes inverse through .on-dark. */
+  bg?: 'surface' | 'muted' | 'subtle' | 'contrast';
   quiet?: boolean;
   eyebrow?: string;
+  /** A real job photo beside a prose or split section (the opening section of every inner page, ADR-006). */
+  photo?: PhotoKey | null;
   /** Photos or photo gaps for a steps section, one per step. */
   media?: StepMedia[];
   /** Real photos for [IMAGE] slots, in order. */
@@ -39,7 +43,8 @@ interface Props {
   /** Heading level for card titles. */
   cardTag?: 'h2' | 'h3';
 }
-const { section, bg = 'surface', quiet = false, eyebrow, media, images, cardTag = 'h3' } = Astro.props;
+const { section, bg = 'surface', quiet = false, eyebrow, media, images, cardTag = 'h3', photo = null } = Astro.props;
+const onDark = bg === 'contrast';
 
 const kind = kindOf(section);
 const h2 = first(section, 'h2');
@@ -57,16 +62,26 @@ const cardCols = cards.length >= 4 && cards.length % 3 !== 0 ? 'md:grid-cols-2 x
 
 <Section bg={bg} quiet={quiet} name={section.name}>
   {
-    kind === 'prose' && (
+    kind === 'prose' && !photo && (
       <BlockFlow blocks={rest} leadFirst images={images} class="mx-auto max-w-[720px] [&>p:first-child]:text-body-lg" />
     )
   }
 
   {
-    kind === 'split' && (
+    /* Photo beside the copy: the opening section of an inner page. */
+    kind === 'prose' && photo && (
+      <div class="grid grid-cols-1 items-center gap-7 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <Figure photo={photo} ratio={4 / 5} sizes="(min-width: 1024px) 500px, 100vw" showTown bleed class="reveal" />
+        <BlockFlow blocks={rest} leadFirst images={images} class="[&>p:first-child]:text-body-lg" />
+      </div>
+    )
+  }
+
+  {
+    kind === 'split' && !photo && (
       <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
         <div class="flex flex-col gap-4">
-          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
           <h2 class="heading text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
         </div>
         <BlockFlow blocks={rest} leadFirst images={images} />
@@ -75,10 +90,23 @@ const cardCols = cards.length >= 4 && cards.length % 3 !== 0 ? 'md:grid-cols-2 x
   }
 
   {
+    kind === 'split' && photo && (
+      <div class="grid grid-cols-1 items-center gap-7 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <Figure photo={photo} ratio={4 / 5} sizes="(min-width: 1024px) 500px, 100vw" showTown bleed class="reveal" />
+        <div class="flex flex-col gap-5">
+          {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
+          <h2 class="heading text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
+          <BlockFlow blocks={rest} leadFirst images={images} />
+        </div>
+      </div>
+    )
+  }
+
+  {
     kind === 'h3grid' && (
       <div class="flex flex-col gap-8 lg:gap-10">
         <div class="flex flex-col gap-4">
-          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
           <h2 class="heading max-w-[800px] text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
           {lead.length > 0 && <BlockFlow blocks={lead} leadFirst images={images} />}
         </div>
@@ -100,7 +128,7 @@ const cardCols = cards.length >= 4 && cards.length % 3 !== 0 ? 'md:grid-cols-2 x
     kind === 'steps' && (
       <div class="flex flex-col gap-6 lg:gap-10">
         <div class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left">
-          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
           <h2 class="heading text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
         </div>
         <Steps items={steps!.items} media={media} />
@@ -113,7 +141,7 @@ const cardCols = cards.length >= 4 && cards.length % 3 !== 0 ? 'md:grid-cols-2 x
     kind === 'cards' && (
       <div class="flex flex-col gap-6 lg:gap-10">
         <div class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left">
-          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
           <h2 class="heading text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
         </div>
         <div class:list={['grid grid-cols-1 gap-5 lg:gap-6', cardCols]}>
@@ -132,7 +160,7 @@ const cardCols = cards.length >= 4 && cards.length % 3 !== 0 ? 'md:grid-cols-2 x
     kind === 'reviews' && (
       <div class="flex flex-col gap-6 lg:gap-10">
         <div class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left">
-          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
           <h2 class="heading text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
           {blocksOf(section, 'p').length > 0 && <BlockFlow blocks={blocksOf(section, 'p')} class="text-left" />}
         </div>

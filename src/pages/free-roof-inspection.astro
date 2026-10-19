@@ -62,7 +62,8 @@ const timeline = [
     minHeight={720}
   />
 
-  <Section bg="surface" name="Who it is for">
+  <!-- The page's dark band (ADR-006): white cards on the dark surface. -->
+  <Section bg="contrast" name="Who it is for">
     <div class="flex flex-col gap-6 lg:gap-10">
       <h2 class="heading text-center text-h2 text-fg lg:text-left"><Rich inline={first(who, 'h2')!.inline} /></h2>
       <ul class="m-0 grid list-none grid-cols-1 gap-5 p-0 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
@@ -78,7 +79,7 @@ const timeline = [
     </div>
   </Section>
 
-  <Section bg="muted" name="What we check">
+  <Section bg="surface" name="What we check">
     <div class="grid grid-cols-1 items-start gap-7 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
       <div class="flex flex-col gap-6">
         <h2 class="heading text-h2 text-fg"><Rich inline={first(check, 'h2')!.inline} /></h2>
@@ -88,7 +89,7 @@ const timeline = [
     </div>
   </Section>
 
-  <Section bg="surface" name="What you get and what happens next">
+  <Section bg="muted" name="What you get and what happens next">
     <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
       <div class="flex flex-col gap-5">
         <h2 class="heading text-h2 text-fg"><Rich inline={first(get, 'h2')!.inline} /></h2>
@@ -119,7 +120,7 @@ const timeline = [
     </div>
   </Section>
 
-  <Section bg="subtle" name="FAQ">
+  <Section bg="surface" name="FAQ">
     <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
       <h2 class="heading text-h2 text-fg"><Rich inline={first(faq, 'h2')!.inline} /></h2>
       <Faq faqs={blocksOf(faq, 'faq')} />

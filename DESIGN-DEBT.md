@@ -27,6 +27,11 @@ Seeded from `design/DESIGN-DEBT.md` (Gate A export, 2026-10-07). `design/` is re
 - **Homepage section order**: services second, image-led cards on a dark band; problem opener third; financing on a dark band with a photo. Artboards: home-1440, home-390.
 - **New tokens** in `brand/tokens.overrides.css` (header heights, logo heights, hero min and max, quiz bar). `design/tokens.css` is unchanged; the generated theme reads both.
 
+## Inner-page rhythm, 2026-10-19 (ADR-006). Fix upstream in the next Mode A export
+
+- **Service, trust, city and offer pages carry a job photo beside the opening section and one dark content band in the first half**, planned from the copy's section kinds. The artboards draw the inner pages as a light cycle with the CTA band as the only dark surface. Artboards: roof-replacement-1440, fairfax-1440, free-roof-inspection-1440 and their 390 pairs.
+- **The CTA band on short service pages sits below the FAQ**, not after the process section, so two dark bands never sit a section apart.
+
 ## Deviations from the artboards
 
 - **Mobile hero photo is a 3:4 crop behind the headline, not a cover image behind the whole hero.** ADR-004. Fix upstream by drawing the mobile hero that way. Artboards: every *-390 hero.
