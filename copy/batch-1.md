@@ -1,4 +1,4 @@
-Updated Sept 30 by Surge. Red [CONFIRM] \= needs Ricardo’s answer before launch.
+Updated Sept 30 by Surge. Revised Oct 19 with Ricardo's answers to the launch questions (Google Doc, 2026-10-19) and Sam's decisions: no price figures anywhere, one owner line used sparingly, 60-day repair warranty published, after-hours emergency calls published. No [CONFIRM] placeholders remain in page copy.
 
 # RC All Exteriors Website Copy: Batch 1
 
@@ -156,7 +156,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[H1]** Woodbridge Roofing Contractor With Fair Prices and a 10-Year Warranty
 
-**[SUBHEAD]** Roof replacement and repair for homes across Northern Virginia, from Woodbridge to Fairfax, Alexandria, and Arlington. Class A licensed. The owner is on every job. [CONFIRM: owner on every job]
+**[SUBHEAD]** Roof replacement and repair for homes across Northern Virginia, from Woodbridge to Fairfax, Alexandria, and Arlington. Class A licensed. Ricardo quotes every job and signs off on every roof.
 
 **[CTA PRIMARY]** Book a Free Roof Inspection
 
@@ -172,7 +172,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[P]** One roofer says patch it. Another says tear it all off. The third never calls back. If your roof is 15 or 20 years old and you're finding shingle pieces in the yard, you just want a straight answer.
 
-**[P]** That's how Ricardo Castro runs RC All Exteriors. He does a detailed inspection, explains what he found, and gives you a transparent written estimate. [CONFIRM: Ricardo shares inspection photos]
+**[P]** That's how Ricardo Castro runs RC All Exteriors. He does a detailed inspection, shows you the photos, explains what he found, and gives you a transparent written estimate.
 
 **Why us**
 
@@ -180,7 +180,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[H3]** A price you can trust
 
-**[P]** "Fair pricing" is the thing our customers mention most in their Google reviews. You get honest pricing and a clear estimate before any work starts. Our prices sit in the middle of the pack: not the cheapest, not the most expensive. The price on your estimate is the price you pay, with no surprise change orders. [CONFIRM: rotted decking policy]
+**[P]** "Fair pricing" is the thing our customers mention most in their Google reviews. You get honest pricing and a clear estimate before any work starts. Our prices sit in the middle of the pack: not the cheapest, not the most expensive. The price on your estimate is the price you pay, with no surprise change orders. Up to five sheets of replacement decking are included in every roof replacement, and we show you anything beyond that before we touch it.
 
 **[H3]** Backed for 10 years
 
@@ -192,7 +192,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[H3]** On time and cleaned up
 
-**[P]** "Quick work" and a tidy crew show up again and again in our reviews. We tear off and haul away the old roof, and we finish when we say we will. [CONFIRM: property protection and nail sweep steps]
+**[P]** "Quick work" and a tidy crew show up again and again in our reviews. We tarp the landscaping, place the dumpster where you want it, haul away the old roof, run a magnetic sweep for nails, and finish when we say we will.
 
 **Services**
 
@@ -226,16 +226,16 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[STEPS]**
 
-1. **Free inspection and consultation.** We start with a detailed inspection of your roof and talk through your options. [CONFIRM: usual wait for an inspection]  
+1. **Free inspection and consultation.** We start with a detailed inspection of your roof and talk through your options. Most inspections are scheduled within 24 to 48 hours of your call.  
 2. **A clear estimate.** You get a transparent proposal built around your roof, your materials, and your budget. No pressure to sign that day. If two of you make the decision, we'll walk you both through it.  
-3. **Removal and replacement.** We remove the old roof, haul it away, and install the new one with care. [CONFIRM: typical install time]  
-4. **Warranty in writing.** Your 10-year workmanship warranty covers the work we did. [CONFIRM: final walk-through step]
+3. **Removal and replacement.** We remove the old roof, haul it away, and install the new one with care. Most roofs take one to three days.  
+4. **Warranty in writing.** We walk the finished roof with you, register your CertainTeed warranty, and hand over your 10-year workmanship warranty in writing.
 
 **Financing**
 
 **[H2]** Need to spread out the cost?
 
-**[P]** A roof that's failing can't always wait for savings to catch up. Financing is available on roof replacements, with monthly payments. [CONFIRM: financing partner and terms]
+**[P]** A roof that's failing can't always wait for savings to catch up. Financing is available through Enhancify on roof replacements, siding, windows, and doors. Checking your options takes about two minutes and uses a soft credit pull.
 
 **[CTA SECONDARY]** See Financing Options → /financing/
 
@@ -259,11 +259,11 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** How much does a new roof cost in Woodbridge?
 
-**[FAQ A]** It depends on the size of the roof, how steep it is, and how many old layers come off. Most Woodbridge homes fall between [CONFIRM: price range]. Your free inspection ends with a written estimate, so you know the real number before you decide.
+**[FAQ A]** It depends on the size of the roof, how steep it is, how many old layers come off, and the shingle you choose. A townhouse and a large colonial are very different jobs, so we do not quote ranges online. Your free inspection ends with a written estimate, so you know the real number before you decide.
 
 **[FAQ Q]** Are you licensed and insured?
 
-**[FAQ A]** Yes. RC All Exteriors holds a Virginia Class A contractor license [CONFIRM: license number], is fully insured, and is BBB accredited.
+**[FAQ A]** Yes. RC All Exteriors holds Virginia Class A contractor license 2705196138, is fully insured, and is BBB accredited.
 
 **[FAQ Q]** Do you help with insurance claims?
 
@@ -275,7 +275,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** Do I have to pay a deposit before you start?
 
-**[FAQ A]** We know nobody wants to front money before they’ve seen any work. The payment schedule is spelled out in writing on your estimate before you sign, so there are no surprises. [CONFIRM: deposit schedule]
+**[FAQ A]** We know nobody wants to front money before they’ve seen any work. The schedule is simple: half when the job starts and half when it is finished. Larger projects are split in thirds at signing, start, and completion. It is spelled out in writing on your estimate before you sign.
 
 **Footer CTA**
 
@@ -342,11 +342,12 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[LIST]**
 
-- **Tear-off and disposal.** The old roof comes off and gets hauled away. [CONFIRM: decking inspection and rotted-wood replacement policy]  
-- **CertainTeed shingles.** The shingles Ricardo uses on most jobs, with a manufacturer warranty on top of ours. Metal and flat roofing systems are available too. [LINK] CertainTeed roofing → /certainteed-roofing/  
+- **Tear-off and disposal.** The old roof comes off and gets hauled away. We inspect the decking underneath. Up to five sheets of replacement plywood are included; if the deck is in bad shape we tell you and quote a full re-deck before any work.  
+- **CertainTeed shingles.** Landmark and Landmark Pro, the shingles Ricardo uses on most jobs, installed as a full CertainTeed Integrity Roof System with SureStart PLUS 3-Star coverage on top of our own warranty. Standing seam metal and flat roofing systems are available too. [LINK] CertainTeed roofing → /certainteed-roofing/  
+- **Brava synthetic shake, slate, and tile.** For a cedar shake, slate, or Spanish tile look without the weight or the upkeep, we are a certified Brava installer. Brava is a composite that holds its color, takes hail and wind, and carries a 50-year limited warranty. Ask to see it at your inspection.  
 - **Flashing and ventilation.** Flashing replacement and ventilation or insulation upgrades, where most leaks and heat problems start.  
 - **Leak detection and waterproofing.** We find where water is getting in and seal the problem areas.  
-- **10-year workmanship warranty.** We stand behind our work. If something fails because of how we installed it, we come back and fix it. [CONFIRM against warranty document] [LINK] warranty details → /warranty/
+- **10-year workmanship warranty.** We stand behind our work. If something fails because of how we installed it, we come back and fix it. [LINK] warranty details → /warranty/
 
 **Process**
 
@@ -356,8 +357,8 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 1. **Inspection and consultation.** We start with a detailed inspection of your existing roof and go over the best replacement options.  
 2. **Custom plan and estimate.** You get a transparent proposal built around your needs, materials, and budget.  
-3. **Removal and replacement.** Old materials are carefully removed, and the new roof is installed to professional safety standards. [CONFIRM: most homes take X days]  
-4. **Warranty.** Your 10-year workmanship warranty and the CertainTeed manufacturer warranty, in writing. [CONFIRM: warranty registration step]
+3. **Removal and replacement.** Old materials are carefully removed, and the new roof is installed to professional safety standards. Most homes take one to three days.  
+4. **Warranty.** Your 10-year workmanship warranty and the CertainTeed manufacturer warranty, in writing. We register the CertainTeed warranty for you.
 
 **[IMAGE]** Before and after of a Northern Virginia home from the project gallery
 
@@ -367,7 +368,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[H3]** Financing
 
-**[P]** Monthly payments are available on roof replacements, so a failing roof doesn't have to wait. [CONFIRM: financing partner and terms] [LINK] financing options → /financing/
+**[P]** Monthly payments are available through Enhancify, so a failing roof doesn't have to wait. [LINK] financing options → /financing/
 
 **[H3]** Insurance
 
@@ -379,19 +380,19 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** How much does a roof replacement cost in Woodbridge?
 
-**[FAQ A]** Most Woodbridge roof replacements fall between [CONFIRM: range]. The final price depends on the roof's size, pitch, the number of old layers, and the materials you pick. Your free inspection comes with a written estimate.
+**[FAQ A]** The price depends on the roof's size, pitch, the number of old layers, the condition of the decking, and the shingle you pick, which is why we do not publish a range. Your free inspection comes with a written estimate, and Landmark and Landmark Pro quotes are usually ready on the spot.
 
 **[FAQ Q]** How long does it take to replace a roof?
 
-**[FAQ A]** Most homes take [CONFIRM: X] days once materials arrive. Weather can move the start date. We'll give you the schedule before we start, and we work to finish on time.
+**[FAQ A]** Most homes take one to three days once materials arrive. Weather can move the start date. We'll give you the schedule before we start, and we work to finish on time.
 
 **[FAQ Q]** Do I need to be home during the install?
 
-**[FAQ A]** [CONFIRM with Ricardo] Usually not. We need access to the outside of the house and room for a dumpster. We'll keep you updated from start to finish.
+**[FAQ A]** No. We need access to the outside of the house and room for a dumpster. We'll keep you updated from start to finish.
 
 **[FAQ Q]** What does your 10-year warranty cover?
 
-**[FAQ A]** Our workmanship warranty covers problems caused by how we installed the roof, for 10 years. The CertainTeed warranty covers the shingles themselves. You get both in writing at the final walk-through [CONFIRM: final walk-through]. [CONFIRM against Ricardo's warranty document]
+**[FAQ A]** Our workmanship warranty covers problems caused by how we installed the roof, for 10 years. The CertainTeed warranty covers the shingles themselves. You get both in writing at the final walk-through, and the workmanship warranty transfers once if you sell the house.
 
 **[FAQ Q]** Will homeowners insurance pay for a new roof?
 
@@ -399,11 +400,11 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** Will the price go up once work starts?
 
-**[FAQ A]** No surprise change orders. Our prices sit in the middle of the pack, not the cheapest and not the most expensive, and the written estimate is the price you pay. If we find rotted decking under the old roof, we’ll show you before any extra work happens. [CONFIRM: rotted decking policy]
+**[FAQ A]** No surprise change orders. Our prices sit in the middle of the pack, not the cheapest and not the most expensive, and the written estimate is the price you pay. Up to five sheets of replacement decking are included. If we find more rot than that under the old roof, we show you before any extra work happens.
 
 **[FAQ Q]** Do I have to pay a deposit before you start?
 
-**[FAQ A]** We know nobody wants to front money before they’ve seen any work. The payment schedule is spelled out in writing on your estimate before you sign. [CONFIRM: deposit schedule]
+**[FAQ A]** We know nobody wants to front money before they’ve seen any work. Half is due when the job starts and half when it is finished; larger projects are split in thirds at signing, start, and completion. It is spelled out in writing on your estimate before you sign.
 
 **CTA**
 
@@ -427,7 +428,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 | :---- | :---- |
 | [URL] | /roof-repair/ |
 | [META TITLE] | Roof Repair in Woodbridge, VA | RC All Exteriors LLC |
-| [META DESCRIPTION] | Leaks, missing shingles, and flashing repairs in Woodbridge and Northern Virginia. Honest advice on repair vs. replace. Call or text (703) 677-1976 for a free roof inspection. |
+| [META DESCRIPTION] | Leaks, missing shingles, and flashing repairs in Woodbridge and Northern Virginia. Honest advice on repair vs. replace, and a free roof inspection. |
 | Primary keyword | roof repair woodbridge va |
 | Supporting keywords | roof repair northern virginia, roof leak repair, shingle repair |
 | [SCHEMA] | Service (serviceType: Roof Repair) · FAQPage · BreadcrumbList |
@@ -442,7 +443,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[CTA SECONDARY]** Call or text (703) 677-1976
 
-**[TRUST BAR]** 49 five-star reviews · Class A licensed [CONFIRM: license \#] · Fully insured · Quick work (from our reviews)
+**[TRUST BAR]** 49 five-star reviews · Class A licensed · Fully insured · Quick work (from our reviews)
 
 **Intro**
 
@@ -482,7 +483,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 1. **Inspection and damage assessment.** We examine the roof and siding to find hidden damage and the root cause of the wear or leak.  
 2. **Repair plan and materials.** You get a detailed repair plan and price, with the most durable matching materials.  
-3. **The repair.** From shingle replacement to siding restoration, done right and on time. [CONFIRM: typical repair turnaround]
+3. **The repair.** From shingle replacement to siding restoration, done right and on time. Most repairs are done within 24 hours of the call.
 
 **[IMAGE]** Close-up before and after of a flashing or shingle repair
 
@@ -500,7 +501,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** How much does roof repair cost?
 
-**[FAQ A]** Small repairs, like replacing a few shingles or a pipe boot, cost far less than bigger jobs like re-flashing a chimney or replacing rotted decking. Most repairs we do fall between [CONFIRM: range]. You'll get a written price after the inspection.
+**[FAQ A]** Small repairs, like replacing a few shingles or a pipe boot, cost far less than bigger jobs like re-flashing a chimney or replacing rotted decking. We do not quote repair prices online because the fix depends on what we find. You'll get a written price after the inspection, and the repaired area carries a 60-day warranty.
 
 **[FAQ Q]** Can you match my existing shingles?
 
@@ -567,7 +568,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 1. **Stay safe.** Don't climb on the roof. Watch for downed lines and loose branches.  
 2. **Take photos.** Shoot the yard, the gutters, any fallen shingles, and inside stains, with the date.  
-3. **Stop the water.** If it's coming inside, call us for an emergency tarp [CONFIRM: emergency tarping offered]. [LINK] emergency roof repair → /emergency-roof-repair/  
+3. **Stop the water.** If it's coming inside, call us for an emergency tarp. [LINK] emergency roof repair → /emergency-roof-repair/  
 4. **Get an inspection.** A roofer's report gives your adjuster the evidence they need.  
 5. **Call your insurance company.** Open the claim once you know what's damaged.
 
@@ -593,12 +594,12 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[LIST]**
 
-- **Storm damage inspection.** We check the roof for wind and hail damage. [CONFIRM: photo documentation provided]  
+- **Storm damage inspection.** We check the roof for wind and hail damage and photograph everything for your claim.  
 - **Estimate for your claim.** What needs to be repaired or replaced, and why.  
-- **Adjuster meeting.** We can meet your adjuster on the roof to walk the damage together. [CONFIRM: Ricardo attends adjuster meetings]  
+- **Adjuster meeting.** We meet your adjuster on the roof to walk the damage together.  
 - **Straight talk on your options.** If the damage looks too small for a claim, we'll say so and quote the repair directly.
 
-**[P]** [CONFIRM with Ricardo before publishing] We never offer to cover or "waive" your deductible. A contractor who does that is putting you in a bad spot with your insurance company.
+**[P]** We never offer to cover or "waive" your deductible. A contractor who does that is putting you in a bad spot with your insurance company.
 
 **FAQ**
 
@@ -614,7 +615,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** Can you tarp my roof right away?
 
-**[FAQ A]** Yes. If water is coming in, we'll put a temporary tarp on to protect the house until the repair. [CONFIRM: emergency tarping offered] [CONFIRM: emergency availability and hours] Call or text (703) 677-1976.
+**[FAQ A]** Yes. If water is coming in, we'll put a temporary tarp on to protect the house until the repair. Emergency calls are answered after hours and on weekends, and we tell you a real arrival time when you call. Call or text (703) 677-1976.
 
 **[FAQ Q]** Will filing a claim raise my premium?
 
@@ -657,7 +658,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[CTA SECONDARY]** Call or text (703) 677-1976
 
-**[FORM]** Name · Phone · Street address and zip · What's going on? (Leak / Storm damage / Roof is getting old / Buying or selling a home / Other) · Best time to reach you. Button: "Book a Free Roof Inspection." Confirmation text: "Got it. Ricardo will call you within [CONFIRM: hours] to set a time."
+**[FORM]** Name · Phone · Street address and zip · What's going on? (Leak / Storm damage / Roof is getting old / Buying or selling a home / Other) · Best time to reach you. Button: "Book a Free Roof Inspection." Confirmation text: "Got it. We call back fast, usually within minutes during business hours, to set a time."
 
 **Who it's for**
 
@@ -680,14 +681,14 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 - Flashing around chimneys, walls, and skylights  
 - Vents and pipe boots  
 - Gutters and drip edge  
-- Ventilation [CONFIRM: attic check included]  
+- Ventilation, with an attic check when there is an active leak  
 - Storm damage: hail marks and wind-lifted shingles
 
 **What you get**
 
 **[H2]** What you get afterward
 
-**[P]** An honest read on your roof. If it needs work, you get a transparent written estimate. If it doesn't, we'll tell you that too, and you won't hear a sales pitch. [CONFIRM: photo report included]
+**[P]** An honest read on your roof. If it needs work, you get a transparent written estimate. If it doesn't, we'll tell you that too, and you won't hear a sales pitch. Either way you get the inspection photos in a written report.
 
 **[IMAGE]** Sample page from an inspection photo report
 
@@ -697,9 +698,9 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[STEPS]**
 
-1. **Book online or call.** Pick a time that works. [CONFIRM: usual lead time]  
-2. **We inspect.** Most inspections take [CONFIRM: 30 to 60 minutes].  
-3. **You get our answer.** [CONFIRM: same day, in person or by text]
+1. **Book online or call.** Pick a time that works. Most inspections happen within 24 to 48 hours.  
+2. **We inspect.** Most inspections take about 30 minutes.  
+3. **You get our answer.** Landmark and Landmark Pro quotes are usually ready on the spot; anything else within 24 hours, by call, text, or email, whichever you prefer.
 
 **FAQ**
 
@@ -711,7 +712,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** Do I need to be home?
 
-**[FAQ A]** Not for the roof itself. Many homeowners like to be there so Ricardo can walk them through what he found. If two of you make the decision, we'll walk you both through it. [CONFIRM]
+**[FAQ A]** Not for the roof itself. Many homeowners like to be there so Ricardo can walk them through what he found. If two of you make the decision, we'll walk you both through it.
 
 **[FAQ Q]** Will you try to sell me a new roof?
 
@@ -719,7 +720,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** Can you inspect a roof before I buy a house?
 
-**[FAQ A]** Yes. [CONFIRM: pre-purchase inspections] A roofer's inspection goes deeper on the roof than a general home inspection. Book as early in your inspection window as you can.
+**[FAQ A]** Not as part of a purchase. We don't do pre-purchase inspections for buyers. If you're selling, or you've just closed and want to know what you bought, book a free inspection and you'll get the same honest read.
 
 **CTA**
 

@@ -1,5 +1,5 @@
 {
-  "$comment": "Single source of truth for business facts (master prompt section 1.7). Schema, header, footer, sitemap and robots all read this file. Service-area business: there is no streetAddress here and there must never be one. A null value is an open CONFIRM with Ricardo; the site renders it as a visible placeholder and check-integrity fails a production build while it is null.",
+  "$comment": "Single source of truth for business facts (master prompt section 1.7). Schema, header, footer, sitemap and robots all read this file. Service-area business: there is no streetAddress here and there must never be one. Filled from Ricardo's launch answers on 2026-10-19 (licence, Facebook, Google review link, Brava). A null profile is simply not rendered.",
   "name": "RC All Exteriors",
   "legalName": "RC All Exteriors LLC",
   "schemaType": "RoofingContractor",
@@ -19,7 +19,14 @@
     "displayLong": "Monday to Saturday, 7am to 5pm",
     "spec": [
       {
-        "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
         "opens": "07:00",
         "closes": "17:00"
       }
@@ -39,9 +46,13 @@
   ],
   "licence": {
     "label": "Virginia Class A Contractor",
-    "number": null
+    "number": "2705196138"
   },
-  "accreditations": ["BBB Accredited"],
+  "accreditations": [
+    "BBB Accredited",
+    "CertainTeed installer",
+    "Certified Brava installer"
+  ],
   "reviews": {
     "source": "Google",
     "fallbackRating": 5,
@@ -50,12 +61,17 @@
   },
   "profiles": {
     "instagram": "https://www.instagram.com/rcallexteriors",
-    "facebook": null,
-    "google": null,
+    "facebook": "https://www.facebook.com/p/RC-All-Exteriors-LLC-61586063353635/",
+    "google": "https://share.google/O2pYNZUopPGVS6teB",
     "bbb": null
   },
   "builtBy": {
     "label": "Website by The Surge Agency",
     "url": "https://thesurgeagency.com"
+  },
+  "leadNotify": {
+    "$comment": "Where website leads go. Set LEAD_NOTIFY_TO and LEAD_NOTIFY_CC on Vercel to these; the API reads env, not this file.",
+    "to": "info@rcallexteriors.com",
+    "cc": "rcroofingllc1@gmail.com"
   }
 }

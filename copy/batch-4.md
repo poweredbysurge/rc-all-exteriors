@@ -1,4 +1,4 @@
-Updated Sept 30 by Surge. Red [CONFIRM] = needs Ricardo’s answer before launch.
+Updated Sept 30 by Surge. Revised Oct 19 with Ricardo's answers to the launch questions and Sam's decisions. No [CONFIRM] placeholders remain in page copy.
 
 # RC All Exteriors Website Copy: Batch 4
 
@@ -56,31 +56,31 @@ GBP lists "Commercial Roof Installation". Commercial got no discussion on the la
 
 Hero
 
-[H1] Commercial Roofing in Northern Virginia
+[H1] Commercial Roofing in Northern Virginia
 
-[SUBHEAD] Roof installation, replacement, and repair for commercial buildings in Woodbridge and Northern Virginia [CONFIRM: building types].
+[SUBHEAD] Roof installation, replacement, and repair for offices, retail, warehouses, multi-family buildings, and HOA communities in Woodbridge and Northern Virginia.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-[TRUST BAR] Residential and commercial · Class A licensed [CONFIRM: license \#] · Fully insured · BBB accredited
+[TRUST BAR] Residential and commercial · Class A licensed · Fully insured · BBB accredited
 
 Intro
 
-[P] A leak over a storefront or an office means lost business, not just a wet ceiling. You need a roofer who shows up, finds the problem, and works around your hours.
+[P] A leak over a storefront or an office means lost business, not just a wet ceiling. You need a roofer who shows up, finds the problem, and works around your hours.
 
-[P] RC All Exteriors handles commercial roofing alongside our residential work. We're a Virginia Class A contractor, fully licensed and insured. [CONFIRM: types of commercial buildings Ricardo takes on]
+[P] RC All Exteriors handles commercial roofing alongside our residential work. We're a Virginia Class A contractor, fully licensed and insured, and we take on offices, retail, warehouses, multi-family buildings, and HOA communities.
 
 Services
 
-[H2] Commercial roofing services
+[H2] Commercial roofing services
 
 [LIST]
 
-- Flat and low-slope roofing: white membrane flat roofs for porches, additions and commercial buildings [CONFIRM: flat roof system, TPO, EPDM or modified bitumen]
+- Flat and low-slope roofing: TPO and EPDM membrane roofs for porches, additions, and commercial buildings
 - Metal roofing
-- Asphalt shingle roofs for commercial and multi-family buildings [CONFIRM: building types]
+- Asphalt shingle roofs for commercial and multi-family buildings
 - Leak detection and repair
 - Full roof replacement and tear-off
 - Storm and hail damage restoration, with insurance claim help
@@ -88,39 +88,39 @@ Services
 
 Process
 
-[H2] How it works
+[H2] How it works
 
 [STEPS]
 
-1.  Inspection and consultation. We inspect the roof and talk through your options and timeline.
-2.  Written proposal. A transparent proposal built around your building and budget.
-3.  Installation or repair. Work done safely, with scheduling that keeps your business running. [CONFIRM: after-hours or weekend work available]
+1.  Inspection and consultation. We inspect the roof and talk through your options and timeline.
+2.  Written proposal. A transparent proposal built around your building and budget.
+3.  Installation or repair. Work done safely, with after-hours and weekend scheduling available so your business keeps running.
 
 FAQ
 
-[H2] Commercial roofing questions
+[H2] Commercial roofing questions
 
-[FAQ Q] Can you work around our business hours?
+[FAQ Q] Can you work around our business hours?
 
-[FAQ A] [CONFIRM with Ricardo] Tell us your hours and we'll plan the schedule around them.
+[FAQ A] Yes. After-hours and weekend work is available. Tell us your hours and we'll plan the schedule around them.
 
-[FAQ Q] Do you provide proof of insurance?
+[FAQ Q] Do you provide proof of insurance?
 
-[FAQ A] Yes. We're fully licensed and insured, and we can provide certificates for property managers. [CONFIRM: COI provided on request]
+[FAQ A] Yes. We're fully licensed and insured, and we provide a certificate of insurance on request for property managers.
 
-[FAQ Q] Do you repair flat roofs?
+[FAQ Q] Do you repair flat roofs?
 
-[FAQ A] Yes. Flat roofing systems are part of what we install and repair.
+[FAQ A] Yes. Flat roofing systems are part of what we install and repair.
 
 CTA
 
-[H2] Get a straight answer about your building's roof
+[H2] Get a straight answer about your building's roof
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: /metal-roofing/ · /roof-repair/ · /storm-damage-roof-repair/ · /contact/ · / (breadcrumb)
+Internal links on this page: /metal-roofing/ · /roof-repair/ · /storm-damage-roof-repair/ · /contact/ · / (breadcrumb)
 
 ------------------------------------------------------------------------
 
@@ -142,7 +142,7 @@ Skylight Replacement in Woodbridge, VA \| RC All Exteriors
 
 [META DESCRIPTION]
 
-Leaking or foggy skylight? We repair and replace skylights in Woodbridge and Northern Virginia, and reflash them so they stay watertight.
+Leaking or foggy skylight? We repair and replace Velux skylights in Woodbridge and Northern Virginia, and reflash them so they stay watertight.
 
 Primary keyword
 
@@ -162,25 +162,25 @@ GBP service list: "Skylight installation" and "Skylight repair". Current site: "
 
 Hero
 
-[H1] Skylight Replacement and Repair in Woodbridge, VA
+[H1] Skylight Replacement and Repair in Woodbridge, VA
 
-[SUBHEAD] Leaking, foggy, or cracked skylights, repaired or replaced and sealed properly into your roof.
+[SUBHEAD] Leaking, foggy, or cracked skylights, repaired or replaced and sealed properly into your roof.
 
-[CTA PRIMARY] Book a Free Inspection
+[CTA PRIMARY] Book a Free Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-[TRUST BAR] Free roof inspection · Class A licensed [CONFIRM: license \#] · Fully insured · Local to Woodbridge
+[TRUST BAR] Free roof inspection · Class A licensed · Fully insured · Local to Woodbridge
 
 Intro
 
-[P] Skylights are one of the most common places for a roof to leak. Usually the glass isn't the problem. The flashing around it is.
+[P] Skylights are one of the most common places for a roof to leak. Usually the glass isn't the problem. The flashing around it is.
 
-[P] Because we're roofers, we don't just swap the skylight. We make sure the flashing and the shingles around it are sealed right.
+[P] Because we're roofers, we don't just swap the skylight. We make sure the flashing and the shingles around it are sealed right.
 
 Signs
 
-[H2] Signs your skylight needs work
+[H2] Signs your skylight needs work
 
 [LIST]
 
@@ -191,7 +191,7 @@ Signs
 
 Services
 
-[H2] Skylight services
+[H2] Skylight services
 
 [LIST]
 
@@ -200,29 +200,29 @@ Services
 - Flashing repair and resealing around existing skylights
 - Skylight replacement during a full roof replacement
 
-[P] Replacing your roof? That's the best time to replace an older skylight, since the flashing gets redone anyway. [LINK] roof replacement → /roof-replacement/
+[P] Replacing your roof? That's the best time to replace an older skylight, since the flashing gets redone anyway. [LINK] roof replacement → /roof-replacement/
 
 FAQ
 
-[H2] Skylight questions
+[H2] Skylight questions
 
-[FAQ Q] Can you fix a leaking skylight without replacing it?
+[FAQ Q] Can you fix a leaking skylight without replacing it?
 
-[FAQ A] Often, yes. If the glass and frame are fine, new flashing and sealing can stop the leak. We'll tell you after we look.
+[FAQ A] Often, yes. If the glass and frame are fine, new flashing and sealing can stop the leak. We'll tell you after we look.
 
-[FAQ Q] What skylight brands do you install?
+[FAQ Q] What skylight brands do you install?
 
-[FAQ A] [CONFIRM: skylight brands Ricardo installs]
+[FAQ A] Velux. We install and repair Velux skylights, and we flash them to the roof the same way we flash a chimney, so the skylight and the roof age together without a leak at the seam.
 
 CTA
 
-[H2] Stop the drip around your skylight
+[H2] Stop the drip around your skylight
 
-[CTA PRIMARY] Book a Free Inspection
+[CTA PRIMARY] Book a Free Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: /roof-repair/ · /roof-replacement/ · /emergency-roof-repair/ · / (breadcrumb)
+Internal links on this page: /roof-repair/ · /roof-replacement/ · /emergency-roof-repair/ · / (breadcrumb)
 
 ------------------------------------------------------------------------
 
@@ -264,61 +264,61 @@ Kept from current site
 
 Hero
 
-[H1] Roofing and Exterior Services
+[H1] Roofing and Exterior Services
 
-[SUBHEAD] Complete exterior services for homes and businesses in Woodbridge and Northern Virginia. From roofing to windows, one licensed contractor.
+[SUBHEAD] Complete exterior services for homes and businesses in Woodbridge and Northern Virginia. From roofing to windows, one licensed contractor.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
 Roofing
 
-[H2] Roofing
+[H2] Roofing
 
-[CARD] Roof Replacement \| Full residential and commercial roof replacements, with a 10-year workmanship warranty. \| /roof-replacement/
+[CARD] Roof Replacement \| Full residential and commercial roof replacements, with a 10-year workmanship warranty. \| /roof-replacement/
 
-[CARD] Roof Repair \| Leaks, shingles, flashing, vents, and chimneys, fixed with matching materials. \| /roof-repair/
+[CARD] Roof Repair \| Leaks, shingles, flashing, vents, and chimneys, fixed with matching materials. \| /roof-repair/
 
-[CARD] Storm Damage \| Wind and hail damage inspections, repairs, and insurance claim help. \| /storm-damage-roof-repair/
+[CARD] Storm Damage \| Wind and hail damage inspections, repairs, and insurance claim help. \| /storm-damage-roof-repair/
 
-[CARD] Emergency Roof Repair \| Water coming in right now? Call us. \| /emergency-roof-repair/
+[CARD] Emergency Roof Repair \| Water coming in right now? Call us. \| /emergency-roof-repair/
 
-[CARD] Free Roof Inspection \| A detailed inspection and a straight answer. \| /free-roof-inspection/
+[CARD] Free Roof Inspection \| A detailed inspection and a straight answer. \| /free-roof-inspection/
 
-[CARD] CertainTeed Roofing \| The shingle we install on most roofs. \| /certainteed-roofing/
+[CARD] CertainTeed Roofing \| The shingle we install on most roofs. \| /certainteed-roofing/
 
-[CARD] Metal Roofing \| Long-lasting metal roofs for homes and businesses. \| /metal-roofing/
+[CARD] Metal Roofing \| Long-lasting metal roofs for homes and businesses. \| /metal-roofing/
 
-[CARD] Commercial Roofing \| Flat and low-slope, metal, and shingle roofs for commercial buildings. \| /commercial-roofing/
+[CARD] Commercial Roofing \| Flat and low-slope, metal, and shingle roofs for commercial buildings. \| /commercial-roofing/
 
-[CARD] Skylights \| Leaking skylights repaired or replaced and reflashed. \| /skylights/
+[CARD] Skylights \| Leaking skylights repaired or replaced and reflashed. \| /skylights/
 
 Exteriors
 
-[H2] Windows, gutters, and siding
+[H2] Windows, gutters, and siding
 
-[CARD] Windows and Doors \| Energy-efficient windows and new entry, patio, and sliding doors. \| /windows-doors/
+[CARD] Windows and Doors \| Energy-efficient windows and new entry, patio, and sliding doors. \| /windows-doors/
 
-[CARD] Gutters \| Seamless aluminum and copper gutters that protect your foundation. \| /gutters/
+[CARD] Gutters \| Seamless aluminum and copper gutters that protect your foundation. \| /gutters/
 
-[CARD] Siding \| Vinyl, fiber cement, and wood siding, with color-matched repairs. \| /siding/
+[CARD] Siding \| Vinyl, fiber cement, and wood siding, with color-matched repairs. \| /siding/
 
 One contractor
 
-[H2] One contractor for the whole outside of your house
+[H2] One contractor for the whole outside of your house
 
-[P] Roof, gutters, siding, windows, and doors all work together to keep water out. When one licensed crew handles all of it, nothing gets missed between trades.
+[P] Roof, gutters, siding, windows, and doors all work together to keep water out. When one licensed crew handles all of it, nothing gets missed between trades.
 
 CTA
 
-[H2] Not sure what you need?
+[H2] Not sure what you need?
 
-[P] Start with a free inspection. We'll tell you what needs attention and what doesn't.
+[P] Start with a free inspection. We'll tell you what needs attention and what doesn't.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: all 12 service pages · /financing/ · / (breadcrumb)
+Internal links on this page: all 12 service pages · /financing/ · / (breadcrumb)
 
 ------------------------------------------------------------------------
 
@@ -340,7 +340,7 @@ Service Areas: Northern Virginia \| RC All Exteriors
 
 [META DESCRIPTION]
 
-RC All Exteriors serves Woodbridge, Lake Ridge, Lorton, Fairfax Station, Fairfax, Springfield, Alexandria, Arlington, McLean, and Great Falls with roofing, siding, gutters, and windows.
+RC All Exteriors serves Woodbridge, Lake Ridge, Lorton, Fairfax, Springfield, Alexandria, Arlington, and McLean with roofing, siding, gutters, and windows.
 
 Primary keyword
 
@@ -356,51 +356,51 @@ Ricardo's ICP questionnaire (Sept 21) and his GBP service area. Confirmed by Mar
 
 Hero
 
-[H1] Roofing Across Northern Virginia
+[H1] Roofing Across Northern Virginia
 
-[SUBHEAD] Based in Woodbridge. Serving homes and businesses from Lorton and Springfield up through Fairfax, Alexandria, and Arlington.
+[SUBHEAD] Based in Woodbridge. Serving homes and businesses from Lorton and Springfield up through Fairfax, Alexandria, and Arlington.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[IMAGE] Map of the service area centered on Woodbridge, 22192, with each city marked
+[IMAGE] Map of the service area centered on Woodbridge, 22192, with each city marked
 
 Cities
 
-[H2] Where we work
+[H2] Where we work
 
-[CARD] Woodbridge \| Our home base. \| /
+[CARD] Woodbridge \| Our home base. \| /
 
-[CARD] Lorton \| Roof replacement and repair in Lorton. \| /service-areas/lorton-va/
+[CARD] Lorton \| Roof replacement and repair in Lorton. \| /service-areas/lorton-va/
 
-[CARD] Fairfax \| Roofing contractor for Fairfax. \| /service-areas/fairfax-va/
+[CARD] Fairfax \| Roofing contractor for Fairfax. \| /service-areas/fairfax-va/
 
-[CARD] Springfield \| Roof repair and replacement in Springfield. \| /service-areas/springfield-va/
+[CARD] Springfield \| Roof repair and replacement in Springfield. \| /service-areas/springfield-va/
 
-[CARD] Alexandria \| Coming soon \| /service-areas/alexandria-va/ (month 2)
+[CARD] Alexandria \| Coming soon \| /service-areas/alexandria-va/ (month 2)
 
-[CARD] Fairfax Station \| Coming soon \| /service-areas/fairfax-station-va/ (month 2)
+[CARD] Fairfax Station \| Coming soon \| /service-areas/fairfax-station-va/ (month 2)
 
-[CARD] Arlington \| Coming soon \| /service-areas/arlington-va/ (month 3)
+[CARD] Arlington \| Coming soon \| /service-areas/arlington-va/ (month 3)
 
-[CARD] McLean \| Coming soon \| /service-areas/mclean-va/ (month 3)
+[CARD] McLean \| Coming soon \| /service-areas/mclean-va/ (month 3)
 
-[CARD] Great Falls \| Coming soon \| /service-areas/great-falls-va/ (month 3)
+[CARD] Great Falls \| Coming soon \| /service-areas/great-falls-va/ (month 3)
 
-[P] Lake Ridge and the neighborhoods around Woodbridge are covered from our home base. Don't see your town? Call or text (703) 677-1976 and ask.
+[P] Lake Ridge and the neighborhoods around Woodbridge are covered from our home base. Don't see your town? Call or text (703) 677-1976 and ask.
 
-[P] Build note for Claude Code: until the month 2 and 3 city pages exist, show those cities as plain text, not links.
+[P] Build note for Claude Code: until the month 2 and 3 city pages exist, show those cities as plain text, not links.
 
 CTA
 
-[H2] Local roofer, local reviews
+[H2] Local roofer, local reviews
 
-[P] Our 49 five-star reviews [CONFIRM: update count at launch] come from homeowners across Northern Virginia.
+[P] Our 49 five-star reviews come from homeowners across Northern Virginia.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: / · each live city page · /reviews/ · /contact/
+Internal links on this page: / · each live city page · /reviews/ · /contact/
 
 ------------------------------------------------------------------------
 
@@ -418,11 +418,11 @@ Value
 
 [META TITLE]
 
-RC All Exteriors Reviews \| 49 Five-Star Google Reviews [CONFIRM: update count at launch]
+RC All Exteriors Reviews \| 49 Five-Star Google Reviews
 
 [META DESCRIPTION]
 
-Read what homeowners across Northern Virginia say about RC All Exteriors. We have 49 Google reviews, and every one of them is five stars. [CONFIRM: update count at launch]
+Read what homeowners across Northern Virginia say about RC All Exteriors. We have 49 Google reviews, and every one of them is five stars. Verbatim.
 
 Primary keyword
 
@@ -430,7 +430,7 @@ rc all exteriors reviews
 
 [SCHEMA]
 
-RoofingContractor with aggregateRating (5.0, 49 reviews) [CONFIRM: update count at launch]. Review markup only for reviews shown on the page, pulled from Google
+RoofingContractor with aggregateRating (5.0, 49 reviews), counts live from the reviews proxy. Review markup only for reviews shown on the page, pulled from Google
 
 Source
 
@@ -438,49 +438,49 @@ GBP: 49 reviews, all 5 stars. Themes: fair pricing (7), competitive pricing (5),
 
 Hero
 
-[H1] RC All Exteriors Reviews
+[H1] RC All Exteriors Reviews
 
-[SUBHEAD] 49 Google reviews [CONFIRM: update count at launch]. Every one of them five stars.
+[SUBHEAD] 49 Google reviews. Every one of them five stars.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Leave Us a Review [CONFIRM: Google review link]
+[CTA SECONDARY] Leave Us a Review → https://share.google/O2pYNZUopPGVS6teB
 
 Themes
 
-[H2] What customers bring up most
+[H2] What customers bring up most
 
 [LIST]
 
-- Fair pricing: mentioned 7 times
-- Competitive pricing: 5 times
-- Quick work: 4 times
-- Polite staff: 4 times
-- Help with the insurance process: 3 times
-- A thorough, tidy crew: 3 times each
-- Clear communication: 3 times
+- Fair pricing: mentioned 7 times
+- Competitive pricing: 5 times
+- Quick work: 4 times
+- Polite staff: 4 times
+- Help with the insurance process: 3 times
+- A thorough, tidy crew: 3 times each
+- Clear communication: 3 times
 
-[P] These counts come straight from Google's review summary for our profile. [CONFIRM: update at launch]
+[P] These counts come straight from Google's review summary for our profile.
 
 Reviews
 
-[H2] In their own words
+[H2] In their own words
 
-[REVIEW] [Pull every review from the GBP, newest first. Show the reviewer's first name, date, star rating, and full text. Never edit or write reviews]
+[REVIEW] [Pull every review from the GBP, newest first. Show the reviewer's first name, date, star rating, and full text. Never edit or write reviews]
 
-[P] Build note for Claude Code: use a live Google reviews feed or a manual list Sam updates monthly. Do not hard-code made-up reviews.
+[P] Build note for Claude Code: use a live Google reviews feed or a manual list Sam updates monthly. Do not hard-code made-up reviews.
 
 CTA
 
-[H2] See why your neighbors hired us
+[H2] See why your neighbors hired us
 
-[P] Ask a neighbor who we worked for and whether the roof held up.
+[P] Ask a neighbor who we worked for and whether the roof held up.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: / · /about/ · /roof-replacement/ · /free-roof-inspection/
+Internal links on this page: / · /about/ · /roof-replacement/ · /free-roof-inspection/
 
 ------------------------------------------------------------------------
 
@@ -590,7 +590,7 @@ Reviews
 
 89
 
-Delivery decision: READY for client review. Commercial scores lower on persona match because it speaks to a secondary buyer, which is intended.
+Delivery decision: READY for client review. Commercial scores lower on persona match because it speaks to a secondary buyer, which is intended.
 
 ## 7. What Ricardo needs to send for this batch
 

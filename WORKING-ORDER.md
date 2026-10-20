@@ -24,6 +24,17 @@
 - `src/lib/rhythm.ts` plans every copy-driven page: opening photo beside the first section (by job type, rotated by route), one dark band in the first half, CTA band below the FAQ when it would crowd the dark band. Wired into `[service].astro`, `TrustPage.astro`; city pages and the offer page set by hand (city services grid is the dark band with photo cards). `ContentSection` takes `photo` and `bg="contrast"`; one unlayered `.on-dark` rule inverts the fg utilities. `npm run audit:rhythm` prints the result per page. Both gates pass.
 - Opening photos repeat across pages (five photos for 28 pages) and the commercial page falls back to a house photo. Photo originals remain the blocker.
 
+**Round 5, same day: Ricardo's answers, placeholder-free site (ADR-007)**
+- Every `[CONFIRM]` in `copy/batch-1..5.md` resolved from the launch-questions Google Doc and Sam's seven decisions (ADR-007). Eight title and description lengths fixed in the copy. Brava paragraph on roof replacement, Brava and CertainTeed SureStart PLUS 3-Star detail on About, Enhancify terms on Financing, ProVia, Velux, Leaf Relief, CertainTeed and Hardie siding lines, TPO and EPDM, standing seam, 60-day repair warranty, after-hours emergency line, no prices anywhere.
+- Code: `PhotoGap` and empty `ReviewCard` render nothing, `Figure` drops unknown towns, city pages carry neighborhoods and a general RC project, external CTA hrefs, footer Facebook and Google review links, `business.json` filled.
+- `npm run check:production`: 0 CONFIRM slots. Its one failure is the LIVE host switch, by design until cutover. `check:layout` passes.
+
+**Still blocked, outside the repo**
+- Vercel env: `LEAD_NOTIFY_TO=info@rcallexteriors.com`, `LEAD_NOTIFY_CC=rcroofingllc1@gmail.com`, `RESEND_API_KEY`, `COMMAND_CENTER_TOKEN`, `GOOGLE_PLACES_KEY`, `GBP_PLACE_ID` (the review sections are empty until these two are set), `PUBLIC_GA_ID`.
+- Warranty PDF: Ricardo is sending it; check the workmanship-warranty sentences against it (10 years, one transfer, 60 days on repairs).
+- Ricardo: four case studies and the town for each photo; Fairfax, Springfield and Lorton jobs to replace the general project.
+- Cutover: `LAUNCH` to the real preview host and `LIVE` switch in `src/lib/site.ts`, `deploy/redirects.json` un-parked.
+
 **Round 4, same day: Ricardo's photos (92 files, sorted on Sam's Mac at `~/Desktop/RC All Exteriors`, MANIFEST.csv there)**
 - 25 originals into `src/assets/photos/` as `rc-*.jpg`, 2400px cap, registered in `src/data/photos.ts` with `pool: false` on people and process shots so they stay out of the opening-photo rotation. Hero is the unwatermarked colonial street view with a pre-cut 16:9 `heroSrc` (Gate A finding 9 closed). Slots filled: about hero, inspection page, roof replacement before-and-after, roof repair flashing, CertainTeed finished roof, process steps, homepage Why us and service cards, flat roof card. LCP photos rematched on commercial, storm, repair, gutters, siding, metal, inspection, Fairfax, Lorton.
 - CONFIRM list regenerated: 116 distinct (was 121). 10 photo slots remain and no file covers them (estimate walkthrough, estimate on the table, inspection report page, metal roof, hail marks, window or door before-and-after, three city before-and-afters, the map which stays schematic by ADR-004).

@@ -487,6 +487,8 @@ Measured on the Vercel production URL with Lighthouse mobile (Moto G Power profi
 - Pricing, warranty terms, financing terms and licence numbers come from an approved client source only. If unconfirmed, cut the sentence and flag it in the build log.
 - Phone number formatted consistently site-wide: `(301) 848-8508` visible, `tel:+13018488508` in the href.
 
+- **Placeholders have two modes.** In preview every unanswered fact, photo and review is a visible `[CONFIRM]` slot and the production gate fails while any remain. At launch, once the client has answered, the components that held slots render nothing rather than a label: no photo where none exists, no review card without a live review, no town in a caption until it is known. The gate stays in the build and must report zero; it is never deleted to get past it. City pages may publish without a local job only by a logged decision (research-backed local context, a general project named as such, no invented job or review).
+
 ---
 
 ## 17. Accessibility floor
@@ -672,6 +674,8 @@ CLIENT DECISIONS ALREADY MADE: [Anything that overrides a default in this prompt
 ---
 
 ## Changelog
+
+- **1.3 (2026-10-19), fifth pass:** Placeholder modes, preview versus launch (section 16). From the RC launch pass, ADR-007.
 
 - **1.3 (2026-10-19), fourth pass:** Portrait hero sources need a pre-cut 16:9 file (section 13). RC STANDARDS 37.
 

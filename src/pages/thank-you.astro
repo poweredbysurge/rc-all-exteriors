@@ -6,7 +6,6 @@
 import Base from '@/layouts/Base.astro';
 import Icon from '@/components/Icon.astro';
 import Section from '@/components/Section.astro';
-import { confirmHtml } from '@/lib/render';
 import { PHONE, TEL } from '@/lib/site';
 ---
 
@@ -15,7 +14,7 @@ import { PHONE, TEL } from '@/lib/site';
     <div class="flex max-w-[720px] flex-col gap-8">
       <div class="flex items-start gap-3">
         <Icon name="check" size={32} class="mt-2 text-accent" />
-        <h1 class="heading text-h1 text-fg">Got it. Ricardo will call you within <Fragment set:html={confirmHtml('hours')} /> to set a time.</h1>
+        <h1 class="heading text-h1 text-fg">Got it. We call back fast, usually within minutes during business hours, to set a time.</h1>
       </div>
       <p class="text-fg">What happens next: we confirm a time, inspect the roof, and give you a straight answer with a written estimate if work is needed.</p>
       <p class="text-fg">Need us sooner? Call or text <a href={TEL} class="font-bold whitespace-nowrap text-accent hover:underline">{PHONE}</a>.</p>

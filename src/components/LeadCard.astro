@@ -15,7 +15,7 @@
 // Field names are the Command Center contract. Do not rename them.
 import Icon from './Icon.astro';
 import { BEST_TIMES, CONTACT_REASONS, REASONS, ROOF_AGES, URGENCIES } from '@/data/lead-form';
-import { confirmHtml, esc } from '@/lib/render';
+import { esc } from '@/lib/render';
 import { CONSENT_TEXT, CONSENT_TEXT_VERSION, PHONE, TEL } from '@/lib/site';
 
 interface Props {
@@ -242,11 +242,11 @@ const step2Panes = ['address', 'roof_age', 'urgency', 'best_time'] as const;
       {
         isContact ? (
           <Fragment>
-            Thanks. We'll call you within <Fragment set:html={confirmHtml('response time')} />.
+            Thanks. We call back fast, usually within minutes during business hours.
           </Fragment>
         ) : (
           <Fragment>
-            Got it. Ricardo will call you within <Fragment set:html={confirmHtml('hours')} /> to set a time.
+            Got it. We call back fast, usually within minutes during business hours, to set a time.
           </Fragment>
         )
       }

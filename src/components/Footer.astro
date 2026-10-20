@@ -118,6 +118,20 @@ const colTitle = 'mb-2 text-body-sm font-bold tracking-[0.02em] text-fg-inverse'
         <li>
           <a href={business.profiles.instagram} class={linkRow} rel="noopener">Instagram</a>
         </li>
+        {
+          business.profiles.facebook && (
+            <li>
+              <a href={business.profiles.facebook} class={linkRow} rel="noopener">Facebook</a>
+            </li>
+          )
+        }
+        {
+          business.profiles.google && (
+            <li>
+              <a href={business.profiles.google} class={linkRow} rel="noopener">Leave a Google review</a>
+            </li>
+          )
+        }
       </ul>
       <p class="text-body-sm font-medium text-fg-inverse-muted" data-sm>
         &copy; {year} {business.legalName} ·

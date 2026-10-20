@@ -1,21 +1,13 @@
 ---
-// A photo the site needs and does not have yet. Drawn as a labeled block,
-// never filled with stock (design/DESIGN-DEBT.md, "Photo gaps"). It carries
-// data-confirm, so a production build cannot ship with one.
-import Icon from './Icon.astro';
-
+// A photo the site needs and does not have yet. Since ADR-007 (2026-10-19)
+// nothing renders in its place: no labeled block, no stock, no placeholder.
+// The description stays in the call site so the slot is findable when the
+// photo arrives (grep PhotoGap).
 interface Props {
   desc: string;
-  ratio: number;
+  ratio?: number;
   icon?: string;
   class?: string;
 }
-const { desc, ratio, icon = 'file-text', class: className } = Astro.props;
+Astro.props;
 ---
-
-<figure data-confirm={`photo: ${desc}`} class:list={['m-0 flex min-w-0 flex-col gap-2', className]}>
-  <div class="flex items-center justify-center rounded-lg bg-surface-subtle text-accent" style={`aspect-ratio:${ratio}`}>
-    <Icon name={icon} size={32} />
-  </div>
-  <figcaption class="text-body-sm leading-snug font-medium text-fg-subtle" data-sm>Photo: {desc}</figcaption>
-</figure>

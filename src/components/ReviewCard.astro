@@ -1,37 +1,32 @@
 ---
-// One Google review, verbatim, or the labeled slot for one. Review text is
-// never typed in: it comes from the reviews proxy or the slot stays a
-// placeholder (and blocks a production build).
+// One Google review, verbatim. Review text is never typed in: it comes from
+// the reviews proxy, and without one the card renders nothing (ADR-007: no
+// placeholders on the live site). Set GOOGLE_PLACES_KEY and GBP_PLACE_ID on
+// Vercel and the slots fill on the next build.
 import Stars from './Stars.astro';
 import type { Review } from '@/lib/reviews';
 
 interface Props {
   review?: Review | null;
-  /** What the copy asked for in this slot, shown on the placeholder. */
+  /** What the copy asked for in this slot. Kept for the call sites; nothing renders without a review. */
   hint?: string;
   /** The lead quote on the homepage is set large on the accent tint. */
   variant?: 'card' | 'pullquote';
   class?: string;
 }
-const { review = null, hint = 'Pull from GBP', variant = 'card', class: className } = Astro.props;
+const { review = null, variant = 'card', class: className } = Astro.props;
 const date = review?.date
   ? new Date(review.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
   : null;
 ---
 
 {
-  variant === 'pullquote' ? (
+  !review ? null : variant === 'pullquote' ? (
     <figure class:list={['m-0 flex flex-col gap-5 rounded-lg bg-accent-tint p-6 lg:p-10', className]}>
       <svg aria-hidden="true" width="48" height="20" viewBox="0 0 48 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" class="block text-accent">
         <path d="M1 19 L24 3 L47 19" />
       </svg>
-      {review ? (
-        <blockquote class="heading m-0 text-h3 leading-tight text-fg">{review.text}</blockquote>
-      ) : (
-        <div class="placeholder-block min-h-24" data-confirm={`verbatim Google review: ${hint}`}>
-          Verbatim Google review<br />{hint}
-        </div>
-      )}
+      <blockquote class="heading m-0 text-h3 leading-tight text-fg">{review.text}</blockquote>
       <figcaption class="flex flex-wrap items-center gap-x-3 gap-y-2 text-body-sm" data-sm>
         <Stars rating={review?.rating ?? 5} class="text-accent" />
         {review && <span class="font-semibold whitespace-nowrap text-fg">{review.author}</span>}
@@ -44,13 +39,7 @@ const date = review?.date
         <Stars rating={review?.rating ?? 5} class="text-accent" />
         <span class="text-body-sm font-medium text-fg-muted">Google</span>
       </div>
-      {review ? (
-        <blockquote class="m-0 flex-1 text-fg">{review.text}</blockquote>
-      ) : (
-        <div class="placeholder-block min-h-[120px] flex-1" data-confirm={`verbatim Google review: ${hint}`}>
-          Verbatim Google review<br />{hint}
-        </div>
-      )}
+      <blockquote class="m-0 flex-1 text-fg">{review.text}</blockquote>
       {review && (
         <figcaption class="text-body-sm font-semibold text-fg" data-sm>
           {review.author}

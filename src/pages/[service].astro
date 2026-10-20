@@ -20,7 +20,6 @@ import { routeByPath, serviceByHref, services } from '@/data/nav';
 import { materials, repairOrReplace } from '@/data/roof-replacement';
 import { blocksOf, faqs, first, getPage, plain, section, type ListBlock, type Section as CopySection } from '@/lib/copy';
 import { metaFor } from '@/lib/page';
-import { confirmHtml } from '@/lib/render';
 import { LCP_MAP, type PhotoKey } from '@/data/photos';
 import { planRhythm, faqSurface } from '@/lib/rhythm';
 import { faqSchema, serviceSchema } from '@/lib/schema';
@@ -85,7 +84,7 @@ const inlineLinks = new Set(
 );
 const more = page.internalLinks.filter((href) => href !== '/' && href !== path && !serviceByHref.has(href) && !inlineLinks.has(href) && routeByPath.has(href));
 
-const stepMedia = isReplacement ? (['ricardoRoof', { gap: 'written estimate on the kitchen table' }, 'newDecking', 'mansardShakeYardSign'] as const) : undefined;
+const stepMedia = isReplacement ? (['ricardoRoof', 'ricardoYardSign', 'newDecking', 'mansardShakeYardSign'] as const) : undefined;
 
 // Real photos for the copy's [IMAGE] slots, in order, where the subject exists
 // (2026-10-19 photos). Slots with no matching photo stay as labeled gaps.
@@ -166,7 +165,13 @@ const slotImages = IMAGE_SLOTS[path] ?? [];
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
                   {materials.map((m, k) => (
                     <a href={m.href} class="reveal group flex flex-col gap-3" style={`--reveal-i:${k}`}>
-                      {m.photo ? <Figure photo={m.photo} ratio={3 / 2} sizes="(min-width: 768px) 400px, 92vw" caption={m.caption} /> : <PhotoGap desc={m.caption} ratio={3 / 2} icon={m.icon} />}
+                      {m.photo ? (
+                        <Figure photo={m.photo} ratio={3 / 2} sizes="(min-width: 768px) 400px, 92vw" caption={m.caption} />
+                      ) : (
+                        <div class="flex items-center justify-center rounded-lg border border-border-subtle bg-surface-subtle text-accent" style="aspect-ratio:3/2">
+                          <Icon name={m.icon} size={40} />
+                        </div>
+                      )}
                       <span class="flex items-center gap-2.5">
                         <Icon name={m.icon} size={24} class="text-accent" />
                         <span class="heading text-h3 text-fg group-hover:text-accent">{m.title}</span>
@@ -190,8 +195,8 @@ const slotImages = IMAGE_SLOTS[path] ?? [];
                     <Icon name="file-text" size={32} class="text-accent" />
                     <div class="flex flex-col gap-2">
                       <h3 class="heading text-h3 text-fg">Pricing guidance</h3>
-                      <p class="text-body-sm text-fg" data-sm><Fragment set:html={confirmHtml('price range, deposit schedule')} /></p>
-                      <p class="text-body-sm text-fg-muted" data-sm>Your free inspection ends with a written estimate.</p>
+                      <p class="text-body-sm text-fg" data-sm>Half at the start, half at completion. Larger projects are split in thirds.</p>
+                      <p class="text-body-sm text-fg-muted" data-sm>Your free inspection ends with a written estimate, and that is the price you pay.</p>
                     </div>
                   </div>
                 </div>

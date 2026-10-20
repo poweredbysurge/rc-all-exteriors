@@ -14,6 +14,7 @@ import CtaBand from '@/components/CtaBand.astro';
 import Eyebrow from '@/components/Eyebrow.astro';
 import Faq from '@/components/Faq.astro';
 import Figure from '@/components/Figure.astro';
+import Icon from '@/components/Icon.astro';
 import Hero from '@/components/Hero.astro';
 import ReviewCard from '@/components/ReviewCard.astro';
 import Rich from '@/components/Rich.astro';
@@ -24,7 +25,6 @@ import { liveCities } from '@/data/nav';
 import type { PhotoKey } from '@/data/photos';
 import { blocksOf, faqs, first, getPage, plain, section } from '@/lib/copy';
 import { metaFor } from '@/lib/page';
-import { confirmHtml } from '@/lib/render';
 import { faqSchema, serviceSchema } from '@/lib/schema';
 
 export function getStaticPaths() {
@@ -43,14 +43,24 @@ const why = section(page, 'Why us');
 const faq = section(page, 'FAQ');
 const cta = section(page, 'CTA');
 const [lead, ...rest] = blocksOf(intro, 'p');
+// Proof section (ADR-007): the same general RC project on every city page,
+// the October mansard job with Brava synthetic shake, in progress and
+// finished, until Ricardo names a real job in that town. The copy says so.
 const proofPhotos: Record<string, [PhotoKey, PhotoKey]> = {
-  Fairfax: ['twoStory', 'colonial'],
-  Springfield: ['underlayment', 'twoStory'],
-  Lorton: ['colonial', 'mansard'],
+  Fairfax: ['underlaymentYardSign', 'mansardShakeYardSign'],
+  Springfield: ['underlaymentYardSign', 'mansardShakeFront'],
+  Lorton: ['shakeInstall', 'mansardShakeYardSign'],
+};
+// Neighborhood names: public geography, researched 2026-10-19 (ADR-007). Not
+// a claim that RC has worked in each one; the heading says "we serve".
+const neighborhoods: Record<string, string[]> = {
+  Fairfax: ['Mosby Woods', 'Mantua', 'Kings Park West', 'Greenbriar', 'Country Club Hills', 'Fairfax Villa', 'Fair Oaks'],
+  Springfield: ['North Springfield', 'West Springfield', 'Kings Park', 'Rolling Valley', 'Saratoga', 'Cardinal Forest', 'Springfield Estates'],
+  Lorton: ['Lorton Station', 'Laurel Hill', 'Lorton Valley', 'Crosspointe', 'Newington Forest', 'Gunston Manor', 'Pohick Estates'],
 };
 const mapTowns = ['Woodbridge', 'Lake Ridge', 'Lorton', 'Fairfax Station', 'Fairfax', 'Springfield'];
 // Homepage card order: replacement, repair, storm, other (ADR-005).
-const SERVICE_PHOTOS: PhotoKey[] = ['twoStory', 'underlayment', 'colonial', 'mansard'];
+const SERVICE_PHOTOS: PhotoKey[] = ['mansardShakeFront', 'chimneyFlashing', 'twoStoryWalk', 'colonialGarage'];
 ---
 
 <Base
@@ -87,13 +97,13 @@ const SERVICE_PHOTOS: PhotoKey[] = ['twoStory', 'underlayment', 'colonial', 'man
         <Eyebrow>Recent work</Eyebrow>
         <h2 class="heading text-h2 text-fg"><Rich inline={first(proof, 'h2')!.inline} /></h2>
       </div>
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6" data-confirm={`photos: before and after from a real ${name} job`}>
-        {proofPhotos[name].map((key) => <Figure photo={key} ratio={3 / 2} sizes="(min-width: 768px) 620px, 92vw" showTown class="reveal" />)}
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6">
+        {proofPhotos[name].map((key) => <Figure photo={key} ratio={3 / 2} sizes="(min-width: 768px) 620px, 92vw" class="reveal" />)}
       </div>
       <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-12">
         <div class="flex flex-col gap-4">
           {blocksOf(proof, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
-          <p class="text-body-sm text-fg-muted" data-sm>Full project write-up: <Fragment set:html={confirmHtml(`case study for the ${name} job`)} /></p>
+          {blocksOf(proof, 'links').map((l) => l.links.map((link) => <a href={link.href} class="link-arrow self-start">{link.text} <Icon name="arrow-right" size={18} /></a>))}
         </div>
         <ReviewCard hint={first(proof, 'review')!.hint} />
       </div>
@@ -123,7 +133,10 @@ const SERVICE_PHOTOS: PhotoKey[] = ['twoStory', 'underlayment', 'colonial', 'man
   <Section bg="muted" quiet name="Neighborhoods">
     <div class="flex flex-col gap-5">
       <h2 class="heading text-h3 text-fg">{name} neighborhoods we serve</h2>
-      <p class="text-body-sm text-fg" data-sm><Fragment set:html={confirmHtml('neighborhood names from Ricardo')} /></p>
+      <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+        {neighborhoods[name].map((n) => <li><span class="chip cursor-default">{n}</span></li>)}
+      </ul>
+      <p class="text-body-sm text-fg-muted" data-sm>And the streets around them. If you are in {name} and not on this list, you are still in range.</p>
     </div>
   </Section>
 

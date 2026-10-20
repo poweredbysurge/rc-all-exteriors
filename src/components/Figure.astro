@@ -1,10 +1,9 @@
 ---
 // A real job photo with its caption. AVIF and WebP with srcset, explicit
-// dimensions, lazy below the fold. The caption names the job type; the town
-// is a CONFIRM slot until Ricardo supplies it, never a guess.
+// dimensions, lazy below the fold. The caption names the job type and the
+// town only once Ricardo has supplied it, never a guess (ADR-007).
 import { photos, type PhotoKey } from '@/data/photos';
 import { sourceSet } from '@/lib/images';
-import { confirmHtml } from '@/lib/render';
 
 interface Props {
   photo: PhotoKey;
@@ -41,15 +40,6 @@ const set = await sourceSet(photo.src, [480, 768, 1024, 1440], { ratio });
   </div>
   <figcaption class="text-body-sm leading-snug font-medium text-fg-subtle" data-sm>
     {caption ?? photo.caption}
-    {
-      showTown &&
-        (photo.town ? (
-          <Fragment> · {photo.town}</Fragment>
-        ) : (
-          <Fragment>
-            · town <Fragment set:html={confirmHtml('from Ricardo')} />
-          </Fragment>
-        ))
-    }
+    {showTown && photo.town && <Fragment> · {photo.town}</Fragment>}
   </figcaption>
 </figure>

@@ -13,7 +13,6 @@ import Rich from '@/components/Rich.astro';
 import Section from '@/components/Section.astro';
 import { blocksOf, faqs, first, getPage, plain, section, type Inline } from '@/lib/copy';
 import { metaFor } from '@/lib/page';
-import { confirmHtml } from '@/lib/render';
 import { faqSchema, serviceSchema } from '@/lib/schema';
 
 const path = '/free-roof-inspection/';
@@ -110,7 +109,7 @@ const timeline = [
                 <div class:list={['flex flex-col gap-1.5', i < timeline.length - 1 && 'pb-7']}>
                   <h3 class="text-body leading-snug font-semibold text-fg">{row.title}</h3>
                   <p class="rich text-fg-muted">
-                    {row.body ? <Rich inline={row.body} /> : <Fragment>Ricardo will call you within <Fragment set:html={confirmHtml('hours')} /> to set a time.</Fragment>}
+                    {row.body ? <Rich inline={row.body} /> : <Fragment>We call back fast, usually within minutes during business hours, to set a time.</Fragment>}
                   </p>
                 </div>
               </li>

@@ -8,7 +8,6 @@ import CtaBand from './CtaBand.astro';
 import Faq from './Faq.astro';
 import Figure from './Figure.astro';
 import PageHero from './PageHero.astro';
-import PhotoGap from './PhotoGap.astro';
 import Rich from './Rich.astro';
 import Section from './Section.astro';
 import type { PhotoKey } from '@/data/photos';
@@ -50,8 +49,8 @@ const { plans: plan } = planRhythm(body, {
   heroPhoto: heroPhoto ?? 'text',
   bandAfter: -1,
   tailLights: faqSection ? 1 : 0,
-  offset: heroImage ? 1 : 0,
-  firstPhoto: !heroImage,
+  offset: heroPhoto ? 1 : 0,
+  firstPhoto: !heroPhoto,
 });
 ---
 
@@ -73,14 +72,10 @@ const { plans: plan } = planRhythm(body, {
   />
 
   {
-    heroImage && (
+    heroPhoto && (
       <Section bg="surface" quiet name="Hero photo">
         <div class="mx-auto max-w-[960px]">
-          {heroPhoto ? (
-            <Figure photo={heroPhoto} ratio={3 / 2} sizes="(min-width: 1024px) 960px, 92vw" showTown />
-          ) : (
-            <PhotoGap desc={heroImage.desc.replace(/\.$/, '')} ratio={3 / 2} />
-          )}
+          <Figure photo={heroPhoto} ratio={3 / 2} sizes="(min-width: 1024px) 960px, 92vw" showTown />
         </div>
       </Section>
     )

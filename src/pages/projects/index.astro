@@ -12,7 +12,6 @@ import { services } from '@/data/nav';
 import { photos, type PhotoKey } from '@/data/photos';
 import { caseStudies } from '@/data/projects';
 import { first, getPage, section } from '@/lib/copy';
-import { confirmHtml } from '@/lib/render';
 import { slugify } from '@/lib/text';
 
 const path = '/projects/';
@@ -31,9 +30,6 @@ const jobs = [...new Set(keys.map((k) => photos[k].job))];
         <button type="button" class="chip cursor-pointer" aria-pressed="true" data-filter="all">All work</button>
         {jobs.map((job) => <button type="button" class="chip cursor-pointer" aria-pressed="false" data-filter={slugify(job)}>{job}</button>)}
       </div>
-      <p class="text-body-sm text-fg-muted" data-sm>
-        Town for each photo: <Fragment set:html={confirmHtml('Ricardo tags each photo with town and job type')} />. Until then every photo files under Other.
-      </p>
       <ul class="m-0 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-2 lg:grid-cols-3">
         {
           keys.map((key) => (
@@ -57,7 +53,7 @@ const jobs = [...new Set(keys.map((k) => photos[k].job))];
             ))}
           </ul>
         ) : (
-          <p class="text-fg-muted"><Fragment set:html={confirmHtml('details for the 4 launch case studies, from real jobs')} /></p>
+          <p class="text-fg-muted">Full write-ups of recent jobs are on the way. Until then, the gallery above is the work, and the reviews page is what homeowners said about it.</p>
         )
       }
       <ul class="m-0 flex list-none flex-wrap gap-2 p-0">

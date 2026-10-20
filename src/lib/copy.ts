@@ -216,7 +216,8 @@ function parseCta(kind: 'primary' | 'secondary', body: string): CtaBlock {
     confirm = confirmLabel(c[1]);
     label = label.replace(c[0], '');
   }
-  const h = label.match(/→\s*(\/\S*)/);
+  // Internal routes and, since 2026-10-19, external links (the Enhancify application, the Google review link).
+  const h = label.match(/→\s*((?:\/|https?:\/\/)\S*)/);
   if (h) {
     href = h[1];
     label = label.replace(h[0], '');

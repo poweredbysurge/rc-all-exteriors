@@ -1,4 +1,4 @@
-Updated Sept 30 by Surge. Red [CONFIRM] = needs Ricardo’s answer before launch.
+Updated Sept 30 by Surge. Revised Oct 19 with Ricardo's answers to the launch questions and Sam's decisions. No [CONFIRM] placeholders remain in page copy.
 
 # RC All Exteriors Website Copy: Batch 3
 
@@ -50,25 +50,25 @@ Full services list · 4 benefits (energy efficiency, security, looks, noise) · 
 
 Hero
 
-[H1] Window and Door Replacement in Woodbridge, VA
+[H1] Window and Door Replacement in Woodbridge, VA
 
-[SUBHEAD] Energy-efficient windows and new entry, patio, and sliding doors, installed and sealed right by a licensed local contractor.
+[SUBHEAD] Energy-efficient windows and new entry, patio, and sliding doors, installed and sealed right by a licensed local contractor.
 
-[CTA PRIMARY] Book a Free Inspection
+[CTA PRIMARY] Book a Free Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-[TRUST BAR] 49 five-star reviews · Class A licensed [CONFIRM: license \#] · Fully insured · Insurance claim help
+[TRUST BAR] 49 five-star reviews · Class A licensed · Fully insured · Insurance claim help
 
 Intro
 
-[P] Drafty rooms. Windows that fog up between the panes. A front door that sticks every summer. Old windows and doors cost you money every month and make the house harder to keep comfortable.
+[P] Drafty rooms. Windows that fog up between the panes. A front door that sticks every summer. Old windows and doors cost you money every month and make the house harder to keep comfortable.
 
-[P] New windows and doors cut drafts, lower your energy bills, and make the whole house look newer from the street. We're a local Woodbridge crew, not a truck that follows the storms, and we'll walk you both through the options at a free inspection.
+[P] New windows and doors cut drafts, lower your energy bills, and make the whole house look newer from the street. We're a local Woodbridge crew, not a truck that follows the storms, and we'll walk you both through the options at a free inspection.
 
 Services
 
-[H2] Window and door services
+[H2] Window and door services
 
 [LIST]
 
@@ -83,52 +83,52 @@ Services
 
 Benefits
 
-[H2] What new windows and doors do for your home
+[H2] What new windows and doors do for your home
 
 [LIST]
 
-- Lower energy bills. Better windows and doors keep the heat in during winter and out during summer.
-- Better security. Stronger frames and modern locks make your home harder to break into.
-- A fresher look. New windows and doors change how the whole house looks from the street.
-- A quieter house. Good insulation and sealing cut outside noise.
+- Lower energy bills. Better windows and doors keep the heat in during winter and out during summer.
+- Better security. Stronger frames and modern locks make your home harder to break into.
+- A fresher look. New windows and doors change how the whole house looks from the street.
+- A quieter house. Good insulation and sealing cut outside noise.
 
 Process
 
-[H2] How it works
+[H2] How it works
 
 [STEPS]
 
-1.  Inspection and consultation. We look at your current windows and doors for damage, drafts, and energy loss.
-2.  Planning and materials. You choose styles and materials that fit your home and budget. You get a transparent written estimate at a fair, middle-of-the-pack price. We quote only what your home needs, with no upselling and no surprise change orders.
-3.  Installation or repair. Precise fitting and airtight sealing, built to last, with a clean job site and the timeline we promised. [CONFIRM: typical install time] Your warranty paperwork is in your hands when we finish. [CONFIRM: window/door warranty]
+1.  Inspection and consultation. We look at your current windows and doors for damage, drafts, and energy loss.
+2.  Planning and materials. You choose styles and materials that fit your home and budget. You get a transparent written estimate at a fair, middle-of-the-pack price. We quote only what your home needs, with no upselling and no surprise change orders.
+3.  Installation or repair. Precise fitting and airtight sealing, built to last, with a clean job site and the timeline we promised, usually two to three days depending on the size of the job. Your ProVia warranty paperwork is in your hands when we finish.
 
-[IMAGE] Before and after of a window or front door replacement from the project gallery
+[IMAGE] Before and after of a window or front door replacement from the project gallery
 
 FAQ
 
-[H2] Window and door questions
+[H2] Window and door questions
 
-[FAQ Q] How much does window replacement cost in Woodbridge?
+[FAQ Q] How much does window replacement cost in Woodbridge?
 
-[FAQ A] It depends on the number of windows, their size, and the style you pick. [CONFIRM: price range per window] You'll get a written price after we measure. Our pricing is middle of the pack: not the cheapest, not the most expensive.
+[FAQ A] It depends on the number of windows, their size, and the style you pick, so we do not quote per-window prices online. You'll get a written price after we measure. Our pricing is middle of the pack: not the cheapest, not the most expensive.
 
-[FAQ Q] What window brands do you install?
+[FAQ Q] What window brands do you install?
 
-[FAQ A] [CONFIRM: window and door brands]
+[FAQ A] ProVia windows and entry doors. ProVia backs them with a limited lifetime warranty, and we go over the exact terms with you at the estimate.
 
-[FAQ Q] Can you replace windows and a roof at the same time?
+[FAQ Q] Can you replace windows and a roof at the same time?
 
-[FAQ A] Yes. We handle roofing, siding, gutters, windows, and doors, so one contractor can do the whole outside of your house.
+[FAQ A] Yes. We handle roofing, siding, gutters, windows, and doors, so one contractor can do the whole outside of your house.
 
 CTA
 
-[H2] Stop paying to heat the outdoors
+[H2] Stop paying to heat the outdoors
 
-[CTA PRIMARY] Book a Free Inspection
+[CTA PRIMARY] Book a Free Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: /siding/ · /gutters/ · /roof-replacement/ · /financing/ · / (breadcrumb)
+Internal links on this page: /siding/ · /gutters/ · /roof-replacement/ · /financing/ · / (breadcrumb)
 
 ------------------------------------------------------------------------
 
@@ -170,38 +170,37 @@ Gutter services list (installation and replacement, cleaning and clog removal, s
 
 Hero
 
-[H1] Gutter Installation and Replacement in Woodbridge, VA
+[H1] Gutter Installation and Replacement in Woodbridge, VA
 
-[SUBHEAD] Seamless aluminum and copper gutters that move water away from your roof, siding, and foundation.
+[SUBHEAD] Seamless aluminum and copper gutters that move water away from your roof, siding, and foundation.
 
-[CTA PRIMARY] Book a Free Inspection
+[CTA PRIMARY] Book a Free Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-[TRUST BAR] 49 five-star reviews · Class A licensed [CONFIRM: license \#] · Fully insured · Roofing and gutters from one crew
+[TRUST BAR] 49 five-star reviews · Class A licensed · Fully insured · Roofing and gutters from one crew
 
 Intro
 
-[P] Gutters don't get much attention until they fail. Then water spills over the edge, soaks the fascia, stains the siding, and pools against the foundation.
+[P] Gutters don't get much attention until they fail. Then water spills over the edge, soaks the fascia, stains the siding, and pools against the foundation.
 
-[P] Properly installed gutters protect your foundation, roof, and walls from leaks and moisture. Since we're roofers too, we make sure the gutters and the roof edge work together. We're local, not a storm chaser, and we won't upsell you on work you don't need.
+[P] Properly installed gutters protect your foundation, roof, and walls from leaks and moisture. Since we're roofers too, we make sure the gutters and the roof edge work together. We're local, not a storm chaser, and we won't upsell you on work you don't need.
 
 Services
 
-[H2] Gutter services
+[H2] Gutter services
 
 [LIST]
 
 - Gutter installation and replacement
 - Seamless aluminum or copper gutter systems
-- Gutter cleaning and clog removal [CONFIRM: gutter cleaning offered]
 - Soffit and fascia repair
 - Water drainage and protection upgrades
-- Gutter guards [CONFIRM: gutter guard brand]
+- Gutter guards: we install Leaf Relief
 
 Signs
 
-[H2] Signs your gutters need replacing
+[H2] Signs your gutters need replacing
 
 [LIST]
 
@@ -213,39 +212,39 @@ Signs
 
 Process
 
-[H2] How it works
+[H2] How it works
 
 [STEPS]
 
-1.  Inspection and assessment. We check your gutters, downspouts, fascia, and roof edge.
-2.  Plan and materials. You get a transparent plan and help choosing aluminum or copper, colors, and sizes. We'll walk you both through it, and the price we quote is the price you pay, with no surprise change orders.
-3.  Installation. Precise installation and repairs, a clean job site, and done on the timeline we promised. [CONFIRM: typical install time]
+1.  Inspection and assessment. We check your gutters, downspouts, fascia, and roof edge.
+2.  Plan and materials. You get a transparent plan and help choosing aluminum or copper, colors, and sizes. We'll walk you both through it, and the price we quote is the price you pay, with no surprise change orders.
+3.  Installation. Precise installation and repairs, a clean job site, and done on the timeline we promised, usually two to three days depending on the size of the job.
 
 FAQ
 
-[H2] Gutter questions
+[H2] Gutter questions
 
-[FAQ Q] What are seamless gutters?
+[FAQ Q] What are seamless gutters?
 
-[FAQ A] Seamless gutters are formed in one continuous piece to fit your house, instead of short sections joined together. Fewer seams means fewer places to leak.
+[FAQ A] Seamless gutters are formed in one continuous piece to fit your house, instead of short sections joined together. Fewer seams means fewer places to leak.
 
-[FAQ Q] How much does gutter installation cost?
+[FAQ Q] How much does gutter installation cost?
 
-[FAQ A] It depends on the length of your roofline, the number of downspouts, and the material. Copper costs more than aluminum. [CONFIRM: typical price range] You'll get a written price at your free inspection, and our pricing is middle of the pack.
+[FAQ A] It depends on the length of your roofline, the number of downspouts, and the material. Copper costs more than aluminum. We do not publish gutter prices because every roofline is different. You'll get a written price at your free inspection, and our pricing is middle of the pack.
 
-[FAQ Q] Should I replace gutters when I replace my roof?
+[FAQ Q] Should I replace gutters when I replace my roof?
 
-[FAQ A] Often, yes. If your gutters are older or damaged, doing both at once saves a second visit. It also makes sure the new roof edge and gutters fit together.
+[FAQ A] Often, yes. If your gutters are older or damaged, doing both at once saves a second visit. It also makes sure the new roof edge and gutters fit together.
 
 CTA
 
-[H2] Keep water where it belongs
+[H2] Keep water where it belongs
 
-[CTA PRIMARY] Book a Free Inspection
+[CTA PRIMARY] Book a Free Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: /roof-replacement/ · /siding/ · /roof-repair/ · /guides/gutter-guards-cost/ (when published) · / (breadcrumb)
+Internal links on this page: /roof-replacement/ · /siding/ · /roof-repair/ · /guides/gutter-guards-cost/ (when published) · / (breadcrumb)
 
 ------------------------------------------------------------------------
 
@@ -287,81 +286,81 @@ Kept from current site
 
 Hero
 
-[H1] Siding Replacement and Repair in Northern Virginia
+[H1] Siding Replacement and Repair in Northern Virginia
 
-[SUBHEAD] Vinyl, fiber cement, and wood siding, installed or repaired by a licensed Woodbridge contractor. We match colors on repairs.
+[SUBHEAD] CertainTeed vinyl and James Hardie fiber cement siding, installed or repaired by a licensed Woodbridge contractor. We match colors on repairs.
 
-[CTA PRIMARY] Book a Free Inspection
+[CTA PRIMARY] Book a Free Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-[TRUST BAR] 49 five-star reviews · Class A licensed [CONFIRM: license \#] · Fully insured · Storm damage help
+[TRUST BAR] 49 five-star reviews · Class A licensed · Fully insured · Storm damage help
 
 Intro
 
-[P] Cracked panels, warped boards, and faded siding do more than look tired. They let water behind the wall, where it rots the sheathing and nobody sees it until it's a bigger job.
+[P] Cracked panels, warped boards, and faded siding do more than look tired. They let water behind the wall, where it rots the sheathing and nobody sees it until it's a bigger job.
 
-[P] Whether you need a few panels replaced after a storm or new siding on the whole house, we'll tell you which one makes sense. We're a local crew, not a storm chaser, and we won't upsell you a full replacement you don't need.
+[P] Whether you need a few panels replaced after a storm or new siding on the whole house, we'll tell you which one makes sense. We're a local crew, not a storm chaser, and we won't upsell you a full replacement you don't need.
 
 Services
 
-[H2] Siding services
+[H2] Siding services
 
 [LIST]
 
 - Siding crack and panel replacement
 - Siding repair with color matching
-- Full siding replacement: vinyl, fiber cement, wood, and more
+- Full siding replacement: CertainTeed MainStreet and Monogram vinyl, James Hardie HardiePlank fiber cement
 - Soffit and fascia repair
 - Storm and hail damage restoration
 - Insurance claim assistance and estimates
 
 Benefits
 
-[H2] Why new siding pays off
+[H2] Why new siding pays off
 
 [LIST]
 
-- Water stays out. Sound siding keeps moisture away from your walls and framing.
-- Lower energy bills. Insulated siding helps keep indoor temperatures steady.
-- Better curb appeal. New siding changes the look of the whole house.
-- Less upkeep. Quality materials resist cracking, warping, and fading.
+- Water stays out. Sound siding keeps moisture away from your walls and framing.
+- Lower energy bills. Insulated siding helps keep indoor temperatures steady.
+- Better curb appeal. New siding changes the look of the whole house.
+- Less upkeep. Quality materials resist cracking, warping, and fading.
 
 Process
 
-[H2] How it works
+[H2] How it works
 
 [STEPS]
 
-1.  Inspection and assessment. We look at your siding for damage, moisture, and wear.
-2.  Plan and materials. A transparent repair or replacement plan, and help choosing the right material and color for your budget. Fair, middle-of-the-pack pricing with no surprise change orders, and we'll walk you both through it.
-3.  Installation or repair. Precise work focused on quality, safety, and durability. We keep the job site clean and finish on the timeline we promised. [CONFIRM: typical install time]
+1.  Inspection and assessment. We look at your siding for damage, moisture, and wear.
+2.  Plan and materials. A transparent repair or replacement plan, and help choosing the right material and color for your budget. Fair, middle-of-the-pack pricing with no surprise change orders, and we'll walk you both through it.
+3.  Installation or repair. Precise work focused on quality, safety, and durability. We keep the job site clean and finish on the timeline we promised, usually two to three days depending on the size of the job.
 
 FAQ
 
-[H2] Siding questions
+[H2] Siding questions
 
-[FAQ Q] Can you match my existing siding on a repair?
+[FAQ Q] Can you match my existing siding on a repair?
 
-[FAQ A] We color-match repairs as closely as possible. Older siding fades and some styles get discontinued, so we'll show you the closest match before we install.
+[FAQ A] We color-match repairs as closely as possible. Older siding fades and some styles get discontinued, so we'll show you the closest match before we install.
 
-[FAQ Q] Vinyl or fiber cement?
+[FAQ Q] Vinyl or fiber cement?
 
-[FAQ A] Vinyl costs less and needs little upkeep. Fiber cement costs more but is heavier and more durable. We'll walk you through both at your free inspection.
+[FAQ A] Vinyl costs less and needs little upkeep. Fiber cement costs more but is heavier and more durable. We'll walk you through both at your free inspection.
 
-[FAQ Q] Does insurance cover siding damage?
+[FAQ Q] Does insurance cover siding damage?
 
-[FAQ A] If a storm caused it, often yes. We help with the claim and the paperwork, so it gets covered without a fight. [LINK] storm damage help → /storm-damage-roof-repair/
+[FAQ A] If a storm caused it, often yes. We help with the claim and the paperwork, so it gets covered without a fight. [LINK] storm damage help → /storm-damage-roof-repair/
 
 CTA
 
-[H2] Give your house a fresh face
+[H2] Give your house a fresh face
 
-[CTA PRIMARY] Book a Free Inspection
+[CTA PRIMARY] Book a Free Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: /gutters/ · /windows-doors/ · /storm-damage-roof-repair/ · /roof-repair/ · / (breadcrumb)
+Internal links on this page: /gutters/ · /windows-doors/ · /storm-damage-roof-repair/ · /roof-repair/ · / (breadcrumb)
 
 ------------------------------------------------------------------------
 
@@ -403,64 +402,64 @@ Launch call: Ricardo uses CertainTeed on most jobs, not GAF, and offers CertainT
 
 Hero
 
-[H1] CertainTeed Roofing Contractor in Woodbridge, VA
+[H1] CertainTeed Roofing Contractor in Woodbridge, VA
 
-[SUBHEAD] CertainTeed is the shingle Ricardo trusts on most of our roofs. Every install is backed by our own 10-year workmanship warranty.
+[SUBHEAD] CertainTeed is the shingle Ricardo trusts on most of our roofs. Every install is backed by our own 10-year workmanship warranty.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-[TRUST BAR] CertainTeed installer [CONFIRM: credential] · 10-year workmanship warranty · Class A licensed [CONFIRM: license \#] · 49 five-star reviews
+[TRUST BAR] CertainTeed installer · 10-year workmanship warranty · Class A licensed · 49 five-star reviews
 
 Intro
 
-[P] Ricardo installs CertainTeed on most jobs [CONFIRM: CertainTeed credential name]. He knows how it installs and what the warranty covers.
+[P] Ricardo installs CertainTeed Landmark and Landmark Pro on most jobs, as a complete CertainTeed Integrity Roof System: RoofRunner underlayment, SwiftStart starter, the shingles, and Shadow Ridge hip and ridge caps. He knows how it installs and what the warranty covers.
 
-[P] When one contractor uses one shingle line on most jobs, the crew gets good at it. We're a local Woodbridge roofer, not a storm chaser. We price in the middle of the pack, tell you if you don't need a full replacement, and put the price in writing with no surprise change orders.
+[P] When one contractor uses one shingle line on most jobs, the crew gets good at it. We're a local Woodbridge roofer, not a storm chaser. We price in the middle of the pack, tell you if you don't need a full replacement, and put the price in writing with no surprise change orders.
 
 Why CertainTeed
 
-[H2] Why we install CertainTeed
+[H2] Why we install CertainTeed
 
 [LIST]
 
-- A major U.S. manufacturer. CertainTeed has been making roofing products for decades.
-- Manufacturer warranty. Eligible roofs we install qualify for CertainTeed's [CONFIRM: program name, 3-Star level] coverage.
-- Color and style options. [CONFIRM: CertainTeed product lines]
-- Consistent installs. Using one product line on most jobs keeps our crew's work consistent. We leave a clean job site and finish on the timeline we promised.
+- A major U.S. manufacturer. CertainTeed has been making roofing products for decades.
+- Manufacturer warranty. Integrity Roof System installs qualify for CertainTeed SureStart PLUS 3-Star coverage: materials, labor, tear-off, and disposal for 50 years, an unlimited wind warranty, and a one-time transfer within 15 years. We register it for you.
+- Color and style options. Landmark and Landmark Pro come in dozens of Max Def colors, and we bring the samples to your inspection.
+- Consistent installs. Using one product line on most jobs keeps our crew's work consistent. We leave a clean job site and finish on the timeline we promised.
 
-[H3] Two layers of protection
+[H3] Two layers of protection
 
-[P] CertainTeed covers the materials. RC All Exteriors' own 10-year workmanship warranty covers the installation. You get both in writing, so your paperwork is solid. [LINK] warranty details → /warranty/
+[P] CertainTeed covers the materials. RC All Exteriors' own 10-year workmanship warranty covers the installation. You get both in writing, so your paperwork is solid. [LINK] warranty details → /warranty/
 
-[IMAGE] A finished CertainTeed roof on a local home, with the shingle color labeled
+[IMAGE] A finished CertainTeed roof on a local home, with the shingle color labeled
 
 FAQ
 
-[H2] CertainTeed questions
+[H2] CertainTeed questions
 
-[FAQ Q] What shingle colors are available?
+[FAQ Q] What shingle colors are available?
 
-[FAQ A] CertainTeed offers a wide range of colors in each shingle line. We'll bring samples to your free inspection so you can both see them against your house. [CONFIRM: samples brought to inspections]
+[FAQ A] CertainTeed offers a wide range of colors in each shingle line. We bring samples to every free inspection so you can both see them against your house.
 
-[FAQ Q] Do you install GAF or Owens Corning?
+[FAQ Q] Do you install GAF or Owens Corning?
 
-[FAQ A] We install CertainTeed on most jobs because it's the product we know best. If you want a different brand, ask us at your inspection.
+[FAQ A] We install CertainTeed on most jobs because it's the product we know best. If you want a different brand, ask us at your inspection.
 
-[FAQ Q] What does the CertainTeed warranty cover?
+[FAQ Q] What does the CertainTeed warranty cover?
 
-[FAQ A] It covers manufacturing defects in the shingles and materials. The exact coverage depends on the warranty level. [CONFIRM with Sam's CertainTeed research]
+[FAQ A] The standard CertainTeed warranty covers manufacturing defects in the shingles. When we install the full Integrity Roof System and register SureStart PLUS 3-Star coverage, that grows to materials, labor, tear-off, and disposal for 50 years, with an unlimited wind warranty, and it transfers once within 15 years.
 
 CTA
 
-[H2] See CertainTeed colors on your house
+[H2] See CertainTeed colors on your house
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: /roof-replacement/ · /warranty/ · /financing/ · /guides/certainteed-landmark-shingles/ (when published) · / (breadcrumb)
+Internal links on this page: /roof-replacement/ · /warranty/ · /financing/ · /guides/certainteed-landmark-shingles/ (when published) · / (breadcrumb)
 
 ------------------------------------------------------------------------
 
@@ -502,27 +501,27 @@ Current site: "Asphalt shingle, metal, and flat roofing systems". GBP service li
 
 Hero
 
-[H1] Metal Roofing in Northern Virginia
+[H1] Metal Roofing in Northern Virginia
 
-[SUBHEAD] Metal roof installation for homes and businesses in Woodbridge and across Northern Virginia.
+[SUBHEAD] Metal roof installation for homes and businesses in Woodbridge and across Northern Virginia.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-[TRUST BAR] Residential and commercial · Class A licensed [CONFIRM: license \#] · Fully insured · 49 five-star reviews
+[TRUST BAR] Residential and commercial · Class A licensed · Fully insured · 49 five-star reviews
 
 Intro
 
-[P] A metal roof costs more up front than shingles. For a lot of homeowners, it's worth it: it lasts longer, handles wind well, and reflects summer heat. We're a local Woodbridge roofer, not a storm chaser, and we'll walk you both through the numbers.
+[P] A metal roof costs more up front than shingles. For a lot of homeowners, it's worth it: it lasts longer, handles wind well, and reflects summer heat. We're a local Woodbridge roofer, not a storm chaser, and we'll walk you both through the numbers.
 
-[P] We install metal roofs on homes and commercial buildings. [CONFIRM: metal panel types]
+[P] We install standing seam metal roofs on homes and commercial buildings. Concealed fasteners, long panels, and no exposed screws to back out over time.
 
 Pros and cons
 
-[H2] Metal vs. shingles: the honest version
+[H2] Metal vs. shingles: the honest version
 
-[H3] Where metal wins
+[H3] Where metal wins
 
 [LIST]
 
@@ -531,7 +530,7 @@ Pros and cons
 - Reflects heat, which can lower cooling costs
 - Low maintenance
 
-[H3] Where shingles win
+[H3] Where shingles win
 
 [LIST]
 
@@ -539,43 +538,43 @@ Pros and cons
 - Easier and cheaper to repair a small section
 - Fits the look of most Northern Virginia neighborhoods and HOA rules
 
-[P] Not sure which is right for your house? We install both, so we'll give you a straight comparison at your free inspection. If shingles make more sense for your house, we'll tell you. [LINK] roof replacement → /roof-replacement/
+[P] Not sure which is right for your house? We install both, so we'll give you a straight comparison at your free inspection. If shingles make more sense for your house, we'll tell you. [LINK] roof replacement → /roof-replacement/
 
 Process
 
-[H2] How it works
+[H2] How it works
 
 [STEPS]
 
-1.  Inspection and consultation. We look at your roof and talk through metal options and colors.
-2.  Custom plan and estimate. A transparent written estimate for your roof at a fair, middle-of-the-pack price, with no surprise change orders.
-3.  Removal and installation. Old materials removed and hauled away, new metal roof installed to professional standards. Clean job site, on the timeline we promised. [CONFIRM: typical install time]
+1.  Inspection and consultation. We look at your roof and talk through metal options and colors.
+2.  Custom plan and estimate. A transparent written estimate for your roof at a fair, middle-of-the-pack price, with no surprise change orders.
+3.  Removal and installation. Old materials removed and hauled away, new metal roof installed to professional standards. Clean job site, on the timeline we promised. We give you the schedule in writing before we start.
 
 FAQ
 
-[H2] Metal roofing questions
+[H2] Metal roofing questions
 
-[FAQ Q] How much does a metal roof cost?
+[FAQ Q] How much does a metal roof cost?
 
-[FAQ A] Metal typically costs more than asphalt shingles. [CONFIRM: typical price range] Your written estimate shows the exact number for your roof, and that's the price you pay.
+[FAQ A] Metal typically costs more than asphalt shingles up front and lasts longer. We do not publish ranges because panel length, roof shape, and trim drive the number. Your written estimate shows the exact number for your roof, and that's the price you pay.
 
-[FAQ Q] Is a metal roof loud in the rain?
+[FAQ Q] Is a metal roof loud in the rain?
 
-[FAQ A] Installed over solid decking and underlayment, most metal roofs are only a little louder than shingles. Most people don't notice from inside.
+[FAQ A] Installed over solid decking and underlayment, most metal roofs are only a little louder than shingles. Most people don't notice from inside.
 
-[FAQ Q] Will my HOA allow a metal roof?
+[FAQ Q] Will my HOA allow a metal roof?
 
-[FAQ A] Some do and some don't. Check your HOA rules before you decide.
+[FAQ A] Some do and some don't. Check your HOA rules before you decide.
 
 CTA
 
-[H2] Find out if metal is right for your roof
+[H2] Find out if metal is right for your roof
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: /roof-replacement/ · /commercial-roofing/ · /financing/ · / (breadcrumb)
+Internal links on this page: /roof-replacement/ · /commercial-roofing/ · /financing/ · / (breadcrumb)
 
 ------------------------------------------------------------------------
 

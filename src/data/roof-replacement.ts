@@ -17,6 +17,6 @@ export const repairOrReplace = [
 
 export const materials = [
   { href: '/certainteed-roofing/', icon: 'award', title: 'Asphalt shingle', text: 'The shingles Ricardo uses on most jobs.', photo: 'colonialFront' as const, caption: 'Asphalt shingle, CertainTeed' },
-  { href: '/metal-roofing/', icon: 'layers', title: 'Metal', text: 'Metal roofing systems are available too.', photo: null, caption: 'metal roof' },
+  { href: '/metal-roofing/', icon: 'layers', title: 'Metal', text: 'Standing seam metal roofs are available too.', photo: null, caption: 'metal roof' },
   { href: '/commercial-roofing/', icon: 'building-2', title: 'Flat', text: 'Flat roofing systems are available too.', photo: 'flatTpo' as const, caption: 'Flat roof, white TPO membrane' },
 ];

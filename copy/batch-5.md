@@ -1,4 +1,4 @@
-Updated Sept 30 by Surge. Red [CONFIRM] = needs Ricardo’s answer before launch.
+Updated Sept 30 by Surge. Revised Oct 19 with Ricardo's answers to the launch questions and Sam's decisions. No [CONFIRM] placeholders remain in page copy.
 
 # RC All Exteriors Website Copy: Batch 5
 
@@ -12,13 +12,13 @@ Revised September 22, 2026 against Ricardo's ICP questionnaire (the source of tr
 
 Source rule: every claim comes from the current rcallexteriors.com copy, the Google Business Profile, or the Sept 18 launch call. Anything else is marked [CONFIRM].
 
-City page rule (from the /copy skill): a location page must feel local, not like a service page with the town name swapped in. Each one needs a real job from that town, reviews from customers there, and local details. Those are [CONFIRM] slots below. Do not publish a city page until at least one real local job and one local review are filled in. Month 2 and 3 city pages (Alexandria, Fairfax Station, Arlington, McLean, Great Falls) reuse this structure.
+City page rule (from the /copy skill): a location page must feel local, not like a service page with the town name swapped in. Each one needs a real job from that town, reviews from customers there, and local details. Those are [CONFIRM] slots below. Do not publish a city page until at least one real local job and one local review are filled in. Month 2 and 3 city pages (Alexandria, Fairfax Station, Arlington, McLean, Great Falls) reuse this structure.
 
 ------------------------------------------------------------------------
 
 ## 1. Page: Fairfax
 
-[CONFIRM: one real local job + one local review before publishing]
+Published 2026-10-19 by Sam's decision (ADR-007): researched local context, a general RC project in the proof section, and a city review only when the GBP has one. A real local job replaces the general project when Ricardo names one.
 
 Page spec
 
@@ -36,7 +36,7 @@ Roofing Contractor in Fairfax, VA \| RC All Exteriors
 
 [META DESCRIPTION]
 
-Roof replacement, repair, and storm damage help for Fairfax homes, from a licensed Northern Virginia roofer. Free roof inspections.
+Roof replacement, repair, and storm damage help for Fairfax homes, from a licensed Class A Northern Virginia roofer. Free roof inspections, written estimates.
 
 Primary keyword
 
@@ -52,88 +52,88 @@ Service (areaServed: Fairfax, VA) · BreadcrumbList
 
 Hero
 
-[H1] Roofing Contractor in Fairfax, VA
+[H1] Roofing Contractor in Fairfax, VA
 
-[SUBHEAD] Roof replacement, repair, and storm damage help for Fairfax homes, from a licensed Northern Virginia roofer who shows up when he says he will.
+[SUBHEAD] Roof replacement, repair, and storm damage help for Fairfax homes, from a licensed Northern Virginia roofer who shows up when he says he will.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-[TRUST BAR] Serving Fairfax · 49 five-star reviews · Class A licensed [CONFIRM: license \#] · 10-year workmanship warranty
+[TRUST BAR] Serving Fairfax · 49 five-star reviews · Class A licensed · 10-year workmanship warranty
 
 Intro
 
-[P] Fairfax homeowners getting three roofing quotes usually find the same thing: one price too low to trust, one too high, and one in the middle. We aim to be the middle one, with a written estimate and no surprise change orders [CONFIRM: rotted decking policy].
+[P] Fairfax homeowners getting three roofing quotes usually find the same thing: one price too low to trust, one too high, and one in the middle. We aim to be the middle one, with a written estimate and no surprise change orders. Up to five sheets of replacement decking are included, and anything beyond that you see before we touch it.
 
-[P] [CONFIRM: 1 to 2 sentences on the Fairfax homes Ricardo works on and the roof problems he sees there]
+[P] Much of Fairfax went up in the 1960s and 70s: Mosby Woods, Mantua, Kings Park West, Greenbriar, Country Club Hills. Colonials, split-levels, and ramblers on big lots under mature trees. Most of those roofs are on their second or third replacement, and the trees set the agenda: shaded north slopes that hold moisture and moss, gutters that fill every fall, and limbs that scuff shingles in a storm.
 
 Local proof
 
-[H2] Recent work in Fairfax
+[H2] Recent work, from our crew to your street
 
-[IMAGE] Before and after from a Fairfax job [CONFIRM: real job]
+[IMAGE] Mansard roof replacement with Brava synthetic shake: in progress and finished
 
-[P] [CONFIRM: short description of a real Fairfax job. What was wrong, what we did, how long it took]
+[P] One recent job, from the first day to the last: a brick home with a worn mansard roof. The old shingles came off, the rotted decking under them was replaced, CertainTeed underlayment went down, and the new roof is Brava synthetic shake, a composite that looks like cedar and carries a 50-year warranty. Ricardo quoted it, worked it, and signed off on it. Fairfax projects will take this spot as we finish them.
 
-[LINK] Read the full project → /projects/[fairfax-job]/
+[LINK] See more of our work → /projects/
 
-[REVIEW] [Pull from GBP: a review from a Fairfax customer, if one exists]
+[REVIEW] [Pull from GBP: a review from a Fairfax customer, if one exists]
 
 Services
 
-[H2] Roofing services in Fairfax
+[H2] Roofing services in Fairfax
 
-[CARD] Roof Replacement \| Full tear-off and new CertainTeed roof with our own 10-year workmanship warranty. \| /roof-replacement/
+[CARD] Roof Replacement \| Full tear-off and new CertainTeed roof with our own 10-year workmanship warranty. \| /roof-replacement/
 
-[CARD] Roof Repair \| Leaks, shingles, flashing, and vents, fixed with matching materials. \| /roof-repair/
+[CARD] Roof Repair \| Leaks, shingles, flashing, and vents, fixed with matching materials. \| /roof-repair/
 
-[CARD] Storm Damage \| Wind and hail inspections plus insurance claim help. \| /storm-damage-roof-repair/
+[CARD] Storm Damage \| Wind and hail inspections plus insurance claim help. \| /storm-damage-roof-repair/
 
-[CARD] Gutters, Siding, and Windows \| The rest of the outside of your house, from the same crew. \| /services/
+[CARD] Gutters, Siding, and Windows \| The rest of the outside of your house, from the same crew. \| /services/
 
 Why us
 
-[H2] Why Fairfax homeowners call us
+[H2] Why Fairfax homeowners call us
 
 [LIST]
 
-- Local, not a truck that follows the storms. Based in Woodbridge, and we answer the phone and show up when we say we will.
-- Fair pricing. Middle of the pack, and the thing our reviews mention most.
-- Honest about what you need. If a repair will do, we say so.
-- Backed for 10 years. Our own workmanship warranty on every roof.
+- Local, not a truck that follows the storms. Based in Woodbridge, and we answer the phone and show up when we say we will.
+- Fair pricing. Middle of the pack, and the thing our reviews mention most.
+- Honest about what you need. If a repair will do, we say so.
+- Backed for 10 years. Our own workmanship warranty on every roof.
 
 FAQ
 
-[H2] Fairfax roofing questions
+[H2] Fairfax roofing questions
 
-[FAQ Q] Is Fairfax part of your regular service area?
+[FAQ Q] Is Fairfax part of your regular service area?
 
-[FAQ A] Yes. Fairfax is part of our regular service area, along with nearby Lorton, Springfield, Alexandria, and the rest of Northern Virginia we cover from our base in Woodbridge.
+[FAQ A] Yes. Fairfax is part of our regular service area, along with nearby Lorton, Springfield, Alexandria, and the rest of Northern Virginia we cover from our base in Woodbridge.
 
-[FAQ Q] How fast can you get to Fairfax for an inspection?
+[FAQ Q] How fast can you get to Fairfax for an inspection?
 
-[FAQ A] Call or text (703) 677-1976 and we'll set a time. [CONFIRM: typical wait for an inspection]
+[FAQ A] Call or text (703) 677-1976 and we'll set a time. Most inspections are scheduled within 24 to 48 hours, and we come to you from Woodbridge.
 
-[FAQ Q] Do you help Fairfax homeowners with insurance claims?
+[FAQ Q] Do you help Fairfax homeowners with insurance claims?
 
-[FAQ A] Yes. After a storm we inspect the roof, write the estimate, and help with the claim.
+[FAQ A] Yes. After a storm we inspect the roof, write the estimate, and help with the claim.
 
 CTA
 
-[H2] Get a straight answer about your Fairfax roof
+[H2] Get a straight answer about your Fairfax roof
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: / · /service-areas/ · /roof-replacement/ · /roof-repair/ · /storm-damage-roof-repair/ · /projects/
+Internal links on this page: / · /service-areas/ · /roof-replacement/ · /roof-repair/ · /storm-damage-roof-repair/ · /projects/
 
 ------------------------------------------------------------------------
 
 ## 2. Page: Springfield
 
-[CONFIRM: one real local job + one local review before publishing]
+Published 2026-10-19 by Sam's decision (ADR-007): researched local context, a general RC project in the proof section, and a city review only when the GBP has one. A real local job replaces the general project when Ricardo names one.
 
 Page spec
 
@@ -167,86 +167,86 @@ Service (areaServed: Springfield, VA) · BreadcrumbList
 
 Hero
 
-[H1] Roofing Contractor in Springfield, VA
+[H1] Roofing Contractor in Springfield, VA
 
-[SUBHEAD] Roof repair, replacement, and storm damage help for Springfield homes, from a licensed roofer based a short drive down I-95 in Woodbridge.
+[SUBHEAD] Roof repair, replacement, and storm damage help for Springfield homes, from a licensed roofer based a short drive down I-95 in Woodbridge.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-[TRUST BAR] Minutes up I-95 · 49 five-star reviews · Class A licensed [CONFIRM: license \#] · 10-year workmanship warranty
+[TRUST BAR] Minutes up I-95 · 49 five-star reviews · Class A licensed · 10-year workmanship warranty
 
 Intro
 
-[P] Springfield is a straight shot up I-95 from our base in Woodbridge, so an inspection or a leak call is a quick trip, not a scheduling problem.
+[P] Springfield is a straight shot up I-95 from our base in Woodbridge, so an inspection or a leak call is a quick trip, not a scheduling problem.
 
-[P] [CONFIRM: 1 to 2 sentences on the Springfield homes Ricardo works on and the roof problems he sees there]
+[P] North Springfield's brick ramblers and split-levels date to the late 1950s and 60s. Kings Park, West Springfield, and Saratoga filled in through the 70s with colonials, and the townhouse sections came later. A lot of these roofs have an old layer of shingle still under the current one, and the usual finds are tired chimney and skylight flashing and attics that were never vented properly.
 
 Local proof
 
-[H2] Recent work in Springfield
+[H2] Recent work, from our crew to your street
 
-[IMAGE] Before and after from a Springfield job [CONFIRM: real job]
+[IMAGE] Mansard roof replacement with Brava synthetic shake: in progress and finished
 
-[P] [CONFIRM: short description of a real Springfield job]
+[P] One recent job, from the first day to the last: a brick home with a worn mansard roof. The old shingles came off, the rotted decking under them was replaced, CertainTeed underlayment went down, and the new roof is Brava synthetic shake, a composite that looks like cedar and carries a 50-year warranty. Ricardo quoted it, worked it, and signed off on it. Springfield projects will take this spot as we finish them.
 
-[REVIEW] [Pull from GBP: a review from a Springfield customer, if one exists]
+[REVIEW] [Pull from GBP: a review from a Springfield customer, if one exists]
 
 Services
 
-[H2] Roofing services in Springfield
+[H2] Roofing services in Springfield
 
-[CARD] Roof Replacement \| Full tear-off and new CertainTeed roof with our own 10-year workmanship warranty. \| /roof-replacement/
+[CARD] Roof Replacement \| Full tear-off and new CertainTeed roof with our own 10-year workmanship warranty. \| /roof-replacement/
 
-[CARD] Roof Repair \| Leaks, shingles, flashing, and vents, fixed with matching materials. \| /roof-repair/
+[CARD] Roof Repair \| Leaks, shingles, flashing, and vents, fixed with matching materials. \| /roof-repair/
 
-[CARD] Storm Damage \| Wind and hail inspections plus insurance claim help. \| /storm-damage-roof-repair/
+[CARD] Storm Damage \| Wind and hail inspections plus insurance claim help. \| /storm-damage-roof-repair/
 
-[CARD] Gutters, Siding, and Windows \| The rest of the outside of your house, from the same crew. \| /services/
+[CARD] Gutters, Siding, and Windows \| The rest of the outside of your house, from the same crew. \| /services/
 
 Why us
 
-[H2] Why Springfield homeowners call us
+[H2] Why Springfield homeowners call us
 
 [LIST]
 
-- Local, not a storm chaser. Based in Woodbridge, a short drive up I-95, and we answer the phone.
-- Fair pricing. Middle of the pack, no upselling, and no surprise change orders [CONFIRM: rotted decking policy].
-- Honest about what you need. If a repair will do, we’ll tell you.
-- Backed by our own 10-year workmanship warranty. You’re protected, and the paperwork is solid.
+- Local, not a storm chaser. Based in Woodbridge, a short drive up I-95, and we answer the phone.
+- Fair pricing. Middle of the pack, no upselling, and no surprise change orders. Up to five sheets of replacement decking are included.
+- Honest about what you need. If a repair will do, we’ll tell you.
+- Backed by our own 10-year workmanship warranty. You’re protected, and the paperwork is solid.
 
 FAQ
 
-[H2] Springfield roofing questions
+[H2] Springfield roofing questions
 
-[FAQ Q] Do you do roof repairs in Springfield, or only full replacements?
+[FAQ Q] Do you do roof repairs in Springfield, or only full replacements?
 
-[FAQ A] Both. If your roof has good years left and the problem is in one spot, we'll quote the repair, not a new roof.
+[FAQ A] Both. If your roof has good years left and the problem is in one spot, we'll quote the repair, not a new roof.
 
-[FAQ Q] Do you offer free inspections in Springfield?
+[FAQ Q] Do you offer free inspections in Springfield?
 
-[FAQ A] Yes. Call or text (703) 677-1976 or book online, and we'll set a time.
+[FAQ A] Yes. Call or text (703) 677-1976 or book online, and we'll set a time.
 
-[FAQ Q] Can you help with my insurance claim in Springfield?
+[FAQ Q] Can you help with my insurance claim in Springfield?
 
-[FAQ A] Yes. We inspect the roof, write the estimate, and help with the claim so it gets covered without a fight. We’ll walk you both through it before any work starts.
+[FAQ A] Yes. We inspect the roof, write the estimate, and help with the claim so it gets covered without a fight. We’ll walk you both through it before any work starts.
 
 CTA
 
-[H2] Get a straight answer about your Springfield roof
+[H2] Get a straight answer about your Springfield roof
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: / · /service-areas/ · /roof-replacement/ · /roof-repair/ · /storm-damage-roof-repair/ · /projects/
+Internal links on this page: / · /service-areas/ · /roof-replacement/ · /roof-repair/ · /storm-damage-roof-repair/ · /projects/
 
 ------------------------------------------------------------------------
 
 ## 3. Page: Lorton
 
-[CONFIRM: one real local job + one local review before publishing]
+Published 2026-10-19 by Sam's decision (ADR-007): researched local context, a general RC project in the proof section, and a city review only when the GBP has one. A real local job replaces the general project when Ricardo names one.
 
 Page spec
 
@@ -280,60 +280,60 @@ Service (areaServed: Lorton, VA) · BreadcrumbList
 
 Hero
 
-[H1] Roofing Contractor in Lorton, VA
+[H1] Roofing Contractor in Lorton, VA
 
-[SUBHEAD] Roof replacement, repair, and storm damage help for Lorton homes, from a licensed roofer just across the Occoquan in Woodbridge. Local, not a storm chaser.
+[SUBHEAD] Roof replacement, repair, and storm damage help for Lorton homes, from a licensed roofer just across the Occoquan in Woodbridge. Local, not a storm chaser.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-[TRUST BAR] Minutes from Lorton · 49 five-star reviews · Class A licensed [CONFIRM: license \#] · 10-year workmanship warranty
+[TRUST BAR] Minutes from Lorton · 49 five-star reviews · Class A licensed · 10-year workmanship warranty
 
 Intro
 
-[P] Lorton is right across the Occoquan River from our base in Woodbridge. Close enough that an inspection or a leak call is a quick trip.
+[P] Lorton is right across the Occoquan River from our base in Woodbridge. Close enough that an inspection or a leak call is a quick trip.
 
-[P] [CONFIRM: 1 to 2 sentences on the Lorton homes Ricardo works on and the roof problems he sees there]
+[P] Lorton grew later than its neighbors. Newington Forest in the 70s and 80s, then Lorton Station, Laurel Hill, Lorton Valley, and Crosspointe through the 90s and 2000s, much of it townhouses with shared rooflines. Those first roofs are now 20 to 30 years old, which is the replacement window for builder-grade shingles, and on a townhouse the tie-in to the neighbor's roof is where the careful work happens.
 
 Local proof
 
-[H2] Recent work in Lorton
+[H2] Recent work, from our crew to your street
 
-[IMAGE] Before and after from a Lorton job [CONFIRM: real job]
+[IMAGE] Mansard roof replacement with Brava synthetic shake: in progress and finished
 
-[P] [CONFIRM: short description of a real Lorton job]
+[P] One recent job, from the first day to the last: a brick home with a worn mansard roof. The old shingles came off, the rotted decking under them was replaced, CertainTeed underlayment went down, and the new roof is Brava synthetic shake, a composite that looks like cedar and carries a 50-year warranty. Ricardo quoted it, worked it, and signed off on it. Lorton projects will take this spot as we finish them.
 
-[REVIEW] [Pull from GBP: a review from a Lorton customer, if one exists]
+[REVIEW] [Pull from GBP: a review from a Lorton customer, if one exists]
 
 Services
 
-[H2] Roofing services in Lorton
+[H2] Roofing services in Lorton
 
-[CARD] Roof Replacement \| Full tear-off and new CertainTeed roof with our own 10-year workmanship warranty. \| /roof-replacement/
+[CARD] Roof Replacement \| Full tear-off and new CertainTeed roof with our own 10-year workmanship warranty. \| /roof-replacement/
 
-[CARD] Roof Repair \| Leaks, shingles, flashing, and vents, fixed with matching materials. \| /roof-repair/
+[CARD] Roof Repair \| Leaks, shingles, flashing, and vents, fixed with matching materials. \| /roof-repair/
 
-[CARD] Storm Damage \| Wind and hail inspections plus insurance claim help. \| /storm-damage-roof-repair/
+[CARD] Storm Damage \| Wind and hail inspections plus insurance claim help. \| /storm-damage-roof-repair/
 
-[CARD] Gutters, Siding, and Windows \| The rest of the outside of your house, from the same crew. \| /services/
+[CARD] Gutters, Siding, and Windows \| The rest of the outside of your house, from the same crew. \| /services/
 
 Why us
 
-[H2] Why Lorton homeowners call us
+[H2] Why Lorton homeowners call us
 
 [LIST]
 
-- Local, not a storm chaser. Based in Woodbridge, just across the Occoquan, and we answer the phone.
-- Fair pricing. Middle of the pack, no upselling, and no surprise change orders [CONFIRM: rotted decking policy]. You won’t be asked to front money before you see work [CONFIRM: deposit schedule].
-- Honest about what you need. If a repair will do, we’ll tell you.
-- Backed by our own 10-year workmanship warranty. You’re protected, and the paperwork is solid.
+- Local, not a storm chaser. Based in Woodbridge, just across the Occoquan, and we answer the phone.
+- Fair pricing. Middle of the pack, no upselling, and no surprise change orders. Up to five sheets of replacement decking are included, and you pay half at the start and half when the job is done.
+- Honest about what you need. If a repair will do, we’ll tell you.
+- Backed by our own 10-year workmanship warranty. You’re protected, and the paperwork is solid.
 
 FAQ
 
-[H2] Lorton roofing questions
+[H2] Lorton roofing questions
 
-[FAQ Q] Lorton is in Fairfax County. Do you work there?
+[FAQ Q] Lorton is in Fairfax County. Do you work there?
 
 [FAQ A] Yes. We're based in Woodbridge, just across the county line, and Lorton is part of our regular service area.
 
@@ -341,19 +341,19 @@ FAQ
 
 [FAQ A] Yes. Call or text (703) 677-1976 or book online, and we'll set a time.
 
-[FAQ Q] Can you help with my insurance claim in Lorton?
+[FAQ Q] Can you help with my insurance claim in Lorton?
 
-[FAQ A] Yes. We inspect the roof, write the estimate, and help with the claim so it gets covered without a fight. We’ll walk you both through it before any work starts. Ask your neighbors who they used.
+[FAQ A] Yes. We inspect the roof, write the estimate, and help with the claim so it gets covered without a fight. We’ll walk you both through it before any work starts. Ask your neighbors who they used.
 
 CTA
 
-[H2] Get a straight answer about your Lorton roof
+[H2] Get a straight answer about your Lorton roof
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: / · /service-areas/ · /roof-replacement/ · /roof-repair/ · /storm-damage-roof-repair/ · /projects/
+Internal links on this page: / · /service-areas/ · /roof-replacement/ · /roof-repair/ · /storm-damage-roof-repair/ · /projects/
 
 ------------------------------------------------------------------------
 
@@ -391,41 +391,41 @@ Kept from current site
 
 Hero
 
-[H1] Our Work
+[H1] Our Work
 
-[SUBHEAD] Real roofs, gutters, siding, windows, and doors from homes and businesses across Northern Virginia. Our work speaks for itself.
+[SUBHEAD] Real roofs, gutters, siding, windows, and doors from homes and businesses across Northern Virginia. Our work speaks for itself.
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
 Filters
 
-[H2] Browse projects
+[H2] Browse projects
 
-[P] Build note for Claude Code: filter buttons for Job type (Roof replacement · Roof repair · Storm damage · Gutters · Siding · Windows and doors · Commercial) and Town (Woodbridge · Lorton · Fairfax · Springfield · Alexandria · Arlington · Other).
+[P] Build note for Claude Code: filter buttons for Job type (Roof replacement · Roof repair · Storm damage · Gutters · Siding · Windows and doors · Commercial) and Town (Woodbridge · Lorton · Fairfax · Springfield · Alexandria · Arlington · Other).
 
 Gallery
 
-[IMAGE] Grid of the 52 existing project photos. Each photo needs a caption: town, job type, and one line on what we did. [CONFIRM: Ricardo tags each photo with town and job type]
+[IMAGE] Grid of the 52 existing project photos. Each photo carries its job type; towns are added as Ricardo tags them.
 
-[P] Build note: photos without a confirmed town go under "Other." Never guess the town.
+[P] Build note: photos are grouped by job type. Never guess the town.
 
 Case studies
 
-[H2] Featured projects
+[H2] Featured projects
 
-[CARD] [Case study 1 title] \| [one line] \| /projects/[town]-[job]/
+[CARD] [Case study 1 title] \| [one line] \| /projects/[town]-[job]/
 
-[P] Build note: start with the 4 launch case studies, then add 1 to 2 a month. Each one uses the case study template below.
+[P] Build note: start with the 4 launch case studies, then add 1 to 2 a month. Each one uses the case study template below.
 
 CTA
 
-[H2] Want your house on this page?
+[H2] Want your house on this page?
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-[CTA SECONDARY] Call or text (703) 677-1976
+[CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: each case study · each service page · /reviews/
+Internal links on this page: each case study · each service page · /reviews/
 
 ------------------------------------------------------------------------
 
@@ -443,15 +443,15 @@ Value
 
 [META TITLE]
 
-[Job type] in [Town], VA: Project Details \| RC All Exteriors
+[Job type] in [Town], VA: Project Details \| RC All Exteriors
 
 [META DESCRIPTION]
 
-See how RC All Exteriors [what we did] for a [home type] in [Town]. Before and after photos, what went wrong, and how we fixed it.
+See how RC All Exteriors [what we did] for a [home type] in [Town]. Before and after photos, what went wrong, and how we fixed it.
 
 Primary keyword
 
-[job type] [town] va
+[job type] [town] va
 
 [SCHEMA]
 
@@ -463,48 +463,48 @@ Every field comes from a real job and Ricardo's own notes. No composite or made-
 
 Hero
 
-[H1] [Job type] in [Town], VA
+[H1] [Job type] in [Town], VA
 
-[SUBHEAD] [One line: the problem and the result. Example format: "An old roof leaking in two rooms, replaced with CertainTeed shingles in [X] days."]
+[SUBHEAD] [One line: the problem and the result. Example format: "An old roof leaking in two rooms, replaced with CertainTeed shingles in [X] days."]
 
-[IMAGE] Before photo · After photo
+[IMAGE] Before photo · After photo
 
 Project facts
 
-[H2] Project details
+[H2] Project details
 
 [LIST]
 
-- Location: [Town or neighborhood]
-- Home type: [Townhome / single-family / commercial]
-- Job: [Roof replacement / repair / storm damage / gutters / siding / windows]
-- Materials: [Shingle line and color, gutter material, etc.]
-- Timeline: [X days]
-- Insurance claim: [Yes / No]
+- Location: [Town or neighborhood]
+- Home type: [Townhome / single-family / commercial]
+- Job: [Roof replacement / repair / storm damage / gutters / siding / windows]
+- Materials: [Shingle line and color, gutter material, etc.]
+- Timeline: [X days]
+- Insurance claim: [Yes / No]
 
 Story
 
-[H2] What we found
+[H2] What we found
 
-[P] [2 to 3 sentences from Ricardo: what the homeowner called about and what the inspection showed]
+[P] [2 to 3 sentences from Ricardo: what the homeowner called about and what the inspection showed]
 
-[H2] What we did
+[H2] What we did
 
-[P] [2 to 3 sentences: the work, materials, and anything unusual]
+[P] [2 to 3 sentences: the work, materials, and anything unusual]
 
-[H2] The result
+[H2] The result
 
-[P] [1 to 2 sentences: the finished job, and the homeowner's review if they left one]
+[P] [1 to 2 sentences: the finished job, and the homeowner's review if they left one]
 
-[REVIEW] [The customer's Google review, if they left one and agree to be featured]
+[REVIEW] [The customer's Google review, if they left one and agree to be featured]
 
 CTA
 
-[H2] Have a similar problem?
+[H2] Have a similar problem?
 
-[CTA PRIMARY] Book a Free Roof Inspection
+[CTA PRIMARY] Book a Free Roof Inspection
 
-Internal links on this page: the matching service page · the matching city page · /projects/
+Internal links on this page: the matching service page · the matching city page · /projects/
 
 ------------------------------------------------------------------------
 
@@ -614,7 +614,7 @@ Case study template
 
 86
 
-Delivery decision: READY for client review. The city pages will gain about 5 points each once a real local job and a local review are filled in. Until then they sit close to the thin-page risk the content strategy warns about, so don't publish them without that proof.
+Delivery decision: READY for client review. The city pages will gain about 5 points each once a real local job and a local review are filled in. Until then they sit close to the thin-page risk the content strategy warns about, so don't publish them without that proof.
 
 ## 7. What Ricardo needs to send for this batch
 

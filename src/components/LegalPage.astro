@@ -5,7 +5,6 @@
 import Base from '@/layouts/Base.astro';
 import PageHero from './PageHero.astro';
 import Section from './Section.astro';
-import { confirmHtml } from '@/lib/render';
 
 interface Props {
   path: string;
@@ -22,7 +21,7 @@ const { path, title, h1, description, updated } = Astro.props;
   <Section bg="surface" name="Legal text">
     <div class="legal rich mx-auto flex max-w-[720px] flex-col gap-5 text-fg">
       <p class="text-body-sm text-fg-muted" data-sm>
-        Last updated {updated}. <Fragment set:html={confirmHtml('legal text reviewed and approved by RC All Exteriors')} />
+        Last updated {updated}.
       </p>
       <slot />
     </div>

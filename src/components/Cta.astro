@@ -24,7 +24,7 @@ const classes = ['btn', `btn-${variant}`, block ? 'btn-block' : 'btn-block-mobil
       <slot />
     </button>
   ) : (
-    <a href={to === 'tel' ? TEL : to} class:list={classes}>
+    <a href={to === 'tel' ? TEL : to} class:list={classes} {...(/^https?:\/\//.test(to) ? { target: '_blank', rel: 'noopener' } : {})}>
       {icon && <Icon name={icon} size={20} />}
       <slot />
     </a>
