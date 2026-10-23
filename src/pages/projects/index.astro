@@ -18,7 +18,7 @@ const path = '/projects/';
 const page = getPage(path);
 const filters = section(page, 'Filters');
 const featured = section(page, 'Case studies');
-const keys = Object.keys(photos) as PhotoKey[];
+const keys = (Object.keys(photos) as PhotoKey[]).filter((k) => photos[k].gallery !== false);
 const jobs = [...new Set(keys.map((k) => photos[k].job))];
 ---
 

@@ -64,6 +64,8 @@ export interface Photo {
   town: string | null;
   /** False keeps a process or people shot out of the opening-photo pool (src/lib/rhythm.ts). */
   pool?: boolean;
+  /** False keeps a photo out of the projects gallery (a before photo is not finished work). */
+  gallery?: boolean;
 }
 
 export const photos = {
@@ -150,13 +152,18 @@ export const photos = {
     town: null,
     pool: false,
   },
+  // A before photo (Sam, 2026-10-23): faded ridge cap, granule loss. It was
+  // captioned as a finished replacement and used as the metal roofing hero.
+  // Kept for a future case study's before-and-after; nowhere else.
   redRidge: {
     src: redRidge,
-    alt: 'New red architectural shingle roof looking down the ridge toward the yard',
-    caption: 'Shingle roof replacement, red shingle',
+    alt: 'Worn red three-tab shingle roof with a faded ridge cap, photographed from the ridge before replacement',
+    caption: 'Before: a worn red shingle roof at inspection',
     job: 'Roof replacement',
     position: 'center',
     town: null,
+    pool: false,
+    gallery: false,
   },
   twoStoryWalk: {
     src: twoStoryWalk,
@@ -343,7 +350,7 @@ export const LCP_MAP: Record<string, PhotoKey | 'text'> = {
   '/emergency-roof-repair/': 'underlayment',
   '/free-roof-inspection/': 'mansardShakeYardSign',
   '/certainteed-roofing/': 'colonialFront',
-  '/metal-roofing/': 'redRidge',
+  '/metal-roofing/': 'tanRidge',
   '/commercial-roofing/': 'flatTpo',
   '/skylights/': 'twoStory',
   '/windows-doors/': 'mansard',
