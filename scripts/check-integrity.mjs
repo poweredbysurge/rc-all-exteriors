@@ -157,7 +157,10 @@ for (const file of htmlFiles) {
     const hit = (page.text + ' ' + page.title + ' ' + page.description).match(re);
     if (hit) fail(route, `kill-list phrase: "${hit[0]}"`);
   }
-  if (/!/.test(page.mainText.replace(/"[^"]*"/g, ''))) fail(route, 'exclamation point in visible copy');
+  // Customer reviews are verbatim and may shout; our own copy may not.
+  const ours = parse(main?.innerHTML ?? '');
+  for (const el of ours.querySelectorAll('[data-review-text]')) el.remove();
+  if (/!/.test(ours.text.replace(/"[^"]*"/g, ''))) fail(route, 'exclamation point in visible copy');
   page.confirms = doc.querySelectorAll('[data-confirm]').map((el) => el.getAttribute('data-confirm'));
   if (production && page.confirms.length) fail(route, `${page.confirms.length} open CONFIRM slot(s): ${[...new Set(page.confirms)].join(' | ')}`);
   if (/\[CONFIRM/.test(html)) fail(route, 'raw [CONFIRM text leaked into the page');

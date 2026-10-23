@@ -14,6 +14,10 @@ export interface Review {
   text: string;
   /** ISO date the review was published. */
   date: string | null;
+  /** The reviewer's Google profile photo, when Google supplies one. */
+  photo?: string | null;
+  /** The review itself on Google Maps, so the card can link to the real thing. */
+  url?: string | null;
 }
 export interface ReviewsData {
   rating: number;
@@ -37,15 +41,20 @@ function env(name: string): string | undefined {
 export async function fetchReviews(): Promise<ReviewsData> {
   const key = env('GOOGLE_PLACES_KEY');
   const placeId = env('GBP_PLACE_ID');
-  if (!key || !placeId) return FALLBACK;
+  // REVIEWS_MOCK=path/to/places-response.json renders the wall from a saved
+  // Places response, for layout checks without a key. Never set on Vercel.
+  const mock = env('REVIEWS_MOCK');
+  if (!mock && (!key || !placeId)) return FALLBACK;
   try {
-    const res = await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}`, {
-      headers: {
-        'X-Goog-Api-Key': key,
-        'X-Goog-FieldMask': 'rating,userRatingCount,reviews',
-      },
-      signal: AbortSignal.timeout(8000),
-    });
+    const res = mock
+      ? new Response(await (await import('node:fs/promises')).readFile(mock, 'utf8'))
+      : await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}`, {
+          headers: {
+            'X-Goog-Api-Key': key!,
+            'X-Goog-FieldMask': 'rating,userRatingCount,reviews',
+          },
+          signal: AbortSignal.timeout(8000),
+        });
     if (!res.ok) {
       console.error('[reviews] Places API returned', res.status);
       return FALLBACK;
@@ -57,8 +66,9 @@ export async function fetchReviews(): Promise<ReviewsData> {
         rating?: number;
         text?: { text?: string };
         originalText?: { text?: string };
-        authorAttribution?: { displayName?: string };
+        authorAttribution?: { displayName?: string; photoUri?: string; uri?: string };
         publishTime?: string;
+        googleMapsUri?: string;
       }[];
     };
     if (!data.rating || !data.userRatingCount) return FALLBACK;
@@ -73,6 +83,8 @@ export async function fetchReviews(): Promise<ReviewsData> {
           // Verbatim. Never paraphrased, never trimmed mid-word by us.
           text: (r.originalText?.text ?? r.text?.text ?? '').trim(),
           date: r.publishTime ?? null,
+          photo: r.authorAttribution?.photoUri ?? null,
+          url: r.googleMapsUri ?? null,
         }))
         .filter((r) => r.text && r.author),
     };

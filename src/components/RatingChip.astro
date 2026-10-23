@@ -24,7 +24,7 @@ const reviews = await getReviews();
   ]}
 >
   <span>Google</span>
-  <Stars rating={reviews.rating} size={16} class={variant === 'dark' ? 'text-fg-inverse/90' : 'text-accent'} />
+  <Stars rating={reviews.rating} size={16} class="text-star" />
   <span data-rating-value>{ratingText(reviews.rating)}</span>
   <span class:list={['font-medium', variant === 'dark' ? 'text-fg-inverse-muted' : 'text-fg-muted']}>
     <span data-rating-count>{reviews.count}</span> reviews

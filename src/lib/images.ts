@@ -50,6 +50,22 @@ export async function sourceSet(src: ImageMetadata, widths: number[], crop: Crop
   };
 }
 
+/**
+ * A reviewer's Google profile photo as a local 72px WebP (36px at 2x), or
+ * null when Google's URL cannot be fetched at build. The card then shows the
+ * reviewer's initial instead. Never an external request on the live page.
+ */
+export async function avatar(url: string | null | undefined): Promise<string | null> {
+  if (!url) return null;
+  try {
+    const img = await getImage({ src: url, width: 72, height: 72, fit: 'cover', format: 'webp', quality: 80, inferSize: true });
+    return img.src;
+  } catch (err) {
+    console.warn('[reviews] avatar skipped:', (err as Error).message);
+    return null;
+  }
+}
+
 // Hero art direction. Phones get a 3:4 portrait crop sized to the viewport
 // width, so a tall stacked hero never has to stretch a landscape file across
 // 2,000px of height. The photo sits behind the headline and fades into the

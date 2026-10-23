@@ -10,6 +10,9 @@
 - Reviews page without the Places key: one card to the Google profile plus a "Leave a Google review" chip. Contact list: Instagram and Facebook as links (batch-2).
 - Docs: ADR-008, STANDARDS 41 to 47, master prompt v1.4 (repo, workspace copy, Project doc).
 
+**Round 2, same day: review cards (ADR-009)**
+- Yellow stars (`--color-star`), reviewer photo through the image pipeline, "View on Google" link per review, eight-line clamp with Read more, live count replaces any literal count, fallback 53. Gate exempts review text from the exclamation rule; `REVIEWS_MOCK` for keyless layout checks. Verified with a saved Places response at 1440 and 390; both gates pass.
+
 **Check with Sam** (also in the session report)
 - Settled: the yard sign shot is the brother-in-law, the roof walk is Ricardo. About hero and homepage Why us now use the roof walk; step 1 is the chimney flashing detail.
 - The homepage dark steps band still shows four photos in a row; fine on desktop, long on phones. Could drop to two.

@@ -3,7 +3,13 @@
 // the reviews proxy, and without one the card renders nothing (ADR-007: no
 // placeholders on the live site). Set GOOGLE_PLACES_KEY and GBP_PLACE_ID on
 // Vercel and the slots fill on the next build.
+//
+// Trust cues (ADR-009): Google's yellow stars, the reviewer's Google profile
+// photo, and the card links to the review itself on Google Maps. A long
+// review is clamped to eight lines behind a "Read more" toggle so one essay
+// does not stretch every card in the row; without JS the full text shows.
 import Stars from './Stars.astro';
+import { avatar } from '@/lib/images';
 import type { Review } from '@/lib/reviews';
 
 interface Props {
@@ -18,6 +24,11 @@ const { review = null, variant = 'card', class: className } = Astro.props;
 const date = review?.date
   ? new Date(review.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
   : null;
+// Roughly eight lines of card text at the body size; longer gets the toggle.
+const LONG = 320;
+const long = (review?.text.length ?? 0) > LONG;
+const initial = (review?.author ?? '?').charAt(0).toUpperCase();
+const photo = await avatar(review?.photo);
 ---
 
 {
@@ -26,26 +37,55 @@ const date = review?.date
       <svg aria-hidden="true" width="48" height="20" viewBox="0 0 48 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" class="block text-accent">
         <path d="M1 19 L24 3 L47 19" />
       </svg>
-      <blockquote class="heading m-0 text-h3 leading-tight text-fg">{review.text}</blockquote>
+      <blockquote class="heading m-0 text-h3 leading-tight text-fg" data-review-text>{review.text}</blockquote>
       <figcaption class="flex flex-wrap items-center gap-x-3 gap-y-2 text-body-sm" data-sm>
-        <Stars rating={review?.rating ?? 5} class="text-accent" />
-        {review && <span class="font-semibold whitespace-nowrap text-fg">{review.author}</span>}
-        <span class="font-medium text-fg-muted">Google{date && ` · ${date}`}</span>
+        <Stars rating={review.rating} />
+        <span class="inline-flex items-center gap-2">
+          {photo ? (
+            <img src={photo} alt="" width="72" height="72" loading="lazy" decoding="async" class="size-7 rounded-full object-cover" />
+          ) : (
+            <span aria-hidden="true" class="inline-flex size-7 items-center justify-center rounded-full bg-accent text-body-sm font-bold text-fg-inverse">{initial}</span>
+          )}
+          <span class="font-semibold whitespace-nowrap text-fg">{review.author}</span>
+        </span>
+        {review.url ? (
+          <a href={review.url} target="_blank" rel="noopener" class="-my-2 inline-flex min-h-11 items-center font-medium text-fg-muted underline-offset-4 hover:underline">Google{date && ` · ${date}`}</a>
+        ) : (
+          <span class="font-medium text-fg-muted">Google{date && ` · ${date}`}</span>
+        )}
       </figcaption>
     </figure>
   ) : (
-    <figure class:list={['card m-0 h-full gap-4', className]}>
+    <figure class:list={['card m-0 h-full gap-4', className]} data-review>
       <div class="flex items-center justify-between gap-3">
-        <Stars rating={review?.rating ?? 5} class="text-accent" />
-        <span class="text-body-sm font-medium text-fg-muted">Google</span>
+        <Stars rating={review.rating} />
+        {review.url ? (
+          <a href={review.url} target="_blank" rel="noopener" class="-my-2 inline-flex min-h-11 items-center text-body-sm font-medium text-fg-muted underline-offset-4 hover:underline">View on Google</a>
+        ) : (
+          <span class="text-body-sm font-medium text-fg-muted">Google</span>
+        )}
       </div>
-      <blockquote class="m-0 flex-1 text-fg">{review.text}</blockquote>
-      {review && (
-        <figcaption class="text-body-sm font-semibold text-fg" data-sm>
-          {review.author}
-          {date && <span class="font-medium text-fg-muted"> · {date}</span>}
-        </figcaption>
-      )}
+      <div class="flex flex-1 flex-col gap-2">
+        <blockquote class:list={['m-0 text-fg', long && 'review-clamp']} data-review-text>
+          {review.text}
+        </blockquote>
+        {long && (
+          <button type="button" class="review-more -my-2 min-h-11 self-start text-body-sm font-semibold text-accent underline-offset-4 hover:underline" data-review-toggle aria-expanded="false">
+            Read more
+          </button>
+        )}
+      </div>
+      <figcaption class="flex items-center gap-3 text-body-sm" data-sm>
+        {photo ? (
+          <img src={photo} alt="" width="72" height="72" loading="lazy" decoding="async" class="size-9 shrink-0 rounded-full object-cover" />
+        ) : (
+          <span aria-hidden="true" class="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-body font-bold text-fg-inverse">{initial}</span>
+        )}
+        <span class="flex flex-col">
+          <span class="font-semibold text-fg">{review.author}</span>
+          {date && <span class="font-medium text-fg-muted">{date}</span>}
+        </span>
+      </figcaption>
     </figure>
   )
 }

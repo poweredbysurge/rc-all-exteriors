@@ -496,6 +496,21 @@
     }
   }
 
+  /* Review cards: a long review is clamped behind "Read more" once JS is
+     confirmed; without JS the full text shows (ADR-009). */
+  .js [data-review-text].review-clamp:not([data-open]) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 8;
+    overflow: hidden;
+  }
+  .review-more {
+    display: none;
+  }
+  .js .review-more {
+    display: inline-block;
+  }
+
   /* FAQ panels collapse only once the head script has confirmed JS is running. */
   .js [data-faq-panel]:not([data-open]) {
     display: none;

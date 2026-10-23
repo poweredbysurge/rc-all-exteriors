@@ -9,6 +9,6 @@ const { rating = 5, size = 18, class: className } = Astro.props;
 const full = Math.round(rating);
 ---
 
-<span class:list={['inline-flex gap-0.5', className]} role="img" aria-label={`${rating} out of 5 stars`}>
+<span class:list={['inline-flex gap-0.5 text-star', className]} role="img" aria-label={`${rating} out of 5 stars`}>
   {Array.from({ length: 5 }, (_, i) => <Icon name="star" size={size} filled={i < full} />)}
 </span>

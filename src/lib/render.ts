@@ -6,13 +6,14 @@ import { getReviews } from '@/lib/reviews';
 import { PHONE, TEL } from '@/lib/site';
 import { NOWRAP_TERMS } from '@/lib/text';
 
-// The copy was written with the review count Ricardo confirmed in September
-// ("49 five-star reviews"). At build the count comes from the reviews proxy,
-// so every place the copy states it follows the live number, visible text and
-// schema alike. With no Places key the proxy returns the confirmed fallback
-// and nothing changes.
+// The copy states the review count in places ("49 five-star reviews"). At
+// build the count comes from the reviews proxy, so any number the copy puts
+// in front of "five-star", "Google" or "reviews" follows the live number,
+// visible text and schema alike (master prompt 1.4, section 12: a review
+// count is never a literal). With no Places key the proxy returns the
+// fallback in business.json and the copy's number is replaced with that.
 const reviews = await getReviews();
-const COUNT_RE = new RegExp(`\\b${business.reviews.fallbackCount}(?=\\s+(?:five-star|Google|reviews))`, 'gi');
+const COUNT_RE = /(?<![.\d])\b\d{1,4}(?=\s+(?:five-star|Google|reviews))/gi;
 export const liveCount = (text: string) => text.replace(COUNT_RE, String(reviews.count));
 
 export const esc = (s: string) =>

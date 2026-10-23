@@ -102,6 +102,18 @@ for (const button of $$<HTMLButtonElement>('[data-action="accordion"]')) {
 }
 
 // FAQ accordions. Answers are in the HTML; CSS hides the closed ones once JS is confirmed.
+// Review cards: "Read more" expands a clamped review in place.
+for (const toggle of $$<HTMLButtonElement>('[data-review-toggle]')) {
+  const text = toggle.previousElementSibling as HTMLElement | null;
+  if (!text) continue;
+  toggle.addEventListener('click', () => {
+    const open = !text.hasAttribute('data-open');
+    text.toggleAttribute('data-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'Show less' : 'Read more';
+  });
+}
+
 for (const trigger of $$<HTMLButtonElement>('[data-faq-trigger]')) {
   trigger.addEventListener('click', () => {
     const answer = document.getElementById(trigger.getAttribute('aria-controls') ?? '');

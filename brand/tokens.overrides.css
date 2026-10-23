@@ -23,4 +23,8 @@
 
   /* ADR-005: lead card quiz panes. */
   --quiz-bar-height: 3px;
+
+  /* ADR-009: review stars are Google's yellow, not the brand accent, so the
+     cards read as Google reviews at a glance. */
+  --color-star: #FBBC04;
 }
