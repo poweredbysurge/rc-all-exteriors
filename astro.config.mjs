@@ -19,10 +19,11 @@ export default defineConfig({
   image: {
     // Responsive widths are declared per image; no layout shift helpers needed.
     responsiveStyles: false,
-    // Reviewer profile photos from Places API (New) are fetched at build and
+    // Reviewer profile photos (Places API (New)) and the service-area map
+    // (Maps Static API) are fetched at build and
     // emitted as local WebP, so the live site makes no request to Google for
     // them (ADR-009; check-integrity forbids external asset requests).
-    domains: ['lh3.googleusercontent.com'],
+    domains: ['lh3.googleusercontent.com', 'maps.googleapis.com'],
   },
   vite: {
     plugins: [tailwindcss()],

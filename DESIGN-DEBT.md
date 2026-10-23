@@ -12,7 +12,7 @@ Seeded from `design/DESIGN-DEBT.md` (Gate A export, 2026-10-07). `design/` is re
 | 4 | "10-year" and "Class A" break across lines | Wrapped in `white-space: nowrap` wherever copy is rendered (`NOWRAP_TERMS`), and on stat values. **Not** the U+2011 hyphen: neither font file has that glyph, so it would render in the fallback face. | home, roof-replacement, stat strips |
 | 5 | Step numerals smudge under wrapped titles | Numeral at 6% opacity, top-left, above the title instead of behind it. | home, roof-replacement |
 | 6 | Footer link rows about 34px | Every footer link row is 44px. | footer-390, footer-1440 |
-| 7 | Schematic map | Kept schematic, by decision. See ADR-004. | home, fairfax |
+| 7 | Schematic map | Replaced by a styled Google static map with our pins on top (ADR-010, 2026-10-23). The artboards still show the schematic. | home, fairfax |
 | 8 | tear-off.jpg is an underlayment shot | Source renamed `rc-select-03-underlayment.jpg`; registry key `underlayment`. | home, roof-replacement |
 | 9 | Hero photo has the RC mark baked in | **Fixed 2026-10-19.** Hero source is the unwatermarked colonial street view from Ricardo's phone, with a pre-cut 16:9 band (`heroSrc`) for desktop because the image service crops portrait sources through the middle. | home |
 | 10 | Section padding 100px / 128px | From `design/tokens.css` through the generated theme (`section-y`, `section-y-quiet`). | all |

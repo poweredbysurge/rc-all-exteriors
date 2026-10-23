@@ -27,4 +27,12 @@
   /* ADR-009: review stars are Google's yellow, not the brand accent, so the
      cards read as Google reviews at a glance. */
   --color-star: #FBBC04;
+
+  /* ADR-010: the service-area map is a styled Google static map fetched at
+     build. These are the only colors Google draws; everything else is off. */
+  --map-land: #F4F5FA;
+  --map-water: #D9DEF6;
+  --map-road: #FFFFFF;
+  --map-highway: #DADDE8;
+  --map-park: #EEF0F5;
 }

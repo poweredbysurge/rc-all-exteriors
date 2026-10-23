@@ -1,9 +1,12 @@
 ---
-// Service-area map. Schematic by decision (DESIGN-DEBT.md): towns plotted by
-// latitude and longitude from src/data/nav.ts, the home base marked with the
-// RC mark, live city pages as solid dots. No street address, and no map
-// provider script or key.
+// Service-area map (ADR-010): a Google Static Map styled in the site palette,
+// fetched once at build and served locally, with our own pins and labels
+// placed by the same projection. Live city pages are solid dots and links,
+// the home base is the RC mark. No street address, no map script on the page.
+// Without a key (a local build) the background falls back to the schematic
+// of ADR-004 so nothing breaks.
 import { cities, homeBase, lakeRidge } from '@/data/nav';
+import { staticMap } from '@/lib/static-map';
 
 interface Props {
   /** Limit the map to these towns (city pages show their own corner). */
@@ -14,7 +17,7 @@ interface Props {
 }
 const { only, ratio = 600 / 540, caption, class: className } = Astro.props;
 
-type Place = { name: string; lat: number; lon: number; kind: 'base' | 'live' | 'area'; label: 'right' | 'left' | 'top'; hideLabelOnPhone?: boolean };
+type Place = { name: string; lat: number; lon: number; kind: 'base' | 'live' | 'area'; href?: string | null; label: 'right' | 'left' | 'top'; hideLabelOnPhone?: boolean };
 const all: Place[] = [
   { ...homeBase, kind: 'base', label: 'right' },
   { ...lakeRidge, kind: 'area', label: 'left', hideLabelOnPhone: true },
@@ -24,6 +27,7 @@ const all: Place[] = [
       lat: c.lat,
       lon: c.lon,
       kind: c.href ? 'live' : 'area',
+      href: c.href,
       label: c.name === 'Fairfax' || c.name === 'Fairfax Station' ? 'left' : c.name === 'Alexandria' ? 'top' : 'right',
       hideLabelOnPhone: c.name === 'Fairfax Station',
     }),
@@ -31,24 +35,35 @@ const all: Place[] = [
 ];
 const places = only ? all.filter((p) => only.includes(p.name)) : all;
 
-// Linear projection with room on the right for labels.
+// The image is drawn at 600 wide; the ratio sets its height. Labels need
+// room on the right and the base needs room below.
+const WIDTH = 600;
+const HEIGHT = Math.round(WIDTH / ratio);
+const pad = { left: 0.2, right: 0.26, top: 0.1, bottom: 0.14 };
+const map = await staticMap(places, { width: WIDTH, height: HEIGHT, pad });
+
+// Keyless fallback: the schematic's linear projection.
 const lons = places.map((p) => p.lon);
 const lats = places.map((p) => p.lat);
 const [lonMin, lonMax] = [Math.min(...lons), Math.max(...lons)];
 const [latMin, latMax] = [Math.min(...lats), Math.max(...lats)];
-const pad = { left: 0.24, right: 0.3, top: 0.13, bottom: 0.2 };
-const x = (lon: number) => (pad.left + ((lon - lonMin) / (lonMax - lonMin || 1)) * (1 - pad.left - pad.right)) * 100;
-const y = (lat: number) => (pad.top + ((latMax - lat) / (latMax - latMin || 1)) * (1 - pad.top - pad.bottom)) * 100;
+const linear = (p: Place) => ({
+  x: (pad.left + ((p.lon - lonMin) / (lonMax - lonMin || 1)) * (1 - pad.left - pad.right)) * 100,
+  y: (pad.top + ((latMax - p.lat) / (latMax - latMin || 1)) * (1 - pad.top - pad.bottom)) * 100,
+});
+const at = (p: Place) => (map.src ? map.project(p) : linear(p));
 
 const base = places.find((p) => p.kind === 'base');
-// The Potomac, as a dashed hint east of the home base. Schematic.
-const river = base
-  ? `M ${x(base.lon)} ${y(base.lat) + 11} C ${x(base.lon) + 6} ${y(base.lat) - 9}, ${x(base.lon) + 34} ${y(base.lat) - 24}, ${x(base.lon) + 38} ${y(base.lat) - 44}`
-  : '';
+// Schematic only: the Potomac as a dashed hint east of the home base.
+const river =
+  !map.src && base
+    ? `M ${at(base).x} ${at(base).y + 11} C ${at(base).x + 6} ${at(base).y - 9}, ${at(base).x + 34} ${at(base).y - 24}, ${at(base).x + 38} ${at(base).y - 44}`
+    : '';
 ---
 
 <figure class:list={['m-0 flex flex-col gap-2', className]}>
   <div class="relative w-full overflow-hidden rounded-lg border border-border-subtle bg-surface-muted" style={`aspect-ratio:${ratio}`} role="img" aria-label={caption}>
+    {map.src && <img src={map.src} alt="" width={WIDTH * 2} height={HEIGHT * 2} loading="lazy" decoding="async" class="absolute inset-0 size-full object-cover" />}
     {
       river && (
         <svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute inset-0 size-full text-border" fill="none" stroke="currentColor">
@@ -58,13 +73,14 @@ const river = base
     }
     {
       places.map((p) => (
-        <span class="absolute" style={`left:${x(p.lon)}%;top:${y(p.lat)}%`} aria-hidden="true">
+        <span class="absolute" style={`left:${at(p).x}%;top:${at(p).y}%`} aria-hidden="true">
           {p.kind === 'base' ? (
-            <img src="/logos/icon-blue.svg" alt="" width="36" height="26" loading="lazy" decoding="async" class="absolute top-0 left-0 block w-9 max-w-none -translate-x-1/2 -translate-y-1/2" />
+            <img src="/logos/icon-blue.svg" alt="" width="36" height="26" loading="lazy" decoding="async" class:list={['absolute top-0 left-0 block w-9 max-w-none -translate-x-1/2 -translate-y-1/2', map.src && 'map-mark']} />
           ) : (
             <span
               class:list={[
                 'absolute top-0 left-0 block -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-accent',
+                map.src && 'shadow-[0_0_0_3px_var(--color-surface)]',
                 p.kind === 'live' ? 'size-3.5 bg-accent' : 'size-2.5 bg-surface',
               ]}
             />
@@ -72,6 +88,7 @@ const river = base
           <span
             class:list={[
               'absolute text-body-sm leading-snug whitespace-nowrap',
+              map.src && 'map-label',
               p.kind === 'area' ? 'font-medium text-fg-muted' : 'font-bold text-fg',
               p.label === 'right' && (p.kind === 'base' ? 'top-0 left-6 -translate-y-1/2' : 'top-0 left-3.5 -translate-y-1/2'),
               p.label === 'left' && 'top-0 right-3.5 -translate-y-1/2',
@@ -85,5 +102,22 @@ const river = base
       ))
     }
   </div>
-  <figcaption class="text-body-sm leading-snug font-medium text-fg-subtle" data-sm>{caption}</figcaption>
+  <figcaption class="text-body-sm leading-snug font-medium text-fg-subtle" data-sm>
+    {caption}
+    {!map.src && ' Schematic, not to scale.'}
+  </figcaption>
 </figure>
+
+<style is:global>
+  /* Over the map image the labels and the mark get a thin white halo so they
+     stay legible across roads and water. */
+  .map-label {
+    text-shadow:
+      0 0 3px var(--color-surface),
+      0 0 3px var(--color-surface),
+      0 0 6px var(--color-surface);
+  }
+  .map-mark {
+    filter: drop-shadow(0 0 2px var(--color-surface)) drop-shadow(0 0 2px var(--color-surface));
+  }
+</style>

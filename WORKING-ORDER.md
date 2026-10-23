@@ -13,6 +13,9 @@
 **Round 2, same day: review cards (ADR-009)**
 - Yellow stars (`--color-star`), reviewer photo through the image pipeline, "View on Google" link per review, eight-line clamp with Read more, live count replaces any literal count, fallback 53. Gate exempts review text from the exclamation rule; `REVIEWS_MOCK` for keyless layout checks. Verified with a saved Places response at 1440 and 390; both gates pass.
 
+**Round 3, same day: service-area map (ADR-010)**
+- `AreaMap` backgrounds are Google Static Maps styled in the palette, fetched at build, pins by projection. Maps Static API added to the `rc-all-exteriors` key. Verified keyless (schematic fallback); the real tile is checked on the Vercel build after push since the key is write-only on Vercel.
+
 **Check with Sam** (also in the session report)
 - Settled: the yard sign shot is the brother-in-law, the roof walk is Ricardo. About hero and homepage Why us now use the roof walk; step 1 is the chimney flashing detail.
 - The homepage dark steps band still shows four photos in a row; fine on desktop, long on phones. Could drop to two.
