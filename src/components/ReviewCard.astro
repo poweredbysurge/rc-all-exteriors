@@ -27,6 +27,9 @@ const date = review?.date
 // Roughly eight lines of card text at the body size; longer gets the toggle.
 const LONG = 320;
 const long = (review?.text.length ?? 0) > LONG;
+// A pullquote over the word cap (every live review is long) drops a type step
+// and clamps to six lines behind Read more.
+const pullLong = (review?.text.split(/\s+/).length ?? 0) > 50;
 const initial = (review?.author ?? '?').charAt(0).toUpperCase();
 const photo = await avatar(review?.photo);
 ---
@@ -37,7 +40,16 @@ const photo = await avatar(review?.photo);
       <svg aria-hidden="true" width="48" height="20" viewBox="0 0 48 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" class="block text-accent">
         <path d="M1 19 L24 3 L47 19" />
       </svg>
-      <blockquote class="heading m-0 text-h3 leading-tight text-fg" data-review-text>{review.text}</blockquote>
+      <div class="flex flex-col gap-3">
+        <blockquote class:list={['heading m-0 leading-tight text-fg', pullLong ? 'text-h4 review-clamp review-clamp-6' : 'text-h3']} data-review-text>
+          {review.text}
+        </blockquote>
+        {pullLong && (
+          <button type="button" class="review-more -my-2 min-h-11 self-start text-body-sm font-semibold text-accent underline-offset-4 hover:underline" data-review-toggle aria-expanded="false">
+            Read more
+          </button>
+        )}
+      </div>
       <figcaption class="flex flex-wrap items-center gap-x-3 gap-y-2 text-body-sm" data-sm>
         <Stars rating={review.rating} />
         <span class="inline-flex items-center gap-2">

@@ -42,7 +42,7 @@ const cta = section(page, 'Footer CTA');
 
 const whyGroups = groupByH3(why.blocks.filter((b) => b.type !== 'h2')).groups;
 const reviewSlots = blocksOf(reviews, 'review');
-const live = pickReviews((await getReviews()).reviews, reviewSlots.map((r) => r.hint));
+const live = pickReviews((await getReviews()).reviews, reviewSlots.map((r) => r.hint), { pullquote: 0 });
 const areaParts = groupByH3(area.blocks.filter((b) => b.type !== 'h2' && b.type !== 'links' && b.type !== 'image'));
 const reviewsLink = first(reviews, 'links')!.links[0];
 
