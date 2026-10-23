@@ -44,6 +44,7 @@ function styles(): string[] {
     `feature:road|element:geometry.fill|color:${token('map-road')}`,
     `feature:road.highway|element:geometry.fill|color:${token('map-highway')}`,
     'feature:road.local|visibility:off',
+    `feature:road.arterial|element:geometry.fill|color:${token('map-road')}`,
     `feature:water|element:geometry|color:${token('map-water')}`,
   ];
 }

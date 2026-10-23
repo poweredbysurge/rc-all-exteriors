@@ -122,9 +122,9 @@
   --rc-hero-py-desktop: 40px;
   --rc-hero-py-mobile: 56px;
   --rc-quiz-bar-height: 3px;
-  --rc-map-land: #F4F5FA;
-  --rc-map-water: #D9DEF6;
+  --rc-map-land: #F1F3F9;
+  --rc-map-water: #D4DAF5;
   --rc-map-road: #FFFFFF;
-  --rc-map-highway: #DADDE8;
+  --rc-map-highway: #C9CDDD;
   --rc-map-park: #EEF0F5;
 }
