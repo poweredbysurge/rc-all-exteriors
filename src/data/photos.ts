@@ -126,6 +126,8 @@ export const photos = {
     town: null,
     pool: false,
   },
+  // Ricardo (Sam, 2026-10-23). Owner-adjacent slots use this one: About hero,
+  // homepage Why us, inspection page. Still unnamed in the caption and alt.
   proOnRoof: {
     src: proOnRoof,
     alt: 'An RC All Exteriors professional walking a shingle roof during an inspection',
@@ -136,6 +138,8 @@ export const photos = {
     town: null,
     pool: false,
   },
+  // The person here is Ricardo's brother-in-law (Sam, 2026-10-23): fine in a
+  // process row or a city page, never the About hero or beside the owner copy.
   proYardSign: {
     src: proYardSign,
     alt: 'An RC All Exteriors professional in front of a brick home with its new Brava synthetic shake mansard roof and the RC All Exteriors yard sign',

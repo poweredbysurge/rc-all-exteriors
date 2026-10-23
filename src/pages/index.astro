@@ -92,7 +92,7 @@ const SERVICE_PHOTOS = ['mansardShakeFront', 'chimneyFlashing', 'twoStoryWalk', 
 
   <Section bg="muted" name="Why us">
     <div class="grid grid-cols-1 items-start gap-7 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
-      <Figure photo="proYardSign" ratio={4 / 5} sizes="(min-width: 1024px) 500px, 100vw" showTown bleed class="reveal lg:sticky lg:top-[calc(var(--rc-header-height-desktop)+24px)]" />
+      <Figure photo="proOnRoof" ratio={4 / 5} sizes="(min-width: 1024px) 500px, 100vw" showTown bleed class="reveal lg:sticky lg:top-[calc(var(--rc-header-height-desktop)+24px)]" />
       <div class="flex flex-col gap-7 lg:gap-10">
         <div class="flex flex-col gap-4">
           <Eyebrow>Why us</Eyebrow>
@@ -140,7 +140,7 @@ const SERVICE_PHOTOS = ['mansardShakeFront', 'chimneyFlashing', 'twoStoryWalk', 
       <h2 class="heading text-center text-h2 text-fg lg:text-left"><Rich inline={first(process, 'h2')!.inline} /></h2>
       <Steps
         items={first(process, 'steps')!.items}
-        media={['proOnRoof', 'proYardSign', 'newDecking', 'mansardShakeYardSign']}
+        media={['chimneyFlashing', 'proYardSign', 'newDecking', 'mansardShakeYardSign']}
       />
     </div>
   </Section>

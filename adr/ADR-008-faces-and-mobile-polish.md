@@ -13,7 +13,7 @@ Why not sharp's `attention` strategy: it anchored on the sky and the shingles in
 
 ## 2. Nobody is named under a photo
 
-Keys `ricardoRoof`, `ricardoYardSign`, `ricardoFlatRoof` became `proOnRoof`, `proYardSign`, `proFlatRoof`. Captions and alts say "an RC All Exteriors professional", "the RC All Exteriors crew", "on site". The owner's name stays in the copy ("Ricardo quotes every job and signs off on every roof"), which is a claim about the business, not about who is in the picture. The free inspection caption is "Every inspection is done in person, on the roof." The homepage Why us photo and the About hero both still show the yard sign shot; whether that person should sit beside the "That's how Ricardo Castro runs RC All Exteriors" paragraph is Sam's call (WORKING-ORDER).
+Keys `ricardoRoof`, `ricardoYardSign`, `ricardoFlatRoof` became `proOnRoof`, `proYardSign`, `proFlatRoof`. Captions and alts say "an RC All Exteriors professional", "the RC All Exteriors crew", "on site". The owner's name stays in the copy ("Ricardo quotes every job and signs off on every roof"), which is a claim about the business, not about who is in the picture. The free inspection caption is "Every inspection is done in person, on the roof." Sam confirmed the yard sign shot is the brother-in-law and the roof walk is Ricardo, so the About hero and the homepage Why us photo (beside "That's how Ricardo Castro runs RC All Exteriors") use the roof walk; the yard sign shot stays in the process row as step 2. Step 1 is the chimney flashing detail so the roof walk is not twice on the homepage.
 
 ## 3. Mobile hero
 

@@ -11,7 +11,7 @@
 - Docs: ADR-008, STANDARDS 41 to 47, master prompt v1.4 (repo, workspace copy, Project doc).
 
 **Check with Sam** (also in the session report)
-- Which photos are the brother-in-law. The yard sign shot (`proYardSign`) sits beside the "That's how Ricardo Castro runs RC All Exteriors" paragraph on the homepage and is the About hero; if it is not Ricardo, swap it for the crew selfie or a house.
+- Settled: the yard sign shot is the brother-in-law, the roof walk is Ricardo. About hero and homepage Why us now use the roof walk; step 1 is the chimney flashing detail.
 - The homepage dark steps band still shows four photos in a row; fine on desktop, long on phones. Could drop to two.
 - Reviews and the homepage pullquote stay empty until `GOOGLE_PLACES_KEY` and `GBP_PLACE_ID` land on Vercel.
 

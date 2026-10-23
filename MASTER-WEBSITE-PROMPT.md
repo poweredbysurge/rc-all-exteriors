@@ -518,6 +518,8 @@ Measured on the Vercel production URL with Lighthouse mobile (Moto G Power profi
 ## 18. Page templates (build all that apply)
 
 1. **Homepage:** hero with lead card → trust strip → services grid, image-led, on the first dark band (4 to 8 cards, each with a real job photo at 16:10 above the title; icon-only cards are for hubs, not the homepage) → problem opener, if the copy has one (the page's one text-only two-column section) → why us / differentiators (split layout with a photo and the stat strip) → reviews wall → process (how it works, no numbered circles) → financing or offer band on the second dark band, with a photo → service area (map or city chips) → FAQ → final CTA band → footer. The services grid is always second: a visitor should know what the company does inside one scroll. Why us never precedes it.
+A four-step process row with a photo per step is a 2,000px column on a phone. Below 768px only the first and last steps keep their photo; from two columns up every step has one.
+
 2. **Service hub** (`/roof-replacement/`): hero with lead card → trust strip → intro with a job photo beside it → what is included → materials or options (table or cards) → pricing guidance if approved → process → gallery → reviews filtered to that service → FAQ → related services → city links → CTA.
 3. **City by service** (`/frederick-md-roofing/`): skeleton in section 15.
 4. **Service areas hub:** map, county and city grid with chips linking to city pages, coverage copy.
@@ -683,7 +685,7 @@ CLIENT DECISIONS ALREADY MADE: [Anything that overrides a default in this prompt
 
 ## Changelog
 
-- **1.4 (2026-10-23):** From the RC polish pass, ADR-008. People in photos: every person photo names a crop anchor (`focus`) the image pipeline honors at every ratio, and captions and alts never name the person (section 13). Hero CTAs stack full width below the desktop breakpoint, mobile scrim lightened to 45 percent with a text shadow (section 10). Three-column comparison tables stack into cards on phones (section 5). Empty states on the live site show the real alternative, never a heading over nothing; social links in copy are markdown links (section 16).
+- **1.4 (2026-10-23):** From the RC polish pass, ADR-008. A four-step process row keeps photos on the first and last step only below 768px (section 18). People in photos: every person photo names a crop anchor (`focus`) the image pipeline honors at every ratio, and captions and alts never name the person (section 13). Hero CTAs stack full width below the desktop breakpoint, mobile scrim lightened to 45 percent with a text shadow (section 10). Three-column comparison tables stack into cards on phones (section 5). Empty states on the live site show the real alternative, never a heading over nothing; social links in copy are markdown links (section 16).
 
 - **1.3 (2026-10-19), fifth pass:** Placeholder modes, preview versus launch (section 16). From the RC launch pass, ADR-007.
 

@@ -84,7 +84,7 @@ const inlineLinks = new Set(
 );
 const more = page.internalLinks.filter((href) => href !== '/' && href !== path && !serviceByHref.has(href) && !inlineLinks.has(href) && routeByPath.has(href));
 
-const stepMedia = isReplacement ? (['proOnRoof', 'proYardSign', 'newDecking', 'mansardShakeYardSign'] as const) : undefined;
+const stepMedia = isReplacement ? (['chimneyFlashing', 'proYardSign', 'newDecking', 'mansardShakeYardSign'] as const) : undefined;
 
 // Real photos for the copy's [IMAGE] slots, in order, where the subject exists
 // (2026-10-19 photos). Slots with no matching photo stay as labeled gaps.
