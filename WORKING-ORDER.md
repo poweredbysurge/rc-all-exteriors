@@ -13,7 +13,7 @@
 **Check with Sam** (also in the session report)
 - Settled: the yard sign shot is the brother-in-law, the roof walk is Ricardo. About hero and homepage Why us now use the roof walk; step 1 is the chimney flashing detail.
 - The homepage dark steps band still shows four photos in a row; fine on desktop, long on phones. Could drop to two.
-- Reviews and the homepage pullquote stay empty until `GOOGLE_PLACES_KEY` and `GBP_PLACE_ID` land on Vercel.
+- Google reviews key: `surge-client-sites` Cloud project (manager@ account, billing linked 2026-10-23), key `rc-all-exteriors` restricted to Places API (New). Place ID `ChIJ_x_3BbtXtokRKZy7EsegsTE`. Sam pastes the key into Vercel as `GOOGLE_PLACES_KEY` with `GBP_PLACE_ID`, then redeploys; the review cards fill on the next build. The auto-created "Maps Platform API Key" (32 APIs, unrestricted) in the same project is unused and can be deleted.
 
 **Next**
 - Push from the Mac, then Sam's next callouts.
