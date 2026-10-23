@@ -17,6 +17,7 @@ export interface SourceSet {
 interface Crop {
   /** width / height. Omit to keep the source ratio. */
   ratio?: number;
+  /** Sharp crop anchor keyword ('top', 'bottom', ...). Photos with people set one in photos.ts (`focus`). */
   position?: string;
 }
 

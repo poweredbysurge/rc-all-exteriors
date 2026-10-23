@@ -92,7 +92,7 @@ const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? '
       </div>
 
       <div class:list={['flex max-w-[680px] flex-col items-center gap-6 lg:col-start-1 lg:row-start-2 lg:items-start lg:self-start', cardFirstOnMobile && 'order-3 lg:order-none']}>
-        <div class="flex w-full flex-col gap-3 btn:w-auto btn:flex-row">
+        <div class="flex w-full flex-col gap-3 lg:w-auto lg:flex-row">
           {primary && <Cta to={target(primary)} variant="primary">{primary.label}</Cta>}
           {secondary && <Cta to={target(secondary)} variant="secondary-on-dark">{secondary.label}</Cta>}
         </div>
@@ -107,8 +107,10 @@ const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? '
 {trust.length > 0 && <TrustStrip items={trust} />}
 
 <style is:global>
-  /* Phones: a 3:4 photo behind the headline, 60% scrim to the 40% line (Gate A
-     review finding 3), then a fade to the solid dark surface. */
+  /* Phones: a 3:4 photo behind the headline, 45% scrim to the 35% line (Gate A
+     review finding 3, lightened 2026-10-23 so the roof reads as a photo and not
+     a navy wash), then a fade to the solid dark surface. The headline sits on a
+     text shadow for contrast against the lighter top. */
   .hero-media {
     aspect-ratio: 3 / 4;
     max-height: 100%;
@@ -116,13 +118,17 @@ const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? '
   .hero-scrim {
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--color-surface-contrast) 60%, transparent) 0%,
-      color-mix(in srgb, var(--color-surface-contrast) 60%, transparent) 40%,
+      color-mix(in srgb, var(--color-surface-contrast) 45%, transparent) 0%,
+      color-mix(in srgb, var(--color-surface-contrast) 45%, transparent) 35%,
       var(--color-surface-contrast) 100%
     );
   }
   .hero {
     padding-block: var(--rc-hero-py-mobile) var(--rc-section-py-mobile);
+  }
+  .hero h1,
+  .hero .rich {
+    text-shadow: 0 1px 2px color-mix(in srgb, var(--color-surface-contrast) 60%, transparent);
   }
   /* The homepage display size, one step under the token so a 10-word H1 holds
      three lines at 1440 and the hero still fits the viewport (ADR-005). */
@@ -137,6 +143,10 @@ const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? '
     }
     .hero-scrim {
       background: var(--rc-hero-scrim-desktop);
+    }
+    .hero h1,
+    .hero .rich {
+      text-shadow: none;
     }
     .hero {
       display: grid;

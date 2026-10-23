@@ -6,14 +6,17 @@ import RatingChip from '@/components/RatingChip.astro';
 import ReviewCard from '@/components/ReviewCard.astro';
 import Rich from '@/components/Rich.astro';
 import Section from '@/components/Section.astro';
+import Stars from '@/components/Stars.astro';
+import business from '@/data/business.json';
 import { first, getPage, section } from '@/lib/copy';
 import { getReviews } from '@/lib/reviews';
 
 const path = '/reviews/';
 const wall = section(getPage(path), 'Reviews');
 const { reviews } = await getReviews();
+// Without the Places proxy the wall is one card that sends people to Google
+// instead of an empty section (2026-10-23).
 const sorted = [...reviews].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
-const hint = first(wall, 'review')!.hint;
 ---
 
 <TrustPage path={path} skip={['Reviews']}>
@@ -29,10 +32,25 @@ const hint = first(wall, 'review')!.hint;
             {sorted.map((review) => <ReviewCard review={review} class="reveal" />)}
           </div>
         ) : (
-          <ReviewCard hint={hint} />
+          <a
+            href={business.profiles.google}
+            rel="noopener"
+            target="_blank"
+            class="card mx-auto flex w-full max-w-[560px] flex-col items-center gap-3 text-center no-underline hover:border-accent"
+          >
+            <Stars rating={5} class="text-accent" />
+            <span class="heading text-h4 text-fg">Read every review on our Google profile</span>
+            <span class="text-body text-fg-muted">Every review, in our customers' own words, newest first.</span>
+            <span class="link-arrow">Open Google reviews</span>
+          </a>
         )
       }
       <ul class="m-0 flex list-none flex-wrap justify-center gap-2 p-0 lg:justify-start">
+        {business.profiles.google && (
+          <li>
+            <a href={business.profiles.google} class="chip" rel="noopener" target="_blank">Leave a Google review</a>
+          </li>
+        )}
         <li><a href="/about/" class="chip">About</a></li>
         <li><a href="/roof-replacement/" class="chip">Roof Replacement</a></li>
         <li><a href="/free-roof-inspection/" class="chip">Free Roof Inspection</a></li>

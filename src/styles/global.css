@@ -457,6 +457,45 @@
     left: 0;
   }
 
+  /* A comparison table stacks into one card per row on phones instead of
+     scrolling sideways with its third column cut off (2026-10-23). Each cell
+     repeats its column heading from data-label. */
+  @media (max-width: 39.99rem) {
+    .table-wrap[data-stack] table {
+      min-width: 0;
+    }
+    .table-wrap[data-stack] thead {
+      display: none;
+    }
+    .table-wrap[data-stack] tr,
+    .table-wrap[data-stack] th,
+    .table-wrap[data-stack] td {
+      display: block;
+    }
+    .table-wrap[data-stack] tbody th {
+      position: static;
+      padding-bottom: 4px;
+      background: var(--color-surface-muted);
+    }
+    .table-wrap[data-stack] tbody tr:first-child th {
+      border-top: 0;
+    }
+    .table-wrap[data-stack] td {
+      border-top: 0;
+      padding-top: 10px;
+    }
+    .table-wrap[data-stack] td + td {
+      padding-top: 0;
+    }
+    .table-wrap[data-stack] td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: var(--text-body-sm);
+      font-weight: 700;
+      color: var(--color-fg-muted);
+    }
+  }
+
   /* FAQ panels collapse only once the head script has confirmed JS is running. */
   .js [data-faq-panel]:not([data-open]) {
     display: none;

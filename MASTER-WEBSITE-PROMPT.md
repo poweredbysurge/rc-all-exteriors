@@ -1,5 +1,5 @@
 # Surge Master Website Prompt
-**Version 1.3 - October 2026**
+**Version 1.4 - October 2026**
 **Owner:** Sam Delgado / Mario Goncalves
 **Built from:** HomeSource Roofing (static, 170 pages), Sunrise Landscape (Next.js, 60+ pages), Señor Tequilas (Astro, Claude Design port)
 
@@ -138,7 +138,7 @@ City pages and service pages run 900 to 2,000 words. They have to stay readable 
 - Inner pages follow the same rule by plan, not by hand: the opening body section carries a real job photo of the page's own job type beside the copy, and one body section in the first half is a dark band (an icon-block grid first, then a split, then the process steps), with at least two light bands between it and the CTA band. When the CTA band would land within one band of it, the CTA band moves below the FAQ. A page with fewer than three body sections keeps the light cycle. Text on a dark content band inverts through one `.on-dark` rule, never per-component variants. Build this as a planner over the copy's section kinds (`src/lib/rhythm.ts` in the RC repo) so the eleventh service page gets it for free.
 - Alternate section layout: full-width prose, then split (heading left / content right or image left / copy right), then full-width. Never five identical left-aligned blocks stacked.
 - Content column max-width 720 to 800px for prose. Full-width 1200 to 1280px container for grids, galleries and CTAs.
-- Tables: responsive wrapper with `overflow-x: auto` and a scroll hint, `min-width` on the table, sticky first column if more than 3 columns. Tables are styled globally, not per page.
+- Tables: responsive wrapper with `overflow-x: auto` and a scroll hint, `min-width` on the table, sticky first column if more than 3 columns. Tables are styled globally, not per page. A comparison table with three columns or fewer (repair versus replace, option A versus B) does not scroll on phones: below 640px it stacks into one card per row, each cell headed by its column label (`data-label` on the cell, `::before` in CSS). A clipped third column with no scroll cue reads as a broken layout.
 - Mid-page CTA band: one per 600 to 800 words, two maximum per page beyond the hero and the footer CTA. Contains headline, one line of copy, phone and button. Never a second full form.
 - FAQ: accordion, 4 to 8 questions, questions in H3 or H4 size, answers at body size, FAQPage schema that mirrors the visible text exactly.
 
@@ -294,8 +294,8 @@ The hero is the page's job. It gets the most design time and the strictest rules
 **Hero layout**
 - Desktop: two-column grid, copy left (1fr) and lead card right (fixed 420 to 460px), vertically centered. The hero is contained to the first viewport: its height is the viewport minus the header, clamped between 640 and 820px (`--hero-min`, `--hero-max`), never a bare `100vh`. The verification gate checks that at 1440 by 900 and 1920 by 1080 the hero's bottom edge is at or above the viewport's and the lead card is fully inside it. The homepage display H1 is one step under the display token (max 60px) so a 10-word headline holds three lines at 1440.
 - The trust row is not inside the hero. It renders as its own thin light strip directly under it (rating chip plus three items on desktop, chip plus two on phones), so the hero carries only the H1, lede, two CTAs and the card.
-- Mobile: stacked. Eyebrow, H1, lede, primary CTA button, then the lead card, then the trust strip. Below 480px the lead card may be replaced by a Google reviews card plus the sticky bottom CTA (Sunrise pattern) when the form has 5 or more fields in step 1; test both against conversion data when available.
-- Background: a real photo of the client's crew or work, WebP, with a scrim (brand dark at 45 to 60 percent). Optional desktop-only video loop (`preload="none"`, `poster` set to the hero WebP, muted, playsinline, hidden on mobile). Never stock photography of a smiling model in a hard hat.
+- Mobile and tablet: stacked. Eyebrow, H1, lede, the CTA buttons stacked full width (never side by side below the desktop breakpoint; two labels like "Book a Free Roof Inspection" and "Call or text (703) 677-1976" wrap into four lines of button at 430px), then the lead card, then the trust strip. Below 480px the lead card may be replaced by a Google reviews card plus the sticky bottom CTA (Sunrise pattern) when the form has 5 or more fields in step 1; test both against conversion data when available.
+- Background: a real photo of the client's crew or work, WebP, with a scrim (brand dark at 45 to 60 percent on desktop; on phones 45 percent over the top third fading to the solid surface, with a 1px text shadow on the H1 and lede for contrast). A 60 percent mobile scrim turns the photo into a navy wash and the page opens on a colored block instead of a roof. Optional desktop-only video loop (`preload="none"`, `poster` set to the hero WebP, muted, playsinline, hidden on mobile). Never stock photography of a smiling model in a hard hat.
 - Eyebrow: trust line (Veteran Owned · Family Owned · Since 1986). Optional on mobile.
 - H1: service plus geography, 6 to 10 words, one highlighted word in accent if the brand allows. "Your Trusted Washington County Roofers". Not a question, not a slogan.
 - Lede: 20 to 35 words. What they do, for whom, one differentiator, one proof.
@@ -382,6 +382,8 @@ Store the consent text version string with every submission.
 - **Everything below the fold:** `loading="lazy"`, `decoding="async"`. Gallery and review avatars included.
 - **Lazy sections:** heavy components (maps, carousels, embedded estimators, video) load on `client:visible` or an `IntersectionObserver` 200px before entering the viewport. Iframes get `loading="lazy"` and a fixed aspect-ratio box so nothing shifts.
 - **Video:** desktop-only hero loops, `preload="none"`, `poster` set, `muted loop playsinline`, WebM with MP4 fallback, under 3MB, starts only after the LCP image has painted. Never on mobile.
+- **People in photos:** no crop may take a face off. Every registered photo with a person in it names a crop anchor (`focus: top | bottom | left | right`, the edge the faces are nearest) and every generated crop (cards, figures, galleries, any ratio) passes it to the image service; the default centre anchor cuts a standing person at the chest in a landscape frame. Before the layout gate, screenshot every photo slot that shows a person at phone and desktop widths and check the heads. A face-safe crop beats a centered composition every time.
+- **Nobody is named in a caption or alt:** people in work photos are "an [Client] professional", "the [Client] crew", "on site". Clients send photos of brothers-in-law, subcontractors and friends under the owner's name; a caption that names the wrong person is worse than one that names nobody, and the owner's own name belongs in the copy, not under a photo. Exception: a portrait the owner supplies of themselves for the About page, confirmed in writing.
 - **Alt text:** descriptive, includes the city or service when honest ("Home Source Roofing crew installing architectural shingles in Hagerstown, MD"). Decorative images get `alt=""`. Never keyword lists.
 - **Source hygiene:** originals in `/src/assets/<section>/`, kebab-case filenames, no spaces, no "final-v2". Build generates the derivatives. A `scripts/optimize-images` step converts any stray JPG/PNG dropped into assets.
 - **OG image per page type:** homepage, service, city, blog. Real photo plus wordmark, generated once, verified to return 200 before launch.
@@ -488,6 +490,12 @@ Measured on the Vercel production URL with Lighthouse mobile (Moto G Power profi
 - Phone number formatted consistently site-wide: `(301) 848-8508` visible, `tel:+13018488508` in the href.
 
 - **Placeholders have two modes.** In preview every unanswered fact, photo and review is a visible `[CONFIRM]` slot and the production gate fails while any remain. At launch, once the client has answered, the components that held slots render nothing rather than a label: no photo where none exists, no review card without a live review, no town in a caption until it is known. The gate stays in the build and must report zero; it is never deleted to get past it. City pages may publish without a local job only by a logged decision (research-backed local context, a general project named as such, no invented job or review).
+
+---
+
+**Empty states on the live site.** A section whose data is not wired yet (reviews before the Places key, a gallery before the photos) never renders empty under its heading. It shows the real alternative: a reviews wall with no reviews is one card that links to the client's Google profile; a gallery with no photos is the CTA band. Orphaned filter chips and headings over nothing are a launch blocker.
+
+**Social links in copy.** Profile links in the contact list are markdown links on the handle or page name (`[@handle](url)`), never a bare URL after an arrow; the renderer prints the arrow form as text.
 
 ---
 
@@ -674,6 +682,8 @@ CLIENT DECISIONS ALREADY MADE: [Anything that overrides a default in this prompt
 ---
 
 ## Changelog
+
+- **1.4 (2026-10-23):** From the RC polish pass, ADR-008. People in photos: every person photo names a crop anchor (`focus`) the image pipeline honors at every ratio, and captions and alts never name the person (section 13). Hero CTAs stack full width below the desktop breakpoint, mobile scrim lightened to 45 percent with a text shadow (section 10). Three-column comparison tables stack into cards on phones (section 5). Empty states on the live site show the real alternative, never a heading over nothing; social links in copy are markdown links (section 16).
 
 - **1.3 (2026-10-19), fifth pass:** Placeholder modes, preview versus launch (section 16). From the RC launch pass, ADR-007.
 

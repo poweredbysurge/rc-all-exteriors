@@ -1,5 +1,23 @@
 # Working order: RC All Exteriors
 
+## 2026-10-23, session 4: mobile polish and people photos (ADR-008)
+
+**Done**
+- Face-safe crops: `focus` on every person photo in `photos.ts`, passed from `Figure` and `ServiceCard` into `sourceSet`. The homepage step 1 photo no longer cuts the head off.
+- People unnamed: keys `proOnRoof`, `proYardSign`, `proFlatRoof`; captions and alts say "an RC All Exteriors professional" or "the crew". Inspection caption and About comment updated.
+- Hero CTAs stack full width below `lg`; mobile scrim 45 percent with a text shadow on the H1 and lede.
+- Repair or replace table stacks into cards below 640px (`data-stack`, `data-label`).
+- Reviews page without the Places key: one card to the Google profile plus a "Leave a Google review" chip. Contact list: Instagram and Facebook as links (batch-2).
+- Docs: ADR-008, STANDARDS 41 to 47, master prompt v1.4 (repo, workspace copy, Project doc).
+
+**Check with Sam** (also in the session report)
+- Which photos are the brother-in-law. The yard sign shot (`proYardSign`) sits beside the "That's how Ricardo Castro runs RC All Exteriors" paragraph on the homepage and is the About hero; if it is not Ricardo, swap it for the crew selfie or a house.
+- The homepage dark steps band still shows four photos in a row; fine on desktop, long on phones. Could drop to two.
+- Reviews and the homepage pullquote stay empty until `GOOGLE_PLACES_KEY` and `GBP_PLACE_ID` land on Vercel.
+
+**Next**
+- Push from the Mac, then Sam's next callouts.
+
 ## 2026-10-19, session 3: live review round 1 (ADR-005)
 
 **Done**

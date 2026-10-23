@@ -17,9 +17,9 @@ import colonialGarage from '@/assets/photos/rc-colonial-garage-truck.jpg';
 import colonialChimney from '@/assets/photos/rc-colonial-chimney-side.jpg';
 import tanRidge from '@/assets/photos/rc-tan-townhouse-ridge-aerial.jpg';
 import flatTpo from '@/assets/photos/rc-flat-tpo-membrane.jpg';
-import ricardoFlatRoof from '@/assets/photos/rc-ricardo-flat-roof.jpg';
-import ricardoRoof from '@/assets/photos/rc-ricardo-on-roof.jpg';
-import ricardoYardSign from '@/assets/photos/rc-ricardo-front-yard-sign.jpg';
+import proFlatRoof from '@/assets/photos/rc-ricardo-flat-roof.jpg';
+import proOnRoof from '@/assets/photos/rc-ricardo-on-roof.jpg';
+import proYardSign from '@/assets/photos/rc-ricardo-front-yard-sign.jpg';
 import redRidge from '@/assets/photos/rc-red-shingle-ridge-aerial.jpg';
 import twoStoryWalk from '@/assets/photos/rc-two-story-front-walkway.jpg';
 import newVsOld1 from '@/assets/photos/rc-new-roof-next-to-old-01.jpg';
@@ -43,8 +43,16 @@ export interface Photo {
   caption: string;
   /** Job type used by the projects gallery filter. */
   job: string;
-  /** object-position for cover crops. */
+  /** object-position for CSS cover crops (hero, service cards). */
   position: string;
+  /**
+   * Where the image service anchors a cropped derivative. Sharp only takes
+   * keywords here, and the default 'centre' cuts through a standing person at
+   * the chest in a landscape frame. Every photo with a person in it names
+   * 'top' (or whichever edge the faces are nearest) so no crop ratio can take
+   * a head off (master prompt v1.4 section 13).
+   */
+  focus?: 'top' | 'bottom' | 'left' | 'right';
   /**
    * A pre-cut 16:9 file for the desktop hero band. The image service only
    * takes keyword positions, so a portrait source would otherwise be cropped
@@ -108,30 +116,33 @@ export const photos = {
     position: 'center 60%',
     town: null,
   },
-  ricardoFlatRoof: {
-    src: ricardoFlatRoof,
-    alt: 'Ricardo Castro standing on a roof during a flat roof installation',
-    caption: 'Ricardo on site, flat roof installation',
+  proFlatRoof: {
+    src: proFlatRoof,
+    alt: 'An RC All Exteriors professional on the roof during a flat roof installation',
+    caption: 'On site, flat roof installation',
     job: 'Commercial',
     position: 'center 30%',
+    focus: 'top',
     town: null,
     pool: false,
   },
-  ricardoRoof: {
-    src: ricardoRoof,
-    alt: 'Ricardo Castro walking a shingle roof during an inspection',
-    caption: 'Ricardo on the roof',
+  proOnRoof: {
+    src: proOnRoof,
+    alt: 'An RC All Exteriors professional walking a shingle roof during an inspection',
+    caption: 'On the roof, inspection in progress',
     job: 'Roof replacement',
     position: 'center 30%',
+    focus: 'top',
     town: null,
     pool: false,
   },
-  ricardoYardSign: {
-    src: ricardoYardSign,
-    alt: 'Ricardo Castro in front of a brick home with its new Brava synthetic shake mansard roof and the RC All Exteriors yard sign',
-    caption: 'Ricardo at a finished Brava shake mansard roof',
+  proYardSign: {
+    src: proYardSign,
+    alt: 'An RC All Exteriors professional in front of a brick home with its new Brava synthetic shake mansard roof and the RC All Exteriors yard sign',
+    caption: 'Finished Brava shake mansard roof, with the sign out front',
     job: 'Roof replacement',
     position: 'center 40%',
+    focus: 'top',
     town: null,
     pool: false,
   },
@@ -175,6 +186,7 @@ export const photos = {
     caption: 'Crew on the ridge, safety lines on',
     job: 'Roof replacement',
     position: 'center 40%',
+    focus: 'top',
     town: null,
     pool: false,
   },
@@ -184,15 +196,17 @@ export const photos = {
     caption: 'Installing ridge cap',
     job: 'Roof replacement',
     position: 'center 30%',
+    focus: 'top',
     town: null,
     pool: false,
   },
   crewSelfie: {
     src: crewSelfie,
-    alt: 'Ricardo Castro and an RC All Exteriors crew member in company shirts at a finished job',
-    caption: 'Ricardo and the crew',
+    alt: 'Two RC All Exteriors crew members in company shirts at a finished job',
+    caption: 'The RC All Exteriors crew',
     job: 'Roof replacement',
     position: 'center 30%',
+    focus: 'top',
     town: null,
     pool: false,
   },
@@ -202,6 +216,7 @@ export const photos = {
     caption: 'Mansard roof replacement in progress, CertainTeed underlayment down and materials arriving',
     job: 'Roof replacement',
     position: 'center 45%',
+    focus: 'bottom',
     town: null,
     pool: false,
   },
@@ -229,6 +244,7 @@ export const photos = {
     caption: 'Replacing decking',
     job: 'Roof replacement',
     position: 'center 40%',
+    focus: 'top',
     town: null,
     pool: false,
   },
@@ -238,6 +254,7 @@ export const photos = {
     caption: 'Brava synthetic shake going on, mansard roof replacement',
     job: 'Roof replacement',
     position: 'center',
+    focus: 'bottom',
     town: null,
     pool: false,
   },
