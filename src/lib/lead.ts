@@ -2,6 +2,7 @@
 // section 11, ADR-003). Field names are a contract with Surge Command Center.
 import business from '@/data/business.json';
 import { REASON_KEYS, REASONS, CONTACT_REASONS, ROOF_AGES, URGENCIES } from '@/data/lead-form';
+import { C, button, chip, esc, h, layout, row } from '@/lib/email';
 
 export interface Lead {
   full_name: string;
@@ -94,8 +95,7 @@ export function sourceDetail(a: Record<string, string>): string {
 }
 
 const env = (name: string) => (typeof process !== 'undefined' ? process.env[name] : undefined) || (import.meta.env[name] as string | undefined);
-const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const fmtPhone = (d: string) => `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+export const fmtPhone = (d: string) => `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
 const label = (list: readonly { key: string; label: string }[], key?: string) => list.find((o) => o.key === key)?.label ?? key ?? '';
 
 async function resend(payload: Record<string, unknown>): Promise<boolean> {
@@ -111,9 +111,9 @@ async function resend(payload: Record<string, unknown>): Promise<boolean> {
   return res.ok;
 }
 
-const SENDER = `${business.name} Leads <leads@updates.thesurgeagency.com>`;
+const SENDER = env('LEAD_NOTIFY_FROM') || `${business.name} Leads <leads@updates.thesurgeagency.com>`;
 
-/** 1. Internal notification to the client and Surge. This one has to land. */
+/** 1. Internal notification to the client and Surge. This one has to land (ADR-012). */
 export async function notifyInternal(lead: Lead, source: string): Promise<boolean> {
   const to = (env('LEAD_NOTIFY_TO') ?? '').split(',').map((s) => s.trim()).filter(Boolean);
   const cc = (env('LEAD_NOTIFY_CC') ?? '').split(',').map((s) => s.trim()).filter(Boolean);
@@ -122,17 +122,21 @@ export async function notifyInternal(lead: Lead, source: string): Promise<boolea
     return false;
   }
   const reason = label([...REASONS, ...CONTACT_REASONS], lead.reason);
-  const rows: [string, string | undefined][] = [
-    ['Name', lead.full_name],
-    ['Phone', fmtPhone(lead.phone)],
-    ['Email', lead.email],
-    ['Zip', lead.zip],
+  const phone = fmtPhone(lead.phone);
+  const first = lead.full_name.split(' ')[0];
+  const more = lead.step === 2;
+  const when = new Date().toLocaleString('en-US', { timeZone: 'America/New_York', weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+
+  const details: [string, string | undefined][] = [
     ['Reason', reason],
+    ['Zip', lead.zip],
     ['Street address', lead.address_street],
     ['Roof age', label(ROOF_AGES, lead.roof_age)],
     ['How soon', label(URGENCIES, lead.urgency)],
     ['Notes', lead.notes],
     ['Text consent', lead.consent_sms ? `Yes (${lead.consent_text_version})` : 'No'],
+  ];
+  const trail: [string, string | undefined][] = [
     ['Source', source],
     ['Form', `${lead.form_id}, step ${lead.step}`],
     ['Page', lead.page_url],
@@ -140,32 +144,57 @@ export async function notifyInternal(lead: Lead, source: string): Promise<boolea
     ['Referrer', lead.attribution.referrer],
     ['Campaign', [lead.attribution.utm_source, lead.attribution.utm_medium, lead.attribution.utm_campaign].filter(Boolean).join(' / ')],
   ];
-  const html = `<h2 style="font-family:sans-serif">${lead.step === 2 ? 'More details on a lead' : 'New website lead'}: ${esc(lead.full_name)}</h2>
-<table style="font-family:sans-serif;font-size:15px;border-collapse:collapse">${rows
-    .filter(([, v]) => v)
-    .map(([k, v]) => `<tr><td style="padding:4px 16px 4px 0;color:#555;vertical-align:top">${k}</td><td style="padding:4px 0">${esc(v!).replace(/\n/g, '<br>')}</td></tr>`)
-    .join('')}</table>
-<p style="font-family:sans-serif;font-size:13px;color:#777">Lead key ${esc(lead.lead_key)}</p>`;
+  const rows = (list: [string, string | undefined][]) => list.filter(([, v]) => v).map(([k, v]) => row(k, v!)).join('');
+
+  // The smsto: scheme opens the thread with the lead's number on both platforms.
+  const body = `
+${h.eyebrow(more ? 'More details on a lead' : 'New website lead')}
+${h.title(lead.full_name)}
+<p style="margin:0 0 16px">${chip(reason)} ${lead.consent_sms ? chip('OK to text', 'dark') : ''}</p>
+${h.lead(`${esc(first)} asked for a free inspection on the website${more ? ' and answered the follow-up questions' : ''}. ${lead.consent_sms ? 'They said texting is fine.' : 'Call or email; no text consent.'}`)}
+<table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td>
+${button(`tel:+1${lead.phone}`, `Call ${phone}`)}${lead.consent_sms ? button(`smsto:+1${lead.phone}?body=${encodeURIComponent(`Hi ${first}, this is Ricardo with RC All Exteriors. Thanks for reaching out about your roof. When is a good time to come take a look?`)}`, 'Text', 'secondary') : ''}${button(`mailto:${lead.email}?subject=${encodeURIComponent('Your free roof inspection with RC All Exteriors')}`, 'Email', 'secondary')}
+</td></tr></table>
+${h.table(rows([['Phone', phone], ['Email', lead.email], ...details]))}
+<p style="margin:22px 0 4px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${C.fgSubtle}">Where it came from</p>
+${h.table(rows(trail))}
+${h.small(`Lead key ${esc(lead.lead_key)} · ${esc(when)} ET · Reply to this email to reach ${esc(first)} directly.`)}`;
+
   return resend({
     from: SENDER,
     to,
     ...(cc.length ? { cc } : {}),
     reply_to: lead.email,
-    subject: `${lead.step === 2 ? 'Lead details' : 'New lead'}: ${lead.full_name} (${reason}, ${lead.zip})`,
-    html,
+    subject: `${more ? 'Lead details' : 'New lead'}: ${lead.full_name} (${reason}, ${lead.zip})`,
+    html: layout({ preheader: `${lead.full_name}, ${reason}, ${lead.zip}. Call ${phone}.`, header: `Lead · ${esc(when)} ET`, body }),
   });
 }
 
-/** 2. Confirmation to the lead. Only from a client-verified sending domain; skipped silently otherwise. */
+/** 2. Confirmation to the lead, from the client's reply address (ADR-012). Step 1 only. */
 export async function confirmToLead(lead: Lead): Promise<void> {
   const from = env('LEAD_REPLY_FROM');
   if (!from || lead.step !== 1) return;
+  const first = lead.full_name.split(' ')[0];
+  const body = `
+${h.eyebrow('Free roof inspection')}
+${h.title(`We got your request, ${first}.`)}
+${h.lead(`Thanks for reaching out to ${esc(business.name)}. We will call you at ${esc(fmtPhone(lead.phone))} to set a time, usually within minutes during business hours (${esc(business.hours.display)}).`)}
+${h.p('<strong>What happens next</strong>')}
+${h.table(
+  row('1. A quick call', 'We confirm your address and what you are seeing, and pick a time that works.') +
+    row('2. The inspection', 'Ricardo walks the roof in person, takes photos, and shows you what he found.') +
+    row('3. A written estimate', 'A clear price, no surprise change orders. No pressure to decide that day.'),
+)}
+${h.p('Need us sooner, or have a leak right now?')}
+<table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td>${button(`tel:${business.phone.e164}`, `Call ${business.phone.display}`)}${button(`sms:${business.phone.e164}`, 'Text us', 'secondary')}</td></tr></table>
+${h.small(`${h.stars()} Rated 5.0 on Google by your neighbors in Woodbridge and Northern Virginia. Class A licensed, 10-year workmanship warranty.`)}`;
   try {
     await resend({
       from,
       to: [lead.email],
-      subject: `We got your request, ${lead.full_name.split(' ')[0]}`,
-      html: `<p style="font-family:sans-serif;font-size:16px">Thanks for reaching out to ${business.name}. We have your request and will call you to set a time.</p><p style="font-family:sans-serif;font-size:16px">Need us sooner? Call or text ${business.phone.display}.</p>`,
+      reply_to: business.email,
+      subject: `We got your request, ${first}`,
+      html: layout({ preheader: `We will call you to set a time for your free inspection. Need us sooner? ${business.phone.display}.`, header: esc(business.phone.display), body }),
     });
   } catch (err) {
     console.error('[lead] confirmation email failed:', (err as Error).message);

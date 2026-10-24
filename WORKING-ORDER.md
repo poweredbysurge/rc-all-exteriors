@@ -22,6 +22,9 @@
 - Hero "also" line: roofing first, siding, gutters, windows and doors linked.
 - `docs/COMMAND-CENTER-RUNBOOK.md`: the tenant, users, Resend and Vercel steps for next session. The form is not live until those env vars land.
 
+**Round 5, same day: branded lead emails (ADR-012)**
+- `src/lib/email.ts` frame; internal notification with Call, Text, Email buttons; homeowner confirmation. Vercel env set for to, cc and the two from addresses; `RESEND_API_KEY` is Sam's to paste, then a redeploy and a live form test. Command Center stays on the runbook.
+
 **Check with Sam** (also in the session report)
 - Settled: the yard sign shot is the brother-in-law, the roof walk is Ricardo. About hero and homepage Why us now use the roof walk; step 1 is the chimney flashing detail.
 - The homepage dark steps band still shows four photos in a row; fine on desktop, long on phones. Could drop to two.

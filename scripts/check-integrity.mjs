@@ -276,7 +276,7 @@ for (let i = 0; i < cityPages.length; i++) {
 // Assets
 for (const file of files) {
   const rel = '/' + relative(out, file);
-  if (/\.(jpe?g|png)$/i.test(file) && !/^\/(og\/|favicon|apple-touch-icon)/.test(rel)) fail(rel, 'JPG or PNG in the output (only favicons and OG images may be)');
+  if (/\.(jpe?g|png)$/i.test(file) && !/^\/(og\/|email\/|favicon|apple-touch-icon)/.test(rel)) fail(rel, 'JPG or PNG in the output (only favicons, OG images and email logos may be)');
 }
 for (const font of ['archivo-expanded-700-latin.woff2', 'manrope-variable-latin.woff2']) {
   if (!existsSync(join(out, 'fonts', font))) fail('/fonts/', `missing self-hosted font ${font}`);
