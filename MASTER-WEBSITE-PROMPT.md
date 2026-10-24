@@ -193,6 +193,10 @@ Chips are where AI-generated UI shows itself first. These rules exist to stop th
 - Card titles at h3, body at body-sm minimum 16px, one link or button per card.
 - No icon-in-a-colored-circle headers. Icons, if used, are 24px line icons in `fg` or `accent-text`, inline with the title.
 
+**Eyebrows and the brand mark**
+- Section eyebrows are the one uppercase label, with the brand's one graphic before them: a small rule drawn from the client's trade (a roofline for a roofer, a blade profile for a landscaper). One SVG path, `currentColor`, reused wherever the mark appears (eyebrow, footer top, pullquote card), so the brand has one mark, not three.
+- The mark is asymmetric or closed. Never a bare symmetric caret or chevron: that is the accordion, select and back-to-top glyph, and visitors read it as a control beside a label and as a scroll button at the footer top. Reference shape for a roofline, pitch and eave in one stroke: `viewBox 0 0 48 20`, round joins and caps, `M2 18 L14 4 L26 18 H46`. No chimneys, no house outlines.
+
 **Forms (see section 10 for the hero form)**
 - Labels above inputs, always visible, never placeholder-only.
 - Inputs 48 to 52px tall on mobile, 16px+ text (prevents iOS zoom), `autocomplete` and `inputmode` set on every field.
@@ -266,6 +270,7 @@ If the output contains any of these, it fails review. No exceptions for "but it 
 - Emoji as icons or bullets
 - Inter, Poppins or the Tailwind default sans as the brand font unless the brand kit specifies it
 - Thin 1px icons in pastel circles
+- A bare symmetric caret or chevron as a decorative or brand mark (it reads as a dropdown or back-to-top control)
 - Dark mode by default for a home services contractor
 - Neon glows, inner shadows, bevels
 
@@ -695,6 +700,8 @@ CLIENT DECISIONS ALREADY MADE: [Anything that overrides a default in this prompt
 ---
 
 ## Changelog
+
+- **1.4 (2026-10-24), second pass:** The brand mark before eyebrows is asymmetric or closed, never a bare caret; one path shared by eyebrow, footer and pullquote (sections 7 and 9). RC ADR-015.
 
 - **1.4 (2026-10-23):** From the RC polish pass, ADR-008 to ADR-013. On Vercel the Astro middleware runs in the function, never `middlewareMode: 'edge'` with `trailingSlash: 'always'`: the edge-to-function hop hits the trailing-slash 308 and drops POST bodies (sections 2 and 21). Branded lead emails with call, text and email tap targets (section 11). Brand strip under the hero from one registry, composed share card, the "exteriors too" hero line (sections 10, 12, 13). Photos sorted before or after before captioning (section 13). Service-area map on a styled Google static map fetched at build, pins by projection, no embed (section 12). Review cards: yellow stars, reviewer photo, link to the review on Google, read-more clamp, live count everywhere (section 12). Google reviews key setup recorded: the `surge-client-sites` Cloud project, one Places API (New) key per client, no GBP API application (section 12). A four-step process row keeps photos on the first and last step only below 768px (section 18). People in photos: every person photo names a crop anchor (`focus`) the image pipeline honors at every ratio, and captions and alts never name the person (section 13). Hero CTAs stack full width below the desktop breakpoint, mobile scrim lightened to 45 percent with a text shadow (section 10). Three-column comparison tables stack into cards on phones (section 5). Empty states on the live site show the real alternative, never a heading over nothing; social links in copy are markdown links (section 16).
 

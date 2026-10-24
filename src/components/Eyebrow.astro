@@ -1,5 +1,8 @@
 ---
 // The one uppercase element on the site: a 16px label with the roofline rule.
+// The rule is a pitch and eave drawn in one stroke (ADR-015): the gable at the
+// left, the eave running out to the right. Never a bare symmetric caret; that
+// is the accordion and select glyph and visitors read it as a control.
 interface Props {
   /** On a dark band the label is white; accent blue on navy does not pass. */
   onDark?: boolean;
@@ -9,8 +12,8 @@ const { onDark = false, class: className } = Astro.props;
 ---
 
 <div class:list={['flex items-center gap-2.5', onDark ? 'text-fg-inverse' : 'text-accent', className]}>
-  <svg aria-hidden="true" width="24" height="10" viewBox="0 0 48 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" class="block shrink-0">
-    <path d="M1 19 L24 3 L47 19"></path>
+  <svg aria-hidden="true" width="24" height="10" viewBox="0 0 48 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" class="block shrink-0">
+    <path d="M2 18 L14 4 L26 18 H46"></path>
   </svg>
   <span class="text-eyebrow font-semibold uppercase tracking-eyebrow"><slot /></span>
 </div>

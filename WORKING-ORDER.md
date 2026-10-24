@@ -31,6 +31,10 @@
 **2026-10-24: DNS cutover (ADR-014)**
 - `SITE` = `LIVE`; legacy 301s live as on-demand routes; `check:production` clean. Apex canonical, www redirects to it in Vercel. Next: GA4 ID, Search Console, sitemap, form test on the real domain.
 
+**2026-10-24, later: roofline mark (ADR-015)**
+- Vercel domains flipped: apex on Production, www 308 to apex. Verified with curl.
+- The eyebrow caret read as an accordion control. Replaced with the pitch and eave path (`M2 18 L14 4 L26 18 H46`) in `Eyebrow`, `Footer` and the `ReviewCard` pullquote. DESIGN-DEBT deviation added, STANDARDS 58, master prompt 1.4 second pass (sections 7 and 9) in repo, workspace and Project doc.
+
 **Check with Sam** (also in the session report)
 - Settled: the yard sign shot is the brother-in-law, the roof walk is Ricardo. About hero and homepage Why us now use the roof walk; step 1 is the chimney flashing detail.
 - The homepage dark steps band still shows four photos in a row; fine on desktop, long on phones. Could drop to two.

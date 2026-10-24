@@ -54,6 +54,7 @@ Seeded from `design/DESIGN-DEBT.md` (Gate A export, 2026-10-07). `design/` is re
 - **City page "Read the full project" link** is a CONFIRM slot, not a link to `/projects/fairfax-job/`, which does not exist. It becomes a link when a case study is added to `src/data/projects.ts`.
 - **City page photo captions** do not say "(placeholder for a Fairfax job)". The two photos sit inside a `data-confirm` wrapper instead, so the page cannot publish with stand-in photos.
 - **Neighborhood chips** on city pages are one CONFIRM slot, not six blank chips.
+- **Roofline mark is a pitch and eave (`M2 18 L14 4 L26 18 H46`), not the bare caret in the export.** ADR-015. The caret read as an accordion or dropdown control beside the eyebrow and as a back-to-top button at the footer top. Same path on the eyebrow, the footer and the pullquote card. Artboards: every section eyebrow, footer-1440, reviews pullquote.
 
 ## Pages with no artboard (built from the templates and primitives)
 
