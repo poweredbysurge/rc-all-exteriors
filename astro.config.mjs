@@ -3,15 +3,18 @@ import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 
 // ADR-001: Astro + Tailwind on Vercel. Static pages, two on-demand routes
-// (/api/lead/, /api/reviews/), host-aware robots.txt, edge middleware for the
-// preview noindex header.
+// (/api/lead/, /api/reviews/), host-aware robots.txt. The middleware runs in
+// the render function, not at the edge (ADR-013): in edge mode every request
+// to an on-demand route is forwarded edge to function over an internal fetch,
+// that hop hits the trailing-slash 308, and a POST body cannot be replayed,
+// so /api/lead/ failed on Vercel with FUNCTION_INVOCATION_FAILED.
 export default defineConfig({
   // The production domain. Canonicals, OG and JSON-LD use src/lib/site.ts
   // (LAUNCH / LIVE), not this value; it only feeds Astro internals.
   site: 'https://rcallexteriors.com',
   trailingSlash: 'always',
   output: 'static',
-  adapter: vercel({ middlewareMode: 'edge' }),
+  adapter: vercel(),
   build: {
     format: 'directory',
     inlineStylesheets: 'always',

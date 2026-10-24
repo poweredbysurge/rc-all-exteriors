@@ -1,7 +1,8 @@
 // Preview lock, second layer (master prompt section 15). Any host that is not
-// the production domain gets X-Robots-Tag: noindex, so a Vercel preview URL
-// can never be indexed even if a crawler ignores robots.txt.
-// Runs as Vercel edge middleware (astro.config.mjs, middlewareMode: 'edge').
+// the production domain gets X-Robots-Tag: noindex on the on-demand responses
+// (robots.txt, the API), and robots.txt itself disallows on that host, so a
+// Vercel preview URL is never indexed. Runs inside the render function, not at
+// the edge (ADR-013): edge mode broke POST bodies to /api/lead/ on Vercel.
 import { defineMiddleware } from 'astro:middleware';
 import { isProductionHost } from '@/lib/site';
 

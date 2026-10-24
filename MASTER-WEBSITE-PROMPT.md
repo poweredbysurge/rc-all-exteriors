@@ -37,6 +37,8 @@ Read the INPUT block before writing a single line. No ICP, no build.
 
 ## 2. Stack decision
 
+- Vercel adapter in its default mode. Never `middlewareMode: 'edge'` together with `trailingSlash: 'always'`: on-demand requests get forwarded edge to function over a fetch that hits the trailing-slash 308, and a POST body cannot follow a redirect, so every form submission fails with FUNCTION_INVOCATION_FAILED while every local check passes (RC, ADR-013). The preview noindex comes from `robots.txt` on non-production hosts, which is the layer crawlers honor.
+
 **Default: Astro + Tailwind CSS, deployed on Vercel.**
 
 Astro ships zero JavaScript by default, which is what a content-heavy SEO site wants. The lead form, mobile nav, review carousel and any map are islands (`client:visible` or `client:idle`). Señor Tequilas is the reference implementation.
@@ -592,7 +594,7 @@ Use this mode after Gate A. Run from the client repo root.
 
 **Build order:** chrome and lead card → homepage → service hubs → city pages (one, run the swap test, then the rest) → about, reviews, contact → blog → legal, thank-you, 404 → redirect map → sitemap and robots → verification gate.
 
-**Launch protocol:** verify on the Vercel preview host (noindex confirmed) → client review → DNS cutover → flip `LAUNCH` to `LIVE` → wire redirects → confirm `robots.txt` now allows → submit sitemap in GSC → verify assets on the bare URL (no cache-buster) → 24-hour check of leads, 404s and Core Web Vitals field data. No URL, title or H1 changes for 4 weeks.
+**Launch protocol:** verify on the Vercel preview host (noindex confirmed) → **submit the lead form against the deployed host and read the 2xx, the notification email and the receiver row; the local preview has no host routing (redirects, trailing slashes, edge hops), and RC's API was dead on Vercel for a week while every local check passed** → client review → DNS cutover → flip `LAUNCH` to `LIVE` → wire redirects → confirm `robots.txt` now allows → submit sitemap in GSC → verify assets on the bare URL (no cache-buster) → 24-hour check of leads, 404s and Core Web Vitals field data. No URL, title or H1 changes for 4 weeks.
 
 ---
 
@@ -694,7 +696,7 @@ CLIENT DECISIONS ALREADY MADE: [Anything that overrides a default in this prompt
 
 ## Changelog
 
-- **1.4 (2026-10-23):** From the RC polish pass, ADR-008 to ADR-012. Branded lead emails with call, text and email tap targets (section 11). Brand strip under the hero from one registry, composed share card, the "exteriors too" hero line (sections 10, 12, 13). Photos sorted before or after before captioning (section 13). Service-area map on a styled Google static map fetched at build, pins by projection, no embed (section 12). Review cards: yellow stars, reviewer photo, link to the review on Google, read-more clamp, live count everywhere (section 12). Google reviews key setup recorded: the `surge-client-sites` Cloud project, one Places API (New) key per client, no GBP API application (section 12). A four-step process row keeps photos on the first and last step only below 768px (section 18). People in photos: every person photo names a crop anchor (`focus`) the image pipeline honors at every ratio, and captions and alts never name the person (section 13). Hero CTAs stack full width below the desktop breakpoint, mobile scrim lightened to 45 percent with a text shadow (section 10). Three-column comparison tables stack into cards on phones (section 5). Empty states on the live site show the real alternative, never a heading over nothing; social links in copy are markdown links (section 16).
+- **1.4 (2026-10-23):** From the RC polish pass, ADR-008 to ADR-013. On Vercel the Astro middleware runs in the function, never `middlewareMode: 'edge'` with `trailingSlash: 'always'`: the edge-to-function hop hits the trailing-slash 308 and drops POST bodies (sections 2 and 21). Branded lead emails with call, text and email tap targets (section 11). Brand strip under the hero from one registry, composed share card, the "exteriors too" hero line (sections 10, 12, 13). Photos sorted before or after before captioning (section 13). Service-area map on a styled Google static map fetched at build, pins by projection, no embed (section 12). Review cards: yellow stars, reviewer photo, link to the review on Google, read-more clamp, live count everywhere (section 12). Google reviews key setup recorded: the `surge-client-sites` Cloud project, one Places API (New) key per client, no GBP API application (section 12). A four-step process row keeps photos on the first and last step only below 768px (section 18). People in photos: every person photo names a crop anchor (`focus`) the image pipeline honors at every ratio, and captions and alts never name the person (section 13). Hero CTAs stack full width below the desktop breakpoint, mobile scrim lightened to 45 percent with a text shadow (section 10). Three-column comparison tables stack into cards on phones (section 5). Empty states on the live site show the real alternative, never a heading over nothing; social links in copy are markdown links (section 16).
 
 - **1.3 (2026-10-19), fifth pass:** Placeholder modes, preview versus launch (section 16). From the RC launch pass, ADR-007.
 
