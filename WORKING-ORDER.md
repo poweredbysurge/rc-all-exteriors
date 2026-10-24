@@ -16,6 +16,12 @@
 **Round 3, same day: service-area map (ADR-010)**
 - `AreaMap` backgrounds are Google Static Maps styled in the palette, fetched at build, pins by projection. Maps Static API added to the `rc-all-exteriors` key. Verified keyless (schematic fallback); the real tile is checked on the Vercel build after push since the key is write-only on Vercel.
 
+**Round 4, same day: launch list (ADR-011)**
+- Brand strip under the hero (`BrandStrip.astro`, `src/data/brands.ts`): CertainTeed, Brava, BBB, James Hardie, ProVia, VELUX, Enhancify. Files in `src/assets/brands/`.
+- Share cards composed from real assets in headless Chrome (`scripts/generate-og.mjs`); regenerated.
+- Hero "also" line: roofing first, siding, gutters, windows and doors linked.
+- `docs/COMMAND-CENTER-RUNBOOK.md`: the tenant, users, Resend and Vercel steps for next session. The form is not live until those env vars land.
+
 **Check with Sam** (also in the session report)
 - Settled: the yard sign shot is the brother-in-law, the roof walk is Ricardo. About hero and homepage Why us now use the roof walk; step 1 is the chimney flashing detail.
 - The homepage dark steps band still shows four photos in a row; fine on desktop, long on phones. Could drop to two.

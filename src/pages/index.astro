@@ -2,6 +2,7 @@
 // Homepage (home-390, home-1440). Copy: batch-1 section 2.
 import Base from '@/layouts/Base.astro';
 import AreaMap from '@/components/AreaMap.astro';
+import BrandStrip from '@/components/BrandStrip.astro';
 import BlockFlow from '@/components/BlockFlow.astro';
 import CityChips from '@/components/CityChips.astro';
 import CtaBand from '@/components/CtaBand.astro';
@@ -60,7 +61,9 @@ const SERVICE_PHOTOS = ['mansardShakeFront', 'chimneyFlashing', 'twoStoryWalk', 
     primary={blocksOf(hero, 'cta').find((c) => c.kind === 'primary') ?? null}
     secondary={blocksOf(hero, 'cta').find((c) => c.kind === 'secondary') ?? null}
     trust={first(hero, 'trust')!.items}
+    also={blocksOf(hero, 'p')[0]?.inline}
   />
+  <BrandStrip />
 
   <!-- Services sit directly under the hero (ADR-005): a visitor knows what we do
        inside one scroll, on the page's first dark band after the trust strip. -->

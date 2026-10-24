@@ -158,6 +158,8 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[SUBHEAD]** Roof replacement and repair for homes across Northern Virginia, from Woodbridge to Fairfax, Alexandria, and Arlington. Class A licensed. Ricardo quotes every job and signs off on every roof.
 
+**[P]** Roofing is most of what we do. We also handle [siding](/siding/), [gutters](/gutters/), and [windows and doors](/windows-doors/), often on the same job.
+
 **[CTA PRIMARY]** Book a Free Roof Inspection
 
 **[CTA SECONDARY]** Call or text (703) 677-1976

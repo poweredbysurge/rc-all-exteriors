@@ -1,0 +1,74 @@
+---
+// Brand and credential logos under the homepage hero (HomeSource's badge
+// strip, master prompt section 12): the marks of the products the crew
+// installs and the credentials it holds, in a quiet white band. Grayscale at
+// rest, color on hover, every logo a link to the page about it. Nothing here
+// is decorative: a logo for a product the crew does not install never ships.
+import Eyebrow from './Eyebrow.astro';
+import { brands } from '@/data/brands';
+import { getImage } from 'astro:assets';
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+// Raster marks at 2x their rendered height, WebP, through the pipeline.
+const rendered = await Promise.all(
+  brands.map(async (b) => {
+    if (!b.image) return { ...b, src: null, width: 0 };
+    const h = b.height * 2;
+    const w = Math.round((b.image.width / b.image.height) * h);
+    const img = await getImage({ src: b.image, width: w, height: h, format: 'webp', quality: 85 });
+    return { ...b, src: img.src, width: w };
+  }),
+);
+---
+
+<section data-section="Brands" class:list={['gutter border-b border-border-subtle bg-surface py-8 lg:py-10', className]}>
+  <div class="container-site flex flex-col items-center gap-6">
+    <Eyebrow>What we install, and who vouches for us</Eyebrow>
+    <ul class="brand-strip m-0 flex list-none flex-wrap items-center justify-center gap-x-8 gap-y-5 p-0 lg:gap-x-12">
+      {
+        rendered.map((b) => (
+          <li class="flex items-center">
+            <a href={b.href} title={b.claim} class="brand-logo flex min-h-11 items-center text-fg" style={`--h:${b.height}px`}>
+              {b.src ? (
+                <img src={b.src} alt={b.claim} width={b.width} height={b.height * 2} loading="lazy" decoding="async" class="block w-auto" style="height:calc(var(--h) * var(--k, 1))" />
+              ) : (
+                <span class="block w-auto [&>svg]:block [&>svg]:h-[calc(var(--h)*var(--k,1))] [&>svg]:w-auto" set:html={b.svg} role="img" aria-label={b.claim} />
+              )}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style is:global>
+  /* Grayscale at rest, the brand's own color on hover and focus (master prompt
+     section 12). Phones get the marks a step smaller. */
+  .brand-logo {
+    filter: grayscale(1);
+    opacity: 0.72;
+    transition:
+      filter 200ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .brand-logo:hover,
+  .brand-logo:focus-visible {
+    filter: none;
+    opacity: 1;
+  }
+  @media (max-width: 47.99rem) {
+    .brand-logo {
+      --k: 0.8;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .brand-logo {
+      transition: none;
+    }
+  }
+</style>

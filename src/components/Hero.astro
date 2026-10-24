@@ -36,6 +36,8 @@ interface Props {
   cardFirstOnMobile?: boolean;
   /** Minimum desktop height in px (the --hero-min token by default, 720 on the offer page). */
   minHeight?: number;
+  /** One short line under the CTAs for what else the company does (the homepage: siding, gutters, windows). */
+  also?: Inline[];
 }
 const {
   path,
@@ -48,6 +50,7 @@ const {
   formId = 'hero',
   cardFirstOnMobile = false,
   minHeight,
+  also,
 } = Astro.props;
 
 const key = LCP_MAP[path];
@@ -96,6 +99,11 @@ const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? '
           {primary && <Cta to={target(primary)} variant="primary">{primary.label}</Cta>}
           {secondary && <Cta to={target(secondary)} variant="secondary-on-dark">{secondary.label}</Cta>}
         </div>
+        {also && (
+          <p class="rich hero-also m-0 max-w-[600px] text-body-sm text-fg-inverse-muted lg:text-body" data-sm>
+            <Rich inline={also} linkPhone={false} />
+          </p>
+        )}
       </div>
 
       <div class:list={['mt-2 w-full max-w-[560px] justify-self-center lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:max-w-none lg:self-center', cardFirstOnMobile && 'order-2 lg:order-none']}>
@@ -129,6 +137,15 @@ const target = (cta: CtaBlock) => (/\(\d{3}\)\s*\d{3}-\d{4}/.test(cta.label) ? '
   .hero h1,
   .hero .rich {
     text-shadow: 0 1px 2px color-mix(in srgb, var(--color-surface-contrast) 60%, transparent);
+  }
+  .hero-also a {
+    color: var(--color-fg-inverse);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: color-mix(in srgb, var(--color-fg-inverse) 50%, transparent);
+  }
+  .hero-also a:hover {
+    text-decoration-color: currentColor;
   }
   /* The homepage display size, one step under the token so a 10-word H1 holds
      three lines at 1440 and the hero still fits the viewport (ADR-005). */
