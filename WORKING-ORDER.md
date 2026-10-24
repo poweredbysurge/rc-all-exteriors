@@ -28,6 +28,9 @@
 **Round 6, same day: the lead API was dead on Vercel (ADR-013)**
 - Edge middleware mode plus the trailing-slash 308 dropped every POST body. Adapter back to default mode; middleware in the function. Verify with a real POST after deploy.
 
+**2026-10-24: DNS cutover (ADR-014)**
+- `SITE` = `LIVE`; legacy 301s live as on-demand routes; `check:production` clean. Apex canonical, www redirects to it in Vercel. Next: GA4 ID, Search Console, sitemap, form test on the real domain.
+
 **Check with Sam** (also in the session report)
 - Settled: the yard sign shot is the brother-in-law, the roof walk is Ricardo. About hero and homepage Why us now use the roof walk; step 1 is the chimney flashing detail.
 - The homepage dark steps band still shows four photos in a row; fine on desktop, long on phones. Could drop to two.

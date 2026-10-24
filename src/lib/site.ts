@@ -6,7 +6,7 @@ import business from '@/data/business.json';
 // `npm run check:production` fails while SITE is not LIVE.
 export const LAUNCH = 'https://rc-all-exteriors.vercel.app';
 export const LIVE = 'https://rcallexteriors.com';
-export const SITE: string = LAUNCH;
+export const SITE: string = LIVE;
 
 // Hosts that may be indexed. Everything else gets Disallow: / in robots.txt
 // and an X-Robots-Tag: noindex header from the middleware.

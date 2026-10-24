@@ -1,6 +1,6 @@
 {
-  "doNotDeployYet": true,
-  "note": "301 map from the old WordPress site (rcallexteriors.com, GoDaddy) to this build. Authored 2026-10-07 from the old site's wp-sitemap.xml (9 pages, 1 form post, 1 author archive). Parked until DNS cutover; the launch protocol wires these into the Vercel config and removes doNotDeployYet. Every old URL maps to its closest live equivalent, never to the homepage in bulk. Trailing slashes on both sides.",
+  "doNotDeployYet": false,
+  "note": "301 map from the old WordPress site (rcallexteriors.com, GoDaddy) to this build. Authored 2026-10-07 from the old site's wp-sitemap.xml (9 pages, 1 form post, 1 author archive). Wired into astro.config.mjs at the DNS cutover on 2026-10-24 (doNotDeployYet false); the config reads this file. Every old URL maps to its closest live equivalent, never to the homepage in bulk. Trailing slashes on both sides.",
   "source": "https://rcallexteriors.com/wp-sitemap.xml, fetched 2026-10-07",
   "keepTheirUrl": [
     "/",
@@ -12,11 +12,36 @@
     "/projects/"
   ],
   "redirects": [
-    { "source": "/roof-siding-repairs/", "destination": "/roof-repair/", "permanent": true, "why": "Old combined roof and siding repair page. Roof repair owns the repair lane; siding repair is linked from it." },
-    { "source": "/gutters-siding/", "destination": "/gutters/", "permanent": true, "why": "Old combined page. Gutters is listed first in its title; /siding/ is cross-linked from /gutters/." },
-    { "source": "/metform-form/:path*", "destination": "/contact/", "permanent": true, "why": "Elementor form post type that leaked into the old sitemap." },
-    { "source": "/author/:path*", "destination": "/about/", "permanent": true, "why": "WordPress author archive." },
-    { "source": "/home/", "destination": "/", "permanent": true, "why": "Common WordPress alias for the front page." }
+    {
+      "source": "/roof-siding-repairs/",
+      "destination": "/roof-repair/",
+      "permanent": true,
+      "why": "Old combined roof and siding repair page. Roof repair owns the repair lane; siding repair is linked from it."
+    },
+    {
+      "source": "/gutters-siding/",
+      "destination": "/gutters/",
+      "permanent": true,
+      "why": "Old combined page. Gutters is listed first in its title; /siding/ is cross-linked from /gutters/."
+    },
+    {
+      "source": "/metform-form/:path*",
+      "destination": "/contact/",
+      "permanent": true,
+      "why": "Elementor form post type that leaked into the old sitemap."
+    },
+    {
+      "source": "/author/:path*",
+      "destination": "/about/",
+      "permanent": true,
+      "why": "WordPress author archive."
+    },
+    {
+      "source": "/home/",
+      "destination": "/",
+      "permanent": true,
+      "why": "Common WordPress alias for the front page."
+    }
   ],
   "keepReturning404": [
     "/wp-admin/*",
