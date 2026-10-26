@@ -1,4 +1,4 @@
-Drafted Oct 26, 2026 by Surge with the /surge-copy pipeline (workspace: clients/rc-all-exterior/copy-pipeline/website-copy-batch-6-alexandria.md). Published Oct 26 by Mario's decision (ADR-017). No [CONFIRM] placeholders remain in page copy.
+Drafted Oct 26, 2026 by Surge with the /surge-copy pipeline (workspace: clients/rc-all-exterior/copy-pipeline/website-copy-batch-6-alexandria.md). Published Oct 26 by Mario's decision (ADR-017); Old Town proof from Ricardo the same day. No [CONFIRM] placeholders remain in page copy.
 
 # RC All Exteriors Website Copy: Batch 6
 
@@ -46,7 +46,7 @@ Hero
 
 [H1] Roofing Contractor in Alexandria, VA
 
-[SUBHEAD] Roof replacement, repair and storm damage help for Alexandria homes, from the Route 1 corridor to Old Town, by a licensed roofer based just down Route 1 in Woodbridge.
+[SUBHEAD] Roof replacement, repair and storm damage help for Alexandria homes, from the Route 1 corridor to Old Town, by a licensed roofer about 25 minutes down Route 1 in Woodbridge.
 
 [CTA PRIMARY] Book a Free Roof Inspection
 
@@ -72,9 +72,9 @@ Local proof
 
 [H2] Recent work from our crew
 
-[IMAGE] Two-story home with dormers, gray architectural shingles, September 2026
+[IMAGE] TPO flat roof installation by our crew
 
-[P] In September 2026 we replaced the roof on a two-story home with dormers, tearing it down to the deck and finishing it in gray architectural shingles. Ricardo walked it before, during and after. Alexandria projects will take this spot as we finish them.
+[P] Our most recent Old Town job was on Duke Street: we replaced the roof, rebuilt the roof beams underneath, and installed a full TPO flat roof system. We've done several other replacements and repairs around Old Town. Ricardo quotes, checks and signs off on every one.
 
 [LINK] See more of our work → /projects/
 
@@ -120,7 +120,7 @@ FAQ
 
 [FAQ Q] Do I need Board of Architectural Review approval to replace my roof in Old Town?
 
-[FAQ A] If your house is in a historic district and the roof is visible from the street, usually yes. In Parker-Gray, visible replacement roofing goes through city staff review, while flat and low-slope roofs are not reviewed by the Board. We check your address and build the estimate around what the city will approve.
+[FAQ A] If your house is in a historic district and the roof is visible from the street, usually yes. In Parker-Gray, visible replacement roofing goes through city staff review, while flat and low-slope roofs are not reviewed by the Board. We check your address and build the estimate around what the city will approve. We've replaced and repaired roofs in Old Town, including a full flat roof on Duke Street.
 
 [FAQ Q] My address says Alexandria but my taxes go to Fairfax County. Does that change anything?
 
@@ -132,7 +132,7 @@ FAQ
 
 [FAQ Q] How fast can you get to Alexandria for an inspection?
 
-[FAQ A] Call or text (703) 677-1976. Most inspections are scheduled within 24 to 48 hours. We come up Route 1 from Woodbridge, so Kingstowne, Franconia and the Mount Vernon side are usually the quickest to schedule.
+[FAQ A] Call or text (703) 677-1976. Most inspections are scheduled within 24 to 48 hours. Kingstowne is about 25 minutes from our base in Woodbridge. We come up Route 1 from Woodbridge, so Kingstowne, Franconia and the Mount Vernon side are usually the quickest to schedule.
 
 [FAQ Q] Do you help with insurance claims after a storm?
 
@@ -152,8 +152,8 @@ Internal links on this page: / · /service-areas/ · /service-areas/springfield-
 
 ## 2. Edits from the workspace draft
 
-- Subhead: "based 20 minutes down the road in Woodbridge" became "based just down Route 1 in Woodbridge". The drive time is not confirmed.
-- Local proof: the September 2026 two-story job is a general RC project, not an Alexandria job, and the paragraph says Alexandria projects will take the spot (same pattern as Fairfax, ADR-007).
+- Subhead: "based 20 minutes down the road in Woodbridge" became "about 25 minutes down Route 1 in Woodbridge" (Ricardo, Oct 26: Woodbridge to Kingstowne is about 25 minutes without traffic).
+- Local proof: Ricardo's Old Town Duke Street job (Oct 26): roof replacement, roof beams rebuilt, full TPO flat roof system. No house number, on purpose. The photos are RC flat roof photos, not that house.
 - Review slot: Rick Day's Google review (June 10, 2026), one sentence quoted verbatim. Rick is not known to be an Alexandria customer. Replace with an Alexandria review when the GBP has one.
 - Why us: "CertainTeed" became "CertainTeed ShingleMaster" (ADR-016).
 - Meta description: "Class A licensed" became "Class A licensed roofer" to reach the 150 to 160 character range (the draft's count of 152 was 149).

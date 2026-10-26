@@ -414,7 +414,7 @@ Hero
 
 Intro
 
-[P] Ricardo installs CertainTeed Landmark and Landmark Pro on most jobs, as a complete CertainTeed Integrity Roof System: RoofRunner underlayment, SwiftStart starter, the shingles, and Shadow Ridge hip and ridge caps. He knows how it installs and what the warranty covers.
+[P] Ricardo installs CertainTeed Landmark and Landmark Pro on most jobs. When you want the extended warranty, he installs it as a complete CertainTeed Integrity Roof System: CertainTeed starter, ridge caps and ridge vents, ice and water shield and synthetic underlayment fastened with plastic cap nails, so it qualifies for SureStart PLUS 3-Star.
 
 [P] When one contractor uses one shingle line on most jobs, the crew gets good at it. We're a local Woodbridge roofer, not a storm chaser. We price in the middle of the pack, tell you if you don't need a full replacement, and put the price in writing with no surprise change orders.
 
@@ -425,7 +425,7 @@ Why CertainTeed
 [LIST]
 
 - A major U.S. manufacturer. CertainTeed has been making roofing products for decades.
-- Manufacturer warranty. Integrity Roof System installs qualify for CertainTeed SureStart PLUS 3-Star coverage: materials, labor, tear-off, and disposal for 50 years, an unlimited wind warranty, and a one-time transfer within 15 years. We register it for you.
+- Manufacturer warranty. Every CertainTeed shingle carries CertainTeed's standard warranty. When you choose the extended warranty and we install the full Integrity Roof System, the roof qualifies for SureStart PLUS 3-Star coverage: materials, labor, tear-off, and disposal for 50 years, an unlimited wind warranty, and a one-time transfer within 15 years. We register it for you.
 - Color and style options. Landmark and Landmark Pro come in dozens of Max Def colors, and we bring the samples to your inspection.
 - Consistent installs. Using one product line on most jobs keeps our crew's work consistent. We leave a clean job site and finish on the timeline we promised.
 
@@ -449,7 +449,7 @@ FAQ
 
 [FAQ Q] What does the CertainTeed warranty cover?
 
-[FAQ A] The standard CertainTeed warranty covers manufacturing defects in the shingles. When we install the full Integrity Roof System and register SureStart PLUS 3-Star coverage, that grows to materials, labor, tear-off, and disposal for 50 years, with an unlimited wind warranty, and it transfers once within 15 years.
+[FAQ A] The standard CertainTeed warranty covers manufacturing defects in the shingles. If you choose the extended warranty, we install the full Integrity Roof System and register SureStart PLUS 3-Star coverage, and that grows to materials, labor, tear-off, and disposal for 50 years, with an unlimited wind warranty, and it transfers once within 15 years.
 
 CTA
 

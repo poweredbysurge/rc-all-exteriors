@@ -21,3 +21,12 @@ The launch shipped three city pages (Fairfax, Springfield, Lorton) under ADR-007
 - When Ricardo names an Alexandria job or the GBP gets an Alexandria review, the proof block changes in `copy/batch-6.md` and `proofPhotos`, nothing else.
 - Still open from the copy review: confirm the building permit sentence with the Alexandria Permit Center (703-746-4200).
 - Next city: Fairfax Station (December), same template, its own batch.
+
+## Addendum, same day: real Old Town proof
+
+Ricardo answered on Oct 26: RC has done several replacements and repairs in Old Town Alexandria, most recently a roof replacement on Duke Street with the roof beams rebuilt and a full TPO flat roof system, and Woodbridge to Kingstowne is about 25 minutes without traffic.
+
+- The proof paragraph is now that job, and the general project and its "Alexandria projects will take this spot" line are gone. The Rick Day review stays.
+- The street is named, the house number is not, on purpose: a customer's house number is never published.
+- The proof photos are `flatTpo` and `proFlatRoof`, RC flat roof photos that match the kind of job. Their captions and alt text describe the photo and do not say Duke Street, because we do not know they are that house.
+- The subhead and the inspection FAQ say "about 25 minutes". The BAR FAQ says RC has worked in Old Town, including the Duke Street flat roof; it does not claim BAR approval for that job.

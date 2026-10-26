@@ -345,7 +345,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 **[LIST]**
 
 - **Tear-off and disposal.** The old roof comes off and gets hauled away. We inspect the decking underneath. Up to five sheets of replacement plywood are included; if the deck is in bad shape we tell you and quote a full re-deck before any work.  
-- **CertainTeed shingles.** Landmark and Landmark Pro, the shingles Ricardo uses on most jobs, installed as a full CertainTeed Integrity Roof System with SureStart PLUS 3-Star coverage on top of our own warranty. Standing seam metal and flat roofing systems are available too. [LINK] CertainTeed roofing → /certainteed-roofing/  
+- **CertainTeed shingles.** Landmark and Landmark Pro, the shingles Ricardo uses on most jobs. Choose the extended warranty and we install them as a full CertainTeed Integrity Roof System with SureStart PLUS 3-Star coverage on top of our own warranty. Standing seam metal and flat roofing systems are available too. [LINK] CertainTeed roofing → /certainteed-roofing/  
 - **Brava synthetic shake, slate, and tile.** For a cedar shake, slate, or Spanish tile look without the weight or the upkeep, we are a certified Brava installer. Brava is a composite that holds its color, takes hail and wind, and carries a 50-year limited warranty. Ask to see it at your inspection.  
 - **Flashing and ventilation.** Flashing replacement and ventilation or insulation upgrades, where most leaks and heat problems start.  
 - **Leak detection and waterproofing.** We find where water is getting in and seal the problem areas.  

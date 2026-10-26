@@ -198,7 +198,7 @@ Two warranties
 
 [H3] The CertainTeed manufacturer warranty
 
-[P] CertainTeed covers the shingles and roofing materials against manufacturing defects. Roofs we install as a CertainTeed Integrity Roof System qualify for SureStart PLUS 3-Star coverage: materials, labor, tear-off, and disposal for 50 years, an unlimited wind warranty, and a one-time transfer within 15 years. [LINK] CertainTeed roofing → /certainteed-roofing/
+[P] CertainTeed covers the shingles and roofing materials against manufacturing defects. If you choose the extended warranty, we install the roof as a full CertainTeed Integrity Roof System, and it qualifies for SureStart PLUS 3-Star coverage: materials, labor, tear-off, and disposal for 50 years, an unlimited wind warranty, and a one-time transfer within 15 years. [LINK] CertainTeed roofing → /certainteed-roofing/
 
 What it means for you
 
@@ -231,7 +231,7 @@ FAQ
 
 [FAQ Q] Does the warranty transfer if I sell my house?
 
-[FAQ A] Yes, once. Our 10-year workmanship warranty transfers one time to the next owner. SureStart PLUS 3-Star coverage from CertainTeed also transfers once within the first 15 years.
+[FAQ A] Yes, once. Our 10-year workmanship warranty transfers one time to the next owner. If your roof is registered for CertainTeed SureStart PLUS 3-Star coverage, that also transfers once within the first 15 years.
 
 [FAQ Q] Do repairs come with a warranty too?
 
@@ -437,7 +437,7 @@ Trust signals
 - Virginia Class A contractor, license 2705196138.
 - Fully licensed and insured.
 - BBB accredited.
-- CertainTeed ShingleMaster. Landmark and Landmark Pro, installed as the Integrity Roof System with SureStart PLUS 3-Star coverage.
+- CertainTeed ShingleMaster. Landmark and Landmark Pro, and the full Integrity Roof System with SureStart PLUS 3-Star coverage when you want the extended warranty.
 - Certified Brava installer: synthetic shake, slate, and Spanish tile.
 - 10-year workmanship warranty on every roof we install
 - 49 five-star Google reviews from customers across Northern Virginia

@@ -1,5 +1,11 @@
 # Working order: RC All Exteriors
 
+## 2026-10-26, evening: Ricardo's answers (ADR-017 addendum)
+
+- Alexandria proof is a real Old Town job now: Duke Street roof replacement, roof beams rebuilt, full TPO flat roof (no house number). Photos `flatTpo`, `proFlatRoof`. "About 25 minutes" in the subhead and the inspection FAQ; the BAR FAQ notes Old Town work without claiming BAR approval.
+- CertainTeed SureStart PLUS 3-Star is the extended warranty option, not on every roof: batch-1 roof replacement, batch-2 warranty page and About, batch-3 CertainTeed page now say it applies when you choose it and RC installs the full Integrity Roof System (CertainTeed starter, ridge caps and vents, ice and water shield, synthetic underlayment with plastic cap nails).
+- All gates pass.
+
 ## 2026-10-26, later: Alexandria city page live (ADR-017)
 
 **Done**

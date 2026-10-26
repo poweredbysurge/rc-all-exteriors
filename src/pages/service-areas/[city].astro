@@ -51,12 +51,14 @@ const [lead, ...rest] = blocksOf(intro, 'p');
 // Proof section (ADR-007): the same general RC project on every city page,
 // the October mansard job with Brava synthetic shake, in progress and
 // finished, until Ricardo names a real job in that town. The copy says so.
+// Alexandria has one (Duke Street, Old Town, ADR-017 addendum).
 const proofPhotos: Record<string, [PhotoKey, PhotoKey]> = {
   Fairfax: ['underlaymentYardSign', 'mansardShakeYardSign'],
   Springfield: ['underlaymentYardSign', 'mansardShakeFront'],
   Lorton: ['shakeInstall', 'mansardShakeYardSign'],
-  // The September 2026 two-story job the Alexandria copy describes (ADR-017).
-  Alexandria: ['twoStoryWalk', 'underlaymentYardSign'],
+  // RC flat roof photos beside the Duke Street TPO job (ADR-017 addendum). Not
+  // that house, so the captions and alt text name no street.
+  Alexandria: ['flatTpo', 'proFlatRoof'],
 };
 // Neighborhood names: public geography, researched 2026-10-19 (ADR-007). Not
 // a claim that RC has worked in each one; the heading says "we serve".
