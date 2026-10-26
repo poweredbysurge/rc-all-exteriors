@@ -110,7 +110,7 @@ FAQ
 
 [FAQ Q] Can you come out today?
 
-[FAQ A] Call or text (703) 677-1976 and we'll tell you how fast we can get there. Our office hours are Monday to Saturday, 7am to 5pm, and emergency calls are answered after hours and on Sundays. We give you a real arrival time instead of a promise we can't keep.
+[FAQ A] Call or text (703) 677-1976 and we'll tell you how fast we can get there. Our office hours are Monday to Friday, 7am to 5pm, and Saturday, 8am to 4pm, and emergency calls are answered after hours and on Sundays. We give you a real arrival time instead of a promise we can't keep.
 
 [FAQ Q] How much does an emergency roof repair cost?
 
@@ -437,7 +437,7 @@ Trust signals
 - Virginia Class A contractor, license 2705196138.
 - Fully licensed and insured.
 - BBB accredited.
-- CertainTeed installer. Landmark and Landmark Pro, installed as the Integrity Roof System with SureStart PLUS 3-Star coverage.
+- CertainTeed ShingleMaster. Landmark and Landmark Pro, installed as the Integrity Roof System with SureStart PLUS 3-Star coverage.
 - Certified Brava installer: synthetic shake, slate, and Spanish tile.
 - 10-year workmanship warranty on every roof we install
 - 49 five-star Google reviews from customers across Northern Virginia
@@ -529,7 +529,7 @@ Contact details
 
 - Call or text: (703) 677-1976
 - Email: [Info@rcallexteriors.com](mailto:Info@rcallexteriors.com)
-- Hours: Monday to Saturday, 7am to 5pm
+- Hours: Monday to Friday, 7am to 5pm. Saturday, 8am to 4pm
 - Service area: Serving Woodbridge and Northern Virginia
 - Instagram: [@rcallexteriors](https://www.instagram.com/rcallexteriors/) · Facebook: [RC All Exteriors LLC](https://www.facebook.com/p/RC-All-Exteriors-LLC-61586063353635/)
 

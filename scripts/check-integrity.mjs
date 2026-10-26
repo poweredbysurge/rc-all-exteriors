@@ -46,7 +46,9 @@ function walk(dir, acc = []) {
   return acc;
 }
 const files = walk(out);
-const htmlFiles = files.filter((f) => f.endsWith('.html'));
+// Search Console verification files (public/google<token>.html) are one line of
+// text with no document around them, not pages.
+const htmlFiles = files.filter((f) => f.endsWith('.html') && !/\/google[0-9a-f]+\.html$/.test(f));
 const routeOf = (file) => {
   const rel = '/' + relative(out, file).replace(/\\/g, '/');
   return rel.endsWith('/index.html') ? rel.slice(0, -'index.html'.length) : rel === '/index.html' ? '/' : rel;

@@ -5,6 +5,7 @@
 import Icon from './Icon.astro';
 import business from '@/data/business.json';
 import { mobileNavServices, primaryNav } from '@/data/nav';
+import { decorate } from '@/lib/render';
 import { PHONE, TEL } from '@/lib/site';
 
 const rest = primaryNav.filter((item) => !item.hasMenu);
@@ -72,7 +73,7 @@ const rest = primaryNav.filter((item) => !item.hasMenu);
       <a href={TEL} class="btn btn-secondary-on-dark btn-block">Call or text {PHONE}</a>
       <a href="/free-roof-inspection/" class="btn btn-inverse btn-block">Book a Free Roof Inspection</a>
       <div class="flex flex-wrap items-center justify-center gap-x-1.5 text-body-sm font-medium text-fg-inverse-muted">
-        <span>{business.hours.display} ·</span>
+        <span><Fragment set:html={decorate(business.hours.display, { linkPhone: false })} /> ·</span>
         <a href={business.profiles.instagram} class="flex min-h-11 items-center text-fg-inverse underline underline-offset-4" rel="noopener">
           Instagram
         </a>

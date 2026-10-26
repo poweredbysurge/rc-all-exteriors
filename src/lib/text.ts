@@ -50,8 +50,8 @@ export function sentenceCase(input: string): string {
   return s.replace(/\u0000(\d+)\u0000/g, (_, i) => held[Number(i)]);
 }
 
-/** Wraps "10-year" style compounds so they never break across lines (Gate A review finding 4). */
-export const NOWRAP_TERMS = /(\b\d+-year\b|\bClass A\b|\bMon to Sat\b)/g;
+/** Wraps "10-year" style compounds and hours ("Mon to Fri", "Sat 8am to 4pm") so they never break across lines (Gate A review finding 4, ADR-016). */
+export const NOWRAP_TERMS = /(\b\d+-year\b|\bClass A\b|\bMon to (?:Sat|Fri)\b|\bSat \d{1,2}am to \d{1,2}pm\b|\b\d{1,2}am to \d{1,2}pm\b)/g;
 
 export function slugify(s: string): string {
   return s

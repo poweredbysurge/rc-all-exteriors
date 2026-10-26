@@ -19,7 +19,7 @@ Everything here needs the humanizer pass and Sam's sign-off before launch. The a
 | Lead card step 2 heading | "A few more details help us prep for your visit. All optional." |
 | Lead card success, thank-you page | "What happens next: we confirm a time, inspect the roof, and give you a straight answer with a written estimate if work is needed." / "Need us sooner? Call or text (703) 677-1976." |
 | 404 | "That page is not here" / "The address may have changed when we rebuilt the site. Pick a service below, or call or text us and we'll point you the right way." |
-| Stat strip labels | "five-star Google reviews", "workmanship warranty", "Virginia licensed", "7am to 5pm" |
+| Stat strip labels | "five-star Google reviews", "workmanship warranty", "Virginia licensed", "7am to 5pm, Sat 8am to 4pm" (value "Mon to Sat") |
 | Roof replacement | "Repair or replace" table (phrases lifted from batch-1 section 3 and 4 FAQs), material cards ("The shingles Ricardo uses on most jobs.", "Metal roofing systems are available too.", "Flat roofing systems are available too."), "Pricing guidance" card with "Your free inspection ends with a written estimate." |
 | Related services heading | "Related services" |
 | City pages | "Recent work" eyebrow, "[City] neighborhoods we serve", "Nearby service areas" |

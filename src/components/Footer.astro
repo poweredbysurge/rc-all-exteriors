@@ -8,7 +8,7 @@ import Icon from './Icon.astro';
 import RatingChip from './RatingChip.astro';
 import business from '@/data/business.json';
 import { footerAreas, footerCompany, legalLinks, services, soonCities } from '@/data/nav';
-import { confirmHtml } from '@/lib/render';
+import { confirmHtml, decorate } from '@/lib/render';
 import { MAILTO, PHONE, TEL } from '@/lib/site';
 
 const year = new Date().getFullYear();
@@ -30,7 +30,7 @@ const colTitle = 'mb-2 text-body-sm font-bold tracking-[0.02em] text-fg-inverse'
         <p class="text-body-sm text-fg-inverse-muted" data-sm>
           {business.legalName}<br />
           {business.serviceAreaLine}<br />
-          {business.hours.display}
+          <Fragment set:html={decorate(business.hours.display, { linkPhone: false })} />
         </p>
         <div class="flex flex-col">
           <a href={TEL} class="flex min-h-11 items-center self-start text-body font-bold text-fg-inverse hover:underline underline-offset-4" data-dni-skip="true">{PHONE}</a>

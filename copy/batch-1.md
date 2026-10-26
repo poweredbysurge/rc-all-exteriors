@@ -43,7 +43,7 @@ Every line of page copy starts with a tag in brackets. The tag tells Claude Code
 Site-wide elements (build once, reuse on every page):
 
 - **Header:** logo · Services · Service Areas · Warranty · Financing · Reviews · About · phone (703) 677-1976 · [CTA PRIMARY] Book a Free Roof Inspection  
-- **Footer:** RC All Exteriors LLC · Serving Woodbridge and Northern Virginia · (703) 677-1976 · [Info@rcallexteriors.com](mailto:Info@rcallexteriors.com) · Mon to Sat, 7am to 5pm · Virginia Class A Contractor · BBB Accredited · service area links  
+- **Footer:** RC All Exteriors LLC · Serving Woodbridge and Northern Virginia · (703) 677-1976 · [Info@rcallexteriors.com](mailto:Info@rcallexteriors.com) · Mon to Fri 7am to 5pm, Sat 8am to 4pm · Virginia Class A Contractor · BBB Accredited · service area links  
 - **Sticky mobile bar:** Call or text (703) 677-1976 · Free Roof Inspection
 
 ---
@@ -102,10 +102,10 @@ Sources used in this batch: Ricardo's ICP questionnaire (Sept 21, the source of 
 | Virginia Class A contractor license | Confirmed. License number [CONFIRM] |
 | BBB accredited | Confirmed |
 | 49 five-star Google reviews | Confirmed (GBP, Sept 2026). Update the number at launch |
-| CertainTeed installer, 3-Star warranty level | Confirmed on call. Exact program name [CONFIRM] |
+| CertainTeed ShingleMaster, 3-Star warranty level | ShingleMaster per CertainTeed Find a Pro profile, 2026-10-26 |
 | 10-year workmanship warranty | Confirmed. Terms document coming from Ricardo |
 | Financing available | Link sent by Ricardo. Partner and terms [CONFIRM] |
-| Hours Mon to Sat, 7am to 5pm | From GBP |
+| Hours Mon to Fri 7am to 5pm, Sat 8am to 4pm, Sun closed | From GBP (ADR-016) |
 | Years in business | RC All Exteriors started in 2025 (confirmed by Mario, Sept 22). The old site's "2015" and "9 years" are wrong and are dropped. The copy never leads with years; it leads with reviews, license, and warranty |
 | Free inspection | Confirmed as the lead offer (Sept 22\) |
 | Services | Current site: residential and commercial; asphalt shingle, metal, and flat roofing; tear-off and disposal; leak detection and waterproofing; ventilation and insulation upgrades; gutter and flashing replacement; siding crack and panel replacement; storm and hail damage restoration; insurance claim assistance and estimates; preventive inspections and maintenance |

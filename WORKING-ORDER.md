@@ -1,5 +1,21 @@
 # Working order: RC All Exteriors
 
+## 2026-10-26: hours match GBP, CertainTeed ShingleMaster (ADR-016)
+
+**Done**
+- Hours now match the Google Business Profile: Mon to Fri 7am to 5pm, Sat 8am to 4pm, Sunday closed. `business.json` `hours` has two `spec` entries (schema emits two `OpeningHoursSpecification`), plus `statValue` / `statLabel` so `StatStrip` no longer splits the display string. Footer, mobile nav and stat strip labels go through `NOWRAP_TERMS` (now covers "Mon to Fri", "Sat 8am to 4pm" and "7am to 5pm" ranges). Copy: emergency FAQ, contact hours line, batch-1 footer spec and fact table, SITEMAP, DRAFT-ADDITIONS.
+- "CertainTeed ShingleMaster" (CertainTeed Find a Pro profile) in `business.json` accreditations (footer), brand strip claim, `/certainteed-roofing/` trust bar and the About trust list. Text only: badge artwork logged in DESIGN-DEBT.
+- `check-integrity` skips `google<token>.html` Search Console files; the verification file added in `372161c` has no `<body>` and crashed the gate.
+- STANDARDS 59.
+
+**Verified:** `npm run build`, `check:production`, `check:layout` pass. Stat strip, footer and mobile nav looked at in headless Chrome at 390 and 1440.
+
+**Not changed:** ADR-007 still records the old hours as history; ADR-016 supersedes it on hours. `copy/batch-2.md` contact intro keeps "Monday to Saturday" as the days served (no times).
+
+**Next**
+- Other listings (BBB, Facebook, BrightLocal citations) should match GBP hours.
+- ShingleMaster badge file from CertainTeed or Ricardo.
+
 ## 2026-10-23, session 4: mobile polish and people photos (ADR-008)
 
 **Done**

@@ -15,8 +15,11 @@
   },
   "serviceAreaLine": "Serving Woodbridge and Northern Virginia",
   "hours": {
-    "display": "Mon to Sat, 7am to 5pm",
-    "displayLong": "Monday to Saturday, 7am to 5pm",
+    "$comment": "Matches the Google Business Profile exactly (ADR-016). Change GBP first, then this block. statValue and statLabel are the stat strip tile.",
+    "display": "Mon to Fri 7am to 5pm, Sat 8am to 4pm",
+    "displayLong": "Monday to Friday, 7am to 5pm. Saturday, 8am to 4pm",
+    "statValue": "Mon to Sat",
+    "statLabel": "7am to 5pm, Sat 8am to 4pm",
     "spec": [
       {
         "days": [
@@ -24,11 +27,17 @@
           "Tuesday",
           "Wednesday",
           "Thursday",
-          "Friday",
-          "Saturday"
+          "Friday"
         ],
         "opens": "07:00",
         "closes": "17:00"
+      },
+      {
+        "days": [
+          "Saturday"
+        ],
+        "opens": "08:00",
+        "closes": "16:00"
       }
     ]
   },
@@ -50,7 +59,7 @@
   },
   "accreditations": [
     "BBB Accredited",
-    "CertainTeed installer",
+    "CertainTeed ShingleMaster",
     "Certified Brava installer"
   ],
   "reviews": {

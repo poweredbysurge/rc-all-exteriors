@@ -72,13 +72,13 @@ The master prompt standard (section 10): step 1 is Name · Phone · Email · Zip
 ## Business facts for schema and footer (from batch-1 §1, locked)
 
 - RC All Exteriors LLC · (703) 677-1976 · Info@rcallexteriors.com
-- Hours: Monday to Saturday, 7am to 5pm (GBP)
+- Hours: Monday to Friday, 7am to 5pm. Saturday, 8am to 4pm. Sunday closed (GBP, ADR-016)
 - Service area business: schema and contact page show the service area, **not** the street address (copy decision, batch-2 §5). Woodbridge, VA as `addressLocality`; no `streetAddress`.
 - Service area: Woodbridge, Lake Ridge, Lorton, Fairfax Station, Fairfax, Springfield, Alexandria, Arlington, McLean, Great Falls. Virginia only. No MD, no DC.
 - Virginia Class A contractor (licence number `[CONFIRM]`)
 - BBB accredited
 - 49 five-star Google reviews (Sept 2026; live via proxy at launch)
-- CertainTeed installer, 3-Star level (program name `[CONFIRM]`)
+- CertainTeed ShingleMaster, 3-Star level (CertainTeed Find a Pro profile)
 - 10-year workmanship warranty (terms doc `[CONFIRM]`)
 - Financing available (partner and terms `[CONFIRM]`)
 - Founded 2025. Copy never leads with years. The old "since 2015" and "9 years" are dropped.

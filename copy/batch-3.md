@@ -410,7 +410,7 @@ Hero
 
 [CTA SECONDARY] Call or text (703) 677-1976
 
-[TRUST BAR] CertainTeed installer · 10-year workmanship warranty · Class A licensed · 49 five-star reviews
+[TRUST BAR] CertainTeed ShingleMaster · 10-year workmanship warranty · Class A licensed · 49 five-star reviews
 
 Intro
 
