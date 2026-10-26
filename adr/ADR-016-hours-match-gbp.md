@@ -28,3 +28,14 @@ In the same pass, CertainTeed's Find a Pro profile (https://www.certainteed.com/
 - Hours are a data change from now on; the stat strip no longer breaks when the display string changes shape.
 - ADR-007's "office hours stay Monday to Saturday, 7am to 5pm" is superseded on hours; its emergency-calls decision stands.
 - Any other listing (BBB, Facebook, Yelp, BrightLocal citations) that disagrees with GBP is a listing to fix, not a reason to change the site.
+
+## Addendum, same day: the ShingleMaster badge
+
+Mario supplied CertainTeed's ShingleMaster Credentialed badge (`design/assets/images/IMG_1859.JPG`, 900px on white). It is cut from the white square (edge flood fill, the white banner inside the badge kept) into `src/assets/brands/certainteed-shinglemaster.png` and goes through the image pipeline as WebP.
+
+The image replaces text where a mark reads better than words:
+
+- **Homepage brand strip:** the badge replaces the plain CertainTeed wordmark (the badge carries the CertainTeed name, and the credential is the stronger claim).
+- **`/certainteed-roofing/` "Why we install CertainTeed"** and **About "trust signals":** the badge under the H2 (`BADGE_SECTIONS` in `src/data/brands.ts`, `CredentialBadge.astro`), linked to CertainTeed's Find a Pro profile as the proof.
+
+Text stays where the credential is part of a sentence or a line of credentials: the footer accreditations, the CertainTeed page hero trust strip, the About list item, alt text and schema. The share cards still show the CertainTeed wordmark; `certainteed.png` stays for `generate-og.mjs`.

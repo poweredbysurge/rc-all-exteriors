@@ -4,7 +4,7 @@
 // crew has not installed. Files are the brands' own marks, from their sites
 // or the HomeSource repo (2026-10-23); nothing redrawn.
 import type { ImageMetadata } from 'astro';
-import certainteed from '@/assets/brands/certainteed.png';
+import shingleMasterBadge from '@/assets/brands/certainteed-shinglemaster.png';
 import jamesHardie from '@/assets/brands/james-hardie.png';
 import provia from '@/assets/brands/provia.png';
 import brava from '@/assets/brands/brava.svg?raw';
@@ -26,7 +26,7 @@ export interface Brand {
 }
 
 export const brands: Brand[] = [
-  { name: 'CertainTeed', claim: 'CertainTeed ShingleMaster', href: '/certainteed-roofing/', image: certainteed, height: 26 },
+  { name: 'CertainTeed', claim: 'CertainTeed ShingleMaster', href: '/certainteed-roofing/', image: shingleMasterBadge, height: 52 },
   { name: 'Brava', claim: 'Certified Brava synthetic shake, slate and tile installer', href: '/roof-replacement/', svg: brava.replace(/fill="#FFF"/g, 'fill="currentColor"'), height: 40 },
   { name: 'Better Business Bureau', claim: 'BBB Accredited Business', href: '/about/', svg: bbb, height: 40 },
   { name: 'James Hardie', claim: 'James Hardie fiber cement siding', href: '/siding/', image: jamesHardie, height: 30 },
@@ -34,3 +34,19 @@ export const brands: Brand[] = [
   { name: 'VELUX', claim: 'VELUX skylights', href: '/skylights/', svg: velux, height: 26 },
   { name: 'Enhancify', claim: 'Financing through Enhancify', href: '/financing/', svg: enhancify, height: 20 },
 ];
+
+// The ShingleMaster Credentialed badge (ADR-016), cut from CertainTeed's artwork
+// (design/assets/images/IMG_1859.JPG). The brand strip uses it in place of the
+// CertainTeed wordmark; CredentialBadge shows it under the H2 of BADGE_SECTIONS.
+export const shingleMaster = {
+  claim: 'CertainTeed ShingleMaster',
+  href: '/certainteed-roofing/',
+  profile: 'https://www.certainteed.com/profiles/r-c-all-exteriors-llc',
+  image: shingleMasterBadge,
+};
+
+/** Route to the copy section name that carries the badge under its H2. */
+export const BADGE_SECTIONS: Record<string, string> = {
+  '/certainteed-roofing/': 'Why CertainTeed',
+  '/about/': 'Trust signals',
+};

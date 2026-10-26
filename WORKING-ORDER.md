@@ -14,7 +14,7 @@
 
 **Next**
 - Other listings (BBB, Facebook, BrightLocal citations) should match GBP hours.
-- ShingleMaster badge file from CertainTeed or Ricardo.
+- ~~ShingleMaster badge file~~ Done same day (ADR-016 addendum): badge cut from Mario's file, in the homepage brand strip and under the H2 on `/certainteed-roofing/` and About, linked to CertainTeed's profile. Share cards still use the wordmark; rerun `npm run og` with the badge if wanted.
 
 ## 2026-10-23, session 4: mobile polish and people photos (ADR-008)
 

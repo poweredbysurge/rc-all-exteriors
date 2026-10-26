@@ -16,6 +16,7 @@ import PhotoGap from '@/components/PhotoGap.astro';
 import Rich from '@/components/Rich.astro';
 import Section from '@/components/Section.astro';
 import ServiceCard from '@/components/ServiceCard.astro';
+import { BADGE_SECTIONS } from '@/data/brands';
 import { routeByPath, serviceByHref, services } from '@/data/nav';
 import { materials, repairOrReplace } from '@/data/roof-replacement';
 import { blocksOf, faqs, first, getPage, plain, section, type ListBlock, type Section as CopySection } from '@/lib/copy';
@@ -127,6 +128,7 @@ const slotImages = IMAGE_SLOTS[path] ?? [];
             bg={bgOf(i)}
             photo={plan[i].photo}
             images={blocksOf(s, 'image').length ? slotImages : undefined}
+            badge={BADGE_SECTIONS[path] === s.name}
             eyebrow={isReplacement && /included/i.test(s.name) ? 'What is included' : undefined}
             media={blocksOf(s, 'steps').length && /process/i.test(s.name) ? (stepMedia as never) : undefined}
           />

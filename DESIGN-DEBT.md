@@ -85,7 +85,7 @@ Carried from the design export, plus the ones the other pages call for:
 
 - **Photo originals.** Only the five 1440 to 2400px selects are in `src/assets/photos/`. The 30 originals are in the RC Drive folder (`PHOTO-INVENTORY.md`). Until they are dropped in: the homepage hero is the GBP cover with the RC mark baked in at bottom right, the mobile hero crop is cut from a 941px-tall file, and five photos serve 16 heroes. Swapping is one import per photo in `src/data/photos.ts`.
 - **Town for every photo.** Every caption carries "town CONFIRM".
-- **ShingleMaster badge artwork needed from CertainTeed or Ricardo** (ADR-016). The credential renders as text ("CertainTeed ShingleMaster") in the footer, brand strip claim, CertainTeed page trust bar and About list. `src/assets/brands/certainteed.png` is the CertainTeed wordmark, not the ShingleMaster badge. Once the official file arrives, add it to `src/assets/brands/` and use it on the CertainTeed page and About.
+- **ShingleMaster badge artwork: resolved 2026-10-26** (ADR-016 addendum). Mario supplied the badge; cut out and used in the homepage brand strip and under the H2 on `/certainteed-roofing/` and About. Text elsewhere by decision.
 
 ## Deviations from the master prompt, by decision (carried from the design)
 

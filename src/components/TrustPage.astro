@@ -4,6 +4,7 @@
 // (DESIGN-DEBT.md). Named slots let a page add its own block after a section.
 import Base from '@/layouts/Base.astro';
 import ContentSection from './ContentSection.astro';
+import { BADGE_SECTIONS } from '@/data/brands';
 import CtaBand from './CtaBand.astro';
 import Faq from './Faq.astro';
 import Figure from './Figure.astro';
@@ -81,7 +82,7 @@ const { plans: plan } = planRhythm(body, {
     )
   }
 
-  {body.map((s, i) => <ContentSection section={s} bg={plan[i].bg} photo={plan[i].photo} cardTag="h3" />)}
+  {body.map((s, i) => <ContentSection section={s} bg={plan[i].bg} photo={plan[i].photo} cardTag="h3" badge={BADGE_SECTIONS[path] === s.name} />)}
 
   <slot />
 

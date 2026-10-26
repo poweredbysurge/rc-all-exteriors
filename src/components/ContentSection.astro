@@ -13,6 +13,7 @@
 // Headings center on phones where they sit above a grid; anything above a
 // list or a paragraph stays left with it (master prompt section 3).
 import BlockFlow from './BlockFlow.astro';
+import CredentialBadge from './CredentialBadge.astro';
 import Eyebrow from './Eyebrow.astro';
 import Figure from './Figure.astro';
 import IconHeading from './IconHeading.astro';
@@ -42,8 +43,10 @@ interface Props {
   images?: (PhotoKey | null)[];
   /** Heading level for card titles. */
   cardTag?: 'h2' | 'h3';
+  /** The ShingleMaster badge under the H2 of a split section (ADR-016). */
+  badge?: boolean;
 }
-const { section, bg = 'surface', quiet = false, eyebrow, media, images, cardTag = 'h3', photo = null } = Astro.props;
+const { section, bg = 'surface', quiet = false, eyebrow, media, images, cardTag = 'h3', photo = null, badge = false } = Astro.props;
 const onDark = bg === 'contrast';
 
 const kind = kindOf(section);
@@ -83,6 +86,7 @@ const cardCols = cards.length >= 4 && cards.length % 3 !== 0 ? 'md:grid-cols-2 x
         <div class="flex flex-col gap-4">
           {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
           <h2 class="heading text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
+          {badge && <CredentialBadge class="mt-2" />}
         </div>
         <BlockFlow blocks={rest} leadFirst images={images} />
       </div>
@@ -96,6 +100,7 @@ const cardCols = cards.length >= 4 && cards.length % 3 !== 0 ? 'md:grid-cols-2 x
         <div class="flex flex-col gap-5">
           {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
           <h2 class="heading text-h2 text-fg"><Rich inline={h2!.inline} linkPhone={false} /></h2>
+          {badge && <CredentialBadge />}
           <BlockFlow blocks={rest} leadFirst images={images} />
         </div>
       </div>
