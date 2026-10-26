@@ -1,0 +1,13 @@
+---
+// Blog posts (ADR-018): /blog/<slug>/, one page per copy page under /blog/ in
+// copy/blog-*.md. Same layout as the guides. No posts, no pages.
+import ArticlePage from '@/components/ArticlePage.astro';
+import { posts } from '@/data/nav';
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.href.split('/')[2] }, props: { path: p.href } }));
+}
+const { path } = Astro.props as { path: string };
+---
+
+<ArticlePage path={path} formId="post" />

@@ -8,8 +8,9 @@
 // The parser fails loudly: an unknown tag or a line it cannot place throws at
 // build time with the batch and line number. Silence is the defect.
 
-// Guides (copy/guides-*.md, ADR-018) use the same format plus four tags.
-const files = import.meta.glob(['../../copy/batch-*.md', '../../copy/guides-*.md'], {
+// Guides and blog posts (copy/guides-*.md, copy/blog-*.md, ADR-018) use the
+// same format plus four tags.
+const files = import.meta.glob(['../../copy/batch-*.md', '../../copy/guides-*.md', '../../copy/blog-*.md'], {
   query: '?raw',
   import: 'default',
   eager: true,
@@ -132,9 +133,13 @@ export interface CopyPage {
   gate: string | null;
   sections: Section[];
   internalLinks: string[];
-  /** Guides: ISO dates from the spec. modified is set only when the content changes. */
+  /** Guides and posts: ISO dates from the spec. modified is set only when the content changes. */
   published: string | null;
   modified: string | null;
+  /** Guides and posts: the footer and menu label. */
+  shortTitle: string | null;
+  /** Guides and posts: the one line on the Resources and blog cards. */
+  summary: Inline[] | null;
 }
 
 const SPEC_KEYS = new Set([
@@ -151,6 +156,8 @@ const SPEC_KEYS = new Set([
   'Rule',
   '[PUBLISHED]',
   '[MODIFIED]',
+  '[SHORT TITLE]',
+  '[SUMMARY]',
 ]);
 
 const TAGS = [
@@ -306,6 +313,8 @@ function parseBatch(path: string, raw: string): CopyPage[] {
     page.schema = spec['[SCHEMA]'] ?? '';
     page.published = spec['[PUBLISHED]'] ?? null;
     page.modified = spec['[MODIFIED]'] ?? null;
+    page.shortTitle = spec['[SHORT TITLE]'] ?? null;
+    page.summary = spec['[SUMMARY]'] ? parseInline(spec['[SUMMARY]']) : null;
     pages.push(page);
     page = null;
   };
@@ -328,6 +337,8 @@ function parseBatch(path: string, raw: string): CopyPage[] {
         internalLinks: [],
         published: null,
         modified: null,
+        shortTitle: null,
+        summary: null,
       };
       spec = {};
       state = 'pre';

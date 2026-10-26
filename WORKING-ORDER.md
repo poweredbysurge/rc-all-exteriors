@@ -1,5 +1,13 @@
 # Working order: RC All Exteriors
 
+## 2026-10-26, late: Resources hub (ADR-019)
+
+- Top nav: Services · Service Areas · Resources · Reviews · About (Warranty and Financing now footer and hub only). Mobile menu and footer have a Resources group.
+- `/resources/` hub: guides, helpful pages, blog section gated on posts, CTA band. `/guides/` 301s to it; guide breadcrumbs Home > Resources > guide.
+- Guides and posts register from copy (`guides`, `posts`, `hasBlog` in nav.ts). Blog post template and `/blog/` index are built but dormant: zero posts, no `/blog/` page, link or sitemap entry. First post = `copy/blog-1.md`.
+- `/warranty/` and `/financing/` link back with "More resources".
+- All gates pass.
+
 ## 2026-10-26, night: /guides/ live (ADR-018)
 
 - `/guides/`, `/guides/does-insurance-cover-roof-replacement/`, `/guides/certainteed-landmark-shingles/` from `copy/guides-1.md` (parser reads `copy/guides-*.md`; new tags BYLINE, TABLE, NOTE, CTA; spec keys PUBLISHED, MODIFIED). Article schema with author `@id` `/about/#person`.

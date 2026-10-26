@@ -17,7 +17,7 @@ import Rich from '@/components/Rich.astro';
 import Section from '@/components/Section.astro';
 import ServiceCard from '@/components/ServiceCard.astro';
 import { BADGE_SECTIONS } from '@/data/brands';
-import { routeByPath, serviceByHref, services } from '@/data/nav';
+import { chipLabel, routeByPath, serviceByHref, services } from '@/data/nav';
 import { materials, repairOrReplace } from '@/data/roof-replacement';
 import { blocksOf, faqs, first, getPage, plain, section, type ListBlock, type Section as CopySection } from '@/lib/copy';
 import { metaFor } from '@/lib/page';
@@ -236,7 +236,7 @@ const slotImages = IMAGE_SLOTS[path] ?? [];
             </div>
             {more.length > 0 && (
               <ul class="m-0 flex list-none flex-wrap justify-center gap-2 p-0 lg:justify-start">
-                {more.map((href) => <li><a href={href} class="chip">{routeByPath.get(href)!.label}</a></li>)}
+                {more.map((href) => <li><a href={href} class="chip">{chipLabel(href)}</a></li>)}
               </ul>
             )}
           </div>

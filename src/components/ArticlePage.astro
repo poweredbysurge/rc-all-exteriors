@@ -1,0 +1,224 @@
+---
+// Article template for guides and blog posts (ADR-018). Copy: copy/guides-*.md
+// and copy/blog-*.md, parsed like the batches.
+// Text hero with the byline, then the article: a reading column with the
+// sections in copy order, a table of contents beside it from lg, the copy's
+// [CTA] drawn mid-article, the [NOTE] as a callout. The FAQ, related links and
+// the lead card close the page. Article schema names the owner by the same
+// Person @id the About page defines.
+import { getImage } from 'astro:assets';
+import Base from '@/layouts/Base.astro';
+import Bullets from '@/components/Bullets.astro';
+import Cta from '@/components/Cta.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Faq from '@/components/Faq.astro';
+import Figure from '@/components/Figure.astro';
+import Icon from '@/components/Icon.astro';
+import LeadCard from '@/components/LeadCard.astro';
+import PageHero from '@/components/PageHero.astro';
+import Rich from '@/components/Rich.astro';
+import Section from '@/components/Section.astro';
+import { chipLabel, routeByPath } from '@/data/nav';
+import { photos, type PhotoKey } from '@/data/photos';
+import { blocksOf, faqs, first, getPage, maybeSection, plain, section, type Inline } from '@/lib/copy';
+import { metaFor } from '@/lib/page';
+import { articleSchema, faqSchema } from '@/lib/schema';
+import { rebase } from '@/lib/site';
+import { slugify } from '@/lib/text';
+
+interface Props {
+  path: string;
+  /** Sent as form_id with the lead card at the foot of the article. */
+  formId: 'guide' | 'post';
+}
+const { path, formId } = Astro.props;
+const page = getPage(path);
+const meta = metaFor(page);
+if (!page.published) throw new Error(`${path}: spec has no [PUBLISHED] date`);
+
+const hero = section(page, 'Hero');
+const byline = first(hero, 'byline');
+const faqSection = maybeSection(page, 'FAQ');
+const note = maybeSection(page, 'Note');
+const cta = maybeSection(page, 'CTA');
+const body = page.sections.filter((s) => ![hero, faqSection, note, cta].includes(s));
+const withH2 = body.filter((s) => first(s, 'h2'));
+const idOf = (inline: Inline[]) => slugify(plain(inline));
+// The copy's call to action sits after the middle section of the article.
+const ctaAfter = withH2[Math.ceil(withH2.length / 2) - 1];
+
+// [IMAGE] slots, by route. A real RC photo, captioned as the registry captions
+// it: the guide does not claim it shows a particular shingle line.
+const IMAGES: Record<string, PhotoKey[]> = {
+  '/guides/certainteed-landmark-shingles/': ['colonialFront'],
+};
+const images = [...(IMAGES[path] ?? [])];
+
+const related = page.internalLinks.filter((href) => href !== path && routeByPath.has(href));
+const shareImages = [rebase('/og/default.jpg')];
+for (const key of IMAGES[path] ?? []) {
+  const img = await getImage({ src: photos[key].src, width: 1200, format: 'webp', quality: 80 });
+  shareImages.unshift(rebase(img.src));
+}
+const h1 = plain(first(hero, 'h1')!.inline);
+const [authorLead, ...authorRest] = plain(byline?.author ?? []).split(', ');
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  path={path}
+  hasLeadCard
+  confirmMeta={meta.confirmMeta}
+  schema={[
+    articleSchema({ path, headline: h1, description: meta.description, published: page.published, modified: page.modified, images: shareImages }),
+    faqSchema(faqs(page)),
+  ]}
+>
+  <PageHero path={path} h1={h1}>
+    {
+      byline && (
+        <p slot="meta" class="text-body-sm text-fg-inverse-muted" data-sm>
+          {authorLead.replace(/Ricardo Castro$/, '')}
+          <a href="/about/" class="font-semibold text-fg-inverse underline underline-offset-4">Ricardo Castro</a>
+          {authorRest.length > 0 && `, ${authorRest.join(', ')}`}
+          {byline.date && (
+            <Fragment>
+              {' · Published '}
+              <time datetime={page.published}>{byline.date}</time>
+            </Fragment>
+          )}
+          {page.modified && (
+            <Fragment>
+              {' · Updated '}
+              <time datetime={page.modified}>{new Date(page.modified).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })}</time>
+            </Fragment>
+          )}
+        </p>
+      )
+    }
+  </PageHero>
+
+  <Section bg="surface" name="Article">
+    <div class="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-16">
+      <article class="flex min-w-0 max-w-[720px] flex-col gap-6">
+        {
+          body.map((s, si) => (
+            <Fragment>
+              {s.blocks.map((b, bi) => {
+                switch (b.type) {
+                  case 'h2':
+                    return <h2 id={idOf(b.inline)} class="heading mt-6 scroll-mt-28 text-h2 text-fg"><Rich inline={b.inline} linkPhone={false} /></h2>;
+                  case 'p':
+                    return <p class:list={['rich text-fg', si === 0 && bi === 0 && 'text-body-lg']}><Rich inline={b.inline} /></p>;
+                  case 'list':
+                    return <Bullets items={b.items} />;
+                  case 'steps':
+                    return (
+                      <ol class="m-0 flex list-none flex-col gap-5 p-0">
+                        {b.items.map((item, i) => (
+                          <li class="flex gap-4">
+                            <span aria-hidden="true" class="heading inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-accent-tint text-body text-accent">{i + 1}</span>
+                            <p class="rich m-0 text-fg">
+                              <strong class="font-bold">{item.title}</strong> <Rich inline={item.inline} />
+                            </p>
+                          </li>
+                        ))}
+                      </ol>
+                    );
+                  case 'table': {
+                    const [head, ...rows] = b.rows;
+                    const labels = head.map((cell) => plain(cell));
+                    return (
+                      <div class="table-wrap" data-stack>
+                        <table>
+                          <thead>
+                            <tr>
+                              {head.map((cell, i) => (i === 0 ? <td class="!border-t-0 bg-surface-muted" /> : <th scope="col"><Rich inline={cell} /></th>))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {rows.map((row) => (
+                              <tr>
+                                {row.map((cell, i) => (i === 0 ? <th scope="row"><Rich inline={cell} /></th> : <td data-label={labels[i]}><Rich inline={cell} /></td>))}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    );
+                  }
+                  case 'image': {
+                    const key = images.shift();
+                    return key ? <Figure photo={key} ratio={3 / 2} sizes="(min-width: 1024px) 720px, 92vw" class="reveal" /> : null;
+                  }
+                  default:
+                    return null;
+                }
+              })}
+              {
+                s === ctaAfter && cta && first(cta, 'action') && (
+                  <aside class="on-dark my-4 flex flex-col gap-4 rounded-lg bg-surface-contrast p-6 lg:p-8" aria-label="Free roof inspection">
+                    <p class="rich m-0 text-body-lg text-fg-inverse"><Rich inline={first(cta, 'action')!.inline} /></p>
+                    <Cta to="lead-card" variant="inverse" class="self-start">Book a Free Roof Inspection</Cta>
+                  </aside>
+                )
+              }
+            </Fragment>
+          ))
+        }
+        {
+          note && first(note, 'note') && (
+            <aside role="note" class="mt-4 flex gap-3 rounded-lg border border-border bg-surface-muted p-5">
+              <Icon name="info" size={24} class="shrink-0 text-accent" />
+              <p class="rich m-0 text-fg-muted"><Rich inline={first(note, 'note')!.inline} /></p>
+            </aside>
+          )
+        }
+      </article>
+
+      <nav aria-label="On this page" class="sticky top-28 hidden lg:block">
+        <p class="mb-3 text-body-sm font-semibold text-fg" data-sm>On this page</p>
+        <ul class="m-0 flex list-none flex-col gap-1 border-l border-border p-0">
+          {
+            [...withH2, ...(faqSection ? [faqSection] : [])].map((s) => {
+              const h2 = first(s, 'h2')!;
+              return (
+                <li>
+                  <a href={`#${idOf(h2.inline)}`} class="-ml-px flex min-h-11 items-center border-l-2 border-transparent py-1 pl-4 text-body-sm text-fg-muted hover:border-accent hover:text-fg">
+                    {plain(h2.inline)}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </nav>
+    </div>
+  </Section>
+
+  {
+    faqSection && (
+      <Section bg="muted" name="FAQ">
+        <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
+          <h2 id={idOf(first(faqSection, 'h2')!.inline)} class="heading scroll-mt-28 text-h2 text-fg"><Rich inline={first(faqSection, 'h2')!.inline} /></h2>
+          <Faq faqs={blocksOf(faqSection, 'faq')} />
+        </div>
+      </Section>
+    )
+  }
+
+  <Section bg="surface" name="Next steps">
+    <div class="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-16">
+      <div class="flex flex-col gap-5">
+        <Eyebrow>Keep reading</Eyebrow>
+        <h2 class="heading text-h2 text-fg">Related pages</h2>
+        <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+          {related.map((href) => <li><a href={href} class="chip">{chipLabel(href)}</a></li>)}
+          <li><a href="/resources/" class="chip">All resources</a></li>
+        </ul>
+      </div>
+      <LeadCard formId={formId} />
+    </div>
+  </Section>
+</Base>

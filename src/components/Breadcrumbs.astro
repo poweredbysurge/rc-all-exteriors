@@ -19,8 +19,10 @@ const trail = breadcrumbsFor(path);
           <li class="flex items-center gap-2">
             {i > 0 && <span aria-hidden="true">/</span>}
             {i === trail.length - 1 ? (
+              // A guide's full title is the H1 right below, so the trail shows its
+              // short title; BreadcrumbList schema keeps the full one (ADR-019).
               <span aria-current="page" class={onDark ? 'text-fg-inverse' : 'text-fg'}>
-                {item.label}
+                {item.short ?? item.label}
               </span>
             ) : (
               <a href={item.href} class="inline-flex min-h-11 items-center underline underline-offset-4 hover:decoration-2">

@@ -1,7 +1,7 @@
 # ADR-018: A /guides/ section, authored by Ricardo
 
 **Date:** 2026-10-26
-**Status:** Accepted.
+**Status:** Accepted. The `/guides/` index, the footer "Guides" link and the Services menu link are superseded by the Resources hub (ADR-019); the guide pages, template and schema stand.
 
 ## Context
 

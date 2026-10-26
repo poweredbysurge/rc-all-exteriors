@@ -1,5 +1,6 @@
 // Site structure: services, cities, navigation, breadcrumbs. One registry so
 // header, footer, mobile panel, sitemap and check-integrity agree.
+import { allCopyPages, first, plain, section, type Inline } from '@/lib/copy';
 
 export interface Service {
   href: string;
@@ -66,8 +67,7 @@ export const soonCities = cities.filter((c) => !c.href);
 export const primaryNav = [
   { href: '/services/', label: 'Services', hasMenu: true },
   { href: '/service-areas/', label: 'Service Areas' },
-  { href: '/warranty/', label: 'Warranty' },
-  { href: '/financing/', label: 'Financing' },
+  { href: '/resources/', label: 'Resources' },
   { href: '/reviews/', label: 'Reviews' },
   { href: '/about/', label: 'About' },
 ];
@@ -85,7 +85,6 @@ export const footerCompany = [
   { href: '/about/', label: 'About' },
   { href: '/reviews/', label: 'Reviews' },
   { href: '/projects/', label: 'Projects' },
-  { href: '/guides/', label: 'Guides' },
   { href: '/warranty/', label: 'Warranty' },
   { href: '/financing/', label: 'Financing' },
   { href: '/contact/', label: 'Contact' },
@@ -101,7 +100,9 @@ export interface RouteEntry {
   path: string;
   /** Breadcrumb label. */
   label: string;
-  kind: 'home' | 'service' | 'offer' | 'city' | 'hub' | 'trust' | 'guide' | 'legal' | 'utility';
+  /** Chip and menu label when the breadcrumb label is a full guide title. */
+  short?: string;
+  kind: 'home' | 'service' | 'offer' | 'city' | 'hub' | 'trust' | 'guide' | 'post' | 'legal' | 'utility';
   /** Files whose last git commit dates the page in sitemap.xml. */
   sources: string[];
   noindex?: boolean;
@@ -131,10 +132,36 @@ const batchOf: Record<string, string> = {
   '/skylights/': 'batch-4.md',
 };
 
-// Guides (ADR-018), in the order the index lists them. label is the breadcrumb.
-export const guides = [
-  { href: '/guides/does-insurance-cover-roof-replacement/', label: 'Insurance and roof replacement' },
-  { href: '/guides/certainteed-landmark-shingles/', label: 'Landmark vs Landmark Pro' },
+// Guides and blog posts register themselves from their copy files (ADR-018):
+// any copy page under /guides/ or /blog/ with a [PUBLISHED] date. Newest first;
+// the same date keeps copy order. title is the H1, shortTitle the menu label.
+export interface Article {
+  href: string;
+  title: string;
+  shortTitle: string;
+  summary: Inline[];
+  published: string;
+  batch: string;
+}
+const articlesUnder = (prefix: string): Article[] =>
+  allCopyPages
+    .filter((p) => p.url.startsWith(prefix) && p.url !== prefix && p.published)
+    .map((p) => {
+      const title = plain(first(section(p, 'Hero'), 'h1')!.inline);
+      return { href: p.url, title, shortTitle: p.shortTitle ?? title, summary: p.summary ?? p.metaDescription, published: p.published!, batch: p.batch };
+    })
+    .sort((a, b) => b.published.localeCompare(a.published));
+export const guides = articlesUnder('/guides/');
+export const posts = articlesUnder('/blog/');
+// The blog switches on with its first post: the /blog/ index, its menu and
+// footer link, the hub section and the sitemap entry. Zero posts, none of it.
+export const hasBlog = posts.length > 0;
+
+// The Resources group in the mobile menu and the footer.
+export const resourceLinks = [
+  { href: '/resources/', label: 'All resources' },
+  ...guides.map((g) => ({ href: g.href, label: g.shortTitle })),
+  ...(hasBlog ? [{ href: '/blog/', label: 'Blog' }] : []),
 ];
 
 // City pages after the launch three live in their own batch.
@@ -173,8 +200,10 @@ export const routes: RouteEntry[] = [
   { path: '/contact/', label: 'Contact', kind: 'trust', sources: ['src/pages/contact.astro', 'copy/batch-2.md'] },
   { path: '/reviews/', label: 'Reviews', kind: 'trust', sources: ['src/pages/reviews.astro', 'copy/batch-4.md'] },
   { path: '/projects/', label: 'Projects', kind: 'trust', sources: ['src/pages/projects/index.astro', 'copy/batch-5.md'] },
-  { path: '/guides/', label: 'Guides', kind: 'hub', sources: ['src/pages/guides/index.astro', 'copy/guides-1.md'] },
-  ...guides.map((g): RouteEntry => ({ path: g.href, label: g.label, kind: 'guide', parent: '/guides/', sources: ['src/pages/guides/[slug].astro', 'copy/guides-1.md'] })),
+  { path: '/resources/', label: 'Resources', kind: 'hub', sources: ['src/pages/resources.astro', 'copy/guides-1.md'] },
+  ...guides.map((g): RouteEntry => ({ path: g.href, label: g.title, short: g.shortTitle, kind: 'guide', parent: '/resources/', sources: ['src/pages/guides/[slug].astro', `copy/${g.batch}`] })),
+  ...(hasBlog ? [{ path: '/blog/', label: 'Blog', kind: 'hub' as const, parent: '/resources/', sources: ['src/pages/blog/[...index].astro'] }] : []),
+  ...posts.map((p): RouteEntry => ({ path: p.href, label: p.title, short: p.shortTitle, kind: 'post', parent: '/blog/', sources: ['src/pages/blog/[slug].astro', `copy/${p.batch}`] })),
   { path: '/privacy-policy/', label: 'Privacy Policy', kind: 'legal', sources: ['src/pages/privacy-policy.astro'] },
   { path: '/terms/', label: 'Terms', kind: 'legal', sources: ['src/pages/terms.astro'] },
   { path: '/sms-terms/', label: 'SMS Terms', kind: 'legal', sources: ['src/pages/sms-terms.astro'] },
@@ -188,12 +217,17 @@ export const routes: RouteEntry[] = [
 ];
 
 export const routeByPath = new Map(routes.map((r) => [r.path, r]));
+/** The label for a chip or menu link to a route: short for guides and posts. */
+export const chipLabel = (path: string) => {
+  const r = routeByPath.get(path)!;
+  return r.short ?? r.label;
+};
 
-export function breadcrumbsFor(path: string): { label: string; href: string }[] {
-  const trail: { label: string; href: string }[] = [];
+export function breadcrumbsFor(path: string): { label: string; href: string; short?: string }[] {
+  const trail: { label: string; href: string; short?: string }[] = [];
   let entry = routeByPath.get(path);
   while (entry) {
-    trail.unshift({ label: entry.label, href: entry.path });
+    trail.unshift({ label: entry.label, href: entry.path, short: entry.short });
     entry = entry.parent ? routeByPath.get(entry.parent) : undefined;
   }
   if (path !== '/') trail.unshift({ label: 'Home', href: '/' });

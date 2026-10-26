@@ -4,7 +4,7 @@
 // site.ts opens and closes it, traps focus and restores it on close.
 import Icon from './Icon.astro';
 import business from '@/data/business.json';
-import { mobileNavServices, primaryNav } from '@/data/nav';
+import { mobileNavServices, primaryNav, resourceLinks } from '@/data/nav';
 import { decorate } from '@/lib/render';
 import { PHONE, TEL } from '@/lib/site';
 
@@ -56,20 +56,34 @@ const rest = primaryNav.filter((item) => !item.hasMenu);
           <Icon name="layout-grid" size={20} class="shrink-0 text-fg-inverse/80" />
           All services
         </a>
-        <a href="/guides/" class="flex min-h-11 items-center gap-2.5 px-4 text-body-sm font-semibold text-fg-inverse">
-          <Icon name="book-open" size={20} class="shrink-0 text-fg-inverse/80" />
-          Roofing guides
-        </a>
       </div>
       {
-        [...rest, { href: '/contact/', label: 'Contact' }].map((item) => (
-          <a
-            href={item.href}
-            class="heading flex min-h-12 items-center border-b border-fg-inverse/10 px-1 text-h4 text-fg-inverse"
-          >
-            {item.label}
-          </a>
-        ))
+        [...rest, { href: '/contact/', label: 'Contact' }].map((item) =>
+          item.href === '/resources/' ? (
+            // The Resources group (ADR-018): the hub, then each guide and, once it has posts, the blog.
+            <Fragment>
+              <a href={item.href} class="heading flex min-h-12 items-center px-1 text-h4 text-fg-inverse">
+                {item.label}
+              </a>
+              <div class="flex flex-col border-b border-fg-inverse/10 pb-1">
+                {resourceLinks
+                  .filter((r) => r.href !== '/resources/')
+                  .map((r) => (
+                    <a href={r.href} class="flex min-h-11 items-center px-4 text-body-sm font-semibold text-fg-inverse-muted">
+                      {r.label}
+                    </a>
+                  ))}
+              </div>
+            </Fragment>
+          ) : (
+            <a
+              href={item.href}
+              class="heading flex min-h-12 items-center border-b border-fg-inverse/10 px-1 text-h4 text-fg-inverse"
+            >
+              {item.label}
+            </a>
+          ),
+        )
       }
     </nav>
 

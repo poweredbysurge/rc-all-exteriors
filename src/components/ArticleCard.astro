@@ -1,0 +1,28 @@
+---
+// One guide or blog post as a card: date and author, title, the [SUMMARY]
+// line. Used by the Resources hub and the blog index (ADR-018).
+import Icon from './Icon.astro';
+import Rich from './Rich.astro';
+import type { Article } from '@/data/nav';
+import { sentenceCase } from '@/lib/text';
+
+interface Props {
+  article: Article;
+  /** Heading level inside the section that lists the cards. */
+  tag?: 'h2' | 'h3';
+  cta?: string;
+}
+const { article, tag: Tag = 'h3', cta = 'Read the guide' } = Astro.props;
+const date = new Date(article.published).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+
+<a href={article.href} class="card h-full gap-3">
+  <p class="text-body-sm font-semibold text-fg-muted" data-sm>
+    <time datetime={article.published}>{date}</time> · By Ricardo Castro
+  </p>
+  <Tag class="heading text-h3 text-fg">{sentenceCase(article.title)}</Tag>
+  <p class="text-fg-muted"><Rich inline={article.summary} /></p>
+  <span class="mt-auto inline-flex items-center gap-1.5 text-body-sm font-semibold text-accent">
+    {cta} <Icon name="arrow-right" size={18} />
+  </span>
+</a>

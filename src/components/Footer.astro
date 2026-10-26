@@ -9,7 +9,7 @@ import Icon from './Icon.astro';
 import RatingChip from './RatingChip.astro';
 import business from '@/data/business.json';
 import { shingleMaster } from '@/data/brands';
-import { footerAreas, footerCompany, legalLinks, services, soonCities } from '@/data/nav';
+import { footerAreas, footerCompany, legalLinks, resourceLinks, services, soonCities } from '@/data/nav';
 import { confirmHtml, decorate } from '@/lib/render';
 import { MAILTO, PHONE, TEL } from '@/lib/site';
 
@@ -100,6 +100,19 @@ const colTitle = 'mb-2 text-body-sm font-bold tracking-[0.02em] text-fg-inverse'
               <li>
                 <a href={c.href} class={linkRow}>
                   {c.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        {/* The Resources group sits under Company in the same column (ADR-018). */}
+        <h2 class:list={[colTitle, 'mt-8']}>Resources</h2>
+        <ul class="flex flex-col">
+          {
+            resourceLinks.map((r) => (
+              <li>
+                <a href={r.href} class={linkRow}>
+                  {r.label}
                 </a>
               </li>
             ))

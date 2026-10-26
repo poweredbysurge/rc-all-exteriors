@@ -225,6 +225,8 @@ How to make a claim
 
 [P] Keep your warranty paperwork with your house records. On a CertainTeed install you also receive the registered CertainTeed warranty paperwork, which we file for you.
 
+[LINK] More resources → /resources/
+
 FAQ
 
 [H2] Warranty questions
@@ -335,6 +337,8 @@ What it covers
 [H3] Insurance first
 
 [P] If a storm caused the damage, your homeowners policy may cover some or all of the cost. Check that before you finance. [LINK] storm damage and insurance → /storm-damage-roof-repair/
+
+[LINK] More resources → /resources/
 
 FAQ
 

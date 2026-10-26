@@ -47,8 +47,9 @@ const {
 const canonical = rebase(path);
 const ogImage = rebase(`/og/${og}.jpg`);
 
-// Case studies are text-led pages added from data, so they need no map entry.
-const lcpKey = LCP_MAP[path] ?? (path.startsWith('/projects/') ? 'text' : undefined);
+// Case studies and blog posts are text-led pages added from data or copy, so
+// they need no map entry.
+const lcpKey = LCP_MAP[path] ?? (path.startsWith('/projects/') || path.startsWith('/blog/') ? 'text' : undefined);
 if (lcpKey === undefined) throw new Error(`${path} has no entry in LCP_MAP (src/data/photos.ts)`);
 const lcp = lcpKey === 'text' ? null : await heroSources(lcpKey);
 

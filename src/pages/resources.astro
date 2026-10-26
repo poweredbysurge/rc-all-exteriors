@@ -1,0 +1,84 @@
+---
+// Resources hub (ADR-018), the one index for guides and, once it has posts,
+// the blog. Copy: copy/guides-1.md section 1. Guide and post cards come from
+// the article registry (src/data/nav.ts), so a new guide lists itself; the
+// blog section renders only when there is at least one post.
+import Base from '@/layouts/Base.astro';
+import ArticleCard from '@/components/ArticleCard.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Icon from '@/components/Icon.astro';
+import PageHero from '@/components/PageHero.astro';
+import Rich from '@/components/Rich.astro';
+import Section from '@/components/Section.astro';
+import { guides, hasBlog, posts } from '@/data/nav';
+import { blocksOf, first, getPage, plain, section } from '@/lib/copy';
+import { metaFor } from '@/lib/page';
+import { itemListSchema, pageSchema } from '@/lib/schema';
+import { sentenceCase } from '@/lib/text';
+
+const path = '/resources/';
+const page = getPage(path);
+const meta = metaFor(page);
+const hero = section(page, 'Hero');
+const h1 = plain(first(hero, 'h1')!.inline);
+const helpful = section(page, 'Helpful pages');
+const blog = section(page, 'Blog');
+const cta = section(page, 'CTA');
+const listed = [...guides, ...(hasBlog ? posts : [])];
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  path={path}
+  confirmMeta={meta.confirmMeta}
+  schema={[pageSchema('CollectionPage', { path, name: h1, description: meta.description }), itemListSchema(listed.map((a) => ({ name: a.title, href: a.href })))]}
+>
+  <PageHero path={path} h1={h1} lede={first(hero, 'subhead')?.inline} />
+
+  <Section bg="surface" name="Guides">
+    <div class="flex flex-col gap-6 lg:gap-10">
+      <h2 class="heading text-h2 text-fg"><Rich inline={first(section(page, 'Guides'), 'h2')!.inline} /></h2>
+      <ul class="m-0 grid list-none grid-cols-1 gap-5 p-0 md:grid-cols-2 lg:gap-6">
+        {guides.map((g) => <li><ArticleCard article={g} /></li>)}
+      </ul>
+    </div>
+  </Section>
+
+  <Section bg="muted" name="Helpful pages">
+    <div class="flex flex-col gap-6 lg:gap-10">
+      <h2 class="heading text-h2 text-fg"><Rich inline={first(helpful, 'h2')!.inline} /></h2>
+      <ul class="m-0 grid list-none grid-cols-1 gap-5 p-0 md:grid-cols-3 lg:gap-6">
+        {
+          blocksOf(helpful, 'card').map((card) => (
+            <li>
+              <a href={card.href} class="card h-full gap-2">
+                <h3 class="heading text-h3 text-fg">{sentenceCase(card.title)}</h3>
+                <p class="text-fg-muted"><Rich inline={card.inline} /></p>
+                <span class="mt-auto inline-flex items-center gap-1.5 text-body-sm font-semibold text-accent">
+                  {card.title} <Icon name="arrow-right" size={18} />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  {
+    hasBlog && (
+      <Section bg="surface" name="Blog">
+        <div class="flex flex-col gap-6 lg:gap-10">
+          <h2 class="heading text-h2 text-fg"><Rich inline={first(blog, 'h2')!.inline} /></h2>
+          <ul class="m-0 grid list-none grid-cols-1 gap-5 p-0 md:grid-cols-2 lg:gap-6">
+            {posts.slice(0, 4).map((p) => <li><ArticleCard article={p} cta="Read the post" /></li>)}
+          </ul>
+          <a href="/blog/" class="link-arrow self-start">All blog posts <Icon name="arrow-right" size={18} /></a>
+        </div>
+      </Section>
+    )
+  }
+
+  <CtaBand heading={first(cta, 'h2')!.inline} text={first(cta, 'p')?.inline} primary={blocksOf(cta, 'cta').find((c) => c.kind === 'primary')} />
+</Base>

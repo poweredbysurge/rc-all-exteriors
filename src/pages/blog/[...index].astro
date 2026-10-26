@@ -1,0 +1,41 @@
+---
+// The /blog/ index (ADR-018). Built only when there is at least one post:
+// with zero posts getStaticPaths returns nothing, so /blog/ is a 404 and
+// nothing links to it (hasBlog gates the menu, footer and hub links too).
+// Copy: copy/blog-index.md.
+import Base from '@/layouts/Base.astro';
+import ArticleCard from '@/components/ArticleCard.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import PageHero from '@/components/PageHero.astro';
+import Section from '@/components/Section.astro';
+import { hasBlog, posts } from '@/data/nav';
+import { blocksOf, first, getPage, plain, section } from '@/lib/copy';
+import { metaFor } from '@/lib/page';
+import { itemListSchema, pageSchema } from '@/lib/schema';
+
+export function getStaticPaths() {
+  return hasBlog ? [{ params: { index: undefined } }] : [];
+}
+const path = '/blog/';
+const page = getPage(path);
+const meta = metaFor(page);
+const hero = section(page, 'Hero');
+const h1 = plain(first(hero, 'h1')!.inline);
+const cta = section(page, 'CTA');
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  path={path}
+  confirmMeta={meta.confirmMeta}
+  schema={[pageSchema('CollectionPage', { path, name: h1, description: meta.description }), itemListSchema(posts.map((p) => ({ name: p.title, href: p.href })))]}
+>
+  <PageHero path={path} h1={h1} lede={first(hero, 'subhead')?.inline} />
+  <Section bg="surface" name="Posts">
+    <ul class="m-0 grid list-none grid-cols-1 gap-5 p-0 md:grid-cols-2 lg:gap-6">
+      {posts.map((p) => <li><ArticleCard article={p} tag="h2" cta="Read the post" /></li>)}
+    </ul>
+  </Section>
+  <CtaBand heading={first(cta, 'h2')!.inline} text={first(cta, 'p')?.inline} primary={blocksOf(cta, 'cta').find((c) => c.kind === 'primary')} />
+</Base>

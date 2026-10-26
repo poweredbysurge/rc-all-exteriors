@@ -2,11 +2,11 @@ Drafted Oct 26, 2026 by Surge with the /surge-copy standard (workspace: clients/
 
 # RC All Exteriors Guides: Batch 1 (November 2026)
 
-Same tag legend, persona, voice rules and locked facts as Batch 1. Guide pages add four tags: [BYLINE] (author line and date), [TABLE] (rows below it start with "|", the first row is the header), [NOTE] (a visible disclaimer callout) and [CTA] (the mid-article call to action). Each guide's spec adds [PUBLISHED] and, only when the content changes, [MODIFIED].
+Same tag legend, persona, voice rules and locked facts as Batch 1. Guide pages add four tags: [BYLINE] (author line and date), [TABLE] (rows below it start with "|", the first row is the header), [NOTE] (a visible disclaimer callout) and [CTA] (the mid-article call to action). Each guide's spec adds [SHORT TITLE] (footer and menu label), [SUMMARY] (the one line on the hub card), [PUBLISHED] and, only when the content changes, [MODIFIED]. Blog posts use the same format in copy/blog-*.md.
 
 ------------------------------------------------------------------------
 
-## 1. Page: Guides index
+## 1. Page: Resources hub
 
 Page spec
 
@@ -16,35 +16,47 @@ Value
 
 [URL]
 
-/guides/
+/resources/
 
 [META TITLE]
 
-Roofing Guides for Northern Virginia \| RC All Exteriors
+Roofing Guides and Homeowner Resources \| RC All Exteriors
 
 [META DESCRIPTION]
 
-Plain answers on roof insurance claims, shingle choices and Virginia contractor rules, written by Ricardo Castro, owner of RC All Exteriors in Woodbridge.
+Roofing guides from Ricardo Castro, owner of RC All Exteriors in Woodbridge: insurance claims, CertainTeed shingles, warranties, financing and inspections.
 
 Primary keyword
 
-roofing guides northern virginia
+roofing guides and resources
 
 [SCHEMA]
 
-CollectionPage · ItemList · BreadcrumbList
+CollectionPage · BreadcrumbList
 
 Hero
 
-[H1] Roofing Guides
+[H1] Roofing Guides and Resources
 
-[SUBHEAD] Straight answers to the questions homeowners ask us most, written by Ricardo Castro, owner of RC All Exteriors.
+[SUBHEAD] Straight answers to the questions homeowners ask us most, written by Ricardo Castro, owner of RC All Exteriors. Start with a guide, or go straight to our warranty, financing and free inspection details.
 
 Guides
 
-[CARD] Does Homeowners Insurance Cover Roof Replacement in Virginia? \| When insurance pays for a new roof, when it doesn't, and the new Virginia rules for roofers in 2027. \| /guides/does-insurance-cover-roof-replacement/
+[H2] Guides
 
-[CARD] CertainTeed Landmark vs Landmark Pro: Which Shingle for Your Roof? \| Wind ratings, algae protection, colors and warranties, compared by a ShingleMaster roofer. \| /guides/certainteed-landmark-shingles/
+Helpful pages
+
+[H2] Helpful pages
+
+[CARD] Our Warranty \| What our 10-year workmanship warranty covers and how to make a claim. \| /warranty/
+
+[CARD] Financing \| Monthly payment options for a new roof through Enhancify. \| /financing/
+
+[CARD] Free Roof Inspection \| A real inspection with photos and a written estimate, at no cost. \| /free-roof-inspection/
+
+Blog
+
+[H2] From the blog
 
 CTA
 
@@ -54,7 +66,7 @@ CTA
 
 [CTA PRIMARY] Book a Free Roof Inspection
 
-Internal links on this page: / · /free-roof-inspection/
+Internal links on this page: / · /warranty/ · /financing/ · /free-roof-inspection/
 
 ------------------------------------------------------------------------
 
@@ -85,6 +97,14 @@ does insurance cover roof replacement
 [SCHEMA]
 
 Article (author: Person, Ricardo Castro; datePublished; dateModified) · FAQPage · BreadcrumbList
+
+[SHORT TITLE]
+
+Insurance and roof replacement
+
+[SUMMARY]
+
+When insurance pays for a new roof, when it doesn't, and the new Virginia rules for roofers in 2027.
 
 [PUBLISHED]
 
@@ -226,6 +246,14 @@ certainteed landmark vs landmark pro
 
 Article (author: Person, Ricardo Castro) · FAQPage · BreadcrumbList
 
+[SHORT TITLE]
+
+Landmark vs Landmark Pro
+
+[SUMMARY]
+
+Wind ratings, algae protection, colors and warranties, compared by a ShingleMaster roofer.
+
 [PUBLISHED]
 
 2026-11-01
@@ -330,4 +358,4 @@ Internal links on this page: /certainteed-roofing/ · /roof-replacement/ · /war
 - Guide 2, wind FAQ: "which is how we install it" became "which is how we install it when you choose the extended warranty". CertainTeed starter and hip and ridge go on with the extended warranty option, not every job (Ricardo, Oct 26).
 - Guide 2, image: the slot is a finished shingle roof from the photo registry. It is not claimed to be Landmark Pro.
 - Statute and regulation numbers link to law.lis.virginia.gov on first mention.
-- Guides index: new copy, written for the build.
+- Resources hub (/resources/): new copy, written for the build. Its guide cards come from each guide's H1 and meta description, and the blog section appears only once a blog post exists (ADR-018).
