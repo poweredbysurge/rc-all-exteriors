@@ -360,6 +360,10 @@ export const LCP_MAP: Record<string, PhotoKey | 'text'> = {
   '/service-areas/springfield-va/': 'twoStory',
   '/service-areas/lorton-va/': 'mansardBrownYardSign',
   '/service-areas/alexandria-va/': 'tanRidge',
+  // Guides open on a text hero; the H1 is the LCP (ADR-018).
+  '/guides/': 'text',
+  '/guides/does-insurance-cover-roof-replacement/': 'text',
+  '/guides/certainteed-landmark-shingles/': 'text',
   '/services/': 'text',
   '/service-areas/': 'text',
   '/warranty/': 'text',

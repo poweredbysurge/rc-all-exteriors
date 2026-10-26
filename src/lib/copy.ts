@@ -8,7 +8,8 @@
 // The parser fails loudly: an unknown tag or a line it cannot place throws at
 // build time with the batch and line number. Silence is the defect.
 
-const files = import.meta.glob('../../copy/batch-*.md', {
+// Guides (copy/guides-*.md, ADR-018) use the same format plus four tags.
+const files = import.meta.glob(['../../copy/batch-*.md', '../../copy/guides-*.md'], {
   query: '?raw',
   import: 'default',
   eager: true,
@@ -77,6 +78,27 @@ export interface FormBlock {
   type: 'form';
   text: string;
 }
+/** Guide author line: "By Ricardo Castro, owner of ... · Published November 2026". */
+export interface BylineBlock {
+  type: 'byline';
+  author: Inline[];
+  date: string | null;
+}
+/** A comparison table; the first row is the header. */
+export interface TableBlock {
+  type: 'table';
+  rows: Inline[][][];
+}
+/** A visible disclaimer callout. */
+export interface NoteBlock {
+  type: 'note';
+  inline: Inline[];
+}
+/** A guide's call to action sentence, drawn mid-article. */
+export interface ActionBlock {
+  type: 'action';
+  inline: Inline[];
+}
 export type Block =
   | TextBlock
   | ListBlock
@@ -88,7 +110,11 @@ export type Block =
   | TrustBlock
   | LinksBlock
   | ImageBlock
-  | FormBlock;
+  | FormBlock
+  | BylineBlock
+  | TableBlock
+  | NoteBlock
+  | ActionBlock;
 
 export interface Section {
   name: string;
@@ -106,6 +132,9 @@ export interface CopyPage {
   gate: string | null;
   sections: Section[];
   internalLinks: string[];
+  /** Guides: ISO dates from the spec. modified is set only when the content changes. */
+  published: string | null;
+  modified: string | null;
 }
 
 const SPEC_KEYS = new Set([
@@ -120,6 +149,8 @@ const SPEC_KEYS = new Set([
   'Source note',
   'Dropped',
   'Rule',
+  '[PUBLISHED]',
+  '[MODIFIED]',
 ]);
 
 const TAGS = [
@@ -140,6 +171,10 @@ const TAGS = [
   'LINK',
   'IMAGE',
   'FORM',
+  'BYLINE',
+  'TABLE',
+  'NOTE',
+  'CTA',
 ];
 const TAG_RE = new RegExp(`^\\**\\[(${TAGS.join('|')})\\]\\**\\s*(.*)$`);
 
@@ -269,6 +304,8 @@ function parseBatch(path: string, raw: string): CopyPage[] {
     page.metaDescription = parseInline(spec['[META DESCRIPTION]'] ?? '');
     page.primaryKeyword = (spec['Primary keyword'] ?? '').replace(/\s*\(.*$/, '').trim();
     page.schema = spec['[SCHEMA]'] ?? '';
+    page.published = spec['[PUBLISHED]'] ?? null;
+    page.modified = spec['[MODIFIED]'] ?? null;
     pages.push(page);
     page = null;
   };
@@ -289,6 +326,8 @@ function parseBatch(path: string, raw: string): CopyPage[] {
         gate: null,
         sections: [],
         internalLinks: [],
+        published: null,
+        modified: null,
       };
       spec = {};
       state = 'pre';
@@ -408,7 +447,28 @@ function parseBatch(path: string, raw: string): CopyPage[] {
         case 'FORM':
           blocks.push({ type: 'form', text: body });
           break;
+        case 'BYLINE': {
+          const [author, date] = body.split(/\s+·\s+Published\s+/);
+          blocks.push({ type: 'byline', author: parseInline(author), date: date?.trim() ?? null });
+          break;
+        }
+        case 'TABLE':
+          blocks.push({ type: 'table', rows: [] });
+          break;
+        case 'NOTE':
+          blocks.push({ type: 'note', inline: parseInline(body) });
+          break;
+        case 'CTA':
+          blocks.push({ type: 'action', inline: parseInline(body) });
+          break;
       }
+      return;
+    }
+
+    if (text.startsWith('|')) {
+      const last = section?.blocks[section.blocks.length - 1];
+      if (!last || last.type !== 'table') throw new Error(`${where}: table row outside a [TABLE]: ${text}`);
+      last.rows.push(text.replace(/^\|\s*/, '').replace(/\s*\|$/, '').split(/\s*\|\s*/).map((cell) => parseInline(cell)));
       return;
     }
 

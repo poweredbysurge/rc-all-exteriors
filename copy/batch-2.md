@@ -118,7 +118,7 @@ FAQ
 
 [FAQ Q] Will insurance pay for a leaking roof?
 
-[FAQ A] If a storm caused the damage, often yes. If the leak comes from age and wear, usually not. We can tell you which it looks like after we inspect.
+[FAQ A] If a storm caused the damage, often yes. If the leak comes from age and wear, usually not. We can tell you which it looks like after we inspect. Our guide to [whether insurance covers roof replacement in Virginia](/guides/does-insurance-cover-roof-replacement/) walks through the rules.
 
 [FAQ Q] Is a tarp a permanent fix?
 

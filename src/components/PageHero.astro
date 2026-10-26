@@ -1,6 +1,7 @@
 ---
-// Text hero for trust, hub and legal pages: no photo, so the H1 is the LCP
-// element and the preloaded heading font covers it.
+// Text hero for trust, hub, guide and legal pages: no photo, so the H1 is the
+// LCP element and the preloaded heading font covers it. The meta slot carries
+// a guide's byline (ADR-018).
 import Breadcrumbs from './Breadcrumbs.astro';
 import Cta from './Cta.astro';
 import Rich from './Rich.astro';
@@ -34,6 +35,7 @@ const target = (cta: CtaBlock) => (isPhone(cta) ? 'tel' : (cta.href ?? formTarge
           </p>
         )
       }
+      <slot name="meta" />
       {
         (primary || secondary) && (
           <div class="mt-2 flex w-full flex-col gap-3 btn:w-auto btn:flex-row">

@@ -459,7 +459,7 @@ CTA
 
 [CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: /roof-replacement/ · /warranty/ · /financing/ · /guides/certainteed-landmark-shingles/ (when published) · / (breadcrumb)
+Internal links on this page: /roof-replacement/ · /warranty/ · /financing/ · /guides/certainteed-landmark-shingles/ · / (breadcrumb)
 
 ------------------------------------------------------------------------
 

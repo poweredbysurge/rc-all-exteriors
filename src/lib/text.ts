@@ -13,6 +13,8 @@ const KEEP = [
   'Lake Ridge',
   'Class A',
   'CertainTeed',
+  'Landmark Pro',
+  'Landmark',
   'Woodbridge',
   'Springfield',
   'Alexandria',

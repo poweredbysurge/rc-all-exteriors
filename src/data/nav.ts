@@ -85,6 +85,7 @@ export const footerCompany = [
   { href: '/about/', label: 'About' },
   { href: '/reviews/', label: 'Reviews' },
   { href: '/projects/', label: 'Projects' },
+  { href: '/guides/', label: 'Guides' },
   { href: '/warranty/', label: 'Warranty' },
   { href: '/financing/', label: 'Financing' },
   { href: '/contact/', label: 'Contact' },
@@ -100,7 +101,7 @@ export interface RouteEntry {
   path: string;
   /** Breadcrumb label. */
   label: string;
-  kind: 'home' | 'service' | 'offer' | 'city' | 'hub' | 'trust' | 'legal' | 'utility';
+  kind: 'home' | 'service' | 'offer' | 'city' | 'hub' | 'trust' | 'guide' | 'legal' | 'utility';
   /** Files whose last git commit dates the page in sitemap.xml. */
   sources: string[];
   noindex?: boolean;
@@ -129,6 +130,12 @@ const batchOf: Record<string, string> = {
   '/commercial-roofing/': 'batch-4.md',
   '/skylights/': 'batch-4.md',
 };
+
+// Guides (ADR-018), in the order the index lists them. label is the breadcrumb.
+export const guides = [
+  { href: '/guides/does-insurance-cover-roof-replacement/', label: 'Insurance and roof replacement' },
+  { href: '/guides/certainteed-landmark-shingles/', label: 'Landmark vs Landmark Pro' },
+];
 
 // City pages after the launch three live in their own batch.
 const cityBatch: Record<string, string> = { 'alexandria-va': 'batch-6.md' };
@@ -166,6 +173,8 @@ export const routes: RouteEntry[] = [
   { path: '/contact/', label: 'Contact', kind: 'trust', sources: ['src/pages/contact.astro', 'copy/batch-2.md'] },
   { path: '/reviews/', label: 'Reviews', kind: 'trust', sources: ['src/pages/reviews.astro', 'copy/batch-4.md'] },
   { path: '/projects/', label: 'Projects', kind: 'trust', sources: ['src/pages/projects/index.astro', 'copy/batch-5.md'] },
+  { path: '/guides/', label: 'Guides', kind: 'hub', sources: ['src/pages/guides/index.astro', 'copy/guides-1.md'] },
+  ...guides.map((g): RouteEntry => ({ path: g.href, label: g.label, kind: 'guide', parent: '/guides/', sources: ['src/pages/guides/[slug].astro', 'copy/guides-1.md'] })),
   { path: '/privacy-policy/', label: 'Privacy Policy', kind: 'legal', sources: ['src/pages/privacy-policy.astro'] },
   { path: '/terms/', label: 'Terms', kind: 'legal', sources: ['src/pages/terms.astro'] },
   { path: '/sms-terms/', label: 'SMS Terms', kind: 'legal', sources: ['src/pages/sms-terms.astro'] },

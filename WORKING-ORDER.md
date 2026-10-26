@@ -1,5 +1,11 @@
 # Working order: RC All Exteriors
 
+## 2026-10-26, night: /guides/ live (ADR-018)
+
+- `/guides/`, `/guides/does-insurance-cover-roof-replacement/`, `/guides/certainteed-landmark-shingles/` from `copy/guides-1.md` (parser reads `copy/guides-*.md`; new tags BYLINE, TABLE, NOTE, CTA; spec keys PUBLISHED, MODIFIED). Article schema with author `@id` `/about/#person`.
+- Linked from storm damage and CertainTeed (internal links now live), emergency repair FAQ, roof replacement cost FAQ, footer "Guides", Services menu "Roofing guides".
+- All gates pass. Next guides: two a month; add a block to a guides copy file, an entry in `guides` (nav.ts) and an LCP_MAP line.
+
 ## 2026-10-26, evening: Ricardo's answers (ADR-017 addendum)
 
 - Alexandria proof is a real Old Town job now: Duke Street roof replacement, roof beams rebuilt, full TPO flat roof (no house number). Photos `flatTpo`, `proFlatRoof`. "About 25 minutes" in the subhead and the inspection FAQ; the BAR FAQ notes Old Town work without claiming BAR approval.

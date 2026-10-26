@@ -127,11 +127,32 @@ export function itemListSchema(items: { name: string; href: string }[]) {
   };
 }
 
+// One Person node for the owner, defined on About and referenced by guides (ADR-018).
+export const PERSON_ID = () => `${rebase('/about/')}#person`;
+
 export function personSchema() {
   return {
     '@type': 'Person',
+    '@id': PERSON_ID(),
+    url: rebase('/about/'),
     name: business.owner,
     jobTitle: 'Owner',
     worksFor: { '@id': BUSINESS_ID() },
+  };
+}
+
+/** Article for a guide: headline, the owner as author, the business as publisher. */
+export function articleSchema(opts: { path: string; headline: string; description: string; published: string; modified: string | null; images: string[] }) {
+  return {
+    '@type': 'Article',
+    '@id': `${rebase(opts.path)}#article`,
+    mainEntityOfPage: rebase(opts.path),
+    headline: opts.headline,
+    description: opts.description,
+    image: opts.images,
+    datePublished: opts.published,
+    dateModified: opts.modified ?? opts.published,
+    author: { '@type': 'Person', '@id': PERSON_ID(), name: business.owner, url: rebase('/about/') },
+    publisher: { '@id': BUSINESS_ID(), name: business.name },
   };
 }

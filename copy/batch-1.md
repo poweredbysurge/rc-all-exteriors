@@ -382,7 +382,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** How much does a roof replacement cost in Woodbridge?
 
-**[FAQ A]** The price depends on the roof's size, pitch, the number of old layers, the condition of the decking, and the shingle you pick, which is why we do not publish a range. Your free inspection comes with a written estimate, and Landmark and Landmark Pro quotes are usually ready on the spot.
+**[FAQ A]** The price depends on the roof's size, pitch, the number of old layers, the condition of the decking, and the shingle you pick, which is why we do not publish a range. Your free inspection comes with a written estimate, and Landmark and Landmark Pro quotes are usually ready on the spot. Our [Landmark vs Landmark Pro guide](/guides/certainteed-landmark-shingles/) explains the difference.
 
 **[FAQ Q]** How long does it take to replace a roof?
 
@@ -633,7 +633,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[CTA SECONDARY]** Call or text (703) 677-1976
 
-**Internal links on this page:** /emergency-roof-repair/ · /roof-repair/ · /roof-replacement/ · /free-roof-inspection/ · /guides/does-insurance-cover-roof-replacement/ (when published) · / (breadcrumb)
+**Internal links on this page:** /emergency-roof-repair/ · /roof-repair/ · /roof-replacement/ · /free-roof-inspection/ · /guides/does-insurance-cover-roof-replacement/ · / (breadcrumb)
 
 ---
 

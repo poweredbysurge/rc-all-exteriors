@@ -44,7 +44,10 @@ export function renderInline(inline: Inline[], opts: { linkPhone?: boolean } = {
         case 'confirm':
           return ` ${confirmHtml(node.v)} `;
         case 'link':
-          return `<a href="${esc(node.href)}">${esc(liveCount(node.text))}</a>`;
+          // Off-site sources (the guides' statute links) open in a new tab.
+          return /^https?:\/\//.test(node.href)
+            ? `<a href="${esc(node.href)}" target="_blank" rel="noopener">${esc(liveCount(node.text))}</a>`
+            : `<a href="${esc(node.href)}">${esc(liveCount(node.text))}</a>`;
       }
     })
     .join('')
