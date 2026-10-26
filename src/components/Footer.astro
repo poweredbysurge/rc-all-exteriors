@@ -4,9 +4,11 @@
 // (Gate A review finding 6). The NAP block carries data-dni-skip so call
 // tracking can never rewrite the canonical number. No street address: this is
 // a service-area business.
+import CredentialBadge from './CredentialBadge.astro';
 import Icon from './Icon.astro';
 import RatingChip from './RatingChip.astro';
 import business from '@/data/business.json';
+import { shingleMaster } from '@/data/brands';
 import { footerAreas, footerCompany, legalLinks, services, soonCities } from '@/data/nav';
 import { confirmHtml, decorate } from '@/lib/render';
 import { MAILTO, PHONE, TEL } from '@/lib/site';
@@ -40,8 +42,10 @@ const colTitle = 'mb-2 text-body-sm font-bold tracking-[0.02em] text-fg-inverse'
           {business.licence.label}{' '}
           {business.licence.number ? <span>#{business.licence.number}</span> : <Fragment set:html={confirmHtml('licence number')} />}
           <br />
-          {business.accreditations.join(' · ')}
+          {/* ShingleMaster is drawn as its badge, right under this line (ADR-016). */}
+          {business.accreditations.filter((a) => a !== shingleMaster.claim).join(' · ')}
         </p>
+        <CredentialBadge size="footer" class="-mt-2" />
         <RatingChip variant="dark" class="self-start" />
       </div>
 

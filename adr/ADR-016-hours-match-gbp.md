@@ -38,4 +38,6 @@ The image replaces text where a mark reads better than words:
 - **Homepage brand strip:** the badge replaces the plain CertainTeed wordmark (the badge carries the CertainTeed name, and the credential is the stronger claim).
 - **`/certainteed-roofing/` "Why we install CertainTeed"** and **About "trust signals":** the badge under the H2 (`BADGE_SECTIONS` in `src/data/brands.ts`, `CredentialBadge.astro`), linked to CertainTeed's Find a Pro profile as the proof.
 
-Text stays where the credential is part of a sentence or a line of credentials: the footer accreditations, the CertainTeed page hero trust strip, the About list item, alt text and schema. The share cards still show the CertainTeed wordmark; `certainteed.png` stays for `generate-og.mjs`.
+- **Footer** (Mario, same day): the badge replaces the words in the accreditations line, drawn right under it at 72px.
+
+Text stays where the credential is part of a sentence: the CertainTeed page hero trust strip, the About list item, alt text and schema. `business.json` accreditations keeps the string; the footer filters it out of the text line. The share cards still show the CertainTeed wordmark; `certainteed.png` stays for `generate-og.mjs`.
