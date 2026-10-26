@@ -1,5 +1,21 @@
 # Working order: RC All Exteriors
 
+## 2026-10-26, later: Alexandria city page live (ADR-017)
+
+**Done**
+- `/service-areas/alexandria-va/` from `copy/batch-6.md` (the workspace draft's page section only). Historic districts and What drives the price render only on pages that have them; Fairfax, Springfield and Lorton changed only by the new Alexandria chip, footer link and the Fairfax FAQ link.
+- Proof block: the September 2026 two-story job (`twoStoryWalk`, `underlaymentYardSign`) and Rick Day's Google review as a fixed quote (`quotedReview()` in `src/lib/reviews.ts`). Hero photo `tanRidge`.
+- Linked from the hub card (batch-4 copy), footer, CityChips, homepage map, Fairfax FAQ (batch-5 copy). 29 pages link in.
+
+**Verified:** build, `check`, `check:production`, `check:layout` (29 pages), `audit:rhythm` (exit 0; the "four light bands" note is on all four city pages). Title 55, description 156. Sitemap has the URL.
+
+**Open**
+- Alexandria job and an Alexandria review from Ricardo replace the general proof.
+- Confirm the permit sentence with the Alexandria Permit Center (703-746-4200).
+- Pre-existing: "Fairfax Station" label clips at the left edge of the city page maps at 1440 (Fairfax page too).
+
+**Next:** Fairfax Station city page (December), `copy/batch-7.md`, same template.
+
 ## 2026-10-26: hours match GBP, CertainTeed ShingleMaster (ADR-016)
 
 **Done**

@@ -376,7 +376,7 @@ Cities
 
 [CARD] Springfield \| Roof repair and replacement in Springfield. \| /service-areas/springfield-va/
 
-[CARD] Alexandria \| Coming soon \| /service-areas/alexandria-va/ (month 2)
+[CARD] Alexandria \| Roof replacement and repair in Alexandria, Old Town to Kingstowne. \| /service-areas/alexandria-va/
 
 [CARD] Fairfax Station \| Coming soon \| /service-areas/fairfax-station-va/ (month 2)
 

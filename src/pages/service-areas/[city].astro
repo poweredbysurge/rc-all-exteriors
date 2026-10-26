@@ -1,5 +1,6 @@
 ---
-// City page template (fairfax-390, fairfax-1440). Copy: batch-5.
+// City page template (fairfax-390, fairfax-1440). Copy: batch-5, and batch-6
+// for Alexandria, which adds two optional sections (ADR-017).
 //
 // Anti-doorway: the three pages share this layout and nothing else. Each one
 // has its own opener, FAQ and local angle in the copy, and its local proof
@@ -23,8 +24,9 @@ import ServiceCard from '@/components/ServiceCard.astro';
 import StatStrip from '@/components/StatStrip.astro';
 import { liveCities } from '@/data/nav';
 import type { PhotoKey } from '@/data/photos';
-import { blocksOf, faqs, first, getPage, plain, section } from '@/lib/copy';
+import { blocksOf, faqs, first, getPage, maybeSection, plain, section } from '@/lib/copy';
 import { metaFor } from '@/lib/page';
+import { getReviews, quotedReview } from '@/lib/reviews';
 import { faqSchema, serviceSchema } from '@/lib/schema';
 
 export function getStaticPaths() {
@@ -39,6 +41,9 @@ const hero = section(page, 'Hero');
 const intro = section(page, 'Intro');
 const proof = section(page, 'Local proof');
 const services = section(page, 'Services');
+// Second-wave pages carry extra sections; launch pages do not (ADR-017).
+const historic = maybeSection(page, 'Historic districts');
+const price = maybeSection(page, 'What drives the price');
 const why = section(page, 'Why us');
 const faq = section(page, 'FAQ');
 const cta = section(page, 'CTA');
@@ -50,6 +55,8 @@ const proofPhotos: Record<string, [PhotoKey, PhotoKey]> = {
   Fairfax: ['underlaymentYardSign', 'mansardShakeYardSign'],
   Springfield: ['underlaymentYardSign', 'mansardShakeFront'],
   Lorton: ['shakeInstall', 'mansardShakeYardSign'],
+  // The September 2026 two-story job the Alexandria copy describes (ADR-017).
+  Alexandria: ['twoStoryWalk', 'underlaymentYardSign'],
 };
 // Neighborhood names: public geography, researched 2026-10-19 (ADR-007). Not
 // a claim that RC has worked in each one; the heading says "we serve".
@@ -57,8 +64,14 @@ const neighborhoods: Record<string, string[]> = {
   Fairfax: ['Mosby Woods', 'Mantua', 'Kings Park West', 'Greenbriar', 'Country Club Hills', 'Fairfax Villa', 'Fair Oaks'],
   Springfield: ['North Springfield', 'West Springfield', 'Kings Park', 'Rolling Valley', 'Saratoga', 'Cardinal Forest', 'Springfield Estates'],
   Lorton: ['Lorton Station', 'Laurel Hill', 'Lorton Valley', 'Crosspointe', 'Newington Forest', 'Gunston Manor', 'Pohick Estates'],
+  Alexandria: ['Old Town', 'Del Ray', 'Rosemont', 'West End', 'Kingstowne', 'Franconia', 'Groveton', 'Belle View', 'Fort Hunt'],
 };
 const mapTowns = ['Woodbridge', 'Lake Ridge', 'Lorton', 'Fairfax Station', 'Fairfax', 'Springfield'];
+// A city outside the launch map adds itself, so the launch pages' maps do not change.
+const towns = mapTowns.includes(name) ? mapTowns : [...mapTowns, name];
+// [REVIEW] is either a hint (no card until a live review fits) or a fixed quote.
+const reviewSlot = first(proof, 'review')!.hint;
+const quoted = quotedReview(reviewSlot, (await getReviews()).reviews);
 // Homepage card order: replacement, repair, storm, other (ADR-005).
 const SERVICE_PHOTOS: PhotoKey[] = ['mansardShakeFront', 'chimneyFlashing', 'twoStoryWalk', 'colonialGarage'];
 ---
@@ -87,11 +100,24 @@ const SERVICE_PHOTOS: PhotoKey[] = ['mansardShakeFront', 'chimneyFlashing', 'two
         <p class="rich text-body-lg text-fg"><Rich inline={lead.inline} /></p>
         {rest.map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
       </div>
-      <AreaMap only={mapTowns} ratio={420 / 320} caption={`${name} from our Woodbridge base.`} class="w-full max-w-[420px]" />
+      <AreaMap only={towns} ratio={420 / 320} caption={`${name} from our Woodbridge base.`} class="w-full max-w-[420px]" />
     </div>
   </Section>
 
-  <Section bg="surface" name="Local proof">
+  {
+    historic && (
+      <Section bg="surface" name="Historic districts">
+        <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+          <h2 class="heading text-h2 text-fg"><Rich inline={first(historic, 'h2')!.inline} /></h2>
+          <div class="flex max-w-[720px] flex-col gap-5">
+            {blocksOf(historic, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
+          </div>
+        </div>
+      </Section>
+    )
+  }
+
+  <Section bg={historic ? 'muted' : 'surface'} name="Local proof">
     <div class="flex flex-col gap-6 lg:gap-10">
       <div class="flex flex-col gap-4">
         <Eyebrow>Recent work</Eyebrow>
@@ -105,7 +131,7 @@ const SERVICE_PHOTOS: PhotoKey[] = ['mansardShakeFront', 'chimneyFlashing', 'two
           {blocksOf(proof, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
           {blocksOf(proof, 'links').map((l) => l.links.map((link) => <a href={link.href} class="link-arrow self-start">{link.text} <Icon name="arrow-right" size={18} /></a>))}
         </div>
-        <ReviewCard hint={first(proof, 'review')!.hint} />
+        <ReviewCard review={quoted} hint={reviewSlot} />
       </div>
     </div>
   </Section>
@@ -119,6 +145,17 @@ const SERVICE_PHOTOS: PhotoKey[] = ['mansardShakeFront', 'chimneyFlashing', 'two
       </div>
     </div>
   </Section>
+
+  {
+    price && (
+      <Section bg="muted" name="What drives the price">
+        <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+          <h2 class="heading text-h2 text-fg"><Rich inline={first(price, 'h2')!.inline} /></h2>
+          <Bullets items={first(price, 'list')!.items} />
+        </div>
+      </Section>
+    )
+  }
 
   <Section bg="surface" name="Why us">
     <div class="flex flex-col gap-10 lg:gap-12">

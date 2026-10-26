@@ -109,7 +109,7 @@ FAQ
 
 [FAQ Q] Is Fairfax part of your regular service area?
 
-[FAQ A] Yes. Fairfax is part of our regular service area, along with nearby Lorton, Springfield, Alexandria, and the rest of Northern Virginia we cover from our base in Woodbridge.
+[FAQ A] Yes. Fairfax is part of our regular service area, along with nearby Lorton, Springfield, [Alexandria](/service-areas/alexandria-va/), and the rest of Northern Virginia we cover from our base in Woodbridge.
 
 [FAQ Q] How fast can you get to Fairfax for an inspection?
 

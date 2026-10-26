@@ -102,3 +102,26 @@ export function getReviews(): Promise<ReviewsData> {
 }
 
 export const ratingText = (rating: number) => rating.toFixed(1);
+
+// A fixed quote in the copy's [REVIEW] slot (ADR-017):
+//   "Verbatim sentence." Full Name, Google review, Month Year
+// The text is a real review, quoted word for word by the copy owner. When the
+// live review containing that sentence is in the proxy response, the card takes
+// its stars, photo and Google link; without it (no Places key, or the review
+// has rotated out of Google's five) the card renders from the copy alone, at
+// five stars (each quote is checked against the live review before it ships).
+const QUOTE_RE = /^"(.+)"\s+(.+?), Google review, ([A-Z][a-z]+ \d{4})$/;
+export function quotedReview(hint: string, live: Review[]): Review | null {
+  const m = hint.match(QUOTE_RE);
+  if (!m) return null;
+  const [, text, author, monthYear] = m;
+  const source = live.find((r) => r.text.includes(text));
+  return {
+    author,
+    rating: source?.rating ?? 5,
+    text,
+    date: source?.date ?? new Date(`1 ${monthYear} UTC`).toISOString(),
+    photo: source?.photo ?? null,
+    url: source?.url ?? null,
+  };
+}

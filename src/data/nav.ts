@@ -51,7 +51,7 @@ export const cities: City[] = [
   { name: 'Fairfax', slug: 'fairfax-va', href: '/service-areas/fairfax-va/', lat: 38.8462, lon: -77.3064 },
   { name: 'Springfield', slug: 'springfield-va', href: '/service-areas/springfield-va/', lat: 38.7893, lon: -77.1872 },
   { name: 'Lorton', slug: 'lorton-va', href: '/service-areas/lorton-va/', lat: 38.7043, lon: -77.2278 },
-  { name: 'Alexandria', slug: 'alexandria-va', href: null, lat: 38.8048, lon: -77.0469 },
+  { name: 'Alexandria', slug: 'alexandria-va', href: '/service-areas/alexandria-va/', lat: 38.8048, lon: -77.0469 },
   { name: 'Fairfax Station', slug: 'fairfax-station-va', href: null, lat: 38.8007, lon: -77.3255 },
   { name: 'Arlington', slug: 'arlington-va', href: null, lat: 38.8816, lon: -77.091 },
   { name: 'McLean', slug: 'mclean-va', href: null, lat: 38.9339, lon: -77.1773 },
@@ -77,6 +77,7 @@ export const footerAreas = [
   { href: '/service-areas/lorton-va/', label: 'Lorton' },
   { href: '/service-areas/fairfax-va/', label: 'Fairfax' },
   { href: '/service-areas/springfield-va/', label: 'Springfield' },
+  { href: '/service-areas/alexandria-va/', label: 'Alexandria' },
   { href: '/service-areas/', label: 'All service areas' },
 ];
 
@@ -129,6 +130,9 @@ const batchOf: Record<string, string> = {
   '/skylights/': 'batch-4.md',
 };
 
+// City pages after the launch three live in their own batch.
+const cityBatch: Record<string, string> = { 'alexandria-va': 'batch-6.md' };
+
 export const routes: RouteEntry[] = [
   { path: '/', label: 'Home', kind: 'home', sources: ['src/pages/index.astro', 'copy/batch-1.md'] },
   ...services
@@ -153,7 +157,7 @@ export const routes: RouteEntry[] = [
       label: c.name,
       kind: 'city',
       parent: '/service-areas/',
-      sources: ['src/pages/service-areas/[city].astro', 'copy/batch-5.md'],
+      sources: ['src/pages/service-areas/[city].astro', `copy/${cityBatch[c.slug] ?? 'batch-5.md'}`],
     }),
   ),
   { path: '/warranty/', label: 'Warranty', kind: 'trust', sources: ['src/pages/warranty.astro', 'copy/batch-2.md'] },

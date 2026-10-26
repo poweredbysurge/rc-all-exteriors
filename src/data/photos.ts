@@ -359,6 +359,7 @@ export const LCP_MAP: Record<string, PhotoKey | 'text'> = {
   '/service-areas/fairfax-va/': 'colonialFront',
   '/service-areas/springfield-va/': 'twoStory',
   '/service-areas/lorton-va/': 'mansardBrownYardSign',
+  '/service-areas/alexandria-va/': 'tanRidge',
   '/services/': 'text',
   '/service-areas/': 'text',
   '/warranty/': 'text',
