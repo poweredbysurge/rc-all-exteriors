@@ -6,8 +6,10 @@
 // A lead is never dropped behind a success message. If neither the email nor
 // the Command Center accepted it, the response is 503 and the form shows the
 // retry copy with the phone number, and queues the payload for replay.
-// Bots (honeypot, sub-3-second submit, rate limit) get a quiet 200.
+// Bots (honeypot, sub-3-second submit, rate limit) get a quiet 200. Vercel
+// BotID runs in front of those and answers a flagged request with a 403.
 import type { APIRoute } from 'astro';
+import { checkBotId } from 'botid/server';
 import { confirmToLead, forwardToCommandCenter, notifyInternal, parseLead, sourceDetail } from '@/lib/lead';
 
 export const prerender = false;
@@ -36,6 +38,22 @@ export const POST: APIRoute = async ({ request }) => {
   const host = request.headers.get('x-forwarded-host') ?? request.headers.get('host');
   if (origin && host && new URL(origin).host !== host) return json({ ok: false }, 403);
 
+  const ip = (request.headers.get('x-forwarded-for') ?? '').split(',')[0].trim() || 'unknown';
+  const userAgent = request.headers.get('user-agent') ?? '';
+
+  try {
+    const verification = await checkBotId({
+      advancedOptions: { headers: Object.fromEntries(request.headers) },
+    });
+    if (verification.isBot) {
+      console.warn('[lead] blocked by BotID', { ip, userAgent });
+      return json({ ok: false }, 403);
+    }
+  } catch (err) {
+    // Fail open: a BotID outage must never cost RC a lead.
+    console.error('[lead] BotID check errored, delivering anyway:', (err as Error).message);
+  }
+
   let body: Record<string, unknown>;
   try {
     body = (await request.json()) as Record<string, unknown>;
@@ -43,8 +61,6 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ ok: false }, 400);
   }
 
-  const ip = (request.headers.get('x-forwarded-for') ?? '').split(',')[0].trim() || 'unknown';
-  const userAgent = request.headers.get('user-agent') ?? '';
   const step = body.step === 2 || body.step === '2' ? 2 : 1;
 
   // Quiet success for bots: never an error they can learn from.
