@@ -1,5 +1,11 @@
 # Working order: RC All Exteriors
 
+## 2026-10-26: Vercel BotID on the lead form (ADR-020)
+
+- `25b6da3`: invisible BotID check on `POST /api/lead/`, in front of the honeypot, timing and rate-limit checks. Bots get 403; the check fails open on error. Deep Analysis is on at the project level.
+- Verified: bare curl POST returns 403 and logs `[lead] blocked by BotID`; no `BotID check errored` lines. Live form test with TEST in the name: see the session report.
+- Rollback: `git revert 25b6da3`, or BotID back to Basic in the Vercel dashboard.
+
 ## 2026-10-26, late: Resources hub (ADR-019)
 
 - Top nav: Services · Service Areas · Resources · Reviews · About (Warranty and Financing now footer and hub only). Mobile menu and footer have a Resources group.
