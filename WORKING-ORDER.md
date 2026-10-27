@@ -3,7 +3,7 @@
 ## 2026-10-26: Vercel BotID on the lead form (ADR-020)
 
 - `25b6da3`: invisible BotID check on `POST /api/lead/`, in front of the honeypot, timing and rate-limit checks. Bots get 403; the check fails open on error. Deep Analysis is on at the project level.
-- Verified: bare curl POST returns 403 and logs `[lead] blocked by BotID`; no `BotID check errored` lines. Live form test with TEST in the name: see the session report.
+- Verified: bare curl POST returns 403 and logs `[lead] blocked by BotID`; no `BotID check errored` lines. Live form test from Claude's DevTools-driven Chrome was flagged (403, retry copy shown, nothing delivered), as expected for an automated browser. Still needed: a TEST submission from Mario's own browser, then Firewall > Traffic > BotID should read Human.
 - Rollback: `git revert 25b6da3`, or BotID back to Basic in the Vercel dashboard.
 
 ## 2026-10-26, late: Resources hub (ADR-019)
