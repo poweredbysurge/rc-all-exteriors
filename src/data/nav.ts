@@ -53,7 +53,7 @@ export const cities: City[] = [
   { name: 'Springfield', slug: 'springfield-va', href: '/service-areas/springfield-va/', lat: 38.7893, lon: -77.1872 },
   { name: 'Lorton', slug: 'lorton-va', href: '/service-areas/lorton-va/', lat: 38.7043, lon: -77.2278 },
   { name: 'Alexandria', slug: 'alexandria-va', href: '/service-areas/alexandria-va/', lat: 38.8048, lon: -77.0469 },
-  { name: 'Fairfax Station', slug: 'fairfax-station-va', href: null, lat: 38.8007, lon: -77.3255 },
+  { name: 'Fairfax Station', slug: 'fairfax-station-va', href: '/service-areas/fairfax-station-va/', lat: 38.8007, lon: -77.3255 },
   { name: 'Arlington', slug: 'arlington-va', href: null, lat: 38.8816, lon: -77.091 },
   { name: 'McLean', slug: 'mclean-va', href: null, lat: 38.9339, lon: -77.1773 },
   { name: 'Great Falls', slug: 'great-falls-va', href: null, lat: 38.9982, lon: -77.2883 },
@@ -78,6 +78,7 @@ export const footerAreas = [
   { href: '/service-areas/fairfax-va/', label: 'Fairfax' },
   { href: '/service-areas/springfield-va/', label: 'Springfield' },
   { href: '/service-areas/alexandria-va/', label: 'Alexandria' },
+  { href: '/service-areas/fairfax-station-va/', label: 'Fairfax Station' },
   { href: '/service-areas/', label: 'All service areas' },
 ];
 
@@ -165,7 +166,7 @@ export const resourceLinks = [
 ];
 
 // City pages after the launch three live in their own batch.
-const cityBatch: Record<string, string> = { 'alexandria-va': 'batch-6.md' };
+const cityBatch: Record<string, string> = { 'alexandria-va': 'batch-6.md', 'fairfax-station-va': 'batch-7.md' };
 
 export const routes: RouteEntry[] = [
   { path: '/', label: 'Home', kind: 'home', sources: ['src/pages/index.astro', 'copy/batch-1.md'] },
