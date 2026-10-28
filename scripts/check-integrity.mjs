@@ -55,11 +55,11 @@ const routeOf = (file) => {
 };
 
 // Kill list, copy section of master prompt section 9. "seamless" is allowed
-// only as the product name "seamless gutters" / "seamless aluminum" (copy voice rules),
+// only as the product name "seamless gutters" / "seamless aluminum" / "6 inch seamless" (copy voice rules),
 // and "premier" only as CertainTeed's "ShingleMaster PREMIER" tier (ADR-018).
 const KILL = [
   /welcome to/i, /your trusted partner/i, /we pride ourselves/i, /look no further/i, /nestled in/i, /vibrant community/i,
-  /hidden gem/i, /\belevate\b/i, /\bseamless(?!\s+(gutters?|aluminum))/i, /\bunlock\b/i, /\bempower/i, /revolutionary/i,
+  /hidden gem/i, /\belevate\b/i, /(?<!inch )\bseamless(?!\s+(gutters?|aluminum))/i, /\bunlock\b/i, /\bempower/i, /revolutionary/i,
   /game-changing/i, /best-in-class/i, /cutting-edge/i, /state-of-the-art/i, /in today's fast-paced world/i, /we've got you covered/i,
   /(?<!ShingleMaster (?:PRO or )?)\bpremier\b/i, /top-notch/i,
 ];
