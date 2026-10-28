@@ -1,5 +1,21 @@
 # Working order: RC All Exteriors
 
+## 2026-10-28: November pages on branch `november-pages` (ADR-021)
+
+**Done (PR open, not merged; Mario merges Mon Nov 2, which publishes all three)**
+- `/service-areas/fairfax-station-va/` from `copy/batch-7.md`. Extra sections between Intro and proof now render generically (Permits and HOA rules, Shake roofs); Alexandria unchanged. Proof `twoStoryWalk` + `newDecking`, C John Long review (checked via Windsor), hero `colonialChimney`. No neighborhoods band (no researched list). Linked from hub card, footer, chips, maps, Fairfax and Lorton FAQs.
+- `/guides/gutter-guards-cost/`, `/guides/roof-repair-or-replacement/` from `copy/guides-2.md`, published 2026-11-02. [TABLE] supports a named first column. Linked from `/gutters/`, `/roof-repair/` and `/roof-replacement/` FAQs, Resources hub, footer, mobile menu.
+
+**Verified:** build, `check`, `check:production`, `check:layout` (35 pages), `audit:rhythm`. Schema: Service + FAQPage + BreadcrumbList; Article (author `@id` `/about/#person`, datePublished 2026-11-02) + FAQPage + BreadcrumbList. Sitemap has all three.
+
+**Open**
+- Ricardo's Fairfax Station job photos replace the general proof (copy + `proofPhotos`).
+- C John Long quote: second sentence is truncated at "done." (review continues ", and if it wasn't..."). Mario to keep or trim to the first sentence.
+- Fairfax Station neighborhoods list, if wanted.
+- Pre-existing: "Fairfax Station" map label clips at the left edge at 1440, now on its own page too.
+
+**Resume:** `git checkout november-pages && npm run build && npm run check:production`.
+
 ## 2026-10-26: Vercel BotID on the lead form (ADR-020)
 
 - `25b6da3`: invisible BotID check on `POST /api/lead/`, in front of the honeypot, timing and rate-limit checks. Bots get 403; the check fails open on error. Deep Analysis is on at the project level.
