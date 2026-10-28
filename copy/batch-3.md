@@ -244,7 +244,7 @@ CTA
 
 [CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: /roof-replacement/ · /siding/ · /roof-repair/ · /guides/gutter-guards-cost/ (when published) · / (breadcrumb)
+Internal links on this page: /roof-replacement/ · /siding/ · /roof-repair/ · /guides/gutter-guards-cost/ · / (breadcrumb)
 
 ------------------------------------------------------------------------
 
