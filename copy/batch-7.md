@@ -10,7 +10,7 @@ Research, fact ledger, E-E-A-T and completeness checks, audit and the copy revie
 
 ## 1. Page: Fairfax Station
 
-Published 2026-11-02 by Mario's decision (ADR-017 rule, ADR-021): researched local context (Fairfax County permit thresholds, HOA roof rules, shake roofs), a general RC project in the proof section and a real Google review from a customer not presented as a Fairfax Station customer, until Ricardo's Fairfax Station job photos arrive.
+Published 2026-11-02 by Mario's decision (ADR-017 rule, ADR-021): researched local context (Fairfax County permit thresholds, HOA roof rules, shake roofs), Ricardo's Fairfax Station skylight job in the proof section (Oct 30) and a real Google review from a customer not presented as a Fairfax Station customer.
 
 Page spec
 
@@ -80,9 +80,9 @@ Local proof
 
 [H2] Recent work from our crew
 
-[IMAGE] rc-two-story-home-gray-shingle-front-walkway (Sept 2026)
+[IMAGE] Fairfax Station job: old skylight with water-stained decking (before) and the finished roof with new skylights (after)
 
-[P] We've done several jobs in Fairfax Station, and photos from those roofs will go here as we add them. One recent job from our crew: a two-story home with dormers, torn down to the deck, rotted boards replaced, and finished in gray architectural shingles. Ricardo quoted it, checked it and signed off on it.
+[P] A recent Fairfax Station job, on a wooded lot like many here: we tore the roof down to the deck, found water damage around the old skylights, replaced the rotted plywood, and finished it in architectural shingles. We also put in new VELUX solar-powered venting skylights with solar blinds. Ricardo quoted it, checked it and signed off on it.
 
 [LINK] See more of our work → /projects/
 
@@ -161,6 +161,6 @@ Internal links on this page: / · /service-areas/ · /service-areas/fairfax-va/ 
 ## 2. Notes on the build
 
 - Page copy is the workspace draft word for word. The character counts after the meta title and description and the build note were left out; they are instructions, not copy.
-- Proof photos: `twoStoryWalk` (the September 2026 two-story job) and `newDecking`. Captions and alt text are the registry's and describe the photo only; neither names a town.
+- Proof photos: `fsSkylightBefore` and `fsSkylightAfter`, Ricardo's Fairfax Station skylight job (Oct 30). Captions may say Fairfax Station; no street or house number. Skylights confirmed VELUX (Oct 31). The general two-story job is gone.
 - Review slot: C John Long's Google review (May 21, 2025, five stars, RC All Exteriors LLC profile), checked against the review on Oct 28 through Windsor. The review names no town, and the page does not present him as a Fairfax Station customer. The second quoted sentence is the start of a longer sentence in the review ("Cleanup was very well done, and if it wasn't for the spectacular new roof we wouldn't have known they were there."), ended at "done" with a period.
-- Replace the proof job when Ricardo's Fairfax Station photos arrive.
+- The spare photo `rc-fairfax-station-rotted-decking.jpg` is in src/assets/photos but not registered yet.

@@ -36,6 +36,9 @@ import mansardShakeFront from '@/assets/photos/rc-mansard-shake-front.jpg';
 import mansardShakeYardSign from '@/assets/photos/rc-mansard-shake-front-yard-sign.jpg';
 import mansardBrownYardSign from '@/assets/photos/rc-mansard-brown-corner-yard-sign.jpg';
 import chimneyFlashing from '@/assets/photos/rc-chimney-flashing.jpg';
+// 2026-10-30: Ricardo's Fairfax Station skylight job (ADR-021 addendum).
+import fsSkylightBefore from '@/assets/photos/rc-fairfax-station-skylight-old-deck.jpg';
+import fsSkylightAfter from '@/assets/photos/rc-fairfax-station-skylights-finished.jpg';
 
 export interface Photo {
   src: ImageMetadata;
@@ -172,6 +175,22 @@ export const photos = {
     job: 'Roof replacement',
     position: 'center 40%',
     town: null,
+  },
+  fsSkylightBefore: {
+    src: fsSkylightBefore,
+    alt: 'Old skylight on bare roof decking with water stains below it, before replacement',
+    caption: 'Before: water damage around the old skylight',
+    job: 'Roof replacement',
+    position: 'center',
+    town: 'Fairfax Station',
+  },
+  fsSkylightAfter: {
+    src: fsSkylightAfter,
+    alt: 'Finished architectural shingle roof with a new VELUX skylight on a wooded lot',
+    caption: 'After: new roof and VELUX solar-powered venting skylights',
+    job: 'Roof replacement',
+    position: 'center',
+    town: 'Fairfax Station',
   },
   newVsOld1: {
     src: newVsOld1,
