@@ -398,7 +398,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** Will homeowners insurance pay for a new roof?
 
-**[FAQ A]** Insurance usually pays when storm damage, like wind or hail, is the cause. It usually won't pay for normal wear and age. After an inspection we can tell you whether the damage looks like a claim worth filing.
+**[FAQ A]** Insurance usually pays when storm damage, like wind or hail, is the cause. It usually won't pay for normal wear and age. After an inspection we can tell you whether the damage looks like a claim worth filing. Our guide to [repair or replacement](/guides/roof-repair-or-replacement/).
 
 **[FAQ Q]** Will the price go up once work starts?
 
@@ -511,7 +511,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** How do I know if my roof needs repair or replacement?
 
-**[FAQ A]** Damage in one area on a roof under 15 years old usually means repair. Worn shingles everywhere, leaks in several spots, or a roof past 20 years usually means replacement. A free inspection will settle it.
+**[FAQ A]** Damage in one area on a roof under 15 years old usually means repair. Worn shingles everywhere, leaks in several spots, or a roof past 20 years usually means replacement. A free inspection will settle it. Our guide to [repair or replacement](/guides/roof-repair-or-replacement/).
 
 **[FAQ Q]** Do you repair roofs after storm damage?
 

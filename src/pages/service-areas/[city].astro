@@ -1,6 +1,7 @@
 ---
-// City page template (fairfax-390, fairfax-1440). Copy: batch-5, and batch-6
-// for Alexandria, which adds two optional sections (ADR-017).
+// City page template (fairfax-390, fairfax-1440). Copy: batch-5, and one
+// batch per second-wave city (batch-6 Alexandria, batch-7 Fairfax Station),
+// which add their own sections (ADR-017, ADR-021).
 //
 // Anti-doorway: the three pages share this layout and nothing else. Each one
 // has its own opener, FAQ and local angle in the copy, and its local proof
@@ -42,7 +43,11 @@ const intro = section(page, 'Intro');
 const proof = section(page, 'Local proof');
 const services = section(page, 'Services');
 // Second-wave pages carry extra sections; launch pages do not (ADR-017).
-const historic = maybeSection(page, 'Historic districts');
+// Any section between the intro and the proof is a local-angle section
+// (Alexandria's historic districts, Fairfax Station's permits and shake
+// roofs), drawn in copy order on light surfaces so Services stays the one
+// dark band (ADR-006, ADR-021).
+const extras = page.sections.slice(page.sections.indexOf(intro) + 1, page.sections.indexOf(proof));
 const price = maybeSection(page, 'What drives the price');
 const why = section(page, 'Why us');
 const faq = section(page, 'FAQ');
@@ -59,9 +64,13 @@ const proofPhotos: Record<string, [PhotoKey, PhotoKey]> = {
   // RC flat roof photos beside the Duke Street TPO job (ADR-017 addendum). Not
   // that house, so the captions and alt text name no street.
   Alexandria: ['flatTpo', 'proFlatRoof'],
+  // Ricardo's real Fairfax Station photos (Oct 30, ADR-021 addendum). Captions
+  // may say Fairfax Station. Never show a street or house number.
+  'Fairfax Station': ['fsSkylightBefore', 'fsSkylightAfter'],
 };
 // Neighborhood names: public geography, researched 2026-10-19 (ADR-007). Not
-// a claim that RC has worked in each one; the heading says "we serve".
+// a claim that RC has worked in each one; the heading says "we serve". A city
+// without a researched list skips the section (Fairfax Station, ADR-021).
 const neighborhoods: Record<string, string[]> = {
   Fairfax: ['Mosby Woods', 'Mantua', 'Kings Park West', 'Greenbriar', 'Country Club Hills', 'Fairfax Villa', 'Fair Oaks'],
   Springfield: ['North Springfield', 'West Springfield', 'Kings Park', 'Rolling Valley', 'Saratoga', 'Cardinal Forest', 'Springfield Estates'],
@@ -75,7 +84,11 @@ const towns = mapTowns.includes(name) ? mapTowns : [...mapTowns, name];
 const reviewSlot = first(proof, 'review')!.hint;
 const quoted = quotedReview(reviewSlot, (await getReviews()).reviews);
 // Homepage card order: replacement, repair, storm, other (ADR-005).
-const SERVICE_PHOTOS: PhotoKey[] = ['mansardShakeFront', 'chimneyFlashing', 'twoStoryWalk', 'colonialGarage'];
+// A card photo that is already in the proof block gives way, so no photo shows twice.
+const SERVICE_PHOTOS: PhotoKey[] = ['mansardShakeFront', 'chimneyFlashing', 'twoStoryWalk', 'colonialGarage'].map((k) =>
+  proofPhotos[name].includes(k as PhotoKey) ? 'twoStory' : k,
+) as PhotoKey[];
+const areas = neighborhoods[name] ?? [];
 ---
 
 <Base
@@ -107,19 +120,19 @@ const SERVICE_PHOTOS: PhotoKey[] = ['mansardShakeFront', 'chimneyFlashing', 'two
   </Section>
 
   {
-    historic && (
-      <Section bg="surface" name="Historic districts">
+    extras.map((s, i) => (
+      <Section bg={i % 2 === 0 ? 'surface' : 'muted'} name={s.name}>
         <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
-          <h2 class="heading text-h2 text-fg"><Rich inline={first(historic, 'h2')!.inline} /></h2>
+          <h2 class="heading text-h2 text-fg"><Rich inline={first(s, 'h2')!.inline} /></h2>
           <div class="flex max-w-[720px] flex-col gap-5">
-            {blocksOf(historic, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
+            {blocksOf(s, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
           </div>
         </div>
       </Section>
-    )
+    ))
   }
 
-  <Section bg={historic ? 'muted' : 'surface'} name="Local proof">
+  <Section bg={extras.length % 2 === 1 ? 'muted' : 'surface'} name="Local proof">
     <div class="flex flex-col gap-6 lg:gap-10">
       <div class="flex flex-col gap-4">
         <Eyebrow>Recent work</Eyebrow>
@@ -169,17 +182,22 @@ const SERVICE_PHOTOS: PhotoKey[] = ['mansardShakeFront', 'chimneyFlashing', 'two
     </div>
   </Section>
 
-  <Section bg="muted" quiet name="Neighborhoods">
-    <div class="flex flex-col gap-5">
-      <h2 class="heading text-h3 text-fg">{name} neighborhoods we serve</h2>
-      <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
-        {neighborhoods[name].map((n) => <li><span class="chip cursor-default">{n}</span></li>)}
-      </ul>
-      <p class="text-body-sm text-fg-muted" data-sm>And the streets around them. If you are in {name} and not on this list, you are still in range.</p>
-    </div>
-  </Section>
+  {
+    areas.length > 0 && (
+      <Section bg="muted" quiet name="Neighborhoods">
+        <div class="flex flex-col gap-5">
+          <h2 class="heading text-h3 text-fg">{name} neighborhoods we serve</h2>
+          <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+            {areas.map((n) => <li><span class="chip cursor-default">{n}</span></li>)}
+          </ul>
+          <p class="text-body-sm text-fg-muted" data-sm>And the streets around them. If you are in {name} and not on this list, you are still in range.</p>
+        </div>
+      </Section>
+    )
+  }
 
-  <Section bg="surface" name="FAQ">
+  <!-- Without the neighborhoods band the FAQ takes its tint, so Why us and the FAQ do not merge. -->
+  <Section bg={areas.length > 0 ? 'surface' : 'muted'} name="FAQ">
     <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
       <h2 class="heading text-h2 text-fg"><Rich inline={first(faq, 'h2')!.inline} /></h2>
       <Faq faqs={blocksOf(faq, 'faq')} />

@@ -378,7 +378,7 @@ Cities
 
 [CARD] Alexandria \| Roof replacement and repair in Alexandria, Old Town to Kingstowne. \| /service-areas/alexandria-va/
 
-[CARD] Fairfax Station \| Coming soon \| /service-areas/fairfax-station-va/ (month 2)
+[CARD] Fairfax Station \| Roof replacement, repair and storm damage help for Fairfax Station homes. \| /service-areas/fairfax-station-va/
 
 [CARD] Arlington \| Coming soon \| /service-areas/arlington-va/ (month 3)
 

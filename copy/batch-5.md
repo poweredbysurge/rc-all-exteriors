@@ -109,7 +109,7 @@ FAQ
 
 [FAQ Q] Is Fairfax part of your regular service area?
 
-[FAQ A] Yes. Fairfax is part of our regular service area, along with nearby Lorton, Springfield, [Alexandria](/service-areas/alexandria-va/), and the rest of Northern Virginia we cover from our base in Woodbridge.
+[FAQ A] Yes. Fairfax is part of our regular service area, along with nearby [Fairfax Station](/service-areas/fairfax-station-va/), Lorton, Springfield, [Alexandria](/service-areas/alexandria-va/), and the rest of Northern Virginia we cover from our base in Woodbridge.
 
 [FAQ Q] How fast can you get to Fairfax for an inspection?
 
@@ -335,7 +335,7 @@ FAQ
 
 [FAQ Q] Lorton is in Fairfax County. Do you work there?
 
-[FAQ A] Yes. We're based in Woodbridge, just across the county line, and Lorton is part of our regular service area.
+[FAQ A] Yes. We're based in Woodbridge, just across the county line, and Lorton is part of our regular service area, along with nearby [Fairfax Station](/service-areas/fairfax-station-va/).
 
 [FAQ Q] Do you offer free inspections in Lorton?
 
