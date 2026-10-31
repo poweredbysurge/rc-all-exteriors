@@ -1,5 +1,13 @@
 # Working order: RC All Exteriors
 
+## 2026-10-30: Fairfax Station real proof, November pages published
+
+- Proof block is Ricardo's Fairfax Station skylight job (`fsSkylightBefore`, `fsSkylightAfter`, VELUX confirmed Oct 31); general job gone (ADR-021 addendum). Spare `rc-fairfax-station-rotted-decking.jpg` not registered.
+- `november-pages` merged to main and deleted; the three pages are live.
+- All gates pass. `check:layout` was run with `BASE_URL=http://localhost:4399` (static server on 4399) because the Laviyra dev server holds localhost:4321.
+- The Mac auto-sync committed `design/assets/images/IMG_1859.JPG`; it is untracked again but stays in history and may be re-added by the next sync. Consider a `.gitignore` entry.
+- Guides show `datePublished` 2026-11-02 but went live Oct 30 (same pattern as ADR-018).
+
 ## 2026-10-28: November pages on branch `november-pages` (ADR-021)
 
 **Done (PR open, not merged; Mario merges Mon Nov 2, which publishes all three)**
