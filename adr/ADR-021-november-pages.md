@@ -35,3 +35,13 @@ ADR-017 set the template for second-wave city pages (Alexandria) and ADR-018 and
 - When Ricardo's Fairfax Station photos arrive, the proof paragraph changes in `copy/batch-7.md` and `proofPhotos` in `[city].astro`, nothing else.
 - A Fairfax Station neighborhoods list can be added to `neighborhoods` once researched; the band comes back on its own.
 - The draft placed each guide's [CTA] near the end; the template draws it after the middle section, as for guides 1 and 2.
+
+## Addendum, 2026-10-30: real Fairfax Station proof
+
+Ricardo sent photos of a Fairfax Station job on Oct 30: a roof torn down to the deck on a wooded lot, water damage around the old skylights, rotted plywood replaced, architectural shingles, and new solar-powered venting skylights with solar blinds. The skylights were confirmed as VELUX on Oct 31.
+
+- The proof photos are `fsSkylightBefore` and `fsSkylightAfter` (town Fairfax Station), and the proof paragraph in `copy/batch-7.md` describes that job. The general two-story job and its "photos will go here" line are gone.
+- Captions may name Fairfax Station. No street or house number appears in copy, captions or alt text.
+- With the general job gone, `twoStoryWalk` is no longer in the proof block, so the Storm Damage card shows it again.
+- The spare photo `rc-fairfax-station-rotted-decking.jpg` is in `src/assets/photos/` but not registered.
+- The C John Long review stays in the review slot.
