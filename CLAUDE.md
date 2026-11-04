@@ -2,6 +2,10 @@
 
 Read `README.md`, then `MASTER-WEBSITE-PROMPT.md` in full, then `GATE-A.md`, `design/GATE-A-REVIEW.md`, `design/DESIGN-DEBT.md`, `copy/SITEMAP.md` before writing code.
 
+## Page templates (Surge rule, 2026-11-04)
+
+Every new or rebuilt service, city, answer/cost, blog or hub page on this site follows `~/Surge-Cowork/workspace/templates/website-build/PAGE-TEMPLATES.md` (section order, components, phone-first spacing, photo slots) and passes its add-a-page gate before it publishes. Where this file is stricter, this file wins and the reason is logged in an ADR. Photos come from the client's Drive `Media` folder; a missing one is "Requested", never stock.
+
 1. **`design/` is read-only after Gate A.** Build from it; never edit it. Deviations go in `DESIGN-DEBT.md` at the repo root with the artboard named.
 2. **Copy comes from `copy/batch-*.md`, never from the design export.** The export is missing collapsed FAQ answers. FAQPage schema is generated from the same copy source as the visible accordion, so they cannot drift.
 3. **Every `[CONFIRM]` in the copy is a placeholder.** Render it with `data-confirm` in preview. `scripts/check-integrity` fails a production build on any remaining one. Never resolve one by guessing.
