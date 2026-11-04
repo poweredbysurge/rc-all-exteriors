@@ -25,6 +25,7 @@ import ServiceCard from '@/components/ServiceCard.astro';
 import StatStrip from '@/components/StatStrip.astro';
 import { liveCities } from '@/data/nav';
 import type { PhotoKey } from '@/data/photos';
+import { asTitled } from '@/lib/blocks';
 import { blocksOf, faqs, first, getPage, maybeSection, plain, section } from '@/lib/copy';
 import { metaFor } from '@/lib/page';
 import { getReviews, quotedReview } from '@/lib/reviews';
@@ -77,6 +78,12 @@ const neighborhoods: Record<string, string[]> = {
   Lorton: ['Lorton Station', 'Laurel Hill', 'Lorton Valley', 'Crosspointe', 'Newington Forest', 'Gunston Manor', 'Pohick Estates'],
   Alexandria: ['Old Town', 'Del Ray', 'Rosemont', 'West End', 'Kingstowne', 'Franconia', 'Groveton', 'Belle View', 'Fort Hunt'],
 };
+// A local-angle section may carry one registry photo, so two text-only bands never
+// sit back to back (PAGE-TEMPLATES shell rule 7). Only a photo that shows the
+// section's own subject, and never one already in the proof block or the cards.
+const extraPhotos: Record<string, Record<string, PhotoKey>> = {
+  'Fairfax Station': { 'Shake roofs': 'shakeInstall' },
+};
 const mapTowns = ['Woodbridge', 'Lake Ridge', 'Lorton', 'Fairfax Station', 'Fairfax', 'Springfield'];
 // A city outside the launch map adds itself, so the launch pages' maps do not change.
 const towns = mapTowns.includes(name) ? mapTowns : [...mapTowns, name];
@@ -122,12 +129,22 @@ const areas = neighborhoods[name] ?? [];
   {
     extras.map((s, i) => (
       <Section bg={i % 2 === 0 ? 'surface' : 'muted'} name={s.name}>
-        <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
-          <h2 class="heading text-h2 text-fg"><Rich inline={first(s, 'h2')!.inline} /></h2>
-          <div class="flex max-w-[720px] flex-col gap-5">
-            {blocksOf(s, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
+        {extraPhotos[name]?.[s.name] ? (
+          <div class="grid grid-cols-1 items-center gap-7 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+            <Figure photo={extraPhotos[name][s.name]} ratio={4 / 3} sizes="(min-width: 1024px) 480px, 92vw" bleed class="reveal" />
+            <div class="flex max-w-[720px] flex-col gap-5">
+              <h2 class="heading text-h2 text-fg"><Rich inline={first(s, 'h2')!.inline} /></h2>
+              {blocksOf(s, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+            <h2 class="heading text-h2 text-fg"><Rich inline={first(s, 'h2')!.inline} /></h2>
+            <div class="flex max-w-[720px] flex-col gap-5">
+              {blocksOf(s, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
+            </div>
+          </div>
+        )}
       </Section>
     ))
   }
@@ -166,7 +183,18 @@ const areas = neighborhoods[name] ?? [];
       <Section bg="muted" name="What drives the price">
         <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
           <h2 class="heading text-h2 text-fg"><Rich inline={first(price, 'h2')!.inline} /></h2>
-          <Bullets items={first(price, 'list')!.items} />
+          {asTitled(first(price, 'list')!.items) ? (
+            <ul class="m-0 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2 lg:gap-5">
+              {asTitled(first(price, 'list')!.items)!.map((item) => (
+                <li class="flex flex-col gap-2 rounded-lg border border-border-subtle bg-surface p-5 lg:p-6">
+                  <strong class="heading text-h4 text-fg">{item.title!.replace(/\.$/, '')}</strong>
+                  <span class="rich text-fg-muted"><Rich inline={item.inline} /></span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <Bullets items={first(price, 'list')!.items} />
+          )}
         </div>
       </Section>
     )
