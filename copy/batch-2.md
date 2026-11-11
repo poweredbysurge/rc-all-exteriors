@@ -422,7 +422,7 @@ Story
 
 [P] RC All Exteriors LLC was founded in 2025 with one goal: to provide honest, dependable, and professional exterior services. Ricardo Castro worked in roofing before he started the company, and he built RC around the things customers told him they couldn't find: a straight price, a crew that shows up, and a warranty that gets honored.
 
-[P] Ricardo has been in roofing and construction since 2014. He started on the roof, then spent years with a major roofing supplier, where he heard the same stories over and over: storm chasers who vanished, overnight companies that never answered the phone, roofs that failed in year three. He started RC All Exteriors to be the company he kept wishing those homeowners had called.
+[P] Ricardo has been in roofing and construction since 2014. He started on the roof, then spent years with a major roofing supplier, where he heard the same stories over and over: storm chasers who vanished, overnight companies that never answered the phone, roofs that failed in year three. He started RC All Exteriors to be the company he kept wishing those homeowners had called. [LinkedIn](https://www.linkedin.com/in/ricardo-castro-172b05384)
 
 [P] Today RC All Exteriors handles roof replacements, repairs, gutters, siding, windows, and doors for residential and commercial customers. Ricardo quotes every job and signs off on every roof.
 

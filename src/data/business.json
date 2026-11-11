@@ -4,6 +4,10 @@
   "legalName": "RC All Exteriors LLC",
   "schemaType": "RoofingContractor",
   "owner": "Ricardo Castro",
+  "ownerProfiles": {
+    "$comment": "The owner's own profiles, for the Person schema sameAs on About (ADR-023). Not the business profiles below.",
+    "linkedin": "https://www.linkedin.com/in/ricardo-castro-172b05384"
+  },
   "phone": {
     "display": "(703) 677-1976",
     "e164": "+17036771976"

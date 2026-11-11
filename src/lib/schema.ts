@@ -131,6 +131,9 @@ export function itemListSchema(items: { name: string; href: string }[]) {
 export const PERSON_ID = () => `${rebase('/about/')}#person`;
 
 export function personSchema() {
+  const sameAs = Object.entries(business.ownerProfiles)
+    .filter(([key, v]) => !key.startsWith('$') && !!v)
+    .map(([, v]) => v);
   return {
     '@type': 'Person',
     '@id': PERSON_ID(),
@@ -138,6 +141,7 @@ export function personSchema() {
     name: business.owner,
     jobTitle: 'Owner',
     worksFor: { '@id': BUSINESS_ID() },
+    ...(sameAs.length ? { sameAs } : {}),
   };
 }
 
