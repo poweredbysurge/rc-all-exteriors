@@ -1,5 +1,25 @@
 # Working order: RC All Exteriors
 
+## 2026-11-11: December pages built on main (ADR-023)
+
+**Done (committed on main, not pushed; Mario's push publishes)**
+- `/insurance-claims/` (new service, `copy/batch-8.md`): deadlines `[TABLE]`, `[NOTE]` under the FAQ, John W Allen fixed quote. Hero `proOnRoof`.
+- `/service-areas/arlington-va/` (`copy/batch-8.md`): Ricardo's 10th Road North job in the proof copy, Megan Hawkins review, hero `newVsOld1`, Permits photo `newDecking`.
+- `/guides/roof-replacement-cost/`, `/guides/storm-damage-checklist/`, `/guides/gutter-installation-cost/` (`copy/guides-3.md`), `[PUBLISHED]` 2026-11-11.
+- Ricardo's LinkedIn on About and in his Person `sameAs`. New internal links per ADR-023.
+- Shared `CopyTable` and `Note`; accent-tint cards keep dark text on a dark band.
+
+**Verified:** build, `check`, `check:production`, `check:layout` (40 pages, run with `BASE_URL=http://localhost:4399`), `audit:rhythm`. Nine pages looked at in headless Chrome at 375 and 1440. Schema, sitemap and links checked in the built HTML. Every customer quote checked against the live Google review through Windsor.
+
+**Open**
+- Arlington proof photo is a stand-in (`twoStoryWalk`): Ricardo's photos are in the group chat. Save them to `src/assets/photos/`, register them like the Fairfax Station pair, set `proofPhotos.Arlington`.
+- Hail illustration: save to `public/images/guides/hail-damage-illustration.webp` and push; the slot draws itself.
+- Insurance claims `[IMAGE]`: needs one of Ricardo's wind damage photos (`IMAGE_SLOTS` in `[service].astro`).
+- If the push is not on Nov 11, change the three `[PUBLISHED]` dates in `copy/guides-3.md`.
+- After the push: request indexing, set the Page Tracker rows to Live, send Ricardo the Now Live doc.
+
+**Resume:** `npm run build && npm run check:production`, then `node scripts/serve-static.mjs 4399` and `BASE_URL=http://localhost:4399 npm run check:layout`.
+
 ## 2026-10-30: Fairfax Station real proof, November pages published
 
 - Proof block is Ricardo's Fairfax Station skylight job (`fsSkylightBefore`, `fsSkylightAfter`, VELUX confirmed Oct 31); general job gone (ADR-021 addendum). Spare `rc-fairfax-station-rotted-decking.jpg` not registered.
