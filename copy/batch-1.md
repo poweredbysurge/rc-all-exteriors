@@ -382,7 +382,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[FAQ Q]** How much does a roof replacement cost in Woodbridge?
 
-**[FAQ A]** The price depends on the roof's size, pitch, the number of old layers, the condition of the decking, and the shingle you pick, which is why we do not publish a range. Your free inspection comes with a written estimate, and Landmark and Landmark Pro quotes are usually ready on the spot. Our [Landmark vs Landmark Pro guide](/guides/certainteed-landmark-shingles/) explains the difference.
+**[FAQ A]** The price depends on the roof's size, pitch, the number of old layers, the condition of the decking, and the shingle you pick, which is why we do not publish a range. Your free inspection comes with a written estimate, and Landmark and Landmark Pro quotes are usually ready on the spot. Our [Landmark vs Landmark Pro guide](/guides/certainteed-landmark-shingles/) explains the difference. Our [roof replacement cost guide](/guides/roof-replacement-cost/) shows what moves the number.
 
 **[FAQ Q]** How long does it take to replace a roof?
 
@@ -574,6 +574,8 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 4. **Get an inspection.** A roofer's report gives your adjuster the evidence they need.  
 5. **Call your insurance company.** Open the claim once you know what's damaged.
 
+**[P]** [Full checklist: after the storm](/guides/storm-damage-checklist/)
+
 **Signs**
 
 **[H2]** Signs of wind and hail damage
@@ -592,7 +594,7 @@ Dropped from the current site on purpose: the percentage bars (97%, 87%, 92%, 95
 
 **[H2]** How we help with your insurance claim
 
-**[P]** Insurance claim assistance and estimates are part of our standard services. Our customers bring up the insurance process in their reviews.
+**[P]** Insurance claim assistance and estimates are part of our standard services. Our customers bring up the insurance process in their reviews. See [how we help with insurance claims](/insurance-claims/).
 
 **[LIST]**
 

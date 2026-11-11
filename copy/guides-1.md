@@ -155,7 +155,7 @@ Claim steps
 1. **Protect the house.** Tarp any opening and photograph everything first. This is the "reasonable means to protect the property" your policy asks for.
 2. **Get a roof inspection.** We go up, photograph the damage shingle by shingle, and tell you honestly whether it looks like storm damage or age. If it's age, we say so, and you save yourself a claim on your record.
 3. **Call your insurer and open the claim.** Ask for your claim number and your adjuster's name.
-4. **Meet the adjuster.** We can be on the roof with the adjuster so the damage they see matches the damage we found.
+4. **Meet the adjuster.** We can be on the roof with the adjuster so the damage they see matches the damage we found. See [how we help with insurance claims](/insurance-claims/).
 5. **Get an itemized estimate.** Every RC estimate lists the work line by line, so you can compare it to the insurer's.
 6. **Pay your deductible.** That part is always yours. See the next section for why.
 

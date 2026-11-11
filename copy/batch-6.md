@@ -132,7 +132,7 @@ FAQ
 
 [FAQ Q] How fast can you get to Alexandria for an inspection?
 
-[FAQ A] Call or text (703) 677-1976. Most inspections are scheduled within 24 to 48 hours. Kingstowne is about 25 minutes from our base in Woodbridge. We come up Route 1 from Woodbridge, so Kingstowne, Franconia and the Mount Vernon side are usually the quickest to schedule.
+[FAQ A] Call or text (703) 677-1976. Most inspections are scheduled within 24 to 48 hours. Kingstowne is about 25 minutes from our base in Woodbridge. We come up Route 1 from Woodbridge, so Kingstowne, Franconia and the Mount Vernon side are usually the quickest to schedule. We also work in nearby [Arlington](/service-areas/arlington-va/).
 
 [FAQ Q] Do you help with insurance claims after a storm?
 

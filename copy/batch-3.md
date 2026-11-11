@@ -230,7 +230,7 @@ FAQ
 
 [FAQ Q] How much does gutter installation cost?
 
-[FAQ A] It depends on the length of your roofline, the number of downspouts, and the material. Copper costs more than aluminum. We do not publish gutter prices because every roofline is different. You'll get a written price at your free inspection, and our pricing is middle of the pack.
+[FAQ A] It depends on the length of your roofline, the number of downspouts, and the material. Copper costs more than aluminum. We do not publish gutter prices because every roofline is different. You'll get a written price at your free inspection, and our pricing is middle of the pack. Our [gutter cost guide](/guides/gutter-installation-cost/) shows what moves the number.
 
 [FAQ Q] Should I replace gutters when I replace my roof?
 
