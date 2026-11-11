@@ -1,7 +1,7 @@
 ---
 // City page template (fairfax-390, fairfax-1440). Copy: batch-5, and one
-// batch per second-wave city (batch-6 Alexandria, batch-7 Fairfax Station),
-// which add their own sections (ADR-017, ADR-021).
+// batch per second-wave city (batch-6 Alexandria, batch-7 Fairfax Station,
+// batch-8 Arlington), which add their own sections (ADR-017, ADR-021, ADR-023).
 //
 // Anti-doorway: the three pages share this layout and nothing else. Each one
 // has its own opener, FAQ and local angle in the copy, and its local proof
@@ -58,7 +58,7 @@ const [lead, ...rest] = blocksOf(intro, 'p');
 // the October mansard job with Brava synthetic shake, in progress and
 // finished, until Ricardo names a real job in that town. The copy says so.
 // Alexandria has one (Duke Street, Old Town, ADR-017 addendum).
-const proofPhotos: Record<string, [PhotoKey, PhotoKey]> = {
+const proofPhotos: Record<string, PhotoKey[]> = {
   Fairfax: ['underlaymentYardSign', 'mansardShakeYardSign'],
   Springfield: ['underlaymentYardSign', 'mansardShakeFront'],
   Lorton: ['shakeInstall', 'mansardShakeYardSign'],
@@ -68,7 +68,12 @@ const proofPhotos: Record<string, [PhotoKey, PhotoKey]> = {
   // Ricardo's real Fairfax Station photos (Oct 30, ADR-021 addendum). Captions
   // may say Fairfax Station. Never show a street or house number.
   'Fairfax Station': ['fsSkylightBefore', 'fsSkylightAfter'],
+  // The proof is Ricardo's 10th Road North job (ADR-023), but his photos of it
+  // had not arrived at build time. One general RC roof replacement stands in:
+  // its caption and alt text name no town. Never show a house number.
+  Arlington: ['twoStoryWalk'],
 };
+const solo = proofPhotos[name].length === 1;
 // Neighborhood names: public geography, researched 2026-10-19 (ADR-007). Not
 // a claim that RC has worked in each one; the heading says "we serve". A city
 // without a researched list skips the section (Fairfax Station, ADR-021).
@@ -83,6 +88,8 @@ const neighborhoods: Record<string, string[]> = {
 // section's own subject, and never one already in the proof block or the cards.
 const extraPhotos: Record<string, Record<string, PhotoKey>> = {
   'Fairfax Station': { 'Shake roofs': 'shakeInstall' },
+  // Arlington's permit rule turns on the decking, so that section shows decking.
+  Arlington: { Permits: 'newDecking' },
 };
 const mapTowns = ['Woodbridge', 'Lake Ridge', 'Lorton', 'Fairfax Station', 'Fairfax', 'Springfield'];
 // A city outside the launch map adds itself, so the launch pages' maps do not change.
@@ -155,15 +162,18 @@ const areas = neighborhoods[name] ?? [];
         <Eyebrow>Recent work</Eyebrow>
         <h2 class="heading text-h2 text-fg"><Rich inline={first(proof, 'h2')!.inline} /></h2>
       </div>
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6">
-        {proofPhotos[name].map((key) => <Figure photo={key} ratio={3 / 2} sizes="(min-width: 768px) 620px, 92vw" class="reveal" />)}
-      </div>
-      <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-12">
-        <div class="flex flex-col gap-4">
-          {blocksOf(proof, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
-          {blocksOf(proof, 'links').map((l) => l.links.map((link) => <a href={link.href} class="link-arrow self-start">{link.text} <Icon name="arrow-right" size={18} /></a>))}
+      <!-- One proof photo sits beside the copy and the review; two sit above them. -->
+      <div class:list={['grid grid-cols-1 gap-6', solo ? 'items-start md:grid-cols-2 lg:gap-12' : 'lg:gap-10']}>
+        <div class:list={[!solo && 'grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6']}>
+          {proofPhotos[name].map((key) => <Figure photo={key} ratio={3 / 2} sizes="(min-width: 768px) 620px, 92vw" class="reveal" />)}
         </div>
-        <ReviewCard review={quoted} hint={reviewSlot} />
+        <div class:list={['grid grid-cols-1 items-start gap-6', !solo && 'lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-12']}>
+          <div class="flex flex-col gap-4">
+            {blocksOf(proof, 'p').map((p) => <p class="rich text-fg-muted"><Rich inline={p.inline} /></p>)}
+            {blocksOf(proof, 'links').map((l) => l.links.map((link) => <a href={link.href} class="link-arrow self-start">{link.text} <Icon name="arrow-right" size={18} /></a>))}
+          </div>
+          <ReviewCard review={quoted} hint={reviewSlot} />
+        </div>
       </div>
     </div>
   </Section>

@@ -280,6 +280,8 @@ Roofing
 
 [CARD] Storm Damage \| Wind and hail damage inspections, repairs, and insurance claim help. \| /storm-damage-roof-repair/
 
+[CARD] Insurance Claims \| We photograph the roof, write an itemized estimate and meet your adjuster. \| /insurance-claims/
+
 [CARD] Emergency Roof Repair \| Water coming in right now? Call us. \| /emergency-roof-repair/
 
 [CARD] Free Roof Inspection \| A detailed inspection and a straight answer. \| /free-roof-inspection/
@@ -318,7 +320,7 @@ CTA
 
 [CTA SECONDARY] Call or text (703) 677-1976
 
-Internal links on this page: all 12 service pages · /financing/ · / (breadcrumb)
+Internal links on this page: all 13 service pages · /financing/ · / (breadcrumb)
 
 ------------------------------------------------------------------------
 
@@ -380,7 +382,7 @@ Cities
 
 [CARD] Fairfax Station \| Roof replacement, repair and storm damage help for Fairfax Station homes. \| /service-areas/fairfax-station-va/
 
-[CARD] Arlington \| Coming soon \| /service-areas/arlington-va/ (month 3)
+[CARD] Arlington \| Roof repair and replacement for Arlington homes and townhouses. \| /service-areas/arlington-va/
 
 [CARD] McLean \| Coming soon \| /service-areas/mclean-va/ (month 3)
 

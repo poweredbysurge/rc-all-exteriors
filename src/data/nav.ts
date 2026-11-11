@@ -16,6 +16,7 @@ export const services: Service[] = [
   { href: '/roof-repair/', label: 'Roof Repair', icon: 'droplet', group: 'roofing', serviceType: 'Roof Repair' },
   { href: '/emergency-roof-repair/', label: 'Emergency Roof Repair', icon: 'phone', group: 'roofing', serviceType: 'Emergency Roof Repair' },
   { href: '/storm-damage-roof-repair/', label: 'Storm Damage', icon: 'cloud-lightning', group: 'roofing', serviceType: 'Storm Damage Roof Repair' },
+  { href: '/insurance-claims/', label: 'Insurance Claims', icon: 'file-check', group: 'roofing', serviceType: 'Roof Insurance Claim Assistance' },
   { href: '/free-roof-inspection/', label: 'Free Roof Inspection', icon: 'clipboard-check', group: 'roofing', serviceType: 'Roof Inspection' },
   { href: '/certainteed-roofing/', label: 'CertainTeed Roofing', icon: 'award', group: 'roofing', serviceType: 'CertainTeed Roof Installation' },
   { href: '/metal-roofing/', label: 'Metal Roofing', icon: 'layers', group: 'roofing', serviceType: 'Metal Roof Installation' },
@@ -54,7 +55,7 @@ export const cities: City[] = [
   { name: 'Lorton', slug: 'lorton-va', href: '/service-areas/lorton-va/', lat: 38.7043, lon: -77.2278 },
   { name: 'Alexandria', slug: 'alexandria-va', href: '/service-areas/alexandria-va/', lat: 38.8048, lon: -77.0469 },
   { name: 'Fairfax Station', slug: 'fairfax-station-va', href: '/service-areas/fairfax-station-va/', lat: 38.8007, lon: -77.3255 },
-  { name: 'Arlington', slug: 'arlington-va', href: null, lat: 38.8816, lon: -77.091 },
+  { name: 'Arlington', slug: 'arlington-va', href: '/service-areas/arlington-va/', lat: 38.8816, lon: -77.091 },
   { name: 'McLean', slug: 'mclean-va', href: null, lat: 38.9339, lon: -77.1773 },
   { name: 'Great Falls', slug: 'great-falls-va', href: null, lat: 38.9982, lon: -77.2883 },
 ];
@@ -79,6 +80,7 @@ export const footerAreas = [
   { href: '/service-areas/springfield-va/', label: 'Springfield' },
   { href: '/service-areas/alexandria-va/', label: 'Alexandria' },
   { href: '/service-areas/fairfax-station-va/', label: 'Fairfax Station' },
+  { href: '/service-areas/arlington-va/', label: 'Arlington' },
   { href: '/service-areas/', label: 'All service areas' },
 ];
 
@@ -124,6 +126,7 @@ const batchOf: Record<string, string> = {
   '/roof-repair/': 'batch-1.md',
   '/storm-damage-roof-repair/': 'batch-1.md',
   '/emergency-roof-repair/': 'batch-2.md',
+  '/insurance-claims/': 'batch-8.md',
   '/windows-doors/': 'batch-3.md',
   '/gutters/': 'batch-3.md',
   '/siding/': 'batch-3.md',
@@ -166,7 +169,7 @@ export const resourceLinks = [
 ];
 
 // City pages after the launch three live in their own batch.
-const cityBatch: Record<string, string> = { 'alexandria-va': 'batch-6.md', 'fairfax-station-va': 'batch-7.md' };
+const cityBatch: Record<string, string> = { 'alexandria-va': 'batch-6.md', 'fairfax-station-va': 'batch-7.md', 'arlington-va': 'batch-8.md' };
 
 export const routes: RouteEntry[] = [
   { path: '/', label: 'Home', kind: 'home', sources: ['src/pages/index.astro', 'copy/batch-1.md'] },
