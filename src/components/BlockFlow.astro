@@ -4,6 +4,7 @@
 // (steps, cards, reviews, FAQ) are composed in ContentSection.astro.
 import Bullets from './Bullets.astro';
 import Checklist from './Checklist.astro';
+import CopyTable from './CopyTable.astro';
 import Figure from './Figure.astro';
 import Icon from './Icon.astro';
 import IconHeading from './IconHeading.astro';
@@ -56,6 +57,8 @@ let image = 0;
           const titled = asTitled(block.items);
           return titled ? <Checklist items={titled} columns={checklistColumns} /> : <Bullets items={block.items} />;
         }
+        case 'table':
+          return <CopyTable rows={block.rows} />;
         case 'links':
           return (
             <div class="flex flex-col">

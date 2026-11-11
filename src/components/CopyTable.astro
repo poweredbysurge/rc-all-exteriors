@@ -1,0 +1,33 @@
+---
+// A copy [TABLE]: the first row is the header. An empty corner cell
+// ("| | Landmark | Landmark Pro |") makes the first column row headings; a
+// named first column ("| Type | ...") is an ordinary column with its own
+// heading and stacked label (ADR-021). Stacks into cards below 640px.
+// Used by the guides and, since ADR-023, by service pages.
+import Rich from './Rich.astro';
+import { plain, type Inline } from '@/lib/copy';
+
+interface Props {
+  rows: Inline[][][];
+}
+const [head, ...rows] = Astro.props.rows;
+const labels = head.map((cell) => plain(cell));
+const rowHeads = labels[0] === '';
+---
+
+<div class="table-wrap" data-stack>
+  <table>
+    <thead>
+      <tr>
+        {head.map((cell, i) => (i === 0 && rowHeads ? <td class="!border-t-0 bg-surface-muted" /> : <th scope="col"><Rich inline={cell} /></th>))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr>
+          {row.map((cell, i) => (i === 0 && rowHeads ? <th scope="row"><Rich inline={cell} /></th> : <td data-label={labels[i]}><Rich inline={cell} /></td>))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

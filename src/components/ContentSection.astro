@@ -1,6 +1,6 @@
 ---
 // Lays out one section of approved copy. The layout follows from what the
-// section contains, so the eleven service pages, the trust pages and the hubs
+// section contains, so the service pages, the trust pages and the hubs
 // all come from the copy batches without a page of hand-placed markup each:
 //
 //   prose     paragraphs only: a centered reading column
@@ -26,7 +26,7 @@ import type { PhotoKey } from '@/data/photos';
 import { groupByH3, iconFor, kindOf } from '@/lib/blocks';
 import { blocksOf, first, plain, type Block, type Section as CopySection } from '@/lib/copy';
 import { pickReviews } from '@/lib/pick-reviews';
-import { getReviews } from '@/lib/reviews';
+import { getReviews, quotedReview } from '@/lib/reviews';
 
 type StepMedia = PhotoKey | { gap: string; icon?: string } | null;
 interface Props {
@@ -57,7 +57,11 @@ const not = (...types: Block['type'][]) => rest.filter((b) => !types.includes(b.
 const steps = first(section, 'steps');
 const cards = blocksOf(section, 'card').filter((c) => c.href && !c.template);
 const reviewSlots = blocksOf(section, 'review');
-const live = reviewSlots.length ? pickReviews((await getReviews()).reviews, reviewSlots.map((r) => r.hint)) : [];
+// A slot is either a hint, filled from the live reviews, or a fixed verbatim
+// quote from the copy (ADR-017), which renders as written.
+const liveReviews = reviewSlots.length ? (await getReviews()).reviews : [];
+const picked = reviewSlots.length ? pickReviews(liveReviews, reviewSlots.map((r) => r.hint)) : [];
+const live = reviewSlots.map((slot, i) => quotedReview(slot.hint, liveReviews) ?? picked[i]);
 const { lead, groups } = groupByH3(rest);
 
 const cardCols = cards.length >= 4 && cards.length % 3 !== 0 ? 'md:grid-cols-2 xl:grid-cols-4' : cards.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
@@ -174,6 +178,7 @@ const cardCols = cards.length >= 4 && cards.length % 3 !== 0 ? 'md:grid-cols-2 x
             <ReviewCard review={live[i]} hint={slot.hint} class="reveal" />
           ))}
         </div>
+        {images && images.length > 0 && blocksOf(section, 'image').length > 0 && <BlockFlow blocks={blocksOf(section, 'image')} images={images} />}
         {blocksOf(section, 'links').length > 0 && <BlockFlow blocks={blocksOf(section, 'links')} />}
       </div>
     )

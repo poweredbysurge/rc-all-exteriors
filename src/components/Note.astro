@@ -1,0 +1,18 @@
+---
+// A copy [NOTE]: a visible disclaimer callout (ADR-018). On guides it closes
+// the article; on a service page it sits under the FAQ (ADR-023).
+import Icon from './Icon.astro';
+import Rich from './Rich.astro';
+import type { Inline } from '@/lib/copy';
+
+interface Props {
+  inline: Inline[];
+  class?: string;
+}
+const { inline, class: className } = Astro.props;
+---
+
+<aside role="note" class:list={['flex gap-3 rounded-lg border border-border bg-surface-muted p-5', className]}>
+  <Icon name="info" size={24} class="shrink-0 text-accent" />
+  <p class="rich m-0 text-fg-muted"><Rich inline={inline} /></p>
+</aside>

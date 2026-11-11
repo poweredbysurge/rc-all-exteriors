@@ -230,7 +230,9 @@
     color: var(--color-fg-inverse);
   }
   /* A light card inside a dark band keeps the light-surface link color. */
-  .on-dark [data-lead-card] .rich a:not(.btn):not(.chip) {
+  .on-dark [data-lead-card] .rich a:not(.btn):not(.chip),
+  .on-dark .bg-accent-tint .rich a:not(.btn):not(.chip),
+  .on-dark .bg-accent-tint.rich a:not(.btn):not(.chip) {
     color: var(--color-accent);
   }
   .on-dark [data-lead-card] :focus-visible {
@@ -576,13 +578,13 @@
    go inverse, except inside anything that paints its own light surface
    (lead card, cards, dropdown panel, stat strip box, figures). Unlayered on
    purpose so it beats the utility layer. */
-.on-dark :is(.text-fg, .text-accent):not(:is(.bg-surface, .card, .dropdown-panel, [data-lead-card]) *) {
+.on-dark :is(.text-fg, .text-accent):not(:is(.bg-surface, .bg-accent-tint, .card, .dropdown-panel, [data-lead-card]) *) {
   color: var(--color-fg-inverse);
 }
-.on-dark :is(.text-fg-muted, .text-fg-subtle):not(:is(.bg-surface, .card, .dropdown-panel, [data-lead-card]) *) {
+.on-dark :is(.text-fg-muted, .text-fg-subtle):not(:is(.bg-surface, .bg-accent-tint, .card, .dropdown-panel, [data-lead-card]) *) {
   color: var(--color-fg-inverse-muted);
 }
-.on-dark .bg-accent:not(:is(.bg-surface, .card, [data-lead-card]) *) {
+.on-dark .bg-accent:not(:is(.bg-surface, .bg-accent-tint, .card, [data-lead-card]) *) {
   background: var(--color-fg-inverse);
 }
 .on-dark figure .border-border-subtle {

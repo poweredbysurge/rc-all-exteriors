@@ -6,15 +6,20 @@
 // [CTA] drawn mid-article, the [NOTE] as a callout. The FAQ, related links and
 // the lead card close the page. Article schema names the owner by the same
 // Person @id the About page defines.
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { getImage } from 'astro:assets';
+import sharp from 'sharp';
 import Base from '@/layouts/Base.astro';
 import Bullets from '@/components/Bullets.astro';
+import CopyTable from '@/components/CopyTable.astro';
 import Cta from '@/components/Cta.astro';
 import Eyebrow from '@/components/Eyebrow.astro';
 import Faq from '@/components/Faq.astro';
 import Figure from '@/components/Figure.astro';
 import Icon from '@/components/Icon.astro';
 import LeadCard from '@/components/LeadCard.astro';
+import Note from '@/components/Note.astro';
 import PageHero from '@/components/PageHero.astro';
 import Rich from '@/components/Rich.astro';
 import Section from '@/components/Section.astro';
@@ -49,14 +54,39 @@ const ctaAfter = withH2[Math.ceil(withH2.length / 2) - 1];
 
 // [IMAGE] slots, by route. A real RC photo, captioned as the registry captions
 // it: the guide does not claim it shows a particular shingle line.
-const IMAGES: Record<string, PhotoKey[]> = {
+//
+// An illustration is not a job photo and is never passed off as one (ADR-023):
+// it lives in public/images/guides/, carries its own alt text and a caption
+// that says it is an illustration, and draws only when the file exists, so a
+// missing file never blocks the build.
+interface Illustration {
+  file: string;
+  alt: string;
+  caption: string;
+}
+const IMAGES: Record<string, (PhotoKey | Illustration)[]> = {
   '/guides/certainteed-landmark-shingles/': ['colonialFront'],
+  '/guides/storm-damage-checklist/': [
+    {
+      file: '/images/guides/hail-damage-illustration.webp',
+      alt: 'Illustration of hail impact marks on asphalt shingles.',
+      caption: "Illustration, not a photo of a customer's roof.",
+    },
+  ],
 };
 const images = [...(IMAGES[path] ?? [])];
+const photoKeys = images.filter((slot): slot is PhotoKey => typeof slot === 'string');
+async function illustration(slot: Illustration) {
+  // The build runs from the repo root; import.meta.url points into the bundle.
+  const onDisk = join(process.cwd(), 'public', slot.file);
+  if (!existsSync(onDisk)) return null;
+  const { width, height } = await sharp(onDisk).metadata();
+  return { ...slot, width, height };
+}
 
 const related = page.internalLinks.filter((href) => href !== path && routeByPath.has(href));
 const shareImages = [rebase('/og/default.jpg')];
-for (const key of IMAGES[path] ?? []) {
+for (const key of photoKeys) {
   const img = await getImage({ src: photos[key].src, width: 1200, format: 'webp', quality: 80 });
   shareImages.unshift(rebase(img.src));
 }
@@ -126,35 +156,23 @@ const [authorLead, ...authorRest] = plain(byline?.author ?? []).split(', ');
                         ))}
                       </ol>
                     );
-                  case 'table': {
-                    const [head, ...rows] = b.rows;
-                    const labels = head.map((cell) => plain(cell));
-                    // An empty corner cell (guide 2's "| | Landmark | Landmark Pro |") makes the
-                    // first column row headings. A named first column ("| Type | ...") is an
-                    // ordinary column with its own heading and stacked label (ADR-021).
-                    const rowHeads = labels[0] === '';
-                    return (
-                      <div class="table-wrap" data-stack>
-                        <table>
-                          <thead>
-                            <tr>
-                              {head.map((cell, i) => (i === 0 && rowHeads ? <td class="!border-t-0 bg-surface-muted" /> : <th scope="col"><Rich inline={cell} /></th>))}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {rows.map((row) => (
-                              <tr>
-                                {row.map((cell, i) => (i === 0 && rowHeads ? <th scope="row"><Rich inline={cell} /></th> : <td data-label={labels[i]}><Rich inline={cell} /></td>))}
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    );
-                  }
+                  case 'table':
+                    return <CopyTable rows={b.rows} />;
                   case 'image': {
-                    const key = images.shift();
-                    return key ? <Figure photo={key} ratio={3 / 2} sizes="(min-width: 1024px) 720px, 92vw" class="reveal" /> : null;
+                    const slot = images.shift();
+                    if (!slot) return null;
+                    if (typeof slot === 'string') return <Figure photo={slot} ratio={3 / 2} sizes="(min-width: 1024px) 720px, 92vw" class="reveal" />;
+                    return illustration(slot).then(
+                      (art) =>
+                        art && (
+                          <figure class="reveal m-0 flex min-w-0 flex-col gap-2">
+                            <div class="overflow-hidden rounded-lg border border-border-subtle bg-surface-subtle">
+                              <img src={art.file} alt={art.alt} width={art.width} height={art.height} loading="lazy" decoding="async" class="block h-auto w-full" />
+                            </div>
+                            <figcaption class="text-body-sm leading-snug font-medium text-fg-subtle" data-sm>{art.caption}</figcaption>
+                          </figure>
+                        ),
+                    );
                   }
                   default:
                     return null;
@@ -173,10 +191,7 @@ const [authorLead, ...authorRest] = plain(byline?.author ?? []).split(', ');
         }
         {
           note && first(note, 'note') && (
-            <aside role="note" class="mt-4 flex gap-3 rounded-lg border border-border bg-surface-muted p-5">
-              <Icon name="info" size={24} class="shrink-0 text-accent" />
-              <p class="rich m-0 text-fg-muted"><Rich inline={first(note, 'note')!.inline} /></p>
-            </aside>
+<Note inline={first(note, 'note')!.inline} class="mt-4" />
           )
         }
       </article>

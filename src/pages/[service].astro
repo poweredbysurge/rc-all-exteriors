@@ -1,6 +1,6 @@
 ---
 // Service hub template (roof-replacement-390, roof-replacement-1440), used by
-// all eleven service pages. Copy: batches 1 to 4. Sections render in the
+// every service page. Copy: batches 1 to 4, and batch 8 for insurance claims. Sections render in the
 // copy's order. One body section is the page's dark band and the CTA band sits
 // after the process section, or below the FAQ when that would put two dark
 // bands within a section of each other (src/lib/rhythm.ts, ADR-006).
@@ -12,6 +12,7 @@ import Faq from '@/components/Faq.astro';
 import Figure from '@/components/Figure.astro';
 import Hero from '@/components/Hero.astro';
 import Icon from '@/components/Icon.astro';
+import Note from '@/components/Note.astro';
 import PhotoGap from '@/components/PhotoGap.astro';
 import Rich from '@/components/Rich.astro';
 import Section from '@/components/Section.astro';
@@ -43,6 +44,8 @@ const hero = section(page, 'Hero');
 const cta = section(page, 'CTA');
 const faqSection = page.sections.find((s) => blocksOf(s, 'faq').length > 0) ?? null;
 const body = page.sections.filter((s) => s !== hero && s !== cta && s !== faqSection);
+// A [NOTE] in the copy (the insurance claims disclaimer) is a callout under the FAQ (ADR-023).
+const note = page.sections.flatMap((s) => blocksOf(s, 'note'))[0] ?? null;
 
 // The CTA band follows the process section when there is one with more page
 // after it; otherwise it sits just above the FAQ.
@@ -217,7 +220,10 @@ const slotImages = IMAGE_SLOTS[path] ?? [];
       <Section bg={faqBg} name="FAQ">
         <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
           <h2 class="heading text-h2 text-fg"><Rich inline={first(faqSection, 'h2')!.inline} /></h2>
-          <Faq faqs={blocksOf(faqSection, 'faq')} />
+          <div class="flex flex-col gap-6">
+            <Faq faqs={blocksOf(faqSection, 'faq')} />
+            {note && <Note inline={note.inline} />}
+          </div>
         </div>
       </Section>
     )
