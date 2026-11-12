@@ -6,10 +6,7 @@
 // [CTA] drawn mid-article, the [NOTE] as a callout. The FAQ, related links and
 // the lead card close the page. Article schema names the owner by the same
 // Person @id the About page defines.
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
 import { getImage } from 'astro:assets';
-import sharp from 'sharp';
 import Base from '@/layouts/Base.astro';
 import Bullets from '@/components/Bullets.astro';
 import CopyTable from '@/components/CopyTable.astro';
@@ -54,26 +51,56 @@ const ctaAfter = withH2[Math.ceil(withH2.length / 2) - 1];
 
 // [IMAGE] slots, by route. A real RC photo, captioned as the registry captions
 // it: the guide does not claim it shows a particular shingle line.
-//
-// An illustration is not a job photo and is never passed off as one (ADR-023):
-// it lives in public/images/guides/, carries its own alt text and a caption
-// that says it is an illustration, and draws only when the file exists, so a
-// missing file never blocks the build.
-interface Illustration {
-  file: string;
-  alt: string;
-  caption: string;
-}
-const IMAGES: Record<string, (PhotoKey | Illustration)[]> = {
+const IMAGES: Record<string, PhotoKey[]> = {
   '/guides/certainteed-landmark-shingles/': ['colonialFront'],
-  '/guides/storm-damage-checklist/': [
-    {
-      file: '/images/guides/hail-damage-illustration.webp',
-      alt: 'Illustration of hail impact marks on asphalt shingles.',
-      caption: "Illustration, not a photo of a customer's roof.",
-    },
-  ],
+  '/guides/storm-damage-checklist/': ['guideStormHail'],
 };
+// Body illustrations, by route and H2 (ADR-023 addendum). Each draws after the
+// first block under its H2 (paragraph, table, list or steps), lazy, at a fixed
+// 3:2 frame so nothing shifts. They are AI illustrations, captioned
+// "(illustration)" in the registry, never presented as RC jobs, and are swapped
+// for Ricardo's job photos as he sends them. The copy is not touched.
+const BODY_IMAGES: Record<string, Record<string, PhotoKey>> = {
+  '/guides/roof-replacement-cost/': {
+    'What moves the price': 'guideCostTearoff',
+    'How to compare three estimates': 'guideCostDecking',
+  },
+  '/guides/storm-damage-checklist/': {
+    'The first hour': 'guideStormTarp',
+    'Hail or wind? How to tell from the ground': 'guideStormWind',
+  },
+  '/guides/gutter-installation-cost/': {
+    'Repair or replace?': 'guideGuttersSagging',
+    'What a gutter job looks like with us': 'guideGuttersInstall',
+  },
+  '/guides/gutter-guards-cost/': {
+    'The five main types, and what they handle': 'guideGuardsCover',
+    'Guards or new gutters?': 'guideGuardsOverflow',
+  },
+  '/guides/roof-repair-or-replacement/': {
+    'How old is your roof?': 'guideRepairAging',
+    'What we check on the roof': 'guideRepairFlashing',
+    "When a repair won't match": 'guideRepairMismatch',
+  },
+  '/guides/does-insurance-cover-roof-replacement/': {
+    'Repair or full replacement?': 'guideInsuranceAdjuster',
+    'How a roof claim goes, step by step': 'guideInsurancePhotos',
+  },
+  '/guides/certainteed-landmark-shingles/': {
+    'Side by side': 'guideLandmarkShingles',
+    'Why algae protection matters here': 'guideLandmarkAlgae',
+  },
+};
+const CONTENT = new Set(['p', 'table', 'list', 'steps']);
+const imageAfter = new Map<object, PhotoKey>();
+for (const [h2Text, key] of Object.entries(BODY_IMAGES[path] ?? {})) {
+  const s = body.find((sec) => sec.blocks.some((b) => b.type === 'h2' && plain(b.inline) === h2Text));
+  const blocks = s?.blocks ?? [];
+  const at = blocks.findIndex((b) => b.type === 'h2' && plain(b.inline) === h2Text);
+  const target = blocks.slice(at + 1).find((b) => CONTENT.has(b.type));
+  if (!target) throw new Error(`${path}: no content block under H2 "${h2Text}" for ${key}`);
+  imageAfter.set(target, key);
+}
 // Hero style by route (ADR-024, PAGE-TEMPLATES rule 15). A guide listed here
 // gets the split hero with this registry photo; the rest keep the text hero.
 // The photo is a real RC job and is not one of the guide's [IMAGE] slots.
@@ -82,14 +109,8 @@ const HERO_PHOTO: Record<string, PhotoKey> = {
 };
 const heroPhoto = HERO_PHOTO[path] ?? null;
 const images = [...(IMAGES[path] ?? [])];
-const photoKeys = images.filter((slot): slot is PhotoKey => typeof slot === 'string');
-async function illustration(slot: Illustration) {
-  // The build runs from the repo root; import.meta.url points into the bundle.
-  const onDisk = join(process.cwd(), 'public', slot.file);
-  if (!existsSync(onDisk)) return null;
-  const { width, height } = await sharp(onDisk).metadata();
-  return { ...slot, width, height };
-}
+// Illustrations stay out of the Article schema images: only real job photos go there.
+const photoKeys = images.filter((key) => photos[key].job !== 'Illustration');
 
 const related = page.internalLinks.filter((href) => href !== path && routeByPath.has(href));
 const shareImages = [rebase('/og/default.jpg')];
@@ -142,8 +163,9 @@ const [authorLead, ...authorRest] = plain(byline?.author ?? []).split(', ');
         {
           body.map((s, si) => (
             <Fragment>
-              {s.blocks.map((b, bi) => {
-                switch (b.type) {
+              {s.blocks.map((b, bi) => (
+                <Fragment>
+                {(() => { switch (b.type) {
                   case 'h2':
                     return <h2 id={idOf(b.inline)} class="heading mt-6 scroll-mt-28 text-h2 text-fg"><Rich inline={b.inline} linkPhone={false} /></h2>;
                   case 'p':
@@ -168,23 +190,14 @@ const [authorLead, ...authorRest] = plain(byline?.author ?? []).split(', ');
                   case 'image': {
                     const slot = images.shift();
                     if (!slot) return null;
-                    if (typeof slot === 'string') return <Figure photo={slot} ratio={3 / 2} sizes="(min-width: 1024px) 720px, 92vw" class="reveal" />;
-                    return illustration(slot).then(
-                      (art) =>
-                        art && (
-                          <figure class="reveal m-0 flex min-w-0 flex-col gap-2">
-                            <div class="overflow-hidden rounded-lg border border-border-subtle bg-surface-subtle">
-                              <img src={art.file} alt={art.alt} width={art.width} height={art.height} loading="lazy" decoding="async" class="block h-auto w-full" />
-                            </div>
-                            <figcaption class="text-body-sm leading-snug font-medium text-fg-subtle" data-sm>{art.caption}</figcaption>
-                          </figure>
-                        ),
-                    );
+                    return <Figure photo={slot} ratio={3 / 2} sizes="(min-width: 1024px) 720px, 92vw" class="reveal" />;
                   }
                   default:
                     return null;
-                }
-              })}
+                } })()}
+                {imageAfter.has(b) && <Figure photo={imageAfter.get(b)!} ratio={3 / 2} sizes="(min-width: 1024px) 720px, 92vw" class="reveal" />}
+                </Fragment>
+              ))}
               {
                 s === ctaAfter && cta && first(cta, 'action') && (
                   <aside class="on-dark my-4 flex flex-col gap-4 rounded-lg bg-surface-contrast p-6 lg:p-8" aria-label="Free roof inspection">
