@@ -62,6 +62,8 @@ const IMAGES: Record<string, PhotoKey[]> = {
 // for Ricardo's job photos as he sends them. The copy is not touched.
 const BODY_IMAGES: Record<string, Record<string, PhotoKey>> = {
   '/guides/roof-replacement-cost/': {
+    // A real RC job photo: the guide's third body image (PAGE-TEMPLATES 4.4, blog and guide images).
+    'The national numbers': 'underlayment',
     'What moves the price': 'guideCostTearoff',
     'How to compare three estimates': 'guideCostDecking',
   },
@@ -70,10 +72,12 @@ const BODY_IMAGES: Record<string, Record<string, PhotoKey>> = {
     'Hail or wind? How to tell from the ground': 'guideStormWind',
   },
   '/guides/gutter-installation-cost/': {
+    'Cost per foot by material': 'guideGuttersCorner',
     'Repair or replace?': 'guideGuttersSagging',
     'What a gutter job looks like with us': 'guideGuttersInstall',
   },
   '/guides/gutter-guards-cost/': {
+    'What gutter guards cost': 'guideGuardsCleaning',
     'The five main types, and what they handle': 'guideGuardsCover',
     'Guards or new gutters?': 'guideGuardsOverflow',
   },
@@ -83,6 +87,7 @@ const BODY_IMAGES: Record<string, Record<string, PhotoKey>> = {
     "When a repair won't match": 'guideRepairMismatch',
   },
   '/guides/does-insurance-cover-roof-replacement/': {
+    "What insurance covers, and what it doesn't": 'guideInsuranceTree',
     'Repair or full replacement?': 'guideInsuranceAdjuster',
     'How a roof claim goes, step by step': 'guideInsurancePhotos',
   },
@@ -109,15 +114,37 @@ const HERO_PHOTO: Record<string, PhotoKey> = {
 };
 const heroPhoto = HERO_PHOTO[path] ?? null;
 const images = [...(IMAGES[path] ?? [])];
-// Illustrations stay out of the Article schema images: only real job photos go there.
-const photoKeys = images.filter((key) => photos[key].job !== 'Illustration');
 
 const related = page.internalLinks.filter((href) => href !== path && routeByPath.has(href));
-const shareImages = [rebase('/og/default.jpg')];
-for (const key of photoKeys) {
-  const img = await getImage({ src: photos[key].src, width: 1200, format: 'webp', quality: 80 });
-  shareImages.unshift(rebase(img.src));
-}
+
+// Every body image in page order: the copy's [IMAGE] slots and BODY_IMAGES.
+const slotQueue = [...images];
+const bodyKeys: PhotoKey[] = [];
+for (const s of body)
+  for (const b of s.blocks) {
+    if (b.type === 'image' && slotQueue.length) bodyKeys.push(slotQueue.shift()!);
+    if (imageAfter.has(b)) bodyKeys.push(imageAfter.get(b)!);
+  }
+// The img title is the caption without the "(illustration)" label.
+const titleOf = (key: PhotoKey) => photos[key].caption.replace(/\s*\(illustration\)$/, '');
+
+// Article schema: the hero photo, then every body image, as ImageObjects with
+// absolute URLs (PAGE-TEMPLATES 4.4, blog and guide images).
+const schemaKeys = [...(heroPhoto ? [heroPhoto] : []), ...bodyKeys];
+const schemaImages = await Promise.all(
+  schemaKeys.map(async (key) => {
+    const src = photos[key].src;
+    const width = Math.min(1200, src.width);
+    const img = await getImage({ src, width, format: 'webp', quality: 80 });
+    return { '@type': 'ImageObject', url: rebase(img.src), width, height: Math.round((width * src.height) / src.width), caption: photos[key].caption };
+  }),
+);
+// Share card: the hero photo, or the first body image, cut to 1200 x 630.
+const shareKey = schemaKeys[0];
+const share = shareKey
+  ? await getImage({ src: photos[shareKey].src, width: 1200, height: 630, fit: 'cover', position: photos[shareKey].focus ?? 'center', format: 'webp', quality: 80 })
+  : null;
+const ogImage = share ? { url: rebase(share.src), width: 1200, height: 630, alt: photos[shareKey!].alt } : undefined;
 const h1 = plain(first(hero, 'h1')!.inline);
 const [authorLead, ...authorRest] = plain(byline?.author ?? []).split(', ');
 ---
@@ -128,8 +155,9 @@ const [authorLead, ...authorRest] = plain(byline?.author ?? []).split(', ');
   path={path}
   hasLeadCard
   confirmMeta={meta.confirmMeta}
+  ogImage={ogImage}
   schema={[
-    articleSchema({ path, headline: h1, description: meta.description, published: page.published, modified: page.modified, images: shareImages }),
+    articleSchema({ path, headline: h1, description: meta.description, published: page.published, modified: page.modified, images: schemaImages }),
     faqSchema(faqs(page)),
   ]}
 >
@@ -190,12 +218,12 @@ const [authorLead, ...authorRest] = plain(byline?.author ?? []).split(', ');
                   case 'image': {
                     const slot = images.shift();
                     if (!slot) return null;
-                    return <Figure photo={slot} ratio={3 / 2} sizes="(min-width: 1024px) 720px, 92vw" class="reveal" />;
+                    return <Figure photo={slot} ratio={3 / 2} sizes="(min-width: 1024px) 720px, 92vw" class="reveal" title={titleOf(slot)} intrinsic />;
                   }
                   default:
                     return null;
                 } })()}
-                {imageAfter.has(b) && <Figure photo={imageAfter.get(b)!} ratio={3 / 2} sizes="(min-width: 1024px) 720px, 92vw" class="reveal" />}
+                {imageAfter.has(b) && <Figure photo={imageAfter.get(b)!} ratio={3 / 2} sizes="(min-width: 1024px) 720px, 92vw" class="reveal" title={titleOf(imageAfter.get(b)!)} intrinsic />}
                 </Fragment>
               ))}
               {

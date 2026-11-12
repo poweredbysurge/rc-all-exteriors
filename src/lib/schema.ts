@@ -146,7 +146,7 @@ export function personSchema() {
 }
 
 /** Article for a guide: headline, the owner as author, the business as publisher. */
-export function articleSchema(opts: { path: string; headline: string; description: string; published: string; modified: string | null; images: string[] }) {
+export function articleSchema(opts: { path: string; headline: string; description: string; published: string; modified: string | null; images: (string | Record<string, unknown>)[] }) {
   return {
     '@type': 'Article',
     '@id': `${rebase(opts.path)}#article`,

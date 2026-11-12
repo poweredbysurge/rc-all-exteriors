@@ -32,6 +32,8 @@ interface Props {
   hasLeadCard?: boolean;
   /** CONFIRM slots that live in the title or meta description, surfaced for check-integrity. */
   confirmMeta?: string[];
+  /** A page's own share image (guides: hero or first body image), absolute URL. Overrides `og`. */
+  ogImage?: { url: string; width: number; height: number; alt: string };
 }
 const {
   title,
@@ -42,10 +44,13 @@ const {
   schema = [],
   hasLeadCard = false,
   confirmMeta = [],
+  ogImage: pageShare,
 } = Astro.props;
 
 const canonical = rebase(path);
+// The business schema keeps the site card; og and twitter take the page's own when it has one.
 const ogImage = rebase(`/og/${og}.jpg`);
+const share = pageShare ?? { url: ogImage, width: 1200, height: 630, alt: null };
 
 // Case studies and blog posts are text-led pages added from data or copy, so
 // they need no map entry.
@@ -101,14 +106,16 @@ const gaId = import.meta.env.PUBLIC_GA_ID as string | undefined;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content={share.url} />
+    <meta property="og:image:width" content={String(share.width)} />
+    <meta property="og:image:height" content={String(share.height)} />
+    {share.alt && <meta property="og:image:alt" content={share.alt} />}
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={share.url} />
+    {share.alt && <meta name="twitter:image:alt" content={share.alt} />}
 
     <script type="application/ld+json" set:html={jsonLd} />
 
