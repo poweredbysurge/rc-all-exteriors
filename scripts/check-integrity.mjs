@@ -185,6 +185,19 @@ for (const file of htmlFiles) {
     if (!eager && !inHeader && img.getAttribute('loading') !== 'lazy') fail(route, `below-the-fold <img> is not lazy: ${src}`);
     if (/\.(jpe?g|png)(\?|$)/i.test(src)) fail(route, `JPG or PNG served in an <img>: ${src}`);
   }
+  // Guide body images (PAGE-TEMPLATES 4.4, blog and guide images): at least 3 figures in the
+  // article, each with alt text and a figcaption.
+  if (route.startsWith('/guides/') && route !== '/guides/') {
+    const figures = doc.querySelectorAll('article figure');
+    if (figures.length < 3) fail(route, `${figures.length} body <figure> images, the guide template needs at least 3`);
+    for (const fig of figures) {
+      const img = fig.querySelector('img');
+      const src = img?.getAttribute('src') ?? '(no img)';
+      if (!img?.getAttribute('alt')?.trim()) fail(route, `body image without alt text: ${src}`);
+      if (!fig.querySelector('figcaption')?.text.trim()) fail(route, `body image without a figcaption: ${src}`);
+    }
+  }
+
   // LCP preload
   const heroImg = doc.querySelector('[data-hero] img[fetchpriority="high"]');
   const preloads = doc.querySelectorAll('link[rel="preload"][as="image"]');
