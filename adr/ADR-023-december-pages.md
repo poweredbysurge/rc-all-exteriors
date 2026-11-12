@@ -42,3 +42,13 @@ All seven guides now carry two or three body images (16 in all). They are AI ill
 - They are lazy loaded in a fixed 3:2 frame. No guide's hero or LCP changed.
 - The storm guide's hail slot (decision 7) is now `guideStormHail` through its existing copy `[IMAGE]` slot after the wind and hail table. The `public/images/guides/` file path and its draw-only-if-present code are gone.
 - The gutter guards guide's cover image is a generic perforated cover. It is not captioned or described as Leaf Relief. The Landmark guide's shingle close-up does not name the brand.
+
+## Addendum, 2026-11-12 (later): three more images, image meta, the 3-image rule
+
+- **Rule** (PAGE-TEMPLATES v1.7, section 4.4): every blog or guide has at least 3 body images, placed under different H2s. Use the client's real job photos first, then labeled Higgsfield illustrations. Every image has alt, title, figcaption, width, height, lazy loading, a descriptive file name and an entry in the Article schema `image`. `npm run check` fails a guide with fewer than 3 body figures, or a body image without alt or a figcaption.
+- Three more illustrations: `guideGuttersCorner` (Cost per foot by material), `guideGuardsCleaning` (What gutter guards cost) and `guideInsuranceTree` (What insurance covers, and what it doesn't).
+- The roof replacement cost guide had two body images. Its third is a real RC photo, `underlayment` (Roof replacement in progress), under "The national numbers", per the real-photos-first rule. Its hero photo sits outside the article and does not count.
+- Body images now carry `title` (the caption without "(illustration)") and width and height from the source file (`Figure` `intrinsic`). The 3:2 frame still sets the drawn size.
+- **This supersedes the first addendum's schema line.** The Article `image` is now the hero photo (if any), then every body image, each an `ImageObject` with an absolute URL, width, height and caption. Illustrations are included, and their captions say "(illustration)".
+- `og:image` and `twitter:image` on each guide are its hero photo, or else its first body image, cut to 1200 x 630 WebP, with an image alt. Other pages keep the site cards. The business schema keeps the site card.
+- File names: the source files are the descriptive names given (`src/assets/photos/guide-*.webp`). Served URLs keep that name plus Astro's content hash (`/_astro/guide-storm-hail.<hash>_<hash>.webp`), which is how the image pipeline busts caches.

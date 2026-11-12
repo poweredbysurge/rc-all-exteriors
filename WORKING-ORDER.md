@@ -6,6 +6,8 @@
 
 **Open:** swap each illustration for Ricardo's job photos as they arrive (change the key in `BODY_IMAGES`). The hail slot is filled.
 
+**Later the same day:** 3 more illustrations (gutter corner, guards cleaning, insurance tree) plus RC's `underlayment` photo as the cost guide's third, so every guide now has 3 body images. Body images carry `title` and width and height from the source file. The Article schema lists the hero and every body image as `ImageObject`, and each guide's og and twitter image is its hero or first body image. `npm run check` fails a guide with fewer than 3 body figures, or a body image without alt or a figcaption. The rule is in PAGE-TEMPLATES v1.7 section 4.4 (workspace) and in the ADR-023 second addendum.
+
 **Push note:** big image pushes need `git -c http.postBuffer=157286400 push origin main` (HTTP 400 otherwise).
 
 ## 2026-11-11, evening: rotating hero styles (ADR-024). NOT built, NOT pushed
