@@ -32,3 +32,13 @@ The Nov 18 to Dec 17 batch is final in the workspace (`clients/rc-all-exterior/c
 - When the hail illustration is saved to `public/images/guides/hail-damage-illustration.webp`, the next push shows it. Nothing else changes.
 - Brandon Renz's quote in the storm guide is trimmed from his review, and John W Allen's sentence stops before the review's list of what was replaced. Both are noted in the copy files.
 - Still open from earlier ADRs: Fairfax, Springfield, Lorton and Alexandria jobs from Ricardo.
+
+## Addendum, 2026-11-12: guide body illustrations
+
+All seven guides now carry two or three body images (16 in all). They are AI illustrations, not photos. Each caption ends "(illustration)", none is presented as an RC job, and each gets replaced with a real job photo as Ricardo sends them.
+
+- The files sit with the job photos in `src/assets/photos/` (`guide-*.webp`) and are registered in `src/data/photos.ts` with job `Illustration`, out of the opening-photo pool and the projects gallery, so they go through the same AVIF and WebP pipeline. They never enter the Article schema images.
+- `BODY_IMAGES` in `ArticlePage.astro` places each one by route and H2, after the first block under that H2 (paragraph, table, list or steps). The build fails if a named H2 leaves the copy. No copy text changed.
+- They are lazy loaded in a fixed 3:2 frame. No guide's hero or LCP changed.
+- The storm guide's hail slot (decision 7) is now `guideStormHail` through its existing copy `[IMAGE]` slot after the wind and hail table. The `public/images/guides/` file path and its draw-only-if-present code are gone.
+- The gutter guards guide's cover image is a generic perforated cover. It is not captioned or described as Leaf Relief. The Landmark guide's shingle close-up does not name the brand.
