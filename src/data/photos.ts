@@ -39,6 +39,25 @@ import chimneyFlashing from '@/assets/photos/rc-chimney-flashing.jpg';
 // 2026-10-30: Ricardo's Fairfax Station skylight job (ADR-021 addendum).
 import fsSkylightBefore from '@/assets/photos/rc-fairfax-station-skylight-old-deck.jpg';
 import fsSkylightAfter from '@/assets/photos/rc-fairfax-station-skylights-finished.jpg';
+// 2026-11-12: AI illustrations for the guide bodies (ADR-023 addendum). Never an
+// RC job: captions end "(illustration)", job 'Illustration', out of the pool and
+// the gallery. Swap for Ricardo's job photos as they arrive.
+import guideCostTearoff from '@/assets/photos/guide-cost-tearoff.webp';
+import guideCostDecking from '@/assets/photos/guide-cost-decking.webp';
+import guideStormHail from '@/assets/photos/guide-storm-hail.webp';
+import guideStormTarp from '@/assets/photos/guide-storm-tarp.webp';
+import guideStormWind from '@/assets/photos/guide-storm-wind.webp';
+import guideGuttersSagging from '@/assets/photos/guide-gutters-sagging.webp';
+import guideGuttersInstall from '@/assets/photos/guide-gutters-install.webp';
+import guideGuardsCover from '@/assets/photos/guide-guards-cover.webp';
+import guideGuardsOverflow from '@/assets/photos/guide-guards-overflow.webp';
+import guideRepairAging from '@/assets/photos/guide-repair-aging.webp';
+import guideRepairFlashing from '@/assets/photos/guide-repair-flashing.webp';
+import guideRepairMismatch from '@/assets/photos/guide-repair-mismatch.webp';
+import guideInsuranceAdjuster from '@/assets/photos/guide-insurance-adjuster.webp';
+import guideInsurancePhotos from '@/assets/photos/guide-insurance-photos.webp';
+import guideLandmarkShingles from '@/assets/photos/guide-landmark-shingles.webp';
+import guideLandmarkAlgae from '@/assets/photos/guide-landmark-algae.webp';
 
 export interface Photo {
   src: ImageMetadata;
@@ -352,6 +371,166 @@ export const photos = {
     job: 'Commercial',
     position: 'center',
     town: null,
+  },
+  guideCostTearoff: {
+    src: guideCostTearoff,
+    alt: "Roofers tearing off old shingles down to the decking on a brick colonial with a hip roof",
+    caption: "A full tear-off on a hip roof with valleys and a dormer (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideCostDecking: {
+    src: guideCostDecking,
+    alt: "Rotted roof decking being replaced with a new plywood sheet",
+    caption: "Rotted decking replaced during a re-roof (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideStormHail: {
+    src: guideStormHail,
+    alt: "Hail impact marks on gray asphalt shingles with hailstones on the roof",
+    caption: "Hail bruising where granules were knocked off (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideStormTarp: {
+    src: guideStormTarp,
+    alt: "Blue emergency tarp secured over a damaged section of a shingle roof",
+    caption: "An emergency tarp keeps water out until the repair (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideStormWind: {
+    src: guideStormWind,
+    alt: "House with missing shingles along the roof edge and shingle pieces on the lawn after a windstorm",
+    caption: "Wind damage: missing shingles at the edges and ridge (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideGuttersSagging: {
+    src: guideGuttersSagging,
+    alt: "Old gutter sagging away from a rotted fascia board with water stains below",
+    caption: "A gutter pulling away from rotted fascia (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideGuttersInstall: {
+    src: guideGuttersInstall,
+    alt: "Worker on a ladder installing a white seamless gutter along a fascia board",
+    caption: "Seamless gutter installation (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideGuardsCover: {
+    src: guideGuardsCover,
+    alt: "Perforated metal gutter cover with oak leaves and pine needles on top",
+    caption: "A perforated metal gutter cover (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideGuardsOverflow: {
+    src: guideGuardsOverflow,
+    alt: "Gutter clogged with leaves overflowing during heavy rain",
+    caption: "A clogged gutter overflowing in a downpour (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideRepairAging: {
+    src: guideRepairAging,
+    alt: "Aging shingles with curled edges, granule loss and moss",
+    caption: "Signs of a roof near the end of its life (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideRepairFlashing: {
+    src: guideRepairFlashing,
+    alt: "Roofer inspecting chimney flashing with a flashlight",
+    caption: "Checking the flashing around a chimney (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideRepairMismatch: {
+    src: guideRepairMismatch,
+    alt: "Patch of newer shingles that don't match the faded roof around them",
+    caption: "A patch that doesn't match the original shingles (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideInsuranceAdjuster: {
+    src: guideInsuranceAdjuster,
+    alt: "Homeowner and insurance adjuster looking up at a storm-damaged roof",
+    caption: "The adjuster decides repair or replacement (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideInsurancePhotos: {
+    src: guideInsurancePhotos,
+    alt: "Phone photographing a dented gutter and broken shingles after a storm",
+    caption: "Photograph everything before you file (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideLandmarkShingles: {
+    src: guideLandmarkShingles,
+    alt: "Close-up of dark gray architectural shingles showing their layered tabs",
+    caption: "Architectural shingles up close (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideLandmarkAlgae: {
+    src: guideLandmarkAlgae,
+    alt: "Black algae streaks on a shaded asphalt shingle roof",
+    caption: "Algae streaks on a shaded north-facing roof (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
   },
 } satisfies Record<string, Photo>;
 
