@@ -1,5 +1,13 @@
 # Working order: RC All Exteriors
 
+## 2026-11-12: guide body illustrations live (ADR-023 addendum)
+
+**Done:** 16 AI illustrations (`src/assets/photos/guide-*.webp`, job `Illustration` in `photos.ts`) across all 7 guides, placed by H2 through `BODY_IMAGES` in `ArticlePage.astro`. They're lazy, in a 3:2 frame, captioned "(illustration)", and kept out of the Article schema. `prune-originals.mjs` now also drops unreferenced WebP originals. All five gates pass, and the previews at 375 and 1440 show each image under its H2 with layout shift of about 0. Pushed (`8cd168d`) and checked live. This build also includes the ADR-024 split hero commit below (`90726c0`), so that one is now built, checked and live too.
+
+**Open:** swap each illustration for Ricardo's job photos as they arrive (change the key in `BODY_IMAGES`). The hail slot is filled.
+
+**Push note:** big image pushes need `git -c http.postBuffer=157286400 push origin main` (HTTP 400 otherwise).
+
 ## 2026-11-11, evening: rotating hero styles (ADR-024). NOT built, NOT pushed
 
 **Done (in the working tree, uncommitted)**
