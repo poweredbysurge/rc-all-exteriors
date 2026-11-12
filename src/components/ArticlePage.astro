@@ -74,6 +74,13 @@ const IMAGES: Record<string, (PhotoKey | Illustration)[]> = {
     },
   ],
 };
+// Hero style by route (ADR-024, PAGE-TEMPLATES rule 15). A guide listed here
+// gets the split hero with this registry photo; the rest keep the text hero.
+// The photo is a real RC job and is not one of the guide's [IMAGE] slots.
+const HERO_PHOTO: Record<string, PhotoKey> = {
+  '/guides/roof-replacement-cost/': 'twoStory',
+};
+const heroPhoto = HERO_PHOTO[path] ?? null;
 const images = [...(IMAGES[path] ?? [])];
 const photoKeys = images.filter((slot): slot is PhotoKey => typeof slot === 'string');
 async function illustration(slot: Illustration) {
@@ -105,7 +112,7 @@ const [authorLead, ...authorRest] = plain(byline?.author ?? []).split(', ');
     faqSchema(faqs(page)),
   ]}
 >
-  <PageHero path={path} h1={h1}>
+  <PageHero path={path} h1={h1} photo={heroPhoto}>
     {
       byline && (
         <p slot="meta" class="text-body-sm text-fg-inverse-muted" data-sm>

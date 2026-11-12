@@ -1,5 +1,20 @@
 # Working order: RC All Exteriors
 
+## 2026-11-11, evening: rotating hero styles (ADR-024). NOT built, NOT pushed
+
+**Done (in the working tree, uncommitted)**
+- `PageHero` takes an optional `photo` and draws the split hero (copy left, 4:3 registry photo right from 1024px). `data-hero-style` on the hero.
+- `/guides/roof-replacement-cost/` uses it with `twoStory` (`HERO_PHOTO` in `ArticlePage.astro`).
+- ADR-024, DESIGN-DEBT entry.
+
+**Blocked: nothing was built or checked.** The session that wrote this could not run the Mac build tools.
+
+**Open**
+- Gutter cost and storm guides keep the text hero until Ricardo sends a gutter photo and a storm damage photo.
+- Stats bar and before and after styles are not built here (ADR-024 item 5).
+
+**Resume:** `npm run build && npm run check:production`, then `node scripts/serve-static.mjs 4399` and `BASE_URL=http://localhost:4399 npm run check:layout && npm run audit:rhythm`. Look at `/guides/roof-replacement-cost/` at 390 and 1440 before pushing.
+
 ## 2026-11-11: December pages live (ADR-023)
 
 **Done (pushed to main on Nov 11 at Mario's request; all five pages live and in the sitemap)**

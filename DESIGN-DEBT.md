@@ -93,3 +93,7 @@ Carried from the design export, plus the ones the other pages call for:
 - Chips are 44px tall with the button radius.
 - Trailing slashes always (master default is none).
 - One uppercase element: the 16px eyebrow.
+
+## Hero styles, 2026-11-11 (ADR-024). Fix upstream in the next Mode A export
+
+- **The text hero has a split style.** `PageHero` with a `photo` draws the copy on the left and a 4:3 registry photo on the right from 1024px, under the copy on phones. First use: `/guides/roof-replacement-cost/`. Artboards: none draw a guide hero with a photo.
