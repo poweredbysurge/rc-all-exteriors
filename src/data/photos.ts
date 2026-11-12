@@ -58,6 +58,9 @@ import guideInsuranceAdjuster from '@/assets/photos/guide-insurance-adjuster.web
 import guideInsurancePhotos from '@/assets/photos/guide-insurance-photos.webp';
 import guideLandmarkShingles from '@/assets/photos/guide-landmark-shingles.webp';
 import guideLandmarkAlgae from '@/assets/photos/guide-landmark-algae.webp';
+import guideGuttersCorner from '@/assets/photos/guide-gutters-corner.webp';
+import guideGuardsCleaning from '@/assets/photos/guide-guards-cleaning.webp';
+import guideInsuranceTree from '@/assets/photos/guide-insurance-tree.webp';
 
 export interface Photo {
   src: ImageMetadata;
@@ -526,6 +529,36 @@ export const photos = {
     src: guideLandmarkAlgae,
     alt: "Black algae streaks on a shaded asphalt shingle roof",
     caption: "Algae streaks on a shaded north-facing roof (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideGuttersCorner: {
+    src: guideGuttersCorner,
+    alt: "New white seamless gutter corner and downspout on a house",
+    caption: "A seamless gutter corner and downspout outlet (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideGuardsCleaning: {
+    src: guideGuardsCleaning,
+    alt: "Gloved hand scooping wet leaves out of a gutter",
+    caption: "Cleaning packed leaves out of an unguarded gutter (illustration)",
+    job: 'Illustration',
+    position: 'center',
+    town: null,
+    pool: false,
+    gallery: false,
+  },
+  guideInsuranceTree: {
+    src: guideInsuranceTree,
+    alt: "Fallen tree limb lying across a damaged shingle roof",
+    caption: "Sudden damage like a fallen limb is what policies usually cover (illustration)",
     job: 'Illustration',
     position: 'center',
     town: null,
