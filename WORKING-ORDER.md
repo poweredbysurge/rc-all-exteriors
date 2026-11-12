@@ -1,8 +1,8 @@
 # Working order: RC All Exteriors
 
-## 2026-11-11: December pages built on main (ADR-023)
+## 2026-11-11: December pages live (ADR-023)
 
-**Done (committed on main, not pushed; Mario's push publishes)**
+**Done (pushed to main on Nov 11 at Mario's request; all five pages live and in the sitemap)**
 - `/insurance-claims/` (new service, `copy/batch-8.md`): deadlines `[TABLE]`, `[NOTE]` under the FAQ, John W Allen fixed quote. Hero `proOnRoof`.
 - `/service-areas/arlington-va/` (`copy/batch-8.md`): Ricardo's 10th Road North job in the proof copy, Megan Hawkins review, hero `newVsOld1`, Permits photo `newDecking`.
 - `/guides/roof-replacement-cost/`, `/guides/storm-damage-checklist/`, `/guides/gutter-installation-cost/` (`copy/guides-3.md`), `[PUBLISHED]` 2026-11-11.
@@ -15,7 +15,6 @@
 - Arlington proof photo is a stand-in (`twoStoryWalk`): Ricardo's photos are in the group chat. Save them to `src/assets/photos/`, register them like the Fairfax Station pair, set `proofPhotos.Arlington`.
 - Hail illustration: save to `public/images/guides/hail-damage-illustration.webp` and push; the slot draws itself.
 - Insurance claims `[IMAGE]`: needs one of Ricardo's wind damage photos (`IMAGE_SLOTS` in `[service].astro`).
-- If the push is not on Nov 11, change the three `[PUBLISHED]` dates in `copy/guides-3.md`.
 - After the push: request indexing, set the Page Tracker rows to Live, send Ricardo the Now Live doc.
 
 **Resume:** `npm run build && npm run check:production`, then `node scripts/serve-static.mjs 4399` and `BASE_URL=http://localhost:4399 npm run check:layout`.
