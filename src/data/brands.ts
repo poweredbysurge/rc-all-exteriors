@@ -27,7 +27,7 @@ export interface Brand {
 
 export const brands: Brand[] = [
   { name: 'CertainTeed', claim: 'CertainTeed ShingleMaster', href: '/certainteed-roofing/', image: shingleMasterBadge, height: 52 },
-  { name: 'Brava', claim: 'Certified Brava synthetic shake, slate and tile installer', href: '/roof-replacement/', svg: brava.replace(/fill="#FFF"/g, 'fill="currentColor"'), height: 40 },
+  { name: 'Brava', claim: 'Brava Cedar Shake Level 1 certified installer', href: '/roof-replacement/', svg: brava.replace(/fill="#FFF"/g, 'fill="currentColor"'), height: 40 },
   { name: 'Better Business Bureau', claim: 'BBB Accredited Business', href: '/about/', svg: bbb, height: 40 },
   { name: 'James Hardie', claim: 'James Hardie fiber cement siding', href: '/siding/', image: jamesHardie, height: 30 },
   { name: 'ProVia', claim: 'ProVia windows and doors', href: '/windows-doors/', image: provia, height: 40 },

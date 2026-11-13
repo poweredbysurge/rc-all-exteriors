@@ -442,7 +442,7 @@ Trust signals
 - Fully licensed and insured.
 - BBB accredited.
 - CertainTeed ShingleMaster. Landmark and Landmark Pro, and the full Integrity Roof System with SureStart PLUS 3-Star coverage when you want the extended warranty.
-- Certified Brava installer: synthetic shake, slate, and Spanish tile.
+- Ricardo completed Brava's Cedar Shake Installation Training, Level 1, in May 2026.
 - 10-year workmanship warranty on every roof we install
 - 49 five-star Google reviews from customers across Northern Virginia
 - Owner-led. The person who quotes your roof is the person accountable for it.

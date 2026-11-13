@@ -130,6 +130,18 @@ export function itemListSchema(items: { name: string; href: string }[]) {
 // One Person node for the owner, defined on About and referenced by guides (ADR-018).
 export const PERSON_ID = () => `${rebase('/about/')}#person`;
 
+/** The owner's credentials from business.json (ADR-025). */
+function ownerCredentials() {
+  return business.ownerCredentials.map((c) => ({
+    '@type': 'EducationalOccupationalCredential',
+    name: c.name,
+    credentialCategory: c.credentialCategory,
+    recognizedBy: { '@type': 'Organization', name: c.recognizedBy.name, url: c.recognizedBy.url },
+    dateCreated: c.dateCreated,
+    expires: c.expires,
+  }));
+}
+
 export function personSchema() {
   const sameAs = Object.entries(business.ownerProfiles)
     .filter(([key, v]) => !key.startsWith('$') && !!v)
@@ -141,6 +153,7 @@ export function personSchema() {
     name: business.owner,
     jobTitle: 'Owner',
     worksFor: { '@id': BUSINESS_ID() },
+    hasCredential: ownerCredentials(),
     ...(sameAs.length ? { sameAs } : {}),
   };
 }
@@ -156,7 +169,7 @@ export function articleSchema(opts: { path: string; headline: string; descriptio
     image: opts.images,
     datePublished: opts.published,
     dateModified: opts.modified ?? opts.published,
-    author: { '@type': 'Person', '@id': PERSON_ID(), name: business.owner, url: rebase('/about/') },
+    author: { '@type': 'Person', '@id': PERSON_ID(), name: business.owner, url: rebase('/about/'), hasCredential: ownerCredentials() },
     publisher: { '@id': BUSINESS_ID(), name: business.name },
   };
 }

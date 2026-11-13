@@ -8,6 +8,16 @@
     "$comment": "The owner's own profiles, for the Person schema sameAs on About (ADR-023). Not the business profiles below.",
     "linkedin": "https://www.linkedin.com/in/ricardo-castro-172b05384"
   },
+  "ownerCredentials": [
+    {
+      "$comment": "Brava certificate PDF, RC Drive > Media > Company (ADR-025). No certificate number exists; never add one.",
+      "name": "Brava Cedar Shake Installation Training, Level 1",
+      "credentialCategory": "certificate",
+      "recognizedBy": { "name": "Brava Roof Tile", "url": "https://www.bravarooftile.com" },
+      "dateCreated": "2026-05-18",
+      "expires": "2027-05-18"
+    }
+  ],
   "phone": {
     "display": "(703) 677-1976",
     "e164": "+17036771976"
@@ -64,7 +74,7 @@
   "accreditations": [
     "BBB Accredited",
     "CertainTeed ShingleMaster",
-    "Certified Brava installer"
+    "Brava Cedar Shake Level 1 certified installer"
   ],
   "reviews": {
     "source": "Google",

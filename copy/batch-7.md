@@ -72,7 +72,7 @@ Shake roofs
 
 [H2] Cedar shake, or something that looks like it
 
-[P] Some Fairfax Station homes still wear cedar shake. Wood roofs have an estimated life of about 25 years (InterNACHI), and when one is done, you have three choices: new cedar, architectural shingles, or a synthetic shake. We are a certified Brava installer. Brava synthetic shake looks like cedar, carries a 50-year limited warranty, and does not need the upkeep wood does.
+[P] Some Fairfax Station homes still wear cedar shake. Wood roofs have an estimated life of about 25 years (InterNACHI), and when one is done, you have three choices: new cedar, architectural shingles, or a synthetic shake. Ricardo completed Brava's Cedar Shake Installation Training, Level 1, in May 2026. Brava synthetic shake looks like cedar, carries a 50-year limited warranty, and does not need the upkeep wood does.
 
 [P] Check your HOA first. Under rules like Pohick Station's, a synthetic shake counts as "any other roofing material" and needs approval, while cedar and architectural shingles do not. We give every homeowner Brava samples and product literature, so you have what your committee asks for.
 
@@ -119,7 +119,7 @@ Why us
 
 - Ricardo Castro, the owner, is on every job: he quotes it, checks it and signs off on it.
 - A written estimate with no surprise change orders.
-- Virginia Class A Contractor, license 2705196138, BBB Accredited, CertainTeed ShingleMaster and certified Brava installer.
+- Virginia Class A Contractor, license 2705196138, BBB Accredited, CertainTeed ShingleMaster and Brava Cedar Shake Level 1 certified installer.
 - Our own 10-year workmanship warranty on every roof, 60 days on repairs.
 
 FAQ

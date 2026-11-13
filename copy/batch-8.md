@@ -270,7 +270,7 @@ Why us
 
 - Ricardo is on every job, start to finish.
 - A written estimate with no surprise change orders.
-- Virginia Class A Contractor, license 2705196138, BBB Accredited, CertainTeed ShingleMaster and certified Brava installer.
+- Virginia Class A Contractor, license 2705196138, BBB Accredited, CertainTeed ShingleMaster and Brava Cedar Shake Level 1 certified installer.
 - Our own 10-year workmanship warranty on every roof, 60 days on repairs.
 
 FAQ
